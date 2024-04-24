@@ -1,8 +1,9 @@
-name: Git push into another repo to deploy to vercel
+name: Copy into another repo (dev)
 
 on:
-  push:
-    branches: [main]
+  pull_request:
+    types: [closed]
+    branches: [develop] # feature/** -> develop으로 병합 요청(PR) 시
 
 jobs:
   build:
@@ -24,7 +25,6 @@ jobs:
           destination-github-username: ${{ secrets.PRIVATE_REPO_USERNAME }}
           destination-repository-name: ${{ secrets.PRIVATE_REPO_NAME }}
           user-email: ${{ secrets.PRIVATE_REPO_EMAIL }}
-          commit-message: ${{ github.event.commits[0].message }}
-          target-branch: main
+          target-branch: develop
       - name: Test get variable exported by push-to-another-repository
         run: echo $DESTINATION_CLONED_DIRECTORY
