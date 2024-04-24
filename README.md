@@ -1,4 +1,4 @@
-# 테스트 README 입니다.
+# README 입니다.
 
 # Turborepo Tailwind CSS starter
 
