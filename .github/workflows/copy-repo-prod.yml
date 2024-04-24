@@ -1,8 +1,9 @@
-name: Git push into another repo (prod)
+name: Copy into another repo (prod)
 
 on:
-  push:
-    branches: [main]
+  pull_request:
+    types: [closed]
+    branches: [develop] # develop -> main으로 PR 했을 때
 
 jobs:
   build:
