@@ -3,7 +3,7 @@ name: Copy into another repo (prod)
 on:
   pull_request:
     types: [closed]
-    branches: [develop] # develop -> main으로 PR 했을 때
+    branches: [main] # develop -> main으로 병합 요청(PR) 시
 
 jobs:
   build:
