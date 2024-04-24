@@ -1,8 +1,9 @@
-name: Git push into another repo (dev)
+name: Copy into another repo (dev)
 
 on:
-  push:
-    branches: [develop]
+  pull_request:
+    types: [closed]
+    branches: [feature/**] # feature/** -> develop으로 PR 했을 때
 
 jobs:
   build:
