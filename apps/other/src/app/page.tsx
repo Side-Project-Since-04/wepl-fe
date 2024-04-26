@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Card } from "@repo/ui/card";
+import { Card } from "@wepl/ui/card";
 
 function Gradient({
   conic,
@@ -21,22 +21,22 @@ function Gradient({
 
 const LINKS = [
   {
-    title: "Dev1",
+    title: "Docs",
     href: "https://turbo.build/repo/docs",
     description: "Find in-depth information about Turborepo features and API.",
   },
   {
-    title: "Dev2",
+    title: "Learn",
     href: "https://turbo.build/repo/docs/handbook",
     description: "Learn more about monorepos with our handbook.",
   },
   {
-    title: "Dev3",
+    title: "Templates",
     href: "https://turbo.build/repo/docs/getting-started/from-example",
     description: "Choose from over 15 examples and deploy with a single click.",
   },
   {
-    title: "Dev4",
+    title: "Deploy",
     href: "https://vercel.com/new",
     description:
       "Instantly deploy your Turborepo to a shareable URL with Vercel.",
@@ -49,7 +49,7 @@ export default function Page(): JSX.Element {
       <div className="z-10 items-center justify-between w-full max-w-5xl font-mono text-sm lg:flex">
         <p className="fixed top-0 left-0 flex justify-center w-full px-4 pt-8 pb-6 border-b bg-gradient-to-b backdrop-blur-2xl border-neutral-800 bg-zinc-800/30 from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:bg-zinc-800/30">
           examples/with-tailwind -&nbsp;
-          <code className="font-mono font-bold">docs</code>
+          <code className="font-mono font-bold">web</code>
         </p>
         <div className="fixed bottom-0 left-0 flex items-end justify-center w-full h-48 bg-gradient-to-t from-black via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
           <a
