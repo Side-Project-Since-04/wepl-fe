@@ -10,5 +10,9 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "@wepl/eslint-config": "*",
+    "@wepl/tailwind-config": "*",
+    "@wepl/typescript-config": "*"
+  }
 }

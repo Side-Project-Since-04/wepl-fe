@@ -9,6 +9,12 @@
     "lint": "next lint",
     "type-check": "tsc --noEmit"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "@wepl/ui": "*"
+  },
+  "devDependencies": {
+    "@wepl/eslint-config": "*",
+    "@wepl/tailwind-config": "*",
+    "@wepl/typescript-config": "*"
+  }
 }
