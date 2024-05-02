@@ -9,23 +9,10 @@
     "lint": "next lint",
     "type-check": "tsc --noEmit"
   },
-  "dependencies": {
-    "next": "^14.1.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@wepl/ui": "*"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@next/eslint-plugin-next": "^14.1.1",
-    "@types/node": "^20.11.24",
-    "@types/react": "^18.2.61",
-    "@types/react-dom": "^18.2.19",
-    "autoprefixer": "^10.4.18",
     "@wepl/eslint-config": "*",
-    "postcss": "^8.4.35",
     "@wepl/tailwind-config": "*",
-    "tailwindcss": "^3.4.1",
-    "@wepl/typescript-config": "*",
-    "typescript": "^5.3.3"
+    "@wepl/typescript-config": "*"
   }
 }

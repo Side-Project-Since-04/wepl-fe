@@ -1,13 +1,9 @@
 module.exports = {
-  extends: [
-    '@wepl/eslint-config/next.js',
-    'next/babel',
-    'plugin:testing-library/react',
-    'plugin:jest-dom/recommended',
-  ],
+  extends: ["@wepl/eslint-config/next.js"],
   parserOptions: {
-    project: './tsconfig.json',
-    sourceType: 'module',
+    project: "./tsconfig.json",
+    sourceType: "module",
     tsconfigRootDir: __dirname,
   },
+  rules: {},
 };
