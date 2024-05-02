@@ -1,10 +1,8 @@
 import NextAuth from 'next-auth';
 import KakaoProvider from 'next-auth/providers/kakao';
 import CredentialsProvider from 'next-auth/providers/credentials';
-export const {
-  handlers: { GET, POST },
-  auth,
-} = NextAuth({
+
+const handler = NextAuth({
   pages: {
     signIn: '/login',
   },
@@ -22,7 +20,7 @@ export const {
 
       async authorize(credentials, req) {
         // Todo : 환경변수 필요
-        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/login`, {
+        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/auth/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -32,6 +30,7 @@ export const {
             password: credentials?.password,
           }),
         });
+
         const user = await res.json();
         if (user) {
           // Todo : 저장 정보 로직 ..
@@ -61,3 +60,5 @@ export const {
   },
   secret: process.env.AUTH_SECRET,
 });
+
+export { handler as GET, handler as POST };
