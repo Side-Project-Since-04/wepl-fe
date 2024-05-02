@@ -12,7 +12,8 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
-    "@wepl/ui": "*"
+    "@wepl/ui": "*",
+    "undici": "^5.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.2",
