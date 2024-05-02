@@ -18,8 +18,6 @@
   "devDependencies": {
     "@wepl/eslint-config": "*",
     "@wepl/tailwind-config": "*",
-    "@wepl/typescript-config": "*",
-    "eslint-plugin-jest-dom": "^5.4.0",
-    "eslint-plugin-testing-library": "^6.2.2"
+    "@wepl/typescript-config": "*"
   }
 }
