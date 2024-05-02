@@ -13,7 +13,7 @@ describe('FSDPage', () => {
   });
 
   it('msw test', async () => {
-    const { container } = render(<FSDPage />);
+    render(<FSDPage />);
     // api test
     const text = await screen.findByText(/hello/i);
     expect(text).toHaveTextContent('hello');
