@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
-import { AppLayout } from "../src/app/appLayout";
+import type { Metadata } from 'next';
+import { AppLayout } from '../src/app/appLayout';
+import AuthSession from '@/src/features/auth/AuthSession';
 
 /** Next Font는 일단 보류 */
 // import { Inter } from "next/font/google";
 // const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Wepl 웨플",
-  description: "결혼까지 편리하게 일정/예산 관리하자",
+  title: 'Wepl 웨플',
+  description: '결혼까지 편리하게 일정/예산 관리하자',
 };
 
 export default function RootLayout({
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <AppLayout>{children}</AppLayout>
+        <AuthSession>
+          <AppLayout>{children}</AppLayout>
+        </AuthSession>
       </body>
     </html>
   );
