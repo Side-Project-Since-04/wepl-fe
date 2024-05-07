@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { signIn } from 'next-auth/react';
+import { signIn } from "next-auth/react";
 
 export default function Page(): JSX.Element {
   const onClick = async () => {
-    const session = await signIn('kakao', {
+    const session = await signIn("kakao", {
       redirect: true,
-      callbackUrl: '/',
+      callbackUrl: "/",
     });
     console.log(session);
   };
   return (
     <>
-      <main>Root Page</main>
+      <main>메인 페이지 입니다.</main>
     </>
   );
 }
