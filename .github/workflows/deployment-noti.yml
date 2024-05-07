@@ -15,7 +15,9 @@ jobs:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
           STATUS="${{ github.event.deployment_status.state }}"
-          MESSAGE="Deployment $STATUS: ${{ github.repository }} at ${{ github.event.deployment.sha }}"
+          ENVIRONMENT="${{ github.event.deployment.environment }}"
+          URL="${{ github.event.deployment_status.target_url }}"
+          MESSAGE="🚀 Deployment $STATUS 🚀\nENVIRONMENT: $ENVIRONMENT\nURL: $URL\n"
           curl -H "Content-Type: application/json" \
                -d "{\"content\": \"$MESSAGE\"}" \
                $DISCORD_WEBHOOK_URL
