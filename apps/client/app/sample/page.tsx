@@ -1,5 +1,5 @@
 'use client';
-import { axiosInstance } from '@/src/shared/config/axios';
+import { axiosInstance } from '@fsd/shared/config/axios';
 import { useEffect, useState } from 'react';
 
 export default function FSDPage() {
