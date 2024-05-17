@@ -8,8 +8,8 @@ export default function Page(): JSX.Element {
       redirect: true,
       callbackUrl: '/',
     });
-    console.log(session);
   };
+
   return (
     <>
       <main>Root Page</main>

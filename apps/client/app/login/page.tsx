@@ -1,16 +1,38 @@
 'use client';
-import { signIn } from 'next-auth/react';
+
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 export default function LoginPage() {
-  const onClick = async () => {
-    const session = await signIn('kakao', {
+  const session = useSession();
+
+  const { status = 'loading' } = session;
+
+  const handleSignIn = async () => {
+    await signIn('kakao', {
       redirect: true,
       callbackUrl: '/',
     });
   };
+
+  const handleSignOut = async () => {
+    await signOut({ redirect: true, callbackUrl: '/' });
+  };
+
+  if (status === 'loading') {
+    return null;
+  }
+
   return (
-    <button className="border-2 p-2" onClick={onClick}>
-      카카오 로그인
-    </button>
+    <>
+      {status === 'unauthenticated' ? (
+        <button className='p-2 border-2' onClick={handleSignIn}>
+          카카오 로그인
+        </button>
+      ) : (
+        <button className='p-2 border-2' onClick={handleSignOut}>
+          카카오 로그아웃
+        </button>
+      )}
+    </>
   );
 }
