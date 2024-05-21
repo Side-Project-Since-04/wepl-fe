@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { AppLayout } from '../src/app/appLayout';
-import AuthSession from '@/src/features/auth/AuthSession';
+import { AppLayout } from '@fsd/app/appLayout';
+import AuthSession from '@fsd/features/auth/AuthSession';
 
 /** Next Font는 일단 보류 */
 // import { Inter } from "next/font/google";
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }): JSX.Element {
   return (
-    <html lang="ko">
+    <html lang='ko'>
       <body>
         <AuthSession>
           <AppLayout>{children}</AppLayout>
