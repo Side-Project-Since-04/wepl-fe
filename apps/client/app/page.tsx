@@ -8,8 +8,8 @@ export default function Page(): JSX.Element {
       redirect: true,
       callbackUrl: "/",
     });
-    console.log(session);
   };
+
   return (
     <>
       <main>메인 페이지 입니다.</main>
