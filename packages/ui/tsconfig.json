@@ -1,5 +1,11 @@
 {
-  "extends": "@wepl/typescript-config/react-library.json",
-  "include": ["."],
-  "exclude": ["dist", "build", "node_modules"]
+  "extends": "@wepl/typescript-config/nextjs.json",
+  "compilerOptions": {
+    "jsx": "react-jsx", // 또는 "react"
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src", "jest.setup.js"]
 }
