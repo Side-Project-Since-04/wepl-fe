@@ -5,7 +5,11 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@ui/*": ["./*"]
+    }
   },
-  "include": ["src", "jest.setup.js"]
+  "include": [".", "src", "jest.setup.js"]
 }
