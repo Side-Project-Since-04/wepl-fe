@@ -1,3 +1,6 @@
 module.exports = {
-  extends: ["@wepl/eslint-config/next.js"],
+  extends: [
+    '@wepl/eslint-config/next.js',
+    // 'next/babel',
+  ],
 };
