@@ -7,9 +7,7 @@ export default function FSDPage() {
 
   useEffect(() => {
     const fetchText = async () => {
-      axiosInstance
-        .get('http://localhost:3030/test')
-        .then((res) => setText(res.data));
+      axiosInstance.get('http://localhost:3030/test').then((res) => setText(res.data));
     };
 
     fetchText();

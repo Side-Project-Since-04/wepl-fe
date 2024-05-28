@@ -12,12 +12,14 @@ const handler = NextAuth({
       credentials: {
         username: {
           label: '이메일',
-          type: 'text',
           placeholder: '이메일 주소 입력 요망',
         },
         password: { label: '비밀번호', type: 'password' },
       },
 
+      /**
+       * credentials : 로그인폼에서 받은 input
+       */
       async authorize(credentials, req) {
         // Todo : 환경변수 필요
         const res = await fetch(`${process.env.NEXTAUTH_URL}/api/auth/login`, {
@@ -49,14 +51,20 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ token, user }: any) {
-      return { ...token, ...user };
+    async jwt({ token, account }: any) {
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+      return token;
     },
 
     async session({ session, token }: any) {
-      session.user = token as any;
+      session.accessToken = token.accessToken as any;
       return session;
     },
+  },
+  session: {
+    maxAge: 24 * 60 * 30, // 12 hours
   },
   secret: process.env.AUTH_SECRET,
 });
