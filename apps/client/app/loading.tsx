@@ -1,4 +1,4 @@
-import LoadingView from '@/src/pages/Loading';
+import LoadingView from '@/src/_pages/Loading';
 import React from 'react';
 
 const Loading = () => {
