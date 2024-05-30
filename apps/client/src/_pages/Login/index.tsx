@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { Button } from '@ui/Button';
+import { Button } from '@wepl/ui/Button.tsx';
 import { useRouter } from 'next/navigation';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import tmpImage from './1.jpeg';
@@ -9,7 +9,7 @@ const LoginView = () => {
   const router = useRouter();
   const session = useSession();
   const { status = 'loading' } = session;
-
+  console.log(session);
   const handleKakaoBtn = async () => {
     if (status === 'unauthenticated') {
       await signIn('kakao', {

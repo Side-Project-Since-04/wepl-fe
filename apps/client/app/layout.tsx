@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { AppLayout } from '@/src/app/AppLayout';
 import AuthSession from '@fsd/features/auth/AuthSession';
-
 /** Next Font는 일단 보류 */
 // import { Inter } from "next/font/google";
 // const inter = Inter({ subsets: ["latin"] });

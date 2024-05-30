@@ -14,9 +14,9 @@
       "@fsd/*": [
         "./src/*"
       ],
-      "@ui/*": [
-        "../../packages/ui/src/*"
-      ],
+      // "@ui/*": [
+      //   "../../packages/ui/src/*"
+      // ],
       "@ui/style/*": [
         "../../packages/ui/style/*"
       ]
