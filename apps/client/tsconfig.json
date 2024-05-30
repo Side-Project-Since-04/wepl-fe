@@ -15,7 +15,7 @@
         "./src/*"
       ],
       "@ui/*": [
-        "../../packages/ui/*"
+        "../../packages/ui/src/*"
       ]
     },
     "strictNullChecks": true

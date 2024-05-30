@@ -1,9 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
-import { Button } from '@ui/index';
+import { Button } from '@ui/Button';
 import { useRouter } from 'next/navigation';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import tmpImage from './1.jpeg';
+
 const LoginView = () => {
   const router = useRouter();
   const session = useSession();
