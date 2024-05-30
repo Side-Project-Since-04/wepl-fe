@@ -1,12 +1,6 @@
 import * as React from 'react';
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@wepl/ui/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@ui/Carousel';
 import Image1 from './1.jpeg';
 import Image2 from './2.jpeg';
 import Image from 'next/image';

@@ -4,9 +4,11 @@
   "sideEffects": [
     "**/*.css"
   ],
-  "main": "./src/index.tsx",
-  "types": "./src/index.tsx",
   "license": "MIT",
+  "exports": {
+    "./*": "./src/*",
+    "./style/*": "./style/*"
+  },
   "scripts": {
     "build": "tailwindcss -i ./src/styles.css -o ./dist/index.css",
     "lint": "eslint src/",
