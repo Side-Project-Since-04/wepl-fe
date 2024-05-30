@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { AppLayout } from '@fsd/app/appLayout';
+import { AppLayout } from '@/src/app/AppLayout';
 import AuthSession from '@fsd/features/auth/AuthSession';
 
 /** Next Font는 일단 보류 */
@@ -11,13 +11,9 @@ export const metadata: Metadata = {
   description: '결혼까지 편리하게 일정/예산 관리하자',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}): JSX.Element {
+export default function RootLayout({ children }: { children: React.ReactNode }): JSX.Element {
   return (
-    <html lang='ko'>
+    <html lang="ko">
       <body>
         <AuthSession>
           <AppLayout>{children}</AppLayout>

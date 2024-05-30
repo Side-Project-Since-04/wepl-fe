@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { Text } from '../card';
-import React from 'react';
+import { Text } from '../Card';
+
 describe('Card', () => {
   it('should render', () => {
     render(<Text title="Test" />);
