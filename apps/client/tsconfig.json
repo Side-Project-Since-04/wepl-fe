@@ -14,12 +14,7 @@
       "@fsd/*": [
         "./src/*"
       ],
-      "@ui/*": [
-        "../../packages/ui/src/*"
-      ],
-      "@ui/style/*": [
-        "../../packages/ui/style/*"
-      ]
+
     },
     "strictNullChecks": true
   },
