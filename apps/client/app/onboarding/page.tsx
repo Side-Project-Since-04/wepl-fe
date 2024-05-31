@@ -1,15 +1,25 @@
-import { OnboardingView } from '@/src/_pages/Onboarding';
-import React from 'react';
+import * as React from 'react';
 
-const Page = () => {
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@wepl/ui/Carousel.tsx';
+import Image1 from './1.jpeg';
+import Image2 from './2.jpeg';
+import Image from 'next/image';
+
+export default function OnboardingView() {
+  const imageArray = [Image1, Image2];
   return (
-    <div className="relative m-auto border-green-500 max-w-[360px] h-screen ">
-      <nav className="absolute top-0 right-0 mt-4 mr-4">건너뛰기</nav>
-      <section className="flex flex-col items-center justify-center text-center h-full">
-        <OnboardingView />
-      </section>
-    </div>
+    <Carousel className="w-full">
+      <CarouselContent>
+        {Array.from({ length: 2 }).map((_, index) => (
+          <CarouselItem key={index}>
+            <div className="p-1 flex justify-center items-center">
+              <Image src={imageArray[index]} alt="wepl" />
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      {/* <CarouselPrevious /> */}
+      {/* <CarouselNext /> */}
+    </Carousel>
   );
-};
-
-export default Page;
+}
