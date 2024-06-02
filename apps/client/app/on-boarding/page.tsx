@@ -10,11 +10,11 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import WeplHeader from '@wepl/ui/components/Header/index.tsx';
 import { Button } from '@wepl/ui/Button.tsx';
 
-export default function OnboardingView() {
+export default function OnboardingPage() {
   const imageArray = [Image1, Image2];
   const router = useRouter();
 
-  const rightHeader = () => {
+  const RightHeader = () => {
     const handleNext = () => {
       router.push('/input');
     };
@@ -27,7 +27,7 @@ export default function OnboardingView() {
 
   return (
     <div className="relative h-screen w-full flex flex-col">
-      <WeplHeader right={rightHeader()} />
+      <WeplHeader right={<RightHeader />} />
       <section className="flex flex-col items-center justify-center text-center flex-grow">
         <Carousel className="w-full">
           <CarouselContent>

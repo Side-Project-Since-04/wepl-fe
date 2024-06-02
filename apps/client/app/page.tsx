@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import tmpImage from './1.jpeg';
 
-export default function LoginView(): JSX.Element {
+export default function LoginPage(): JSX.Element {
   const router = useRouter();
   const session = useSession();
   const { status = 'loading' } = session;
