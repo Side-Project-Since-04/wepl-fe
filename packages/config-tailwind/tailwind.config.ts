@@ -11,16 +11,11 @@ const config: Config = {
   ],
   prefix: '',
   theme: {
-    container: {
-      center: true,
-      padding: '2rem',
-      screens: {
-        '2xl': '1535px',
-        xl: { max: '1279px' },
-        lg: { max: '1023px' },
-        md: { max: '767px' },
-        sm: { max: '359px' },
-      },
+    screens: {
+      xl: { max: '1535px' },
+      lg: { max: '1279px' },
+      md: { max: '1023px' },
+      sm: { max: '767px' },
     },
     extend: {
       colors: {
