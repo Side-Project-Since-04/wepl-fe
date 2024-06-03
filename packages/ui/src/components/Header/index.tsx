@@ -12,7 +12,7 @@ const WeplHeader: React.FC<HeaderProps> = ({ left, center, right }) => {
     <header className="flex justify-between items-center p-4 bg-gray-100 h-16">
       <div className="flex-1 flex justify-start items-center">{left || <div />}</div>
       <div className="flex-4 flex justify-center items-center">{center || <div />}</div>
-      <div className="flex-1 flex justify-end items-center">{right || <div />}</div>
+      <div className="flex-1 flex justify-end items-center pr-5">{right || <div />}</div>
     </header>
   );
 };

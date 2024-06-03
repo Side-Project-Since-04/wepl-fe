@@ -21,6 +21,8 @@ export default function LoginPage(): JSX.Element {
   const handleSignOut = async () => {
     await signOut({ redirect: true, callbackUrl: '/' });
   };
+
+  // Todo : 로그아웃 연결 후에는 로그아웃 버튼 삭제
   return (
     <main className="bg-primary-500 flex flex-col items-center justify-center text-center h-full">
       <div className="flex items-center justify-center">
