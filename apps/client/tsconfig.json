@@ -14,7 +14,6 @@
       "@fsd/*": [
         "./src/*"
       ],
-
     },
     "strictNullChecks": true
   },
