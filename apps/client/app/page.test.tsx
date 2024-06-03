@@ -2,10 +2,9 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { useRouter } from 'next/navigation';
 import { signIn, useSession } from 'next-auth/react';
-import LoginView from '@/src/_pages/Login';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-
+import LoginView from './page';
 // Mock the next-auth/react module
 jest.mock('next-auth/react');
 jest.mock('next/navigation');
@@ -31,7 +30,7 @@ describe('LoginView Render', () => {
 
     expect(signIn).toHaveBeenCalledWith('kakao', {
       redirect: true,
-      callbackUrl: '/onboarding',
+      callbackUrl: '/on-boarding',
     });
   });
 

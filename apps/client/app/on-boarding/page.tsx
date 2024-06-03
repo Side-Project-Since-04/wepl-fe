@@ -1,8 +1,5 @@
 import * as React from 'react';
-import Image from 'next/image';
-
-// import Image1 from './1.jpeg';
-// import Image2 from './2.jpeg';
+// import Image from 'next/image';
 
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@wepl/ui/Carousel.tsx';
 import WeplHeader from '@wepl/ui/components/Header/index.tsx';
