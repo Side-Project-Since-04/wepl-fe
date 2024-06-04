@@ -11,5 +11,5 @@
       "@ui/*": ["./*"]
     }
   },
-  "include": [".", "src", "jest.setup.js"]
+  "include": [".", "src", "./jest.setup.js"]
 }
