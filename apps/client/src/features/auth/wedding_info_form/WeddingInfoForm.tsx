@@ -1,48 +1,43 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@wepl/ui/Form.tsx';
-import { Input } from '@wepl/ui/Input.tsx';
-import { Button } from '@wepl/ui/Button.tsx';
+import { Form } from '@wepl/ui/Form.tsx';
+import NumberInputFormItem from '@wepl/ui/components/Form/NumberFormItem.tsx';
+import DatePickerFormItem from '@wepl/ui/components/Form/DatePickFormItem.tsx';
+import InputFormItem from '@ui/src/components/Form/InputFormItem';
+import { UseFormReturn } from 'react-hook-form';
+import { WeddingFormData } from '@/app/user-info/wedding/page';
 
-const formSchema = z.object({
-  wedding_date: z.string().date(),
-  wedding_time: z.string().time(),
-});
+type WeddingInfoForomProps = {
+  form: UseFormReturn<WeddingFormData>;
+};
 
-export function WeddingInfoForm() {
-  // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      wedding_date: '',
-    },
-  });
-
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
-
+export function WeddingInfoForm({ form }: WeddingInfoForomProps) {
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
+      <form className="flex flex-col gap-5">
+        <DatePickerFormItem control={form.control} name="wedding_date" label="예식일" required={true} />
+        <div className="flex justify-between">
+          <div className="flex-1 pr-4">
+            <NumberInputFormItem
+              control={form.control}
+              name="time"
+              label="예식 시간"
+              placeholder="00시"
+              required={true}
+              unit="시"
+              range={[0, 24]}
+            />
+          </div>
+          <div className="flex-1 pl-4 flex flex-col justify-end">
+            <NumberInputFormItem control={form.control} name="min" placeholder="00분" unit="분" range={[0, 59]} />
+          </div>
+        </div>
+        <InputFormItem
           control={form.control}
-          name="wedding_date"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          name="wedding_hole"
+          label="예식장소"
+          placeholder="예식장을 입력해주세요"
         />
-        <Button type="submit">Submit</Button>
       </form>
     </Form>
   );

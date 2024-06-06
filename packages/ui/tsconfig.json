@@ -8,7 +8,7 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@ui/*": ["./*"]
+      "@ui/*": ["../../packages/ui/*"]
     }
   },
   "include": [".", "src", "./jest.setup.js"]

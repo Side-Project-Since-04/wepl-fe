@@ -6,7 +6,6 @@ import { useState } from 'react';
 
 export default function BudgetInputPage() {
   const [budget, setBudget] = useState(0);
-
   // TODO
   const saveBudget = () => {
     // api
