@@ -32,7 +32,6 @@ const NumberInputFormItem = ({ range, unit, required = false, ...props }: Number
         const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           let value = e.target.value;
           if (range) {
-            console.log(range[0], parseInt(e.target.value));
             if (parseInt(e.target.value) >= range[0] && parseInt(e.target.value) <= range[1]) {
               value = e.target.value;
             } else if (parseInt(e.target.value) > range[1]) {
