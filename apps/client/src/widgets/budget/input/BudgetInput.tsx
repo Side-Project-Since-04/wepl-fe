@@ -20,11 +20,14 @@ export default function BudgetInput({ budget, onChange }: BudgetInputProps) {
   );
 
   return (
-    <div className="mt-[40px] flex items-center text-[28px] font-bold">
+    <div className="mt-[40px] flex items-center text-headline3">
       <input
         type="text"
         value={budget > 0 ? budget.toLocaleString() : ''}
-        className="outline-none placeholder:text-[#d9d9d9] after:content-['원']"
+        className="outline-none placeholder:text-gray-200"
+        style={{
+          width: budget > 0 ? String(budget).length + 'ch' : '100%',
+        }}
         placeholder="예산을 입력해주세요"
         onChange={handleChange}
       />
