@@ -14,7 +14,7 @@
   [
     "../../node_modules/@types",
     "../../node_modules/@testing-library", 
-    ".", 
     "src", 
+    "types"
   ]
 }
