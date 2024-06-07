@@ -18,20 +18,8 @@ const formSchema = z.object({
     return numberValue >= 0 && numberValue <= 59;
   }),
 });
+
 type FormValues = z.infer<typeof formSchema>;
-
-const renderWithForm = (Component: React.FC<{ form: UseFormReturn<FormValues> }>) => {
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      wedding_hole: '',
-      time: '',
-      min: '',
-    },
-  });
-
-  return { user: userEvent.setup(), ...render(<Component form={form} />) };
-};
 
 function setup(jsx: React.JSX.Element) {
   return {
@@ -45,11 +33,11 @@ describe('WeddingInfoForm', () => {
     it('initial render', () => {});
 
     it('초기에 placeHolder을 보여준다', () => {
-      // renderWithForm(WeddingInfoForm);
-      // expect(screen.getByPlaceholderText('YYYY-MM-DD')).toBeInTheDocument();
-      // expect(screen.getByPlaceholderText('00시')).toBeInTheDocument();
-      // expect(screen.getByPlaceholderText('00분')).toBeInTheDocument();
-      // expect(screen.getByPlaceholderText('예식장을 입력해주세요')).toBeInTheDocument();
+      // render(<WeddingInfoForm/>);
+      expect(screen.getByPlaceholderText('YYYY-MM-DD')).toBeInTheDocument();
+      expect(screen.getByPlaceholderText('00시')).toBeInTheDocument();
+      expect(screen.getByPlaceholderText('00분')).toBeInTheDocument();
+      expect(screen.getByPlaceholderText('예식장을 입력해주세요')).toBeInTheDocument();
     });
   });
 

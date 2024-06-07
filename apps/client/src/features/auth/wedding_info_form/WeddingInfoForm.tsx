@@ -7,11 +7,11 @@ import InputFormItem from '@ui/src/components/Form/InputFormItem';
 import { UseFormReturn } from 'react-hook-form';
 import { WeddingFormData } from '@/app/user-info/wedding/page';
 
-type WeddingInfoForomProps = {
+type WeddingInfoFormProps = {
   form: UseFormReturn<WeddingFormData>;
 };
 
-export function WeddingInfoForm({ form }: WeddingInfoForomProps) {
+export function WeddingInfoForm({ form }: WeddingInfoFormProps) {
   return (
     <Form {...form}>
       <form className="flex flex-col gap-5">
