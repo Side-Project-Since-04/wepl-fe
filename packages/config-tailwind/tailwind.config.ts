@@ -9,6 +9,8 @@ const config: Config = {
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
     '../../packages/ui/src/*.{ts,tsx}',
+    '../../packages/ui/src/**/*.{ts,tsx}',
+    '../../packages/ui/shadcn-ui/*.{ts,tsx}',
   ],
   prefix: '',
   theme: {
