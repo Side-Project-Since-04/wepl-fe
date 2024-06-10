@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 
 // @wepl/ui
-import WeplHeader from '@wepl/ui/components/Header/index.tsx';
+import Header from '@wepl/ui/components/Header/index.tsx';
 import { Button } from '@wepl/ui/Button.tsx';
 import { HeadLine5 } from '@wepl/ui/components/HeadLine/index.tsx';
 
@@ -65,7 +65,7 @@ const WeddingInfoPage = () => {
 
   return (
     <>
-      <WeplHeader left={<LeftHeader />} right={<RightHeader />} />
+      <Header left={<LeftHeader />} right={<RightHeader />} />
       <div className="pt-5 flex flex-col gap-8">
         <HeadLine5>웨딩홀 정보를 입력해주세요.</HeadLine5>
         <WeddingInfoForm form={form} />
