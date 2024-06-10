@@ -1,15 +1,17 @@
+'use client';
+
 import { Button } from '@ui/src/Button';
 import Header from '@ui/src/components/Header';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
-const BackHeader = (path: string) => {
+const BackHeader = () => {
+  const router = useRouter();
+
   const LeftHeader = () => {
     return (
-      <Button variant={'ghost'} className="p-0">
-        <Link href={path}>
-          <img src="left_arrow.svg" />
-        </Link>
+      <Button variant={'ghost'} className="p-0" onClick={() => router.back()}>
+        <img src="left_arrow.svg" />
       </Button>
     );
   };
