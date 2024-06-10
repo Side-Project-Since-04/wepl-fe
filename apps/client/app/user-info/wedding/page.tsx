@@ -56,7 +56,7 @@ const WeddingInfoPage = () => {
   const RightHeader = () => {
     return (
       <Button variant={'ghost'} className="p-0" onClick={onSave} disabled={!form.formState.isValid}>
-        <Link href={'/budget/input'} className="text-lg" onClick={onSave}>
+        <Link href={'/invite'} className="text-lg" onClick={onSave}>
           다음
         </Link>
       </Button>

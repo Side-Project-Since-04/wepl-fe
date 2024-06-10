@@ -4,13 +4,15 @@ import { Button } from '@wepl/ui/Button.tsx';
 
 const InvitePage = () => {
   return (
-    <main className="bg-primary-500 flex flex-col items-center justify-center text-center h-full">
+    <main className=" flex flex-col items-center justify-center text-center h-full gap-[16px]">
       <div className="flex items-center justify-center">
-        <img src="invitation.svg" />
-        <span className="text-headline1 text-neutral-white">wepl</span>
+        <img src="invite/invitation.svg" />
       </div>
-      <div className="text-neutral-white">결혼 준비에도 관리가 필요하니까</div>
-      <Button className="mt-8 w-72 h-14" variant="outline">
+      <div>
+        <div className="my-[4px]">웨플 초대하기</div>
+        <div className="text-gray-500">결혼 일정과 지출을 함께 관리할 수 있습니다.</div>
+      </div>
+      <Button className="bg-[#FAE100] w-[320px] h-[50px]" variant="outline">
         카카오톡 초대하기
       </Button>
     </main>
