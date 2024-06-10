@@ -53,14 +53,14 @@ const NumberInputFormItem = ({ range, unit, required = false, ...props }: Number
             </FormLabel>
             <FormControl>
               <Input
-                className="bg-gray-50"
+                className="bg-gray-50 h-[56px] text-2xl pl-[14px]"
                 placeholder={props.placeholder}
                 {...field}
                 onChange={handleChange}
                 type="number"
               />
             </FormControl>
-            {unit && field.value && <span className="absolute bottom-4 left-8">{unit}</span>}
+            {unit && field.value && <span className="absolute bottom-[16px] left-[35px]">{unit}</span>}
 
             <FormMessage />
           </FormItem>

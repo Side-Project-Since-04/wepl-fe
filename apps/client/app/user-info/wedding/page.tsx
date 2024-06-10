@@ -66,7 +66,7 @@ const WeddingInfoPage = () => {
   return (
     <>
       <WeplHeader left={<LeftHeader />} right={<RightHeader />} />
-      <div className="pt-5 flex flex-col gap-8">
+      <div className="pt-5 flex flex-col gap-[16px]">
         <HeadLine5>웨딩홀 정보를 입력해주세요.</HeadLine5>
         <WeddingInfoForm form={form} />
       </div>

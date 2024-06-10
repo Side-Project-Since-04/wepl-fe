@@ -14,10 +14,10 @@ type WeddingInfoFormProps = {
 export function WeddingInfoForm({ form }: WeddingInfoFormProps) {
   return (
     <Form {...form}>
-      <form className="flex flex-col gap-5">
+      <form className="flex flex-col gap-[24px]">
         <DatePickerFormItem control={form.control} name="wedding_date" label="예식일" required={true} />
         <div className="flex justify-between">
-          <div className="flex-1 pr-4">
+          <div className="flex-1">
             <NumberInputFormItem
               control={form.control}
               name="time"
@@ -28,7 +28,7 @@ export function WeddingInfoForm({ form }: WeddingInfoFormProps) {
               range={[0, 24]}
             />
           </div>
-          <div className="flex-1 pl-4 flex flex-col justify-end">
+          <div className="flex-1 pl-[16px] flex flex-col justify-end">
             <NumberInputFormItem control={form.control} name="min" placeholder="00분" unit="분" range={[0, 59]} />
           </div>
         </div>

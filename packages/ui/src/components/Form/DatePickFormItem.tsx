@@ -41,7 +41,7 @@ function DatePickerFormItem({ required = false, ...props }: DatePickerFormItemPr
               <FormControl>
                 <Button
                   variant={'outline'}
-                  className={cn('bg-gray-50 justify-start', !field.value && 'text-muted-foreground')}
+                  className={cn('bg-gray-50 justify-start h-[50px] pl-[14px]', !field.value && 'text-muted-foreground')}
                 >
                   {field.value ? format(field.value, 'yyyy-MM-dd') : <span>YYYY-MM-DD</span>}
                 </Button>
