@@ -1,6 +1,13 @@
 import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss-animate';
 
+const px0_200 = Array.from({ length: 201 })
+  .map((_, i) => `${i}px`)
+  .reduce((acc: Record<string, string>, cur, idx) => {
+    acc[idx] = cur;
+    return acc;
+  }, {});
+
 const config: Config = {
   darkMode: ['selector'],
   content: [
@@ -8,9 +15,7 @@ const config: Config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-    '../../packages/ui/src/*.{ts,tsx}',
-    '../../packages/ui/src/**/*.{ts,tsx}',
-    '../../packages/ui/shadcn-ui/*.{ts,tsx}',
+    '../../packages/ui/**/*.{ts,tsx}',
   ],
   prefix: '',
   theme: {
@@ -146,7 +151,7 @@ const config: Config = {
         '16px',
         {
           lineHeight: '22px',
-          letterSpacing: '-0.02px',
+          letterSpacing: '-0.2px',
           fontWeight: '600',
         },
       ],
@@ -155,7 +160,7 @@ const config: Config = {
         '14px',
         {
           lineHeight: '20px',
-          letterSpacing: '-0.02px',
+          letterSpacing: '-0.2px',
           fontWeight: '600',
         },
       ],
@@ -163,7 +168,7 @@ const config: Config = {
         '16px',
         {
           lineHeight: '22px',
-          letterSpacing: '-0.02px',
+          letterSpacing: '-0.2px',
           fontWeight: '500',
         },
       ],
@@ -171,7 +176,7 @@ const config: Config = {
         '16px',
         {
           lineHeight: '28px',
-          letterSpacing: '-0.02px',
+          letterSpacing: '-0.2px',
           fontWeight: '500',
         },
       ],
@@ -179,7 +184,7 @@ const config: Config = {
         '14px',
         {
           lineHeight: '20px',
-          letterSpacing: '-0.02px',
+          letterSpacing: '-0.2px',
           fontWeight: '500',
         },
       ],
@@ -187,7 +192,7 @@ const config: Config = {
         '14px',
         {
           lineHeight: '24px',
-          letterSpacing: '-0.02px',
+          letterSpacing: '-0.2px',
           fontWeight: '500',
         },
       ],
@@ -195,12 +200,54 @@ const config: Config = {
         '12px',
         {
           lineHeight: '18px',
-          letterSpacing: '-0.02px',
+          letterSpacing: '-0.2px',
           fontWeight: '500',
+        },
+      ],
+      'button-lg': [
+        '15px',
+        {
+          lineHeight: '26px',
+          letterSpacing: '-0.2px',
+          fontWeight: '700',
+        },
+      ],
+      'button-md': [
+        '14px',
+        {
+          lineHeight: '24px',
+          letterSpacing: '-0.2px',
+          fontWeight: '700',
+        },
+      ],
+      'button-sm': [
+        '13px',
+        {
+          lineHeight: '22px',
+          letterSpacing: '-0.2px',
+          fontWeight: '700',
         },
       ],
     },
     extend: {
+      // px로 단위로 변경
+      spacing: px0_200,
+      margin: px0_200,
+      padding: px0_200,
+      borderRadius: px0_200,
+      width: px0_200,
+      height: px0_200,
+      maxWidth: px0_200,
+      minWidth: px0_200,
+      maxHeight: px0_200,
+      minHeight: px0_200,
+      lineHeight: px0_200,
+      letterSpacing: px0_200,
+      fontSize: px0_200,
+      inset: px0_200,
+      gap: px0_200,
+
+      // shadcn-ui style
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -235,11 +282,6 @@ const config: Config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
-      },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
       },
       keyframes: {
         'accordion-down': {

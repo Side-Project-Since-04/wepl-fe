@@ -1,5 +1,4 @@
 {
-  "extends": "@wepl/typescript-config/nextjs.json",
   "compilerOptions": {
     "jsx": "react-jsx", // 또는 "react"
     "strict": true,
@@ -8,8 +7,14 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@ui/*": ["../../packages/ui/*"]
+      "@ui/*": ["./*"]
     }
   },
-  "include": [".", "src", "./jest.setup.js"]
+  "include": 
+  [
+    "../../node_modules/@types",
+    "../../node_modules/@testing-library", 
+    "src", 
+    "types"
+  ]
 }
