@@ -7,7 +7,7 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@ui/*": ["../../packages/ui/*"]
+      "@ui/*": ["./*"]
     }
   },
   "include": 
