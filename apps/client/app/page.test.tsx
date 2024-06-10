@@ -13,8 +13,8 @@ describe('LoginView Render', () => {
     (useSession as jest.Mock).mockReturnValue({ status: 'unauthenticated' });
     render(<LoginView />);
 
-    expect(screen.getByAltText('wepl')).toBeInTheDocument();
-    expect(screen.getByText('결혼도 관리가 필요하니까')).toBeInTheDocument();
+    expect(screen.getByText('wepl')).toBeInTheDocument();
+    expect(screen.getByText('결혼 준비에도 관리가 필요하니까')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: '카카오톡으로 시작하기' })).toBeInTheDocument();
   });
 
