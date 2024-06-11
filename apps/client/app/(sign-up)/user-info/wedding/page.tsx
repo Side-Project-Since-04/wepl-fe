@@ -56,7 +56,7 @@ const WeddingInfoPage = () => {
   const RightHeader = () => {
     return (
       <Button variant={'ghost'} className="p-0" onClick={onSave} disabled={!form.formState.isValid}>
-        <Link href={'/budget/input'} className="text-lg" onClick={onSave}>
+        <Link href={'/invite'} className="text-lg" onClick={onSave}>
           다음
         </Link>
       </Button>
@@ -66,7 +66,7 @@ const WeddingInfoPage = () => {
   return (
     <>
       <Header left={<LeftHeader />} right={<RightHeader />} />
-      <div className="pt-5 flex flex-col gap-8">
+      <div className="pt-5 flex flex-col gap-[16px]">
         <HeadLine5>웨딩홀 정보를 입력해주세요.</HeadLine5>
         <WeddingInfoForm form={form} />
       </div>
