@@ -5,7 +5,7 @@ import NumberInputFormItem from '@wepl/ui/components/Form/NumberFormItem.tsx';
 import DatePickerFormItem from '@wepl/ui/components/Form/DatePickFormItem.tsx';
 import InputFormItem from '@ui/src/components/Form/InputFormItem';
 import { UseFormReturn } from 'react-hook-form';
-import { WeddingFormData } from '@/app/user-info/wedding/page';
+import { WeddingFormData } from '@/app/(sign-up)/user-info/wedding/page';
 
 type WeddingInfoFormProps = {
   form: UseFormReturn<WeddingFormData>;
