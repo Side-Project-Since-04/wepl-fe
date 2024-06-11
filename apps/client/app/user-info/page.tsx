@@ -1,25 +1,16 @@
 import React from 'react';
 import Link from 'next/link';
 
-import WeplHeader from '@wepl/ui/components/Header/index.tsx';
+import Header from '@wepl/ui/components/Header/index.tsx';
 import { Button } from '@wepl/ui/Button.tsx';
 import { HeadLine5 } from '@ui/src/components/HeadLine';
 import { TextBody2 } from '@ui/src/components/Text';
+import BackHeader from '@/src/shared/components/BackHeader';
 
 const UserInfoPage = () => {
-  const LeftHeader = () => {
-    return (
-      <Button variant={'ghost'} className="p-0">
-        <Link href={'/'}>
-          <img src="left_arrow.svg" />
-        </Link>
-      </Button>
-    );
-  };
-
   return (
     <>
-      <WeplHeader left={<LeftHeader />} />
+      <BackHeader />
       <div className="pt-4 flex flex-col gap-3">
         <HeadLine5>
           만나서 반가워요!

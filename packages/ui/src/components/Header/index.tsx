@@ -7,7 +7,7 @@ interface HeaderProps {
   right?: React.ReactNode;
 }
 
-const WeplHeader: React.FC<HeaderProps> = ({ left, center, right }) => {
+const Header: React.FC<HeaderProps> = ({ left, center, right }) => {
   return (
     <div className="flex justify-between items-center py-4  h-14">
       <div className="w-1/3 flex justify-start items-center">{left || <div className="" />}</div>
@@ -17,4 +17,4 @@ const WeplHeader: React.FC<HeaderProps> = ({ left, center, right }) => {
   );
 };
 
-export default WeplHeader;
+export default Header;
