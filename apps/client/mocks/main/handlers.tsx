@@ -1,8 +1,13 @@
 import { HttpResponse, http } from 'msw';
 
-export const handlers = [
+export const MainHandlers = [
   // Intercept the "GET /resource" request.
-  http.get('http://localhost:3030/test', () => {
-    return HttpResponse.text('hello');
+
+  http.get('http://localhost:3030/user', () => {
+    console.log('??');
+    return HttpResponse.json({
+      username: '홍길동',
+      dDay: 365,
+    });
   }),
 ];
