@@ -1,6 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import BudgetInput from './BudgetInput';
+import { render } from '@/src/shared/test/testing-library-utils';
 
 describe('BudgetInput', () => {
   context('budget에 대하여', () => {
@@ -8,7 +9,6 @@ describe('BudgetInput', () => {
       const budget = 10000;
       const unit = '원';
       render(<BudgetInput budget={budget} onChange={() => {}} />);
-
       expect(screen.getByRole('textbox')).toHaveValue(budget.toLocaleString());
       expect(screen.getByText(unit)).toBeInTheDocument();
     });
