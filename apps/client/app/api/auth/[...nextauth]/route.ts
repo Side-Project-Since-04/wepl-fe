@@ -1,1 +1,1 @@
-export { GET, POST } from '@/src/features/auth/auth';
+export { GET, POST } from '@fsd/features/auth/auth';

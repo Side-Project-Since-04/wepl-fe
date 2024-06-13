@@ -12,8 +12,7 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
-    "@wepl/ui": "*",
-    "undici": "^5.0.0"
+    "@wepl/ui": "*"
   },
   "devDependencies": {
     "@wepl/eslint-config": "*",

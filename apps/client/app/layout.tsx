@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
-import { AppLayout } from '../src/app/appLayout';
-import AuthSession from '@/src/features/auth/AuthSession';
-
+import { AppLayout } from '@/src/app/AppLayout';
+import AuthSession from '@fsd/features/auth/AuthSession';
 /** Next Font는 일단 보류 */
 // import { Inter } from "next/font/google";
 // const inter = Inter({ subsets: ["latin"] });
@@ -11,11 +10,7 @@ export const metadata: Metadata = {
   description: '결혼까지 편리하게 일정/예산 관리하자',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}): JSX.Element {
+export default function RootLayout({ children }: { children: React.ReactNode }): JSX.Element {
   return (
     <html lang="ko">
       <body>
