@@ -5,10 +5,10 @@
 /**
  * 대분류에 대한 타입정의
  */
-export const WEDDING = 'WEDDING';
-export const PRESENT = 'PRESENT';
-export const FURNITURE = 'FURNITURE';
-export const HONEYMOON = 'HONEYMOON';
+export const WEDDING = 'wedding';
+export const PRESENT = 'present';
+export const FURNITURE = 'furniture';
+export const HONEYMOON = 'honeymoon';
 
 /**
  * 대분류의 타입과 이름을 배열로 정의
