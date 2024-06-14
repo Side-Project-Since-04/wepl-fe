@@ -9,16 +9,20 @@ export default function BudgetList() {
 
   return (
     <div className="flex flex-col gap-12">
-      {CLASSIFICATION.map(({ type, name }, idx) => (
-        <Link href={`/budget/list/${type.toLocaleLowerCase()}`}>
-          <BudgetListItem
-            key={`budget-list-item-${type}`}
-            classification={{ type, name }}
-            order={idx + 1}
-            budget={budget}
-          />
-        </Link>
-      ))}
+      {CLASSIFICATION.map(({ type, name }, idx) => {
+        const order = idx + 1;
+
+        return (
+          <Link href={`/budget/list/${type.toLocaleLowerCase()}?order=${order}`}>
+            <BudgetListItem
+              key={`budget-list-item-${type}`}
+              classification={{ type, name }}
+              order={order}
+              budget={budget}
+            />
+          </Link>
+        );
+      })}
     </div>
   );
 }

@@ -20,7 +20,7 @@ export default function BudgetInput({ budget, onChange }: BudgetInputProps) {
   );
 
   return (
-    <div className="mt-[40px] flex items-center text-headline3">
+    <div className="flex items-center text-headline3">
       <input
         type="text"
         value={budget > 0 ? budget.toLocaleString() : ''}

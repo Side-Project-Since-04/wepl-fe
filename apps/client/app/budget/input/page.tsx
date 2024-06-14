@@ -19,14 +19,19 @@ export default function BudgetInputPage() {
     toast({
       variant: 'success',
       title: '저장되었습니다.',
+      duration: 2000,
     });
   };
 
   return (
     <main className="h-full">
       <BudgetHeader isEnableSave={isEnabledSave} onSave={saveBudget} />
-      <BudgetDescription />
-      <BudgetInput budget={budget} onChange={setBudget} />
+      <section>
+        <BudgetDescription />
+      </section>
+      <section className="mt-40">
+        <BudgetInput budget={budget} onChange={setBudget} />
+      </section>
     </main>
   );
 }
