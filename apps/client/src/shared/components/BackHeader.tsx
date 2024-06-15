@@ -5,7 +5,7 @@ import Header, { HeaderProps } from '@ui/src/components/Header';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-export interface BackHeaderProps extends HeaderProps {}
+interface BackHeaderProps extends HeaderProps {}
 
 const BackHeader = (props: BackHeaderProps) => {
   const router = useRouter();

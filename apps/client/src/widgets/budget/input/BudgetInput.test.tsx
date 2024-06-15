@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import BudgetInput from './BudgetInput';
 import { render } from '@/src/shared/test/testing-library-utils';
-import BudgetInput from '.';
 
 describe('BudgetInput', () => {
   context('budget에 대하여', () => {
