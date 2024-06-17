@@ -4,7 +4,7 @@ import { Button } from '@wepl/ui/Button.tsx';
 import { useRouter } from 'next/navigation';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import { axiosInstance } from '@/src/shared/config/axios';
 
 export default function LoginPage(): JSX.Element {
   const router = useRouter();
@@ -12,7 +12,7 @@ export default function LoginPage(): JSX.Element {
 
   //Todo: login -> accessToken -> header에 토큰 집어넣기 -> 유저정보 받아오기 -> 유저정보 웹스토리지에 저장 -> 유저정보 유무에 따른 routing 처리
   const login = async () => {
-    return await axios.post('/wepl-api/auth/kakao', { accessToken: session.data.accessToken });
+    return await axiosInstance.post('/auth/kakao', { accessToken: session.data.accessToken });
   };
 
   const { data, isPending } = useQuery({ queryKey: ['login'], queryFn: login });
