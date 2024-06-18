@@ -1,4 +1,4 @@
-import iconWriteSvg from '@/public/budget/list/icon-write.svg';
+import iconWriteSvg from '@/public/budget/list/icon-write.svg?url';
 import BudgetList from '@/src/widgets/budget/list/BudgetList';
 import BackHeader from '@/src/shared/components/BackHeader';
 import Link from 'next/link';
