@@ -9,7 +9,7 @@
     "clean": "turbo clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "test:wepl": "turbo run test --filter=client",
-    "test:ui": "turbo run test --filter=ui",
+    "test:ui": "turbo run test --filter=@wepl/ui",
     "test:watch": "turbo run test:watch"
   },
   "dependencies": {
@@ -24,8 +24,8 @@
     "qs": "^6.12.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tailwind-merge": "^2.3.0",
     "react-hook-form": "^7.51.5",
+    "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.1",
     "zustand": "^4.5.2"
   },
@@ -34,6 +34,7 @@
     "@babel/preset-react": "^7.24.6",
     "@babel/preset-typescript": "^7.24.6",
     "@next/eslint-plugin-next": "^14.1.1",
+    "@svgr/webpack": "^8.1.0",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^15.0.6",
     "@testing-library/user-event": "^14.5.2",
