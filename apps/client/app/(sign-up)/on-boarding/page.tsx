@@ -1,9 +1,9 @@
 import * as React from 'react';
 // import Image from 'next/image';
 
-import { Carousel, CarouselContent, CarouselItem } from '@wepl/ui/Carousel';
-import Header from '@wepl/ui/components/Header';
-import { Button } from '@wepl/ui/Button';
+import { Carousel, CarouselContent, CarouselItem } from '@ui/src/Carousel';
+import Header from '@ui/src/components/Header';
+import { Button } from '@ui/src/Button';
 import Link from 'next/link';
 
 export default function OnboardingPage() {

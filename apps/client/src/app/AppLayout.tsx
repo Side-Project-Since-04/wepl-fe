@@ -1,6 +1,6 @@
 import '@ui/style/globals.css';
 import { QueryProvider } from './QueryProvider';
-import { Toaster } from '@wepl/ui/Toast';
+import { Toaster } from '@ui/src/Toast';
 import { cn } from '@fsd/shared/ui/utils';
 import { screen } from '../shared/ui/screen';
 
