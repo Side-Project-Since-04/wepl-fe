@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Button } from '@wepl/ui/Button.tsx';
-import { HeadLine5 } from '@ui/src/components/HeadLine';
-import { TextBody1 } from '@ui/src/components/Text';
+import { Button } from '@wepl/ui/Button';
+import { HeadLine5 } from '@wepl/ui/components/HeadLine';
+import { TextBody1 } from '@wepl/ui/components/Text';
 import Link from 'next/link';
 
 const InvitePage = () => {
