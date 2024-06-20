@@ -1,4 +1,4 @@
-import ArrowSvg from '@/public/budget/list/16-chevron-right.svg';
+import ArrowSvg from '@/public/budget/list/16-chevron-right.svg?url';
 
 interface BudgetListItemProps {
   classification: {
