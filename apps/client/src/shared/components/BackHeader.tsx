@@ -2,6 +2,7 @@
 
 import { Button } from '@ui/src/Button';
 import Header from '@ui/src/components/Header';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
@@ -11,7 +12,7 @@ const BackHeader = () => {
   const LeftHeader = () => {
     return (
       <Button variant={'ghost'} className="p-0" onClick={() => router.back()}>
-        <img src="left_arrow.svg" />
+        <Image alt="left_arrow" src="left_arrow.svg" width={25} height={25} />
       </Button>
     );
   };

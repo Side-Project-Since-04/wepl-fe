@@ -12,6 +12,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { WeddingInfoForm } from '@/src/features/auth/wedding_info_form/WeddingInfoForm';
+import Image from 'next/image';
 
 const formSchema = z.object({
   wedding_date: z.date(),
@@ -47,7 +48,7 @@ const WeddingInfoPage = () => {
     return (
       <Button variant={'ghost'} className="p-0">
         <Link href={'/user-info'}>
-          <img src="/left_arrow.svg" />
+          <Image alt="left_arrow" src="/left_arrow.svg" width={25} height={25} />
         </Link>
       </Button>
     );
