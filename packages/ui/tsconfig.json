@@ -12,9 +12,11 @@
   },
   "include": 
   [
+    "./types/svgr.d.ts",
     "../../node_modules/@types",
     "../../node_modules/@testing-library", 
     "src", 
+    "dist",
     "types"
   ]
 }

@@ -2,12 +2,15 @@
 
 import BudgetDescription from '@/src/widgets/budget/input/BudgetDescription';
 import BudgetInput from '@/src/widgets/budget/input/BudgetInput';
-import { useToast } from '../../../../../packages/ui/src/Toast';
+import { useToast } from '@ui/src/Toast';
 import { useState } from 'react';
+import BudgetHeader from '@/src/widgets/budget/common/BudgetHeader';
 
 export default function BudgetInputPage() {
   const [budget, setBudget] = useState(0);
   const { toast } = useToast();
+
+  const isEnabledSave = budget > 0;
 
   // TODO
   const saveBudget = () => {
@@ -16,21 +19,19 @@ export default function BudgetInputPage() {
     toast({
       variant: 'success',
       title: '저장되었습니다.',
+      duration: 2000,
     });
-  };
-
-  const backHistory = () => {
-    //
   };
 
   return (
     <main className="h-full">
-      {/* TODO - Header로 바꿀 예정 */}
-      <header className="h-[56px] text-button-md" onClick={saveBudget}>
-        저장 (임시)
-      </header>
-      <BudgetDescription />
-      <BudgetInput budget={budget} onChange={setBudget} />
+      <BudgetHeader isEnableSave={isEnabledSave} onSave={saveBudget} />
+      <section>
+        <BudgetDescription />
+      </section>
+      <section className="mt-40">
+        <BudgetInput budget={budget} onChange={setBudget} />
+      </section>
     </main>
   );
 }

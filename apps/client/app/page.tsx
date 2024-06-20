@@ -1,6 +1,6 @@
 'use client';
-import React from 'react';
-import { Button } from '@wepl/ui/Button.tsx';
+
+import { Button } from '@ui/src/Button';
 import { useRouter } from 'next/navigation';
 import { signIn, signOut, useSession } from 'next-auth/react';
 
