@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { Button } from '@wepl/ui/Button.tsx';
+import { Button } from '@ui/src/Button';
 import { HeadLine5 } from '@ui/src/components/HeadLine';
 import { TextBody2 } from '@ui/src/components/Text';
 import BackHeader from '@/src/shared/components/BackHeader';

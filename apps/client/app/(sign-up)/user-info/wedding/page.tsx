@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 
 // @wepl/ui
-import Header from '@wepl/ui/components/Header/index.tsx';
-import { Button } from '@wepl/ui/Button.tsx';
-import { HeadLine5 } from '@wepl/ui/components/HeadLine/index.tsx';
+import Header from '@ui/src/components/Header';
+import { Button } from '@ui/src/Button';
+import { HeadLine5 } from '@ui/src/components/HeadLine';
 
 //third-party
 import { useForm } from 'react-hook-form';

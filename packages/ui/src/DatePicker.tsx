@@ -4,7 +4,7 @@ import * as React from 'react';
 import { format } from 'date-fns';
 
 import { cn } from '@ui/lib/utils';
-import { Button } from '@ui/shadcn-ui/button';
+import { Button } from '@ui/src/Button';
 import { Calendar } from '@ui/shadcn-ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@ui/shadcn-ui/popover';
 
