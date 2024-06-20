@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button } from '@wepl/ui/Button.tsx';
+import { Button } from '@ui/src/Button';
 import { HeadLine5 } from '@ui/src/components/HeadLine';
 import { TextBody1 } from '@ui/src/components/Text';
 import Link from 'next/link';

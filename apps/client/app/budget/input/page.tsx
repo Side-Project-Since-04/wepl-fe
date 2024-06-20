@@ -2,7 +2,7 @@
 
 import BudgetDescription from '@/src/widgets/budget/input/BudgetDescription';
 import BudgetInput from '@/src/widgets/budget/input/BudgetInput';
-import { useToast } from '../../../../../packages/ui/src/Toast';
+import { useToast } from '@ui/src/Toast';
 import { useState } from 'react';
 import BudgetHeader from '@/src/widgets/budget/common/BudgetHeader';
 
