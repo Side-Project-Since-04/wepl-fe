@@ -2,16 +2,14 @@ import React from 'react';
 import { Control, FieldValues, UseFormReturn } from 'react-hook-form';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@ui/src/Form';
 import { Input } from '@ui/src/Input';
-import { TextBody1 } from '../Text';
+import { TextBody1 } from '../../Text';
 
-type NumberInputFormItemProps = {
+type InputFormItemProps = {
   control: Control<any, any>;
   name: string;
   label?: string | React.ReactNode;
   placeholder: string;
   required?: boolean;
-  unit?: string;
-  range?: [number, number];
 };
 /**
  * Renders a form item for an input field with optional required label.
@@ -22,29 +20,15 @@ type NumberInputFormItemProps = {
  * @param {string} props.placeholder - The placeholder for the input field.
  * @return {JSX.Element} The rendered input form item.
  */
-const NumberInputFormItem = ({ range, unit, required = false, ...props }: NumberInputFormItemProps) => {
+const InputFormItem = ({ required = false, ...props }: InputFormItemProps) => {
   return (
     <FormField
       control={props.control}
       name={props.name}
-      rules={{ required: required, min: 0, max: 60 }}
+      rules={{ required: required }}
       render={({ field }) => {
-        const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-          let value = e.target.value;
-          if (range) {
-            if (parseInt(e.target.value) >= range[0] && parseInt(e.target.value) <= range[1]) {
-              value = e.target.value;
-            } else if (parseInt(e.target.value) > range[1]) {
-              value = String(range[1]);
-            } else {
-              value = '';
-            }
-          }
-          field.onChange(value);
-        };
-
         return (
-          <FormItem className="relative">
+          <FormItem>
             <FormLabel>
               <TextBody1>
                 {props.label}
@@ -52,16 +36,8 @@ const NumberInputFormItem = ({ range, unit, required = false, ...props }: Number
               </TextBody1>
             </FormLabel>
             <FormControl>
-              <Input
-                className="bg-gray-50 h-[56px] text-2xl pl-[14px]"
-                placeholder={props.placeholder}
-                {...field}
-                onChange={handleChange}
-                type="number"
-              />
+              <Input className="bg-gray-50 pl-[14px] h-[50px]" placeholder={props.placeholder} {...field} />
             </FormControl>
-            {unit && field.value && <span className="absolute bottom-[16px] left-[35px]">{unit}</span>}
-
             <FormMessage />
           </FormItem>
         );
@@ -70,4 +46,4 @@ const NumberInputFormItem = ({ range, unit, required = false, ...props }: Number
   );
 };
 
-export default NumberInputFormItem;
+export default InputFormItem;
