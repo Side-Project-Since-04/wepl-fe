@@ -14,7 +14,7 @@
     "dist"
   ],
   "scripts": {
-    "ui:build": "rm -rf dist && npm run tsc:build && npm run copy:svg && npm run tailwind:build",
+    "build": "rm -rf dist && npm run tsc:build && npm run copy:svg && npm run tailwind:build",
     "tsc:build": "npx tsc -p tsconfig.build.json",
     "tailwind:build": "tailwindcss -i ./src/styles.css -o ./dist/index.css",
     "copy:svg": "cpy 'src/**/*.svg' dist/src",
