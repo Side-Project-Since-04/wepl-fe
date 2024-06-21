@@ -6,7 +6,7 @@ import { type Classification } from '@/src/shared/types/classification';
 import BudgetHeader from '@/src/widgets/budget/common/BudgetHeader';
 import BudgetInput from '@/src/widgets/budget/input/BudgetInput';
 import BudgetListDetailDescription from '@/src/widgets/budget/list-detail/BudgetListDetailDescription';
-import { useToast } from '@ui/src/Toast';
+import { useToast } from '@wepl/ui/Toast';
 import { useSearchParams } from 'next/navigation';
 import React, { useState } from 'react';
 

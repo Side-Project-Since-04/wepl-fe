@@ -9,7 +9,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@ui/shadcn-ui/popover';
 import { Button } from '@ui/src/Button';
 import { FormControl, FormField, FormItem, FormLabel } from '@ui/src/Form';
 import { z } from 'zod';
-import { TextBody1 } from '../Text';
+import { TextBody1 } from '../../Text';
 
 type DatePickerFormItemProps = {
   control: Control<any, any>;
