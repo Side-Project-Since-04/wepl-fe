@@ -1,6 +1,6 @@
 const authKeys = {
-  login: ['auth'] as const,
-
-  list: () => [...authKeys.login, 'list'] as const,
-  refresh: () => [...authKeys.login, 'refresh'] as const,
+  signup: ['auth'] as const,
+  login: () => [...authKeys.signup, 'logout'] as const,
+  logout: () => [...authKeys.signup, 'logout'] as const,
+  refresh: () => [...authKeys.signup, 'refresh'] as const,
 };
