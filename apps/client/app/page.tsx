@@ -1,6 +1,6 @@
 'use client';
-import React, { useEffect } from 'react';
-import { Button } from '@wepl/ui/Button.tsx';
+
+import { Button } from '@wepl/ui/Button';
 import { useRouter } from 'next/navigation';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useQuery } from '@tanstack/react-query';

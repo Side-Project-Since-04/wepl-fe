@@ -4,14 +4,20 @@
   "sideEffects": [
     "**/*.css"
   ],
+  "private": true,
   "license": "MIT",
   "exports": {
-    "./*": "./src/*",
-    "./components": "./src/components/*",
-    "./style/*": "./style/*"
+    "./*": "./dist/src/*/index.js",
+    "./components/*": "./dist/src/components/*/index.js"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tailwindcss -i ./src/styles.css -o ./dist/index.css",
+    "build": "rm -rf dist && npm run tsc:build && npm run copy:svg && npm run tailwind:build",
+    "tsc:build": "npx tsc -p tsconfig.build.json",
+    "tailwind:build": "tailwindcss -i ./src/styles.css -o ./dist/index.css",
+    "copy:svg": "cpy 'src/**/*.svg' dist/src",
     "lint": "eslint src/",
     "dev": "tailwindcss -i ./src/styles.css -o ./dist/index.css --watch",
     "type-check": "tsc --noEmit",
@@ -27,6 +33,7 @@
     "@wepl/tailwind-config": "*",
     "@wepl/typescript-config": "*",
     "autoprefixer": "^10.4.18",
+    "cpy-cli": "^5.0.0",
     "postcss": "^8.4.35",
     "react": "^18.2.0",
     "tailwindcss": "^3.4.1",
