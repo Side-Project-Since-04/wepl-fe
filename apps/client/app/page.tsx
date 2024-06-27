@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useQuery } from '@tanstack/react-query';
 import { axiosInstance } from '@/src/shared/config/axios';
+import { supabase } from '@/src/shared/utils/supbase';
 
 export default function LoginPage(): JSX.Element {
   const router = useRouter();
@@ -16,9 +17,6 @@ export default function LoginPage(): JSX.Element {
   };
 
   const { data, isPending } = useQuery({ queryKey: ['login'], queryFn: login });
-  console.log(data);
-  useEffect(() => {}, [session]);
-
   const handleKakaoBtn = async () => {
     try {
       await signIn('kakao', {
