@@ -2,7 +2,7 @@ module.exports = {
   extends: [
     '@wepl/eslint-config/next.js',
     'next',
-    'eslint-config-turbo',
+    'turbo',
     // 'next/babel',
     'next/core-web-vitals',
     'plugin:testing-library/react',
