@@ -1,4 +1,4 @@
-import '@ui/style/globals.css';
+import '@fsd/shared/styles/app.css';
 import { QueryProvider } from './QueryProvider';
 import { Toaster } from '@ui/src/Toast';
 import { cn } from '@fsd/shared/ui/utils';
