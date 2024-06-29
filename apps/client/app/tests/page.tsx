@@ -1,10 +1,9 @@
 import { supabase } from '@/src/shared/utils/supabase';
-import React from 'react';
 
 // Todo : supabase 더미
-const page = async () => {
+async function TestPage() {
   const { data, error } = await supabase.from('classification').select('*');
-  console.log(data);
+
   return (
     <div>
       {data.map((a: any) => (
@@ -12,6 +11,6 @@ const page = async () => {
       ))}
     </div>
   );
-};
+}
 
-export default page;
+export default TestPage;
