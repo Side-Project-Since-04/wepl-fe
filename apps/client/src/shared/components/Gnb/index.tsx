@@ -20,15 +20,25 @@ export const gnbItems = [
   },
 ] as const;
 
-const gnbHeight = 'h-50';
-
+const gnbClassName = {
+  minWidth: 'min-w-[360px]',
+  maxWidth: 'max-w-[768px]',
+  gnbHeight: 'h-50',
+};
 interface GnbProps {
   pathname: string;
 }
 
 export function Gnb({ pathname }: GnbProps) {
   return (
-    <nav className={cn('fixed bottom-0 left-0 w-full h-50 pt-5 border-t border-t-gray-100', gnbHeight)}>
+    <nav
+      className={cn(
+        'fixed bottom-0 left-1/2 translate-x-[-50%] w-full h-50 pt-5 border-t border-t-gray-100',
+        gnbClassName.maxWidth,
+        gnbClassName.minWidth,
+        gnbClassName.gnbHeight,
+      )}
+    >
       <ul className="flex">
         {gnbItems.map((item) => (
           <GnbItem key={item.name} isSelected={item.pathname === pathname} item={item} />
