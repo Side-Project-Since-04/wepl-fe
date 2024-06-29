@@ -2,7 +2,7 @@ import { FunctionComponent, LazyExoticComponent, SVGProps, Suspense, lazy } from
 
 type SVGComponent = FunctionComponent<SVGProps<SVGElement>>;
 
-type IconName =
+export type IconName =
   | 'alert'
   | 'arrow-down'
   | 'arrow-left'
