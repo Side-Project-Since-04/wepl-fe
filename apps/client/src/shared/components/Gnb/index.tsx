@@ -21,7 +21,7 @@ export const gnbItems = [
 ] as const;
 
 const gnbClassName = {
-  minWidth: 'min-w-[360px]',
+  minWidth: 'min-w-[280px]',
   maxWidth: 'max-w-[768px]',
   gnbHeight: 'h-50',
 };

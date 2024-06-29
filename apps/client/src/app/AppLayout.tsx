@@ -8,7 +8,7 @@ import { Gnb } from '../shared/components/Gnb';
 
 // 디바이스 크기와 관련된 CSS를 변수로 관리
 const layoutClassName = {
-  minWidth: 'min-w-[360px]',
+  minWidth: 'min-w-[280px]',
   maxWidth: 'max-w-[768px]',
   gnbPadding: 'pb-50',
 };
