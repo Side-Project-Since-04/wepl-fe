@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@ui/src/Button';
+import Icon from '@ui/src/Icon';
 import Header, { HeaderProps } from '@ui/src/components/Header';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -13,7 +14,7 @@ const BackHeader = (props: BackHeaderProps) => {
   const LeftHeader = () => {
     return (
       <Button variant={'ghost'} className="p-0" onClick={() => router.back()}>
-        <img src="/left_arrow.svg" />
+        <Icon size={24} name="arrow-left" />
       </Button>
     );
   };
