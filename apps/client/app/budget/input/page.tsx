@@ -2,7 +2,7 @@
 
 import BudgetDescription from '@/src/widgets/budget/input/BudgetDescription';
 import BudgetInput from '@/src/widgets/budget/input/BudgetInput';
-import { useToast } from '@wepl/ui/Toast';
+import { useToast } from '@ui/src/Toast';
 import { useState } from 'react';
 import BudgetHeader from '@/src/widgets/budget/common/BudgetHeader';
 
@@ -19,7 +19,7 @@ export default function BudgetInputPage() {
     toast({
       variant: 'success',
       title: '저장되었습니다.',
-      duration: 2000,
+      duration: 1500,
     });
   };
 
