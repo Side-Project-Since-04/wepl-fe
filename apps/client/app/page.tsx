@@ -8,7 +8,6 @@ export default function LoginPage(): JSX.Element {
   const router = useRouter();
   const session = useSession();
 
-  console.log(session);
   const { status = 'loading' } = session;
   const handleKakaoBtn = async () => {
     if (status === 'unauthenticated') {
