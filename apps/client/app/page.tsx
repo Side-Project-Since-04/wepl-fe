@@ -7,20 +7,16 @@ import { useQuery } from '@tanstack/react-query';
 import { axiosInstance } from '@/src/shared/config/axios';
 
 export default function LoginPage(): JSX.Element {
-  const router = useRouter();
   const session = useSession() as any;
 
-  //Todo: login -> accessTo ken -> header에 토큰 집어넣기 -> 유저정보 받아오기 -> 유저정보 웹스토리지에 저장 -> 유저정보 유무에 따른 routing 처리
-  const login = async () => {
-    return await axiosInstance.post('/auth/kakao', { accessToken: session.data.accessToken });
-  };
+  //Todo: login -> accessToken -> header에 토큰 집어넣기 -> 유저정보 받아오기 -> 유저정보 웹스토리지에 저장 -> 유저정보 유무에 따른 routing 처리
 
-  const { data, isPending } = useQuery({ queryKey: ['login'], queryFn: login });
   const handleKakaoBtn = async () => {
     try {
       await signIn('kakao', {
         redirect: false,
       });
+      console.log(session.data);
     } catch {
       console.log('ERROR');
     }
