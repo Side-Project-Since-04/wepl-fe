@@ -7,20 +7,17 @@
   "private": true,
   "license": "MIT",
   "exports": {
-    "./*": {
-      "import": "./dist/src/*.js",
-      "default": "./dist/src/*/index.js"
-    },
-    "./components/*": {
-      "import": "./dist/src/components/*.js",
-      "default": "./dist/src/components/*/index.js"
-    }
+    "./*": "./dist/src/*/index.js",
+    "./components/*": "./dist/src/components/*/index.js"
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "rm -rf dist && npx tsc -p tsconfig.build.json && cpy 'src/**/*.svg' dist/src && tailwindcss -i ./src/styles.css -o ./dist/index.css",
+    "build": "rm -rf dist && npm run tsc:build && npm run copy:svg && npm run tailwind:build",
+    "tsc:build": "npx tsc -p tsconfig.build.json",
+    "tailwind:build": "tailwindcss -i ./src/styles.css -o ./dist/index.css",
+    "copy:svg": "cpy 'src/**/*.svg' dist/src",
     "lint": "eslint src/",
     "dev": "tailwindcss -i ./src/styles.css -o ./dist/index.css --watch",
     "type-check": "tsc --noEmit",

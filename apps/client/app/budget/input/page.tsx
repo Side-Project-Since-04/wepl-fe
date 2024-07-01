@@ -19,7 +19,7 @@ export default function BudgetInputPage() {
     toast({
       variant: 'success',
       title: '저장되었습니다.',
-      duration: 2000,
+      duration: 1500,
     });
   };
 

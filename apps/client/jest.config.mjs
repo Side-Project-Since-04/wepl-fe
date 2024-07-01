@@ -15,6 +15,9 @@ const config = {
   testEnvironmentOptions: {
     customExportConditions: [''],
   },
+  moduleNameMapper: {
+    '@ui/(.*)$': '<rootDir>/../../packages/ui/$1',
+  },
   setupFiles: ['<rootDir>/jest.polyfill.js'],
 };
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

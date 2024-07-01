@@ -33,7 +33,7 @@ export default function BudgetListDetailPage({ params }: BudgetListDetailPage) {
     toast({
       variant: 'success',
       title: 'hi',
-      duration: 2000,
+      duration: 1500,
     });
   };
 

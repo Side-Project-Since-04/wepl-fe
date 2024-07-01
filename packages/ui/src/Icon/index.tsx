@@ -2,7 +2,7 @@ import { FunctionComponent, LazyExoticComponent, SVGProps, Suspense, lazy } from
 
 type SVGComponent = FunctionComponent<SVGProps<SVGElement>>;
 
-type IconName =
+export type IconName =
   | 'alert'
   | 'arrow-down'
   | 'arrow-left'
@@ -20,6 +20,7 @@ type IconName =
   | 'wallet-on';
 
 export interface IconProps {
+  className?: string | undefined;
   name: IconName;
   size: 24 | 16;
 }
@@ -46,7 +47,7 @@ const loadDynamicIcon = (name: IconName) => {
   return DynamicIcon;
 };
 
-export default function Icon({ name, size }: IconProps) {
+export default function Icon({ className, name, size }: IconProps) {
   const DynamicIcon = loadDynamicIcon(name);
 
   if (!DynamicIcon) {
@@ -56,7 +57,7 @@ export default function Icon({ name, size }: IconProps) {
 
   return (
     <Suspense fallback={<IconSkeleton size={size} />}>
-      <DynamicIcon width={size} height={size} />
+      <DynamicIcon className={className} width={size} height={size} />
     </Suspense>
   );
 }
