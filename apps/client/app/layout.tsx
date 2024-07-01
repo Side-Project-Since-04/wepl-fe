@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { AppLayout } from '@/src/app/AppLayout';
+import { AppLayout } from '@fsd/app/AppLayout';
+import { QueryProvider } from '@fsd/app/QueryProvider';
 import AuthSession from '@fsd/features/auth/AuthSession';
 import KakaoScript from '@/src/shared/Kakao/Kakaoscript';
 /** Next Font는 일단 보류 */
@@ -22,7 +23,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
     <html lang="ko">
       <body>
         <AuthSession>
-          <AppLayout>{children}</AppLayout>
+          <QueryProvider>
+            <AppLayout>{children}</AppLayout>
+          </QueryProvider>
         </AuthSession>
       </body>
       <KakaoScript />

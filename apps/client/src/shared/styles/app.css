@@ -1,0 +1,8 @@
+@import '@ui/style/globals.css';
+
+/**
+ * client app에 공통적으로 설정할 CSS 
+**/
+svg {
+    display: inline-block;
+}
