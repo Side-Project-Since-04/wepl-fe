@@ -16,10 +16,10 @@ const MainPage = () => {
   return (
     <>
       <Header left={<LeftHeader />} />
-      <div className="flex flex-col justify-center items-center gap-20">
+      <div className="flex flex-col justify-center items-center gap-20 mb-20">
         <WeddingEventInfo />
-        <BudgetInfo />
       </div>
+      <BudgetInfo />
     </>
   );
 };
