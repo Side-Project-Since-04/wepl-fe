@@ -12,7 +12,7 @@ const BudgetInfo = () => {
 
   return (
     <>
-      <HeadLine5>예산 대비 지출 27% 사용</HeadLine5>
+      <HeadLine5>총 예산 대비 지출</HeadLine5>
       <SubTitle1 className="text-gray-300 font-normal">해당 비율은 총 예산금액/총 지출금액 비율입니다.</SubTitle1>
       <div className="flex justify-center">
         <DonutProgress progress={50} size={156} />

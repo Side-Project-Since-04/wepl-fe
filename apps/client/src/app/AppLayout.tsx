@@ -27,7 +27,7 @@ export function AppLayout({ children }: { children: React.ReactNode }): JSX.Elem
   return (
     <div
       className={cn(
-        'relative m-auto px-[40px] h-screen border-l-2 border-r-2 border-green-500',
+        'relative m-auto px-[40px] h-screen border-l-2 border-r-2 border-green-500 overflow-y-auto',
         'sm:px-[20px]',
         layoutClassName.minWidth,
         layoutClassName.maxWidth,

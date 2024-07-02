@@ -60,7 +60,7 @@ export const DonutProgress = ({ progress, size }: DonutProgress) => {
           cy={size / 2}
         />
       </svg>
-      <HeadLine5 className="absolute text-28 text-primary-400">{progress}%</HeadLine5>
+      <HeadLine5 className="absolute text-28 text-primary-400 font-normal">{progress}%</HeadLine5>
     </div>
   );
 };
