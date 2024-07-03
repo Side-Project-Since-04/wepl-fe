@@ -15,9 +15,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "20"
+      - name: Install dependencies
+        run: npm ci
       - name: Build packages/ui
         run: npm run build:ui
-      - name: Install dependencies
+      - name: ReInstall dependencies for @wepl/ui
         run: npm ci
       - name: Test app/client & packages/ui
         run: npm run test
