@@ -1,25 +1,15 @@
 'use client';
 
-import React, { Suspense } from 'react';
+import React from 'react';
 import BudgetListItem from '../BudgetListItem';
 import Link from 'next/link';
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { getClassifications } from '@/src/shared/api/category';
-import { ErrorBoundary } from 'react-error-boundary';
+import { queryKeys } from '@/src/shared/constants/queryKeys';
 
 export default function BudgetList() {
-  return (
-    <ErrorBoundary fallback={<div>에러...</div>}>
-      <Suspense fallback={<div>Loading...</div>}>
-        <FetchData />
-      </Suspense>
-    </ErrorBoundary>
-  );
-}
-
-function FetchData() {
   const { data } = useSuspenseQuery({
-    queryKey: ['/getClassifications'],
+    queryKey: [queryKeys.getClassifications],
     queryFn: getClassifications,
     refetchInterval: false,
   });
