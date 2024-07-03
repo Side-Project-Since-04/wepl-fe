@@ -1,17 +1,15 @@
-import { useQuery } from '@tanstack/react-query';
-import React, { useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@ui/shadcn-ui/card';
-import { HeadLine3, HeadLine5 } from '@ui/src/components/HeadLine';
+import React from 'react';
+import Image from 'next/image';
+
+// ui
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@ui/shadcn-ui/card';
+import { HeadLine5 } from '@ui/src/components/HeadLine';
 import { SubTitle1 } from '@ui/src/components/Text';
 
+// third
+import MarriedCouple from '@/public/home/Married-Couple.png';
+
 const WeddingEventInfo = () => {
-  // const { isLoading, data } = useQuery({
-  //   queryKey: ['users'],
-  //   queryFn: () => fetch('http://localhost:3030/user?fields[0]=username&fields[1]=dDay').then((res) => res.json()),
-  // });
-
-  // if (isLoading) return <>Loading...</>;
-
   return (
     <div className="w-screen max-w-[768px] flex flex-col items-center h-[404px] bg-primary-400 gap-24 text-primary-25 p-32">
       <InfoHeader name="홍길동" />
@@ -28,19 +26,29 @@ const InfoHeader = ({ name }: { name: string }) => {
   );
 };
 
-const WeddingInfoCard = () => {
+interface WeddingInfoCardProps {
+  // name: string;
+  // date: string;
+  // weddingTime: string;
+  // weddingHall: string;
+}
+
+const WeddingInfoCard = (weddinngInfo: WeddingInfoCardProps) => {
   return (
     <div>
-      <Card className="mt-12 bg-neutral-white flex flex-col justify-between items-center w-[260px] h-[336px] p-4">
-        <CardHeader className="text-center pb-2">
-          <CardTitle className="text-14s">Wedding day</CardTitle>
-          <CardDescription className="text-[36px] font-bold text-red-500">-365</CardDescription>
+      <Card className="mt-12 bg-neutral-white flex flex-col justify-between items-center w-[260px] h-[336px] border-0">
+        <CardHeader className="items-center gap-4 p-0">
+          <div className="mt-20 w-104 h-30 p-6 bg-primary-600 rounded-full text-[13px] text-center text-neutral-white">
+            우리 결혼합니다
+          </div>
+          <CardTitle className="text-primary-800 text-[24px]">Wedding day</CardTitle>
+          <CardDescription className="text-[32px] font-bold text-auxiliary-red">D-{'365'}</CardDescription>
+          <Image src={MarriedCouple} alt="Married-Couple" width={160} height={90} placeholder="empty" />
         </CardHeader>
-        <div className="h-42 w-px bg-gray-300 mx-3" />
-        <CardHeader className="flex flex-col items-start space-y-1 w-[130px]">
-          <CardTitle className="text-button-sm">🎈 장소</CardTitle>
-          <CardDescription className="text-[12px] ">해피웨플타운웨딩홀 3F</CardDescription>
-        </CardHeader>
+        <CardFooter className="flex flex-col justify-center items-center w-full h-full gap-4 bg-primary-600 rounded-br-lg rounded-bl-lg text-neutral-white font-normal">
+          <CardTitle className="text-14">{'2024년 12월 30일 (토) 오후 2:30'}</CardTitle>
+          <CardDescription className="text-14">{'해피웨플타운웨딩홀 3F'}</CardDescription>
+        </CardFooter>
       </Card>
     </div>
   );
