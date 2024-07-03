@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
+    "build:ui": "turbo build --filter=@wepl/ui",
     "dev": "turbo dev --filter=client",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
