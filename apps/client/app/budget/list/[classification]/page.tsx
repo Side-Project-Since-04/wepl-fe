@@ -16,7 +16,7 @@ interface BudgetListDetailPage {
   };
 }
 
-const VALID_CLASSIFICATION = CLASSIFICATION.map(({ type }) => type.toLowerCase());
+const VALID_CLASSIFICATION = CLASSIFICATION.map(({ name }) => name.toLowerCase());
 
 export default function BudgetListDetailPage({ params }: BudgetListDetailPage) {
   const [budget, setBudget] = useState(0);
@@ -50,7 +50,10 @@ export default function BudgetListDetailPage({ params }: BudgetListDetailPage) {
     <main>
       <BudgetHeader isEnableSave={isEnableSave} onSave={handleSave} />
       <section className="py-16">
-        <BudgetListDetailDescription classification={params.classification} order={order} />
+        <BudgetListDetailDescription
+          classification={params.classification.toUpperCase() as Classification}
+          order={order}
+        />
       </section>
       <section>
         <BudgetInput budget={budget} onChange={setBudget} />

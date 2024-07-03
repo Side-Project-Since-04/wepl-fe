@@ -5,29 +5,35 @@
 /**
  * 대분류에 대한 타입정의
  */
-export const WEDDING = 'wedding';
-export const PRESENT = 'present';
-export const FURNITURE = 'furniture';
-export const HONEYMOON = 'honeymoon';
+export const WEDDING = 'WEDDING';
+export const PRESENT = 'PRESENT';
+export const FURNITURE = 'FURNITURE';
+export const HONEYMOON = 'HONEYMOON';
 
 /**
  * 대분류의 타입과 이름을 배열로 정의
+ *
+ * 백엔드의 데이터 형식과 통일
  */
 export const CLASSIFICATION = [
   {
-    type: WEDDING,
-    name: '웨딩',
+    id: 1,
+    name: WEDDING,
+    guide: '웨딩',
   },
   {
-    type: PRESENT,
-    name: '예물',
+    id: 2,
+    name: PRESENT,
+    guide: '예물',
   },
   {
-    type: FURNITURE,
-    name: '혼수',
+    id: 3,
+    name: FURNITURE,
+    guide: '혼수',
   },
   {
-    type: HONEYMOON,
-    name: '신혼여행',
+    id: 4,
+    name: HONEYMOON,
+    guide: '신혼여행',
   },
 ] as const;

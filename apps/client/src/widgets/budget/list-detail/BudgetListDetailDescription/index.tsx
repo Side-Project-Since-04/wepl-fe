@@ -2,7 +2,7 @@ import { FURNITURE, HONEYMOON, PRESENT, WEDDING } from '@/src/shared/constants/c
 import { Classification } from '@/src/shared/types/classification';
 
 interface BudgetListDetailDescriptionProps {
-  classification: Lowercase<Classification>;
+  classification: Classification;
   order: string;
 }
 

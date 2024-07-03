@@ -1,9 +1,9 @@
-import ArrowSvg from '@/public/budget/list/16-chevron-right.svg?url';
+import Icon from '@ui/src/Icon';
 
 interface BudgetListItemProps {
   classification: {
-    type: string;
     name: string;
+    guide: string;
   };
   order: number;
   budget: number;
@@ -16,12 +16,12 @@ export default function BudgetListItem({ classification, order, budget }: Budget
         <span className="inline-block w-18 h-18 bg-gray-600 rounded-4 text-center text-gray-50 text-[12px]">
           {order}
         </span>
-        <span className="ml-6">{classification.name}</span>
+        <span className="ml-6">{classification.guide}</span>
       </div>
       <div className="flex items-center">
         <span className="text-sub-title1 text-gray-400">{budget}원</span>
         <span>
-          <img src={ArrowSvg.src} alt="화살표" />
+          <Icon name="arrow-right" size={16} />
         </span>
       </div>
     </div>
