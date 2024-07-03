@@ -1,8 +1,3 @@
-import { HttpResponse, http } from 'msw';
+import { handlers as classificationHandlers } from './handlers/classification';
 
-export const handlers = [
-  // Intercept the "GET /resource" request.
-  http.get('http://localhost:3030/test', () => {
-    return HttpResponse.text('hello');
-  }),
-];
+export const handlers = [...classificationHandlers];

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { AppLayout } from '@fsd/app/AppLayout';
 import { QueryProvider } from '@fsd/app/QueryProvider';
 import AuthSession from '@fsd/features/auth/AuthSession';
+import { MswProvider } from '@/src/app/MswProvider';
 
 /** Next Font는 일단 보류 */
 // import { Inter } from "next/font/google";
@@ -17,9 +18,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
     <html lang="ko">
       <body>
         <AuthSession>
-          <QueryProvider>
-            <AppLayout>{children}</AppLayout>
-          </QueryProvider>
+          <MswProvider>
+            <QueryProvider>
+              <AppLayout>{children}</AppLayout>
+            </QueryProvider>
+          </MswProvider>
         </AuthSession>
       </body>
     </html>
