@@ -12,7 +12,6 @@ export default function BudgetList() {
     <ErrorBoundary fallback={<div>에러...</div>}>
       <Suspense fallback={<div>Loading...</div>}>
         <FetchData />
-        hi
       </Suspense>
     </ErrorBoundary>
   );
@@ -20,11 +19,9 @@ export default function BudgetList() {
 
 function FetchData() {
   const { data } = useSuspenseQuery({
-    // const { data } = useQuery({
     queryKey: ['/getClassifications'],
     queryFn: getClassifications,
-    retry: 1,
-    retryDelay: 5000,
+    refetchInterval: false,
   });
 
   const budget = 0;
