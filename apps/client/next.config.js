@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
+  transpilePackages: ['@wepl/ui'],
+  rewrites: async () => {
+    return [
+      {
+        source: '/wepl-api/:path*',
+        destination: 'https://wepl-latest.onrender.com/:path*',
+      },
+    ];
+  },
   reactStrictMode: false,
   transpilePackages: ['@wepl/ui'],
   /**
