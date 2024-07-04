@@ -1,14 +1,18 @@
 'use client';
 
+import { queries } from '@/src/features/common/queries';
+import { getBudget, updateBudget } from '@/src/shared/api/budget';
 import BackHeader from '@/src/shared/components/BackHeader';
 import { CLASSIFICATION } from '@/src/shared/constants/classification';
+import { Budget } from '@/src/shared/types/budget';
 import { type ClassificationName } from '@/src/shared/types/classification';
 import BudgetHeader from '@/src/widgets/budget/common/BudgetHeader';
 import BudgetInput from '@/src/widgets/budget/input/BudgetInput';
 import BudgetListDetailDescription from '@/src/widgets/budget/list-detail/BudgetListDetailDescription';
+import { QueryClient, useMutation } from '@tanstack/react-query';
 import { useToast } from '@ui/src/Toast';
 import { useSearchParams } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface BudgetListDetailPage {
   params: {
@@ -16,7 +20,7 @@ interface BudgetListDetailPage {
   };
 }
 
-const VALID_CLASSIFICATION = CLASSIFICATION.map(({ name }) => name.toLowerCase());
+const VALID_CLASSIFICATION = CLASSIFICATION.map(({ name }) => name);
 
 export default function BudgetListDetailPage({ params }: BudgetListDetailPage) {
   const [budget, setBudget] = useState(0);
@@ -25,17 +29,60 @@ export default function BudgetListDetailPage({ params }: BudgetListDetailPage) {
   const order = searchParams.get('order') || '?';
 
   const isEnableSave = budget > 0;
+  const classificationName = (params.classification?.toUpperCase() || '') as ClassificationName;
+  const isValidClassification = VALID_CLASSIFICATION.includes(classificationName);
 
-  const isValidClassification = VALID_CLASSIFICATION.includes(params.classification);
+  const { mutate: mutateForUpdateBudget } = useMutation({
+    mutationKey: [queries.wedding.updateTotalBudget],
+    mutationFn: (budget: Budget) => updateBudget(budget),
+  });
 
-  // TODO: Toast 띄우고 API 호출 ?
-  const handleSave = () => {
-    toast({
-      variant: 'success',
-      title: 'hi',
-      duration: 1500,
-    });
+  const handleSave = async (budgetAmount: number) => {
+    await mutateForUpdateBudget(
+      {
+        classificationName,
+        amount: budgetAmount,
+      },
+      {
+        onSuccess: () => {
+          toast({
+            variant: 'success',
+            title: '저장되었습니다',
+            duration: 1500,
+          });
+        },
+        onError: () => {
+          toast({
+            variant: 'alert',
+            title: '오류가 발생했습니다',
+            duration: 1500,
+          });
+        },
+      },
+    );
   };
+
+  useEffect(() => {
+    const fetchBudget = async () => {
+      const queryClient = new QueryClient();
+
+      try {
+        const budgets = await queryClient.fetchQuery({
+          queryKey: queries.budget.getBudget,
+          queryFn: getBudget,
+        });
+
+        const budget = budgets.filter((value) => value.classificationName === classificationName)[0].amount;
+        setBudget(budget);
+      } catch (e) {
+        console.warn(e);
+      }
+    };
+
+    if (isValidClassification) {
+      fetchBudget();
+    }
+  }, [classificationName, isValidClassification]);
 
   if (!isValidClassification) {
     return (
@@ -48,7 +95,7 @@ export default function BudgetListDetailPage({ params }: BudgetListDetailPage) {
 
   return (
     <main>
-      <BudgetHeader isEnableSave={isEnableSave} onSave={handleSave} />
+      <BudgetHeader isEnableSave={isEnableSave} onSave={() => handleSave(budget)} />
       <section className="py-16">
         <BudgetListDetailDescription
           classification={params.classification.toUpperCase() as ClassificationName}

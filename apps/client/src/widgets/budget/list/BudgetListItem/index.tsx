@@ -19,7 +19,7 @@ export default function BudgetListItem({ classification, order, budget }: Budget
         <span className="ml-6">{classification.guide}</span>
       </div>
       <div className="flex items-center">
-        <span className="text-sub-title1 text-gray-400">{budget}원</span>
+        <span className="text-sub-title1 text-gray-400">{budget.toLocaleString()}원</span>
         <span>
           <Icon name="arrow-right" size={16} />
         </span>

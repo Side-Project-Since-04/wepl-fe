@@ -4,12 +4,6 @@ import { BudgetAmount } from '@/src/widgets/budget/list/BudgetAmount';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Suspense } from 'react';
 
-/**
- * TODO
- *
- * 서버 State : 총 예산 금액, 대분류 예산 금액
- *
- */
 export default function BudgetListPage() {
   return (
     <main>

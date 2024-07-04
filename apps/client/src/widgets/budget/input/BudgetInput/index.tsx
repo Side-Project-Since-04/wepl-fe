@@ -26,7 +26,11 @@ export default function BudgetInput({ budget, onChange }: BudgetInputProps) {
         value={budget > 0 ? budget.toLocaleString() : ''}
         className="outline-none placeholder:text-gray-200"
         style={{
-          width: budget > 0 ? String(budget).length + 'ch' : '100%',
+          /**
+           * width는 폰트숫자 0의 가로크기 * 글자 수로 결정
+           * 가로크기가 애매해서 0.5ch 만큼 추가
+           */
+          width: budget > 0 ? String(budget).length + 0.5 + 'ch' : '100%',
         }}
         placeholder="예산을 입력해주세요"
         onChange={handleChange}
