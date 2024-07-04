@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { WeddingInfoForm } from './WeddingInfoForm';
+import { WeddingInfoForm } from '../WeddingInfoForm';
 import { UseFormReturn, useForm } from 'react-hook-form';
 
 const formSchema = z.object({

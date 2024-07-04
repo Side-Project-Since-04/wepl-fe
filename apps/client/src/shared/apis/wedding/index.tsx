@@ -6,19 +6,9 @@ const URL_ROOT = '/wedding';
 
 export const WeddingClient = {
   create: async (formData: WeddingInfoType) => {
-    return await axiosInstance.post(URL_ROOT, { ...formData });
+    return await axiosInstance.post(URL_ROOT + '/input', { ...formData });
   },
   update: async (formData: WeddingInfoType) => {
     return await axiosInstance.put(URL_ROOT, { ...formData });
   },
 };
-
-export const WeddingKeys = createQueryKeys('wedding', {
-  create: (formData: WeddingInfoType) => ({
-    queryKey: [{ formData }],
-  }),
-  update: (formData: WeddingInfoType) => ({
-    queryKey: [{ formData }],
-    queryFn: WeddingClient.update,
-  }),
-});

@@ -12,8 +12,8 @@ import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useCreateWeddingInfo } from '@/src/features/user_info/hooks';
-import { WeddingInfoForm } from '@/src/features/user_info/WeddingInfoForm';
+import { WeddingInfoForm } from '@/src/widgets/wedding/WeddingInfoForm';
+import { useCreateWeddingInfo } from '@/src/features/wedding/queries';
 
 const formSchema = z.object({
   weddingDate: z.date(),
@@ -49,8 +49,6 @@ const WeddingInfoPage = () => {
       weddingTime: `${hour}:${min}`,
     };
     mutate(formData);
-
-    // mutate(formData);
   };
 
   const LeftHeader = () => {
