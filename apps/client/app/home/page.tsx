@@ -16,9 +16,7 @@ const MainPage = () => {
   return (
     <>
       <Header left={<LeftHeader />} />
-      <div className="flex flex-col items-center mb-100">
-        <WeddingEventInfo />
-      </div>
+      <WeddingEventInfo />
       <BudgetInfo />
     </>
   );

@@ -13,13 +13,9 @@ const BudgetInfo = () => {
   return (
     <>
       <HeadLine5>총 예산 대비 지출</HeadLine5>
-      <SubTitle1 className="text-gray-300 font-normal">해당 비율은 총 예산금액/총 지출금액 비율입니다.</SubTitle1>
-      <div className="flex justify-center">
+      <SubTitle1 className="text-gray-500 font-normal mb-32">해당 비율은 총 예산금액/총 지출금액 비율입니다.</SubTitle1>
+      <div className="flex justify-center items-center gap-34">
         <DonutProgress progress={50} size={156} />
-        <div>
-          <p>총 예산 금액</p>
-          <p>총 지출 금액</p>
-        </div>
       </div>
     </>
     // <Card className="w-[332px] p-10">

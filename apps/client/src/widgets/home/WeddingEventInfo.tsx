@@ -11,9 +11,11 @@ import MarriedCouple from '@/public/home/Married-Couple.png';
 
 const WeddingEventInfo = () => {
   return (
-    <div className="w-screen max-w-[768px] flex flex-col items-center h-[404px] bg-primary-400 gap-24 text-primary-25 p-32">
-      <InfoHeader name="홍길동" />
-      <WeddingInfoCard />
+    <div className="flex flex-col items-center mb-100">
+      <div className="w-screen max-w-[768px] flex flex-col items-center h-[404px] bg-primary-400 gap-24 text-primary-25 p-32">
+        <InfoHeader name="홍길동" />
+        <WeddingInfoCard />
+      </div>
     </div>
   );
 };
