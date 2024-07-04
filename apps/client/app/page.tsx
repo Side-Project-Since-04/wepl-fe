@@ -12,9 +12,10 @@ export default function LoginPage(): JSX.Element {
   const router = useRouter();
 
   const { mutate: signUp, isPending } = useSignUp(router);
+
+  // Todo : 로그아웃에 대한 처리 고민..
   useEffect(() => {
     if (session?.accessToken) {
-      console.log(isPending);
       signUp(session.accessToken);
     }
   }, [session?.accessToken]);
