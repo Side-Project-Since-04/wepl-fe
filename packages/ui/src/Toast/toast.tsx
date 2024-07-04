@@ -29,7 +29,6 @@ const toastVariants = cva(
         default: 'px-16 py-12 bg-gray-800 text-neutral-white',
         success: 'px-16 py-12 bg-gray-800 text-neutral-white',
         alert: 'px-16 py-12 bg-gray-800 text-neutral-white',
-        destructive: 'destructive group border-destructive bg-destructive text-destructive-foreground',
       },
     },
     defaultVariants: {
