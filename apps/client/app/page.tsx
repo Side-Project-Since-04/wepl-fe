@@ -3,9 +3,9 @@
 import { Button } from '@wepl/ui/Button';
 import { useRouter } from 'next/navigation';
 import { signIn, signOut, useSession } from 'next-auth/react';
-import { useSignUp } from '@/src/api/auth';
 import { useEffect } from 'react';
 import { cn } from '@ui/lib/utils';
+import { useSignUp } from '@/src/features/auth/queries';
 
 export default function LoginPage(): JSX.Element {
   const { data: session, status } = useSession() as any;
