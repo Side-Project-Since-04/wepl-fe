@@ -49,6 +49,8 @@ const WeddingInfoPage = () => {
       weddingTime: `${hour}:${min}`,
     };
     mutate(formData);
+
+    // mutate(formData);
   };
 
   const LeftHeader = () => {

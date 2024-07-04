@@ -3,29 +3,15 @@ import { useMutation } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { useToast } from '@ui/src/Toast';
-
-const weddingKeys = {
-  list: ['wedding'] as const,
-  create: () => [...weddingKeys.list, 'create'] as const,
-  update: () => [...weddingKeys.list, 'refresh'] as const,
-};
-
-interface CreateWeddingInfoFormType {
-  weddingDate: string;
-  weddingTime: string;
-  weddingHall: string;
-}
+import { queryKeys } from '@/src/shared/apis';
+import { WeddingInfoType } from '@/src/shared/types/wedding';
+import { WeddingClient } from '@/src/shared/apis/wedding';
 
 export const useCreateWeddingInfo = () => {
   const { toast } = useToast();
 
-  const weddingInfoSubmit = async (formData: CreateWeddingInfoFormType) => {
-    return await axiosInstance.post('/wedding', { ...formData });
-  };
-
   return useMutation({
-    mutationKey: weddingKeys.create(),
-    mutationFn: weddingInfoSubmit,
+    mutationFn: WeddingClient.create,
     onSuccess: (res) => {
       toast({
         variant: 'success',
