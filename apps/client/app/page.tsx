@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useSignUp } from '@/src/api/auth';
 import { useEffect } from 'react';
+import { cn } from '@ui/lib/utils';
 
 export default function LoginPage(): JSX.Element {
   const { data: session, status } = useSession() as any;
@@ -40,12 +41,30 @@ export default function LoginPage(): JSX.Element {
       </div>
       <div className="text-neutral-white">결혼 준비에도 관리가 필요하니까</div>
       <Button className="mt-[22px] w-[280px] h-[50px]" onClick={handleKakaoBtn} variant="outline">
-        카카오톡으로 시작하기
+        {status === 'loading' ? <LoadingSpinner /> : '카카오톡으로 시작하기'}
       </Button>
-      <Button className="mt-8 w-[280px] h-[50px]" onClick={handleSignOut} variant="outline">
-        로그아웃
-      </Button>
-      {status === 'loading' && <div>Loading...</div>}
     </main>
   );
 }
+
+export const LoadingSpinner = ({ className }: { className?: string }) => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={cn('animate-spin', className)}
+      style={{
+        animationDuration: '1.5s',
+        animationTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      }}
+    >
+      <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+    </svg>
+  );
+};
