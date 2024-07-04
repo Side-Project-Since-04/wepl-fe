@@ -12,8 +12,8 @@ import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useCreateWeddingInfo } from '@/src/api/wedding';
-import { WeddingInfoForm } from '@/src/features/wedding_info_form/WeddingInfoForm';
+import { useCreateWeddingInfo } from '@/src/features/user_info/hooks';
+import { WeddingInfoForm } from '@/src/features/user_info/WeddingInfoForm';
 
 const formSchema = z.object({
   weddingDate: z.date(),
