@@ -1,5 +1,5 @@
 import { axiosInstance } from '@/src/shared/config/axios';
-import { useMutation } from '@tanstack/react-query';
+import { QueryClient, useMutation } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { useRouter } from 'next/router';
@@ -31,9 +31,6 @@ export const useSignUp = (router: AppRouterInstance) => {
       } else {
         router.push('/on-boarding');
       }
-    },
-    onError: (error) => {
-      console.error('Sign up failed:', error);
     },
   });
 };

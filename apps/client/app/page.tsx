@@ -4,27 +4,29 @@ import { Button } from '@wepl/ui/Button';
 import { useRouter } from 'next/navigation';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useSignUp } from '@/src/api/auth';
+import { useEffect } from 'react';
 
 export default function LoginPage(): JSX.Element {
-  const session = useSession() as any;
+  const { data: session, status } = useSession() as any;
   const router = useRouter();
 
-  const { mutate: signUp } = useSignUp(router);
+  const { mutate: signUp, isPending } = useSignUp(router);
+  useEffect(() => {
+    if (session?.accessToken) {
+      console.log(isPending);
+      signUp(session.accessToken);
+    }
+  }, [session?.accessToken]);
 
   const handleKakaoBtn = async () => {
     try {
-      const result = await signIn('kakao', {
-        redirect: false,
-      });
-      if (result?.error) {
-        console.error('Kakao sign-in failed:', result.error);
-        return;
-      }
-      signUp(session.data?.accessToken);
+      await signIn('kakao', { redirect: false });
     } catch (error) {
       console.error('Error during login process:', error);
+      // 에러 처리
     }
   };
+
   const handleSignOut = async () => {
     await signOut({ redirect: true, callbackUrl: '/' });
   };
@@ -43,6 +45,7 @@ export default function LoginPage(): JSX.Element {
       <Button className="mt-8 w-[280px] h-[50px]" onClick={handleSignOut} variant="outline">
         로그아웃
       </Button>
+      {status === 'loading' && <div>Loading...</div>}
     </main>
   );
 }

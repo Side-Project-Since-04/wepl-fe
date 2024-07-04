@@ -7,14 +7,14 @@ import { TextBody1 } from '@ui/src/components/Text';
 import Link from 'next/link';
 
 const InvitePage = () => {
-  const handleShearToKakao = () => {
+  const handleShareToKakao = () => {
     const { Kakao, location } = window;
     Kakao.Share.sendScrap({
       requestUrl: location.href + '/3001?',
     });
   };
 
-  https: return (
+  return (
     <>
       <main className="flex flex-col items-center justify-center text-center h-full gap-[16px]">
         <div className="flex items-center justify-center">
@@ -24,7 +24,7 @@ const InvitePage = () => {
           <HeadLine5>웨플 초대하기</HeadLine5>
           <TextBody1 className="text-gray-500">결혼 일정과 지출을 함께 관리할 수 있습니다.</TextBody1>
         </div>
-        <Button className="bg-[#FAE100] w-[320px] h-[50px]" variant="outline" onClick={handleShearToKakao}>
+        <Button className="bg-[#FAE100] w-[320px] h-[50px]" variant="outline" onClick={handleShareToKakao}>
           카카오톡 초대하기
         </Button>
         <Button
