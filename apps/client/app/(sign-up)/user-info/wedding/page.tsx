@@ -11,8 +11,8 @@ import { HeadLine5 } from '@ui/src/components/HeadLine';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { WeddingInfoForm } from '@/src/features/auth/wedding_info_form/WeddingInfoForm';
 import Image from 'next/image';
+import { WeddingInfoForm } from '@/src/features/wedding_info_form/WeddingInfoForm';
 
 const formSchema = z.object({
   wedding_date: z.date(),
