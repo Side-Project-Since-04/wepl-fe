@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { stringify } from 'qs';
 
 export const axiosInstance = axios.create({
@@ -14,9 +14,9 @@ export const axiosInstance = axios.create({
 // 응답 인터셉터
 axiosInstance.interceptors.response.use(
   (response) => {
-    return response.data;
+    return response;
   },
-  async (error) => {
+  async (error: AxiosError) => {
     if (!error.response) throw error;
     if (!error.config) throw error;
 
