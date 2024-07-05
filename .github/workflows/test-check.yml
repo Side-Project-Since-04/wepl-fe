@@ -2,8 +2,7 @@ name: Test Check
 
 on:
   pull_request:
-    types: [opened, reopened]
-  push:
+    types: [opened, synchronize, reopened]
 
 jobs:
   unit-test:
@@ -21,6 +20,10 @@ jobs:
         run: npm run build:ui
       - name: ReInstall dependencies for @wepl/ui
         run: npm ci
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
       - name: Test app/client & packages/ui
         run: npm run test
 
