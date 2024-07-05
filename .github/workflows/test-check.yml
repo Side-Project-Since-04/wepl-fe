@@ -22,9 +22,20 @@ jobs:
         run: npm ci
       - name: Test app/client & packages/ui
         run: npm run test
-      - name: Upload coverage reports to Codecov
+      - name: Upload app/client coverage reports to Codecov
         uses: codecov/codecov-action@v4.0.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./apps/client/coverage/icov.info
+          flags: app/client
+          name: app/client-coverage
+      - name: Upload packages/ui coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./packages/ui/coverage/icov.info
+          flags: packages/ui
+          name: packages/client-coverage
+        
 
         
