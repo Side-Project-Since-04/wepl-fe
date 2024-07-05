@@ -17,12 +17,14 @@ export type IconName =
   | 'success'
   | 'trash'
   | 'wallet-off'
-  | 'wallet-on';
+  | 'wallet-on'
+  | 'gray-wepl'
+  | 'primary-wepl';
 
 export interface IconProps {
   className?: string | undefined;
   name: IconName;
-  size: 24 | 16;
+  size: 24 | 16 | 40;
 }
 
 /**

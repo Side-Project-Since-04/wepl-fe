@@ -16,7 +16,7 @@ const UserInfoPage = () => {
           <br />
           결혼예식일이 정해지셨나요?
         </HeadLine5>
-        <TextBody2>예식일이 미정이도 괜찮습니다.</TextBody2>
+        <TextBody2 className="text-gray-500 ">예식일이 미정이도 괜찮습니다.</TextBody2>
         <Button
           className="bg-gray-50 text-base justify-start text-gray-600 h-[55px] pl-[14px] mt-[16px]"
           variant="outline"

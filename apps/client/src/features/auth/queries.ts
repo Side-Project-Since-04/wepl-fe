@@ -22,6 +22,7 @@ export const useSignUp = (router: AppRouterInstance) => {
     onSuccess: (res) => {
       const { invitationToken, signUp: isSignUp } = res.data;
       localStorage.setItem('invitationToken', invitationToken);
+
       if (isSignUp) {
         router.push('/home');
       } else {

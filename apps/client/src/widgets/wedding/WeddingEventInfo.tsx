@@ -9,16 +9,22 @@ import { SubTitle1 } from '@ui/src/components/Text';
 // third
 import MarriedCouple from '@/public/home/Married-Couple.png';
 
+interface WeddingInfoCardProps {
+  // name: string;
+  // date: string;
+  // weddingTime: string;
+  // weddingHall: string;
+}
+
 const WeddingEventInfo = () => {
   return (
-    <div className="flex flex-col items-center mb-100">
-      <div className="w-screen max-w-[768px] flex flex-col items-center h-[404px] bg-primary-400 gap-24 text-primary-25 p-32">
-        <InfoHeader name="홍길동" />
-        <WeddingInfoCard />
-      </div>
+    <div className="w-screen max-w-[768px] flex flex-col items-center h-[404px] bg-primary-400 gap-24 text-primary-25 p-32  mb-100">
+      <WeddingEventInfo.Header name="홍길동" />
+      <WeddingEventInfo.Card />
     </div>
   );
 };
+
 const InfoHeader = ({ name }: { name: string }) => {
   return (
     <div className="text-center">
@@ -27,13 +33,6 @@ const InfoHeader = ({ name }: { name: string }) => {
     </div>
   );
 };
-
-interface WeddingInfoCardProps {
-  // name: string;
-  // date: string;
-  // weddingTime: string;
-  // weddingHall: string;
-}
 
 const WeddingInfoCard = (weddinngInfo: WeddingInfoCardProps) => {
   return (
@@ -58,4 +57,5 @@ const WeddingInfoCard = (weddinngInfo: WeddingInfoCardProps) => {
 
 WeddingEventInfo.Header = InfoHeader;
 WeddingEventInfo.Card = WeddingInfoCard;
+
 export default WeddingEventInfo;

@@ -1,5 +1,6 @@
-import BudgetInfo from '@/src/widgets/home/BudgetInfo';
-import WeddingEventInfo from '@/src/widgets/home/WeddingEventInfo';
+import { InvitationButton } from '@/src/widgets/auth/InvitationButton';
+import BudgetOverview from '@/src/widgets/budget/BudgetOverview';
+import WeddingEventInfo from '@/src/widgets/wedding/WeddingEventInfo';
 import { Button } from '@ui/src/Button';
 import Header from '@ui/src/components/Header';
 import Image from 'next/image';
@@ -16,8 +17,11 @@ const MainPage = () => {
   return (
     <>
       <Header left={<LeftHeader />} />
-      <WeddingEventInfo />
-      <BudgetInfo />
+      <div className="flex flex-col items-center">
+        <WeddingEventInfo />
+        <BudgetOverview />
+        <InvitationButton />
+      </div>
     </>
   );
 };

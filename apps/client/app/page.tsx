@@ -9,6 +9,7 @@ import { useSignUp } from '@/src/features/auth/queries';
 
 export default function LoginPage(): JSX.Element {
   const { data: session, status } = useSession() as any;
+  console.log(session);
   const router = useRouter();
 
   const { mutate: signUp, isPending } = useSignUp(router);
@@ -17,6 +18,7 @@ export default function LoginPage(): JSX.Element {
   useEffect(() => {
     if (session?.accessToken) {
       signUp(session.accessToken);
+      localStorage.setItem('sub_id', session.social_id);
     }
   }, [session?.accessToken]);
 
