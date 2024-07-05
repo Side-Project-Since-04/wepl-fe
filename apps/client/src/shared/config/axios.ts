@@ -4,17 +4,19 @@ import { stringify } from 'qs';
 export const axiosInstance = axios.create({
   baseURL:
     process.env.NODE_ENV === 'development' ? process.env.NEXT_PUBLIC_API_DEV_URL : process.env.NEXT_PUBLIC_API_PROD_URL,
+  // baseURL: '/wepl-api',
   paramsSerializer(params: any) {
     return stringify(params, {
       arrayFormat: 'comma',
     });
   },
+  withCredentials: true,
 });
 
 // 응답 인터셉터
 axiosInstance.interceptors.response.use(
   (response) => {
-    return response.data;
+    return response;
   },
   async (error: AxiosError) => {
     if (!error.response) throw error;

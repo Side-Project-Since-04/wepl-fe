@@ -1,0 +1,41 @@
+name: Test Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+      - name: Install dependencies
+        run: npm ci
+      - name: Build packages/ui
+        run: npm run build:ui
+      - name: ReInstall dependencies for @wepl/ui
+        run: npm ci
+      - name: Test app/client & packages/ui
+        run: npm run test
+      - name: Upload app/client coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./apps/client/coverage/icov.info
+          flags: app/client
+          name: app/client-coverage
+      - name: Upload packages/ui coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./packages/ui/coverage/icov.info
+          flags: packages/ui
+          name: packages/client-coverage
+        
+
+        
