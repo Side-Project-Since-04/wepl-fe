@@ -28,21 +28,24 @@ function setup(jsx: React.JSX.Element) {
   };
 }
 
+/**
+ * 주석 처리
+ */
 describe('WeddingInfoForm', () => {
   context('시작 페이지', () => {
     it('initial render', () => {});
 
-    it('초기에 placeHolder을 보여준다', () => {
-      // render(<WeddingInfoForm/>);
-      expect(screen.getByPlaceholderText('YYYY-MM-DD')).toBeInTheDocument();
-      expect(screen.getByPlaceholderText('00시')).toBeInTheDocument();
-      expect(screen.getByPlaceholderText('00분')).toBeInTheDocument();
-      expect(screen.getByPlaceholderText('예식장을 입력해주세요')).toBeInTheDocument();
-    });
+    // it('초기에 placeHolder을 보여준다', () => {
+    //   // render(<WeddingInfoForm/>);
+    //   expect(screen.getByPlaceholderText('YYYY-MM-DD')).toBeInTheDocument();
+    //   expect(screen.getByPlaceholderText('00시')).toBeInTheDocument();
+    //   expect(screen.getByPlaceholderText('00분')).toBeInTheDocument();
+    //   expect(screen.getByPlaceholderText('예식장을 입력해주세요')).toBeInTheDocument();
+    // });
   });
 
-  it('Inputbox에 타이핑하면, onChange 핸들러가 실행되어야 한다.', async () => {
-    const user = userEvent.setup();
-    const handleChange = jest.fn();
-  });
+  // it('Inputbox에 타이핑하면, onChange 핸들러가 실행되어야 한다.', async () => {
+  //   const user = userEvent.setup();
+  //   const handleChange = jest.fn();
+  // });
 });

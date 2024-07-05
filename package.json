@@ -3,11 +3,13 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
+    "build:ui": "turbo build --filter=@wepl/ui",
     "dev": "turbo dev --filter=client",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "clean": "turbo clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "test": "turbo run test -- --coverage",
     "test:wepl": "turbo run test --filter=client",
     "test:ui": "turbo run test --filter=@wepl/ui",
     "test:watch": "turbo run test:watch"
