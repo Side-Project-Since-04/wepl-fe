@@ -2,7 +2,7 @@ import React from 'react';
 
 import { DonutProgress } from '@ui/shadcn-ui/progress';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@ui/shadcn-ui/card';
+import { Card } from '@ui/shadcn-ui/card';
 import { HeadLine5 } from '@ui/src/components/HeadLine';
 import Icon from '@ui/src/Icon';
 import { SubTitle1, TextBody1, TextBody2 } from '@ui/src/components/Text';

@@ -1,5 +1,6 @@
 import { InvitationButton } from '@/src/widgets/auth/InvitationButton';
 import BudgetOverview from '@/src/widgets/budget/BudgetOverview';
+import { ScheduleCard } from '@/src/widgets/schedule/ScheduleCard';
 import WeddingEventInfo from '@/src/widgets/wedding/WeddingEventInfo';
 import { Button } from '@ui/src/Button';
 import Header from '@ui/src/components/Header';
@@ -17,10 +18,13 @@ const MainPage = () => {
   return (
     <>
       <Header left={<LeftHeader />} />
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center gap-32">
         <WeddingEventInfo />
         <BudgetOverview />
         <InvitationButton />
+        <ScheduleCard />
+        {/* <UpcomingSchedulesList /> */}
+        {/* <WeddingInfoCard /> */}
       </div>
     </>
   );

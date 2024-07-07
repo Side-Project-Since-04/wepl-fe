@@ -1,5 +1,9 @@
 'use client';
 import { useInvitation } from '@/src/features/auth/hooks';
+import { Button } from '@ui/src/Button';
+import Icon from '@ui/src/Icon';
+import { HeadLine3, HeadLine5 } from '@ui/src/components/HeadLine';
+import { TextBody1, TextBody2 } from '@ui/src/components/Text';
 import React from 'react';
 
 interface InvitationButtonProps {
@@ -15,24 +19,15 @@ export const InvitationButton: React.FC<InvitationButtonProps> = ({ className })
 
   return (
     // <div className="flex flex-col items-center">
-    <div className="w-screen max-w-[768px] h-[100px] flex flex-col justify-center bg-semantic-info-600  text-primary-25 p-10">
-      <button onClick={handleClick} disabled={isLoading}>
-        {isLoading ? (
-          <span className="mr-2">
-            <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-              ></path>
-            </svg>
-          </span>
-        ) : null}
-        {isLoading ? '초대장 보내는 중...' : '웨플 초대하기'}
-        {!isLoading && <span className="ml-2">❤️</span>}
-      </button>
+    <div className="w-screen max-w-[768px] h-[100px] flex gap-16 justify-center items-center bg-semantic-info-600  text-primary-25 p-10">
+      <div>
+        <TextBody2>결혼 준비는 같이하는 거니까!</TextBody2>
+        <Button onClick={handleClick} variant={'ghost'} className="hover:bg-inherit hover:text-inherit">
+          <HeadLine5>웨플 초대하기</HeadLine5>
+          <Icon name="arrow-right" size={16} />
+        </Button>
+      </div>
+      <Icon name="letter" size={77} className="text-white" />
     </div>
-    // </div>
   );
 };

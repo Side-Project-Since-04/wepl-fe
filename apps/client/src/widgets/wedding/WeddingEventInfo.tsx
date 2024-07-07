@@ -18,7 +18,7 @@ interface WeddingInfoCardProps {
 
 const WeddingEventInfo = () => {
   return (
-    <div className="w-screen max-w-[768px] flex flex-col items-center h-[404px] bg-primary-400 gap-24 text-primary-25 p-32  mb-100">
+    <div className="w-screen max-w-[768px] flex flex-col items-center h-[404px] bg-primary-400 gap-24 text-primary-25 p-32 mb-60">
       <WeddingEventInfo.Header name="홍길동" />
       <WeddingEventInfo.Card />
     </div>
