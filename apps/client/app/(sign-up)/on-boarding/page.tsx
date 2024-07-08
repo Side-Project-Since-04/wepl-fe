@@ -12,7 +12,7 @@ export default function OnboardingPage() {
   const RightHeader = () => {
     return (
       <Button className="hover:bg-inherit" variant={'ghost'} asChild>
-        <Link href={'/user-info'} className="text-gray-400 text-base hover:text-white">
+        <Link href={'/user-info'} className="text-gray-400 text-base hover:text-white pr-14">
           건너뛰기
         </Link>
       </Button>

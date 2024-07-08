@@ -34,7 +34,7 @@ export default function LoginPage(): JSX.Element {
   const { data: session, status } = useSession() as any;
   const router = useRouter();
 
-  const { mutate: signUp, isPending } = useSignUp(router);
+  const { mutate: signUp } = useSignUp(router);
 
   // Todo : 로그아웃에 대한 처리 고민..
   useEffect(() => {
