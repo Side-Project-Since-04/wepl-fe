@@ -1,6 +1,5 @@
 import { axiosInstance } from '../../config/axios';
 import { WeddingInfoType } from '../../types/wedding';
-import { createQueryKeys } from '@lukemorales/query-key-factory';
 
 const URL_ROOT = '/wedding';
 
