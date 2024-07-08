@@ -13,6 +13,7 @@ const authKeys = {
 interface SignUpResponse {
   invitationToken: string;
   signUp: boolean;
+  hasWeddingInfo: boolean;
 }
 
 export const useSignUp = (router: AppRouterInstance) => {
@@ -20,9 +21,9 @@ export const useSignUp = (router: AppRouterInstance) => {
     mutationKey: authKeys.signup,
     mutationFn: authClient.signup,
     onSuccess: (res) => {
-      const { invitationToken, signUp: isSignUp } = res.data;
+      const { invitationToken, signUp: isSignUp, hasWeddingInfo } = res.data;
       localStorage.setItem('invitationToken', invitationToken);
-      if (isSignUp) {
+      if (hasWeddingInfo) {
         router.push('/home');
       } else {
         router.push('/on-boarding');
