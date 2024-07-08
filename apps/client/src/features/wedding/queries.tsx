@@ -7,11 +7,11 @@ import { useToast } from '@ui/src/Toast';
 export const WeddingKeys = createQueryKeys('wedding', {
   create: (formData: WeddingInfoType) => ({
     queryKey: [{ formData }],
-    mutationFn: WeddingClient.create(formData),
+    queryFn: () => WeddingClient.create(formData),
   }),
   update: (formData: WeddingInfoType) => ({
     queryKey: [{ formData }],
-    queryFn: WeddingClient.update,
+    queryFn: () => WeddingClient.update,
   }),
 });
 
@@ -19,14 +19,9 @@ export const useCreateWeddingInfo = () => {
   const { toast } = useToast();
 
   return useMutation({
-    // mutationFn: WeddingClient.create,
     mutationFn: (formData: WeddingInfoType) => WeddingClient.create(formData),
     onSuccess: (res) => {
-      toast({
-        variant: 'success',
-        title: '완료!',
-        duration: 1500,
-      });
+      toast({ variant: 'success', title: '완료!', duration: 1500 });
     },
     onError: (error) => {
       toast({

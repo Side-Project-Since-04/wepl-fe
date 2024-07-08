@@ -48,6 +48,7 @@ const WeddingInfoPage = () => {
       weddingDate: format(weddingDate, 'yyyy-MM-dd'),
       weddingTime: `${hour}:${min}`,
     };
+
     mutate(formData);
   };
 
@@ -64,7 +65,7 @@ const WeddingInfoPage = () => {
   const RightHeader = () => {
     return (
       <Button variant={'ghost'} className="p-0" onClick={onSave} disabled={!form.formState.isValid}>
-        <Link href={'/invite'} className="text-lg" onClick={onSave}>
+        <Link href={'/invite'} className="text-lg">
           다음
         </Link>
       </Button>
