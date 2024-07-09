@@ -1,4 +1,4 @@
-import { FURNITURE, HONEYMOON, PRESENT, WEDDING } from '../constants/classification';
+import { FURNITURE, HONEYMOON, PRESENT, WEDDING } from './constants';
 
 export type Wedding = typeof WEDDING;
 export type Present = typeof PRESENT;

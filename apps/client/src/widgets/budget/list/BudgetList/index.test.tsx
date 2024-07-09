@@ -1,5 +1,5 @@
 import BudgetList from '.';
-import { CLASSIFICATION } from '@/src/shared/constants/classification';
+import { CLASSIFICATION } from '@fsd/features/category/constants';
 import { server } from '@/mocks/server';
 import { HttpResponse, http } from 'msw';
 import { render, screen, waitFor } from '@/src/shared/test/testing-library-utils';

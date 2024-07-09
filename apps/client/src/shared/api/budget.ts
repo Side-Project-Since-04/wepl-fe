@@ -1,12 +1,15 @@
 import { axiosInstance } from '../config/axios';
-import { Budget } from '../types/budget';
+import { Budget } from '@fsd/features/budget/types';
 
-export const getBudget = async () => {
-  const { data } = await axiosInstance.get<Budget[]>('/budget');
+const URL_ROOT = '/budget';
 
-  return data;
-};
+export const budgetClient = {
+  getBudget: async () => {
+    const { data } = await axiosInstance.get<Budget[]>(URL_ROOT);
 
-export const updateBudget = async (budget: Budget) => {
-  await axiosInstance.put('/budget', budget);
+    return data;
+  },
+  updateBudget: async (budget: Budget) => {
+    await axiosInstance.put(URL_ROOT, budget);
+  },
 };

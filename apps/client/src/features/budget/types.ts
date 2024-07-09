@@ -1,4 +1,4 @@
-import { ClassificationName } from './classification';
+import { ClassificationName } from '../category/types';
 
 export interface Budget {
   classificationName: ClassificationName;

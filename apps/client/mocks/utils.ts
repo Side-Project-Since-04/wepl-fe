@@ -3,5 +3,5 @@
  * API url을 붙여줌
  */
 export function createUrl(path: string) {
-  return `${process.env.NEXT_PUBLIC_API_DEV_URL}${path}`;
+  return process.env.NEXT_PUBLIC_API_DEV_URL + path;
 }

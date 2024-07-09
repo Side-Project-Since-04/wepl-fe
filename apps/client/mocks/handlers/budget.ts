@@ -1,7 +1,7 @@
 import { HttpResponse, http } from 'msw';
 import { createUrl } from '../utils';
-import { CLASSIFICATION } from '@/src/shared/constants/classification';
-import { Budget } from '@/src/shared/types/budget';
+import { CLASSIFICATION } from '@fsd/features/category/constants';
+import { Budget } from '@/src/features/budget/types';
 
 const BUDGETS: Budget[] = CLASSIFICATION.map(({ name }, idx) => ({
   classificationName: name,
@@ -10,7 +10,7 @@ const BUDGETS: Budget[] = CLASSIFICATION.map(({ name }, idx) => ({
 
 export const handlers = [
   http.get(createUrl('/budget'), () => {
-    return HttpResponse.json({ data: BUDGETS });
+    return HttpResponse.json(BUDGETS);
   }),
   http.put(createUrl('/budget'), () => {
     return HttpResponse.json({});

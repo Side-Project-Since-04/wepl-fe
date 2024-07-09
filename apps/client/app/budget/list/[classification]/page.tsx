@@ -1,11 +1,10 @@
 'use client';
 
 import { queries } from '@/src/features/common/queries';
-import { getBudget, updateBudget } from '@/src/shared/api/budget';
+import { budgetClient } from '@/src/shared/api/budget';
 import BackHeader from '@/src/shared/components/BackHeader';
-import { CLASSIFICATION } from '@/src/shared/constants/classification';
-import { Budget } from '@/src/shared/types/budget';
-import { type ClassificationName } from '@/src/shared/types/classification';
+import { CLASSIFICATION } from '@/src/features/category/constants';
+import { type ClassificationName } from '@/src/features/category/types';
 import BudgetHeader from '@/src/widgets/budget/common/BudgetHeader';
 import BudgetInput from '@/src/widgets/budget/input/BudgetInput';
 import BudgetListDetailDescription from '@/src/widgets/budget/list-detail/BudgetListDetailDescription';
@@ -13,6 +12,7 @@ import { QueryClient, useMutation } from '@tanstack/react-query';
 import { useToast } from '@ui/src/Toast';
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import { Budget } from '@/src/features/budget/types';
 
 interface BudgetListDetailPage {
   params: {
@@ -34,7 +34,7 @@ export default function BudgetListDetailPage({ params }: BudgetListDetailPage) {
 
   const { mutate: mutateForUpdateBudget } = useMutation({
     mutationKey: [queries.wedding.updateTotalBudget],
-    mutationFn: (budget: Budget) => updateBudget(budget),
+    mutationFn: (budget: Budget) => budgetClient.updateBudget(budget),
   });
 
   const handleSave = async (budgetAmount: number) => {
@@ -67,10 +67,7 @@ export default function BudgetListDetailPage({ params }: BudgetListDetailPage) {
       const queryClient = new QueryClient();
 
       try {
-        const budgets = await queryClient.fetchQuery({
-          queryKey: queries.budget.getBudget,
-          queryFn: getBudget,
-        });
+        const budgets = await queryClient.fetchQuery(queries.budget.getBudget());
 
         const budget = budgets.filter((value) => value.classificationName === classificationName)[0].amount;
         setBudget(budget);

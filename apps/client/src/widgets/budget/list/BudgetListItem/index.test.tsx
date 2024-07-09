@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import BudgetListItem from '.';
-import { CLASSIFICATION } from '@/src/shared/constants/classification';
+import { CLASSIFICATION } from '@/src/features/category/constants';
 import { GNB_ITEMS } from '@/src/shared/components/Gnb';
 
 // Icon 컴포넌트를 모킹

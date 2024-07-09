@@ -1,8 +1,12 @@
+import { Classification } from '@/src/features/category/types';
 import { axiosInstance } from '../config/axios';
-import { Classification } from '../types/classification';
-import { Pageable } from '../types/common';
+import { Pageable } from '@fsd/features/common/types';
 
-export const getClassifications = async () => {
-  const { data } = await axiosInstance.get<Pageable<Classification>>('/category/classifications');
-  return data;
+const URL_ROOT = '/category';
+
+export const categoryClient = {
+  getClassifications: async () => {
+    const { data } = await axiosInstance.get<Pageable<Classification>>(URL_ROOT + '/classifications');
+    return data;
+  },
 };
