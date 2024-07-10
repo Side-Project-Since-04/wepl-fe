@@ -22,6 +22,7 @@ const LoadingSpinner = ({ className }: { className?: string }) => {
       style={{
         animationDuration: '1.5s',
         animationTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+        stroke: '#0b7285',
       }}
     >
       <path d="M21 12a9 9 0 1 1-6.219-8.56" />
@@ -33,7 +34,7 @@ export default function LoginPage(): JSX.Element {
   const { data: session, status } = useSession() as any;
   const router = useRouter();
 
-  const { mutate: signUp, isPending } = useSignUp(router);
+  const { mutate: signUp } = useSignUp(router);
 
   // Todo : 로그아웃에 대한 처리 고민..
   useEffect(() => {
