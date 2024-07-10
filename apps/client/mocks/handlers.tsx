@@ -1,8 +1,5 @@
-import { HttpResponse, http } from 'msw';
+import { handlers as classificationHandlers } from './handlers/classification';
+import { handlers as budgetHandlers } from './handlers/budget';
+import { handlers as weddingHandlers } from './handlers/wedding';
 
-export const handlers = [
-  // Intercept the "GET /resource" request.
-  http.get('http://localhost:3030/test', () => {
-    return HttpResponse.text('hello');
-  }),
-];
+export const handlers = [...classificationHandlers, ...budgetHandlers, ...weddingHandlers];

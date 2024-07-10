@@ -18,5 +18,10 @@
     "@wepl/eslint-config": "*",
     "@wepl/tailwind-config": "*",
     "@wepl/typescript-config": "*"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

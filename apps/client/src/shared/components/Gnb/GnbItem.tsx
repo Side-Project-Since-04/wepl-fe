@@ -1,10 +1,10 @@
 import Icon, { IconName } from '@ui/src/Icon';
 import Link from 'next/link';
-import { gnbItems } from '.';
+import { GNB_ITEMS } from '.';
 
 export interface GnbItemProps {
   isSelected: boolean;
-  item: (typeof gnbItems)[number];
+  item: (typeof GNB_ITEMS)[number];
 }
 export function GnbItem({ isSelected, item }: GnbItemProps) {
   const { pathname, name } = item;
