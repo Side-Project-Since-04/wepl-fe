@@ -1,11 +1,8 @@
 name: NextJs build Check
 
 on:
-  # Runs on any open or reopened pull request
   pull_request:
-    types: [opened, reopened]
-
-  push:
+    types: [opened, synchronize, reopened]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -51,5 +48,10 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+      - name: Generate env file in app/client
+        run: |
+          cd apps/client
+          echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
+          echo "SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> .env
       - name: Build with Next.js
         run: npm run build

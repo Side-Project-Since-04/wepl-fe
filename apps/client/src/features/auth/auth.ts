@@ -36,7 +36,7 @@ const handler = NextAuth({
         const user = await res.json();
         if (user) {
           // Todo : 저장 정보 로직 ..
-
+          console.log(user);
           //
           return user;
         } else {
@@ -47,7 +47,7 @@ const handler = NextAuth({
     }),
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID!,
-      clientSecret: process.env.KAKAO_CLIENT_SECRET!,
+      clientSecret: process.env.NEXT_PUBLIC_KAKAO_CLIENT_SECRET!,
     }),
   ],
   callbacks: {
@@ -57,10 +57,9 @@ const handler = NextAuth({
       }
       return token;
     },
-
     async session({ session, token }: any) {
       session.accessToken = token.accessToken as any;
-      return { ...session, ...token };
+      return session;
     },
   },
   session: {

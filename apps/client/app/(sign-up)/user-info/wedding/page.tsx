@@ -3,20 +3,22 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 
 // @wepl/ui
-import Header from '@wepl/ui/components/Header/index.tsx';
-import { Button } from '@wepl/ui/Button.tsx';
-import { HeadLine5 } from '@wepl/ui/components/HeadLine/index.tsx';
+import Header from '@ui/src/components/Header';
+import { Button } from '@ui/src/Button';
+import { HeadLine5 } from '@ui/src/components/HeadLine';
 
 //third-party
+import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { WeddingInfoForm } from '@/src/features/auth/wedding_info_form/WeddingInfoForm';
+import { WeddingInfoForm } from '@/src/widgets/wedding/WeddingInfoForm';
+import { useCreateWeddingInfo } from '@/src/features/wedding/queries';
 
 const formSchema = z.object({
-  wedding_date: z.date(),
-  wedding_hole: z.string(),
-  time: z.union([z.string(), z.number()]).refine((value) => {
+  weddingDate: z.date(),
+  weddingHall: z.string().max(15),
+  hour: z.union([z.string(), z.number()]).refine((value) => {
     const numberValue = typeof value === 'string' ? parseInt(value, 10) : value;
     return numberValue >= 0 && numberValue <= 23;
   }),
@@ -29,18 +31,26 @@ const formSchema = z.object({
 export type WeddingFormData = z.infer<typeof formSchema>;
 
 const WeddingInfoPage = () => {
-  // schema 생성
+  const { mutate } = useCreateWeddingInfo();
 
   const form = useForm<WeddingFormData>({
     resolver: zodResolver(formSchema), // zod validater 통합
     defaultValues: {
-      wedding_hole: '',
-      time: '',
+      weddingHall: '',
+      hour: '',
       min: '',
     },
   });
+
   const onSave = () => {
-    console.log(form.getValues());
+    const { weddingHall, weddingDate, hour, min } = form.getValues();
+    const formData = {
+      weddingHall,
+      weddingDate: format(weddingDate, 'yyyy-MM-dd'),
+      weddingTime: `${hour}:${min}`,
+    };
+
+    mutate(formData);
   };
 
   const LeftHeader = () => {
@@ -56,7 +66,7 @@ const WeddingInfoPage = () => {
   const RightHeader = () => {
     return (
       <Button variant={'ghost'} className="p-0" onClick={onSave} disabled={!form.formState.isValid}>
-        <Link href={'/invite'} className="text-lg" onClick={onSave}>
+        <Link href={'/invite'} className="text-lg">
           다음
         </Link>
       </Button>

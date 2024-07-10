@@ -1,9 +1,19 @@
 import type { Metadata } from 'next';
-import { AppLayout } from '@/src/app/AppLayout';
+import { AppLayout } from '@fsd/app/AppLayout';
+import { QueryProvider } from '@fsd/app/QueryProvider';
 import AuthSession from '@fsd/features/auth/AuthSession';
+import { MswProvider } from '@/src/app/MswProvider';
+import KakaoScript from '@/src/shared/Kakao/Kakaoscript';
+
 /** Next Font는 일단 보류 */
 // import { Inter } from "next/font/google";
 // const inter = Inter({ subsets: ["latin"] });
+
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
 
 export const metadata: Metadata = {
   title: 'Wepl 웨플',
@@ -15,9 +25,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
     <html lang="ko">
       <body>
         <AuthSession>
-          <AppLayout>{children}</AppLayout>
+          <MswProvider>
+            <QueryProvider>
+              <AppLayout>{children}</AppLayout>
+            </QueryProvider>
+          </MswProvider>
         </AuthSession>
       </body>
+      <KakaoScript />
     </html>
   );
 }

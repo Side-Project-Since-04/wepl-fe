@@ -1,25 +1,57 @@
 'use client';
-import React from 'react';
-import { Button } from '@wepl/ui/Button.tsx';
+
+import { Button } from '@wepl/ui/Button';
 import { useRouter } from 'next/navigation';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import { useEffect } from 'react';
+import { cn } from '@ui/lib/utils';
+import { useSignUp } from '@/src/features/auth/queries';
+
+const LoadingSpinner = ({ className }: { className?: string }) => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={cn('animate-spin', className)}
+      style={{
+        animationDuration: '1.5s',
+        animationTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+        stroke: '#0b7285',
+      }}
+    >
+      <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+    </svg>
+  );
+};
 
 export default function LoginPage(): JSX.Element {
+  const { data: session, status } = useSession() as any;
   const router = useRouter();
-  const session = useSession();
 
-  console.log(session);
-  const { status = 'loading' } = session;
+  const { mutate: signUp } = useSignUp(router);
+
+  // Todo : 로그아웃에 대한 처리 고민..
+  useEffect(() => {
+    if (session?.accessToken) {
+      signUp(session.accessToken);
+    }
+  }, [session?.accessToken]);
+
   const handleKakaoBtn = async () => {
-    if (status === 'unauthenticated') {
-      await signIn('kakao', {
-        redirect: true,
-        callbackUrl: '/on-boarding',
-      });
-    } else {
-      router.push('/home');
+    try {
+      await signIn('kakao', { redirect: false });
+    } catch (error) {
+      console.error('Error during login process:', error);
+      // 에러 처리
     }
   };
+
   const handleSignOut = async () => {
     await signOut({ redirect: true, callbackUrl: '/' });
   };
@@ -33,10 +65,7 @@ export default function LoginPage(): JSX.Element {
       </div>
       <div className="text-neutral-white">결혼 준비에도 관리가 필요하니까</div>
       <Button className="mt-[22px] w-[280px] h-[50px]" onClick={handleKakaoBtn} variant="outline">
-        카카오톡으로 시작하기
-      </Button>
-      <Button className="mt-8 w-[280px] h-[50px]" onClick={handleSignOut} variant="outline">
-        로그아웃
+        {status === 'loading' ? <LoadingSpinner /> : '카카오톡으로 시작하기'}
       </Button>
     </main>
   );

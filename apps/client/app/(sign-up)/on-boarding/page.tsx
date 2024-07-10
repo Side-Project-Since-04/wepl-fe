@@ -1,9 +1,9 @@
 import * as React from 'react';
 // import Image from 'next/image';
 
-import { Carousel, CarouselContent, CarouselItem } from '@wepl/ui/Carousel.tsx';
-import Header from '@wepl/ui/components/Header/index.tsx';
-import { Button } from '@wepl/ui/Button.tsx';
+import { Carousel, CarouselContent, CarouselItem } from '@ui/src/Carousel';
+import Header from '@ui/src/components/Header';
+import { Button } from '@ui/src/Button';
 import Link from 'next/link';
 
 export default function OnboardingPage() {
@@ -12,7 +12,7 @@ export default function OnboardingPage() {
   const RightHeader = () => {
     return (
       <Button className="hover:bg-inherit" variant={'ghost'} asChild>
-        <Link href={'/user-info'} className="text-gray-400 text-base hover:text-white">
+        <Link href={'/user-info'} className="text-gray-400 text-base hover:text-white pr-14">
           건너뛰기
         </Link>
       </Button>
