@@ -29,7 +29,7 @@ axiosInstance.interceptors.response.use(
     if (error.response.status === 401) {
       try {
         // 토큰 갱신 요청
-        const response = await axiosInstance.post('/auth/refresh');
+        const response = await axiosInstance.get('/auth/refresh');
 
         if (response.status === 200) {
           // 새 토큰이 쿠키에 저장됨

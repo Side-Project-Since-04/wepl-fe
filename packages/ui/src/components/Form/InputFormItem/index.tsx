@@ -38,7 +38,7 @@ const InputFormItem = ({ required = false, ...props }: InputFormItemProps) => {
             <FormControl>
               <Input className="bg-gray-50 pl-[14px] h-[50px]" placeholder={props.placeholder} {...field} />
             </FormControl>
-            <FormMessage />
+            {field.value.length > 15 && <div className="text-destructive">예식 장소 글자수를 15자 이하로 해주세요</div>}
           </FormItem>
         );
       }}
