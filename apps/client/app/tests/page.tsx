@@ -4,13 +4,7 @@ import { supabase } from '@/src/shared/utils/supabase';
 async function TestPage() {
   const { data, error } = await supabase.from('classification').select('*');
 
-  return (
-    <div>
-      {data.map((a: any) => (
-        <div>{a.name}</div>
-      ))}
-    </div>
-  );
+  return <div>{data?.map((a: any) => <div>{a.name}</div>)}</div>;
 }
 
 export default TestPage;
