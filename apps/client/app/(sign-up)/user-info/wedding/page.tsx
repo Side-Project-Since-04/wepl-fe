@@ -41,6 +41,7 @@ const WeddingInfoPage = () => {
       min: '',
     },
   });
+
   const onSave = () => {
     const { weddingHall, weddingDate, hour, min } = form.getValues();
     const formData = {

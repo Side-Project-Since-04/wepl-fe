@@ -1,48 +1,49 @@
+// WeddingInfoForm.test.tsx
+import React from 'react';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, UseFormReturn } from 'react-hook-form';
+import { WeddingInfoForm } from '@/src/widgets/wedding/WeddingInfoForm';
+import { WeddingFormData } from '@/app/(sign-up)/user-info/wedding/page';
 
-import { WeddingInfoForm } from '../WeddingInfoForm';
-import { UseFormReturn, useForm } from 'react-hook-form';
+// useForm 훅을 모킹합니다.
 
-const formSchema = z.object({
-  wedding_date: z.date(),
-  wedding_hole: z.string(),
-  time: z.union([z.string(), z.number()]).refine((value) => {
-    const numberValue = typeof value === 'string' ? parseInt(value, 10) : value;
-    return numberValue >= 0 && numberValue <= 23;
-  }),
-  min: z.union([z.string(), z.number()]).refine((value) => {
-    const numberValue = typeof value === 'string' ? parseInt(value, 10) : value;
-    return numberValue >= 0 && numberValue <= 59;
-  }),
-});
+jest.mock('react-hook-form', () => ({
+  useForm: jest.fn(),
+}));
 
-type FormValues = z.infer<typeof formSchema>;
+// 모킹된 useForm 함수 가져오기
+const mockUseForm = jest.requireMock('react-hook-form').useForm;
 
-function setup(jsx: React.JSX.Element) {
-  return {
-    user: userEvent.setup(),
-    ...render(jsx),
-  };
-}
+// 모킹된 form 객체 생성
 
+// useForm이 모킹된 form 객체를 반환하도록 설정
+mockUseForm.mockReturnValue(mockForm);
 describe('WeddingInfoForm', () => {
-  context('시작 페이지', () => {
-    it('initial render', () => {});
+  const mockform = useForm as any;
 
-    it('초기에 placeHolder을 보여준다', () => {
-      // render(<WeddingInfoForm/>);
-      expect(screen.getByPlaceholderText('YYYY-MM-DD')).toBeInTheDocument();
-      expect(screen.getByPlaceholderText('00시')).toBeInTheDocument();
-      expect(screen.getByPlaceholderText('00분')).toBeInTheDocument();
-      expect(screen.getByPlaceholderText('예식장을 입력해주세요')).toBeInTheDocument();
-    });
+  it('renders form fields', () => {
+    render(<WeddingInfoForm form={mockform} />);
+
+    // 필드가 렌더링되었는지 확인합니다.
+    expect(screen.getByLabelText('예식일')).toBeInTheDocument();
+    expect(screen.getByLabelText('예식 시간')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('00시')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('00분')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('예식장을 입력해주세요')).toBeInTheDocument();
   });
 
-  it('Inputbox에 타이핑하면, onChange 핸들러가 실행되어야 한다.', async () => {
-    const user = userEvent.setup();
-    const handleChange = jest.fn();
-  });
+  // it('should call handleSubmit when form is submitted', () => {
+  //   const mockSubmit = jest.fn();
+  //   mockUseFormReturn.handleSubmit = mockSubmit;
+
+  //   render(<WeddingInfoForm form={mockUseFormReturn} />);
+
+  //   // 폼 제출을 트리거합니다.
+  //   screen.getByRole('form').submit();
+
+  //   // handleSubmit 함수가 호출되었는지 확인합니다.
+  //   expect(mockSubmit).toHaveBeenCalled();
+  // });
+
+  // 추가적인 테스트는 여기서 추가할 수 있습니다.
 });
