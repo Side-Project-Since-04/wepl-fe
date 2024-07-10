@@ -2,7 +2,7 @@ import { budgetClient } from '@/src/shared/api/budget';
 import { createQueryKeys } from '@lukemorales/query-key-factory';
 import { Budget } from './types';
 
-export const budgetKeys = createQueryKeys('budget', {
+export const BudgetKeys = createQueryKeys('budget', {
   getBudget: () => ({
     queryKey: ['get'],
     queryFn: () => budgetClient.getBudget(),

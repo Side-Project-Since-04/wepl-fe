@@ -1,6 +1,6 @@
 import { mergeQueryKeys } from '@lukemorales/query-key-factory';
-import { budgetKeys } from '../budget/queries';
-import { categoryKeys } from '../category/queries';
-import { weddingKeys } from '../wedding/queries';
+import { BudgetKeys } from '../budget/queries';
+import { CategoryKeys } from '../category/queries';
+import { WeddingKeys } from '../wedding/queries';
 
-export const queries = mergeQueryKeys(budgetKeys, categoryKeys, weddingKeys);
+export const queries = mergeQueryKeys(BudgetKeys, CategoryKeys, WeddingKeys);
