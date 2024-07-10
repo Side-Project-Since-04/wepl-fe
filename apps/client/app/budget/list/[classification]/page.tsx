@@ -1,7 +1,7 @@
 'use client';
 
 import { queries } from '@/src/features/common/queries';
-import { budgetClient } from '@/src/shared/api/budget';
+import { BudgetClient } from '@/src/shared/apis/budget';
 import BackHeader from '@/src/shared/components/BackHeader';
 import { CLASSIFICATION } from '@/src/features/category/constants';
 import { type ClassificationName } from '@/src/features/category/types';
@@ -34,7 +34,7 @@ export default function BudgetListDetailPage({ params }: BudgetListDetailPage) {
 
   const { mutate: mutateForUpdateBudget } = useMutation({
     mutationKey: [queries.wedding.updateTotalBudget],
-    mutationFn: (budget: Budget) => budgetClient.updateBudget(budget),
+    mutationFn: (budget: Budget) => BudgetClient.updateBudget(budget),
   });
 
   const handleSave = async (budgetAmount: number) => {
