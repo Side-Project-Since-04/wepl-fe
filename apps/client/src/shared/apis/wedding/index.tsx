@@ -4,7 +4,7 @@ import { WeddingInfoType } from '../../types/wedding';
 const URL_ROOT = '/wedding';
 
 export const WeddingClient = {
-  create: async (formData: WeddingInfoType) => {
+  createWeddingInfo: async (formData: WeddingInfoType) => {
     return await axiosInstance.post(URL_ROOT, { ...formData });
   },
   update: async (formData: WeddingInfoType) => {
