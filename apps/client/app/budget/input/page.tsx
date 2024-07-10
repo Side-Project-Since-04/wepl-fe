@@ -6,7 +6,7 @@ import { useToast } from '@ui/src/Toast';
 import { useState } from 'react';
 import BudgetHeader from '@/src/widgets/budget/common/BudgetHeader';
 import { useMutation } from '@tanstack/react-query';
-import { weddingClient } from '@/src/shared/api/wedding';
+import { WeddingClient } from '@/src/shared/apis/wedding';
 
 export default function BudgetInputPage() {
   const [budget, setBudget] = useState(0);
@@ -15,7 +15,7 @@ export default function BudgetInputPage() {
   const isEnabledSave = budget > 0;
 
   const { mutate: mutateForUpdateTotalBudget } = useMutation({
-    mutationFn: (budget: number) => weddingClient.updateTotalBudget(budget),
+    mutationFn: (budget: number) => WeddingClient.updateTotalBudget(budget),
   });
 
   const saveBudget = async (budget: number) => {

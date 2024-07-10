@@ -3,7 +3,7 @@ import { Budget } from '@fsd/features/budget/types';
 
 const URL_ROOT = '/budget';
 
-export const budgetClient = {
+export const BudgetClient = {
   getBudget: async () => {
     const { data } = await axiosInstance.get<Budget[]>(URL_ROOT);
 
