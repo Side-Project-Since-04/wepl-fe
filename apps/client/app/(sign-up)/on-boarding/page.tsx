@@ -5,7 +5,6 @@ import { Carousel, CarouselContent, CarouselItem } from '@ui/src/Carousel';
 import Header from '@ui/src/components/Header';
 import { Button } from '@ui/src/Button';
 import Link from 'next/link';
-import { LoadingSpinner } from '@/app/page';
 
 export default function OnboardingPage() {
   const imageArray = [null, null];

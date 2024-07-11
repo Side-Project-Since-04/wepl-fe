@@ -1,7 +1,7 @@
 import { cn } from '@ui/lib/utils';
 import { GnbItem } from './GnbItem';
 
-export const gnbItems = [
+export const GNB_ITEMS = [
   {
     name: '홈',
     pathname: '/home',
@@ -40,7 +40,7 @@ export function Gnb({ pathname }: GnbProps) {
       )}
     >
       <ul className="flex">
-        {gnbItems.map((item) => (
+        {GNB_ITEMS.map((item) => (
           <GnbItem key={item.name} isSelected={item.pathname === pathname} item={item} />
         ))}
       </ul>
