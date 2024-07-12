@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import Image from 'next/image';
 
@@ -8,6 +9,7 @@ import { SubTitle1 } from '@ui/src/components/Text';
 
 // third
 import MarriedCouple from '@/public/home/Married-Couple.png';
+import { useGetWeddingInfo } from '@/src/features/wedding/queries';
 
 interface WeddingInfoCardProps {
   // name: string;
@@ -17,9 +19,11 @@ interface WeddingInfoCardProps {
 }
 
 const WeddingEventInfo = () => {
+  // const { data, isLoading } = useGetWeddingInfo();
+  // console.log(data);
   return (
     <div className="w-screen max-w-[768px] flex flex-col items-center h-[404px] bg-primary-400 gap-24 text-primary-25 p-32 mb-60">
-      <WeddingEventInfo.Header name="홍길동" />
+      <WeddingEventInfo.Header name={'홍길동'} />
       <WeddingEventInfo.Card />
     </div>
   );

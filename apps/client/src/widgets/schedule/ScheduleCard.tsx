@@ -1,10 +1,11 @@
 import { Card, CardContent, CardHeader } from '@ui/shadcn-ui/card';
+import { Button } from '@ui/src/Button';
 import { HeadLine4, HeadLine6 } from '@ui/src/components/HeadLine';
-import { SubTitle1, TextBody2 } from '@ui/src/components/Text';
+import { SubTitle1, TextBody1, TextBody2 } from '@ui/src/components/Text';
 import React from 'react';
 
 export const ScheduleCard: React.FC = () => {
-  const data = 't';
+  const data = '';
 
   return (
     <div className="mx-auto my-24">
@@ -17,8 +18,10 @@ export const ScheduleCard: React.FC = () => {
           </Card>
         </>
       ) : (
-        <Card className="w-[320px] h-[240px] flex items-center justify-center">
-          <HeadLine4 className="text-gray-200">등록된 일정이 없어요</HeadLine4>
+        <Card className="w-[320px] h-[246px] bg-gray-50 flex flex-col items-center justify-center gap-2">
+          <TextBody1 className="text-gray-400">등록된 일정이 없어요</TextBody1>
+          <TextBody1 className="text-gray-400">지출에 필요한 일정을 등록해주세요</TextBody1>
+          <Button className="mt-20 h-40 w-110 bg-neutral-white text-primary-400">일정 등록하기</Button>
         </Card>
       )}
     </div>

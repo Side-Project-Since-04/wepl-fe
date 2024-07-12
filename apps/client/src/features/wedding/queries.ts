@@ -2,10 +2,14 @@ import { WeddingClient } from '@/src/shared/apis/wedding';
 
 import { WeddingInfoType } from '@/src/shared/types/wedding';
 import { createQueryKeys } from '@lukemorales/query-key-factory';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useToast } from '@ui/src/Toast';
 
 export const WeddingKeys = createQueryKeys('wedding', {
+  getWeddingInfo: {
+    queryKey: ['wedding'],
+    queryFn: () => WeddingClient.getWeddingInfo(),
+  },
   create: (formData: WeddingInfoType) => ({
     queryKey: [{ formData }],
     queryFn: () => WeddingClient.createWeddingInfo(formData),
@@ -19,6 +23,13 @@ export const WeddingKeys = createQueryKeys('wedding', {
     queryFn: (budget: number) => WeddingClient.updateTotalBudget(budget),
   }),
 });
+
+export const useGetWeddingInfo = () => {
+  return useQuery({
+    queryKey: WeddingKeys.getWeddingInfo.queryKey,
+    queryFn: WeddingKeys.getWeddingInfo.queryFn,
+  });
+};
 
 export const useCreateWeddingInfo = () => {
   const { toast } = useToast();

@@ -32,7 +32,6 @@ const LoadingSpinner = ({ className }: { className?: string }) => {
 
 export default function LoginPage(): JSX.Element {
   const { data: session, status } = useSession() as any;
-  console.log(session);
   const router = useRouter();
 
   const { mutate: signUp } = useSignUp(router);
