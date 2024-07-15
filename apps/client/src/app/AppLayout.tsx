@@ -27,8 +27,7 @@ export function AppLayout({ children }: { children: React.ReactNode }): JSX.Elem
   return (
     <div
       className={cn(
-        'relative m-auto px-[40px] h-screen border-l-2 border-r-2 border-green-500',
-        'sm:px-[20px]',
+        'relative m-auto h-screen border-l-2 border-r-2 border-green-500',
         layoutClassName.minWidth,
         layoutClassName.maxWidth,
         { [layoutClassName.gnbPadding]: isMainPage },

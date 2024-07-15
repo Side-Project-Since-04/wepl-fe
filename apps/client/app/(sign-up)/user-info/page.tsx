@@ -5,10 +5,11 @@ import { Button } from '@ui/src/Button';
 import { HeadLine5 } from '@ui/src/components/HeadLine';
 import { TextBody2 } from '@ui/src/components/Text';
 import BackHeader from '@/src/shared/components/BackHeader';
+import PageLayout from '@/src/pages/PageLayout';
 
 const UserInfoPage = () => {
   return (
-    <>
+    <PageLayout isPadding>
       <div className="pt-[4px] flex flex-col gap-[16px]">
         <BackHeader />
         <HeadLine5>
@@ -32,7 +33,7 @@ const UserInfoPage = () => {
           <Link href={'/invite'}>미정입니다</Link>
         </Button>
       </div>
-    </>
+    </PageLayout>
   );
 };
 
