@@ -7,7 +7,7 @@ import { useToast } from '@ui/src/Toast';
 
 export const WeddingKeys = createQueryKeys('wedding', {
   getWeddingInfo: {
-    queryKey: ['wedding'],
+    queryKey: null,
     queryFn: () => WeddingClient.getWeddingInfo(),
   },
   create: (formData: WeddingInfoType) => ({
@@ -25,10 +25,7 @@ export const WeddingKeys = createQueryKeys('wedding', {
 });
 
 export const useGetWeddingInfo = () => {
-  return useQuery({
-    queryKey: WeddingKeys.getWeddingInfo.queryKey,
-    queryFn: WeddingKeys.getWeddingInfo.queryFn,
-  });
+  return useQuery(WeddingKeys.getWeddingInfo);
 };
 
 export const useCreateWeddingInfo = () => {
