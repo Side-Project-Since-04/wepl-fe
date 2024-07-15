@@ -27,7 +27,7 @@ export default function BudgetListDetailPage({ params }: BudgetListDetailPage) {
   const [budget, setBudget] = useState(0);
   const { toast } = useToast();
   const searchParams = useSearchParams();
-  const order = searchParams.get('order') || '?';
+  const order = searchParams?.get('order') || '?';
 
   const isEnableSave = budget > 0;
   const classificationName = (params.classification?.toUpperCase() || '') as ClassificationName;
