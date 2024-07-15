@@ -21,13 +21,13 @@ const mainPages = {
 };
 
 export function AppLayout({ children }: { children: React.ReactNode }): JSX.Element {
-  const pathname = usePathname();
+  const pathname = usePathname() || '';
   const isMainPage = Object.values(mainPages).includes(pathname);
 
   return (
     <div
       className={cn(
-        'relative m-auto h-screen border-l-2 border-r-2 border-green-500',
+        'relative m-auto min-h-screen border-l-2 border-r-2 border-green-500',
         layoutClassName.minWidth,
         layoutClassName.maxWidth,
         { [layoutClassName.gnbPadding]: isMainPage },
