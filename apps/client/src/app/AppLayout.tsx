@@ -15,7 +15,7 @@ const layoutClassName = {
 
 const mainPages = {
   home: '/home',
-  budget: '/budget',
+  spending: '/spending',
   schedule: '/schedule',
   setting: '/setting',
 };
@@ -27,7 +27,7 @@ export function AppLayout({ children }: { children: React.ReactNode }): JSX.Elem
   return (
     <div
       className={cn(
-        'relative m-auto min-h-screen border-l-2 border-r-2 border-green-500 overflow-y-auto',
+        'relative m-auto h-screen min-h-screen border-l-2 border-r-2 border-green-500 overflow-y-auto',
         layoutClassName.minWidth,
         layoutClassName.maxWidth,
         { [layoutClassName.gnbPadding]: isMainPage },

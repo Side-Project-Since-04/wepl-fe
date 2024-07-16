@@ -8,7 +8,7 @@ export const GNB_ITEMS = [
   },
   {
     name: '지출',
-    pathname: '/budget',
+    pathname: '/spending',
   },
   {
     name: '일정',
