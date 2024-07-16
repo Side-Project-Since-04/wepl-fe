@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { SubTitle1 } from '@ui/src/components/Text';
+import WeplBadge from '@ui/src/Badge';
 
 const SpendingSummaryCard = () => {
   return (
@@ -22,19 +25,18 @@ const CardHeader = () => {
     </div>
   );
 };
-
 const CardContent = () => {
   return (
     <div>
-      <p className="text-sm text-gray-600 mb-2">지출 완료/대기 금액</p>
-      <div className="flex justify-between gap-8">
-        <div className="flex items-center">
-          <span className="text-xs text-white bg-green-500 px-2 py-1 rounded mr-2">완료</span>
-          <span className="text-sm font-bold">10,000,000원</span>
+      <p className="text-12 text-gray-500 mb-4">지출 완료/대기 금액</p>
+      <div className="flex justify-between">
+        <div className="flex flex-1">
+          <WeplBadge className={'bg-semantic-success-100 text-semantic-success-600'}>완료</WeplBadge>
+          <span className="ml-4 whitespace-nowrap text-15 ">10,000,000원</span>
         </div>
-        <div className="flex items-center">
-          <span className="text-xs text-white bg-yellow-500 px-2 py-1 rounded mr-2">대기</span>
-          <span className="text-sm font-bold">24,000,000원</span>
+        <div className="flex ">
+          <WeplBadge className={'bg-semantic-warning-100 text-semantic-warning-600'}>대기</WeplBadge>
+          <span className="ml-4 whitespace-nowrap text-15 ">50,000원</span>
         </div>
       </div>
     </div>

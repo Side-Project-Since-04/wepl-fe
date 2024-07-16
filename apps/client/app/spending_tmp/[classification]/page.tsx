@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { redirect, useParams } from 'next/navigation';
 import React from 'react';
 import SpendingSummaryCard from './component/SpendingSummaryCard';
+import CategoryTabs from './component/MiddleClassificationList';
 
 const ExpenseDetailPage = ({ params }: { params: { classification: string } }) => {
   // 파라미터를 한글 카테고리명으로 변환
@@ -29,8 +30,9 @@ const ExpenseDetailPage = ({ params }: { params: { classification: string } }) =
   return (
     <div>
       <Header left={<LeftHeader />} center={categoryName} />
+      {/* paddingLayout 적용해줄것 */}
       <SpendingSummaryCard />
-      {/* <MiddleClassificationList /> */}
+      <CategoryTabs />
     </div>
   );
 };
