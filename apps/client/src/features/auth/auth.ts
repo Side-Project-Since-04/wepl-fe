@@ -36,7 +36,7 @@ const handler = NextAuth({
         const user = await res.json();
         if (user) {
           // Todo : 저장 정보 로직 ..
-          console.log(user);
+          // console.log(user);
           //
           return user;
         } else {
@@ -58,7 +58,8 @@ const handler = NextAuth({
       return token;
     },
     async session({ session, token }: any) {
-      session.accessToken = token.accessToken as any;
+      session.accessToken = token.accessToken;
+      session.social_id = token.sub;
       return session;
     },
   },

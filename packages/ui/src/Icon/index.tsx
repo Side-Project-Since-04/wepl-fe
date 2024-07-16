@@ -17,12 +17,15 @@ export type IconName =
   | 'success'
   | 'trash'
   | 'wallet-off'
-  | 'wallet-on';
+  | 'wallet-on'
+  | 'gray-wepl'
+  | 'primary-wepl'
+  | 'letter';
 
 export interface IconProps {
   className?: string | undefined;
   name: IconName;
-  size: 24 | 16;
+  size: 24 | 16 | 40 | number;
 }
 
 /**
@@ -57,7 +60,7 @@ export default function Icon({ className, name, size }: IconProps) {
 
   return (
     <Suspense fallback={<IconSkeleton size={size} />}>
-      <DynamicIcon className={className} width={size} height={size} />
+      <DynamicIcon width={size} height={size} className={className} />
     </Suspense>
   );
 }
