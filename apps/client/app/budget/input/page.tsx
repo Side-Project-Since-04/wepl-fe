@@ -7,6 +7,7 @@ import { useState } from 'react';
 import BudgetHeader from '@/src/widgets/budget/common/BudgetHeader';
 import { useMutation } from '@tanstack/react-query';
 import { WeddingClient } from '@/src/shared/apis/wedding';
+import PageLayout from '@/src/pages/PageLayout';
 
 export default function BudgetInputPage() {
   const [budget, setBudget] = useState(0);
@@ -38,7 +39,7 @@ export default function BudgetInputPage() {
   };
 
   return (
-    <main className="h-full">
+    <PageLayout isPadding className="h-full">
       <BudgetHeader isEnableSave={isEnabledSave} onSave={() => saveBudget(budget)} />
       <section>
         <BudgetDescription />
@@ -46,6 +47,6 @@ export default function BudgetInputPage() {
       <section className="mt-40">
         <BudgetInput budget={budget} onChange={setBudget} />
       </section>
-    </main>
+    </PageLayout>
   );
 }
