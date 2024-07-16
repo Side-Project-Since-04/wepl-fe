@@ -15,20 +15,19 @@ const layoutClassName = {
 
 const mainPages = {
   home: '/home',
-  budget: '/budget',
+  spending: '/spending',
   schedule: '/schedule',
   setting: '/setting',
 };
 
 export function AppLayout({ children }: { children: React.ReactNode }): JSX.Element {
-  const pathname = usePathname();
+  const pathname = usePathname() || '';
   const isMainPage = Object.values(mainPages).includes(pathname);
 
   return (
     <div
       className={cn(
-        'relative m-auto px-[40px] h-screen border-l-2 border-r-2 border-green-500 overflow-y-auto',
-        'sm:px-[20px]',
+        'relative m-auto h-screen min-h-screen border-l-2 border-r-2 border-green-500 overflow-y-auto',
         layoutClassName.minWidth,
         layoutClassName.maxWidth,
         { [layoutClassName.gnbPadding]: isMainPage },

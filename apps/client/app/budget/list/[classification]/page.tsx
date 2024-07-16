@@ -13,6 +13,7 @@ import { useToast } from '@ui/src/Toast';
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { Budget } from '@/src/features/budget/types';
+import PageLayout from '@/src/pages/PageLayout';
 
 interface BudgetListDetailPage {
   params: {
@@ -26,7 +27,7 @@ export default function BudgetListDetailPage({ params }: BudgetListDetailPage) {
   const [budget, setBudget] = useState(0);
   const { toast } = useToast();
   const searchParams = useSearchParams();
-  const order = searchParams.get('order') || '?';
+  const order = searchParams?.get('order') || '?';
 
   const isEnableSave = budget > 0;
   const classificationName = (params.classification?.toUpperCase() || '') as ClassificationName;
@@ -83,15 +84,15 @@ export default function BudgetListDetailPage({ params }: BudgetListDetailPage) {
 
   if (!isValidClassification) {
     return (
-      <main>
+      <PageLayout isPadding>
         <BackHeader />
         <div>올바르지 않은 대분류 항목입니다.</div>
-      </main>
+      </PageLayout>
     );
   }
 
   return (
-    <main>
+    <PageLayout isPadding>
       <BudgetHeader isEnableSave={isEnableSave} onSave={() => handleSave(budget)} />
       <section className="py-16">
         <BudgetListDetailDescription
@@ -102,6 +103,6 @@ export default function BudgetListDetailPage({ params }: BudgetListDetailPage) {
       <section>
         <BudgetInput budget={budget} onChange={setBudget} />
       </section>
-    </main>
+    </PageLayout>
   );
 }
