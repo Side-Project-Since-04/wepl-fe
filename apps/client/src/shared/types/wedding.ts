@@ -3,3 +3,9 @@ export type WeddingInfoType = {
   weddingTime: string;
   weddingHall: string;
 };
+
+export type WeddingBudgetInfoType = {
+  totalBudget: number;
+  totalSpending: number;
+  spendingPerBudget: number;
+};

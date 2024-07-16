@@ -3,6 +3,7 @@
 import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
 import Header, { HeaderProps } from '@ui/src/components/Header';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 

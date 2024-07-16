@@ -15,6 +15,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { WeddingInfoForm } from '@/src/widgets/wedding/WeddingInfoForm';
 import { useCreateWeddingInfo } from '@/src/features/wedding/queries';
 import PageLayout from '@/src/pages/PageLayout';
+import Icon from '@ui/src/Icon';
 
 const formSchema = z.object({
   weddingDate: z.date(),
@@ -58,7 +59,7 @@ const WeddingInfoPage = () => {
     return (
       <Button variant={'ghost'} className="p-0">
         <Link href={'/user-info'}>
-          <img src="/left_arrow.svg" />
+          <Icon name="arrow-left" size={25} />
         </Link>
       </Button>
     );
