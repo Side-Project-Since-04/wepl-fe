@@ -40,6 +40,7 @@ export default function LoginPage(): JSX.Element {
   useEffect(() => {
     if (session?.accessToken) {
       signUp(session.accessToken);
+      localStorage.setItem('sub_id', session.social_id);
     }
   }, [session?.accessToken]);
 
@@ -60,7 +61,7 @@ export default function LoginPage(): JSX.Element {
   return (
     <main className="bg-primary-500 flex flex-col items-center justify-center text-center h-full">
       <div className="flex items-center justify-center">
-        <img src="logo0.svg" />
+        <img src="logo.svg" />
         <span className="text-headline1 text-neutral-white">wepl</span>
       </div>
       <div className="text-neutral-white">결혼 준비에도 관리가 필요하니까</div>

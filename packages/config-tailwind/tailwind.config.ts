@@ -57,7 +57,7 @@ const config: Config = {
         900: '#022542',
       },
       auxiliary: {
-        rad: '#f64c4c',
+        red: '#f64c4c',
         blue: '#3b82f6',
         orange: '#fe9a74',
         green: '#c7f9cc',
