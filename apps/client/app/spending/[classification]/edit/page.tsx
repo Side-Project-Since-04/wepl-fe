@@ -22,7 +22,7 @@ const CategoryEditPage = ({ params }: { params: { classification: string } }) =>
         {/* Todo : map 구현  */}
         <div className="flex justify-between py-12">
           <SubTitle1>웨딩홀</SubTitle1>
-          <Link href={`/spending/${params.classification}/edit/${'웨딩홀'}`}>
+          <Link href={`/spending/${params.classification}/edit/${decodeURIComponent('웨딩홀')}`}>
             <Icon name="arrow-right" size={16} />
           </Link>
         </div>
@@ -37,9 +37,11 @@ const CategoryEditPage = ({ params }: { params: { classification: string } }) =>
       </div>
 
       <div className="p-20">
-        <Button variant={'outline'} className="w-full h-44 bg-gray-50 text-gray-500">
-          카테고리 추가
-        </Button>
+        <Link href={`/spending/${params.classification}/edit/add`}>
+          <Button variant={'outline'} className="w-full h-44 bg-gray-50 text-gray-500">
+            카테고리 추가
+          </Button>
+        </Link>
       </div>
     </div>
   );

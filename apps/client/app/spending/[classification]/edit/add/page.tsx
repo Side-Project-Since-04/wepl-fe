@@ -12,12 +12,11 @@ import { toast } from '@ui/src/Toast';
 import { ConfirmDialog } from '@ui/src/Dialog';
 import { useRouter } from 'next/navigation';
 
-const page = ({ params }: { params: { classification: string; smallCategory: string } }) => {
+const page = ({ params }: { params: { classification: string } }) => {
   const router = useRouter();
-  const smallCategory = decodeURIComponent(params.smallCategory);
   const classification = decodeURIComponent(params.classification);
 
-  const [category, setCategory] = useState(smallCategory);
+  const [category, setCategory] = useState('');
 
   const LeftHeader = () => {
     return (
@@ -28,12 +27,7 @@ const page = ({ params }: { params: { classification: string; smallCategory: str
   };
 
   const onSave = () => {
-    toast({ variant: 'success', title: '카테고리 편집이 완료되었습니다!', duration: 1500 });
-    router.push(`/spending/${classification}/edit`);
-  };
-
-  const onDelete = () => {
-    toast({ variant: 'success', title: '카테고리 삭제되었습니다', duration: 1500 });
+    toast({ variant: 'success', title: '카테고리 추가가 완료되었습니다!', duration: 1500 });
     router.push(`/spending/${classification}/edit`);
   };
 
@@ -46,7 +40,7 @@ const page = ({ params }: { params: { classification: string; smallCategory: str
           console.log(category);
           onSave();
         }}
-        disabled={category.length == 0 || category == smallCategory}
+        disabled={category.length == 0}
       >
         저장
       </Button>
@@ -56,7 +50,7 @@ const page = ({ params }: { params: { classification: string; smallCategory: str
     <div>
       <Header
         left={<LeftHeader />}
-        center={'카테고리 편집'}
+        center={'카테고리 추가'}
         right={<RightHeader />}
         className="px-20 border-b-2 border-gray-50"
       />
@@ -72,18 +66,6 @@ const page = ({ params }: { params: { classification: string; smallCategory: str
             onChange={(e) => setCategory(e.target.value)}
           />
         </div>
-      </div>
-      <div className="text-center">
-        <ConfirmDialog
-          onSubmit={onDelete}
-          title="정말 삭제하시겠습니까?"
-          subtitle="삭제후에는 복구가 불가능합니다."
-          submitText="삭제"
-        >
-          <Button variant={'ghost'} className="text-gray-500 underline decoration-gray-500">
-            카테고리 삭제
-          </Button>
-        </ConfirmDialog>
       </div>
     </div>
   );
