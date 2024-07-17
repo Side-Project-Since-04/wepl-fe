@@ -4,13 +4,18 @@ import Icon from '@ui/src/Icon';
 import { WeplTabs } from '@ui/src/Tabs';
 import Header from '@ui/src/components/Header';
 import { SubTitle1, TextBody1 } from '@ui/src/components/Text';
+import Link from 'next/link';
 
 import React from 'react';
 
-const MiddleClassificationList = () => {
+type ClassficationProps = {
+  classification: string;
+};
+
+const MiddleClassificationList = ({ classification }: ClassficationProps) => {
   return (
     <div>
-      <SpendingListHeader />
+      <SpendingListHeader classification={classification} />
       <CategoryTabs />
     </div>
   );
@@ -18,7 +23,7 @@ const MiddleClassificationList = () => {
 
 export default MiddleClassificationList;
 
-const SpendingListHeader = (items: any) => {
+const SpendingListHeader = ({ classification }: ClassficationProps) => {
   const LeftHeader = () => {
     return <SubTitle1 className="font-500">분류 카테고리(6)</SubTitle1>;
   };
@@ -26,12 +31,14 @@ const SpendingListHeader = (items: any) => {
   const RightHeader = () => {
     return (
       <Button variant={'ghost'} className="p-0" asChild>
-        <SubTitle1 className="text-auxiliary-blue">편집하기</SubTitle1>
+        <Link href={`/spending/${classification}/edit`} className="text-auxiliary-blue">
+          <SubTitle1 className="text-auxiliary-blue">편집하기</SubTitle1>
+        </Link>
       </Button>
     );
   };
 
-  return <Header left={<LeftHeader />} right={<RightHeader />} />;
+  return <Header className="px-20" left={<LeftHeader />} right={<RightHeader />} />;
 };
 
 const CategoryTabs = () => {
@@ -57,7 +64,7 @@ const MiddleClassificationContent = () => {
   ];
 
   return (
-    <div>
+    <div className="px-20">
       <div className="my-24">
         <span className="text-auxiliary-red"> 지출 금액 </span> ${'3,000,000'}$
       </div>
@@ -75,7 +82,7 @@ const MiddleClassificationContent = () => {
             </div>
             <div className="flex items-center">
               <TextBody1 className={isZeroSpending ? 'text-gray-100' : ''}>{item.spending} 원</TextBody1>
-              <Button variant={'ghost'}>
+              <Button variant={'ghost'} className="hover:bg-neutral-white">
                 <Icon name="arrow-right" size={16} className={isZeroSpending ? 'text-gray-100' : ''} />
               </Button>
             </div>

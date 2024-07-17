@@ -12,7 +12,6 @@ type WeddingInfoFormProps = {
 };
 
 export function WeddingInfoForm({ form }: WeddingInfoFormProps) {
-  console.log(form);
   return (
     <Form {...form}>
       <form className="flex flex-col gap-[24px]">

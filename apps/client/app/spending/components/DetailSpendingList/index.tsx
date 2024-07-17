@@ -1,17 +1,18 @@
+import { WEDDING_MAIN_CATEGORIES } from '@/src/shared/constants';
 import Icon from '@ui/src/Icon';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const LIST = [
+const LIST: DetailSpendingItemProps[] = [
   {
-    name: '본식',
+    name: 'main_ceremony',
     middleCategories: ['웨딩홀', '스냅/DVD', '스드메', '예복', '혼주', '청첩장'],
     spending: 10000000,
     budget: 24000000,
     imgUrl: '/spending/thumb-wedding.png',
   },
   {
-    name: '예물',
+    name: 'wedding_gifts',
     middleCategories: [
       '가구',
       '가전제품',
@@ -32,14 +33,14 @@ const LIST = [
     imgUrl: '/spending/thumb-present.png',
   },
   {
-    name: '혼수',
+    name: 'marriage_articles',
     middleCategories: ['웨딩밴드', '현금/현물'],
     spending: 10000000,
     budget: 24000000,
     imgUrl: '/spending/thumb-furniture.png',
   },
   {
-    name: '신혼여행',
+    name: 'honeymoon',
     middleCategories: ['항공', '숙박', '관광'],
     spending: 10000000,
     budget: 24000000,
@@ -50,7 +51,7 @@ const LIST = [
 function DetailSpendingList() {
   return (
     <div className="mt-32">
-      {LIST.map((item) => (
+      {LIST.map((item: DetailSpendingItemProps) => (
         <DetailSpendingItem key={item.name} item={item} />
       ))}
     </div>
@@ -58,10 +59,14 @@ function DetailSpendingList() {
 }
 
 interface DetailSpendingItemProps {
-  item: (typeof LIST)[number];
+  name: 'main_ceremony' | 'wedding_gifts' | 'marriage_articles' | 'honeymoon';
+  middleCategories: string[];
+  spending: number;
+  budget: number;
+  imgUrl: string;
 }
 
-function DetailSpendingItem({ item }: DetailSpendingItemProps) {
+function DetailSpendingItem({ item }: { item: DetailSpendingItemProps }) {
   const { name, imgUrl, middleCategories, spending, budget } = item;
 
   return (
@@ -71,11 +76,11 @@ function DetailSpendingItem({ item }: DetailSpendingItemProps) {
       </div>
       <div className="flex-auto">
         <div className="flex items-center gap-5">
-          <h6 className="text-gray-800 text-headline6">{name}</h6>
+          <h6 className="text-gray-800 text-headline6">{WEDDING_MAIN_CATEGORIES[name]}</h6>
           {/* TODO: 상세 지출 페이지로 이동 */}
-          {/* <Link href='/spending/???'> */}
-          <Icon name="arrow-right" size={16} />
-          {/* </Link> */}
+          <Link href={`/spending/${item.name}`}>
+            <Icon name="arrow-right" size={16} />
+          </Link>
         </div>
         <div className="mt-4">
           <div className="text-auxiliary-blue text-12 font-medium">{middleCategories.join(' · ')}</div>
