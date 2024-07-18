@@ -234,6 +234,7 @@ const config: Config = {
       spacing: px0_200,
       margin: px0_200,
       padding: px0_200,
+      border: px0_200,
       borderRadius: px0_200,
       width: px0_200,
       height: px0_200,
