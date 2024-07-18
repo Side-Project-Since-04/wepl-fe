@@ -9,7 +9,7 @@ export interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ left, center, right }) => {
   return (
-    <header className="flex justify-between items-center py-[15px] h-[56px]">
+    <header className="flex justify-between items-center py-15 h-50">
       <div className="w-1/3 flex justify-start items-center">{left || <div className="" />}</div>
       <div className="w-1/3 flex justify-center items-center">{center || <div className="" />}</div>
       <div className="w-1/3 flex justify-end items-center">{right || <div className="" />}</div>
