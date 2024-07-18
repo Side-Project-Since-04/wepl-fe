@@ -1,5 +1,4 @@
 // src/Header.tsx
-import { HeadLine4 } from '@ui/dist/src/components/HeadLine';
 import React from 'react';
 
 export interface HeaderProps {
