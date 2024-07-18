@@ -8,7 +8,7 @@ export const GNB_ITEMS = [
   },
   {
     name: '지출',
-    pathname: '/budget',
+    pathname: '/spending',
   },
   {
     name: '일정',
@@ -33,7 +33,7 @@ export function Gnb({ pathname }: GnbProps) {
   return (
     <nav
       className={cn(
-        'fixed bottom-0 left-1/2 translate-x-[-50%] w-full h-50 pt-5 border-t border-t-gray-100',
+        'fixed bottom-0 left-1/2 translate-x-[-50%] w-full h-50 pt-5 border-t border-t-gray-100 bg-neutral-white',
         gnbClassName.maxWidth,
         gnbClassName.minWidth,
         gnbClassName.gnbHeight,

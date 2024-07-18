@@ -4,10 +4,11 @@ import BudgetList from '@/src/widgets/budget/list/BudgetList';
 import BackHeader from '@/src/shared/components/BackHeader';
 import { BudgetAmount } from '@/src/widgets/budget/list/BudgetAmount';
 import AsyncBoundary from '@/src/shared/components/AsyncBoundary';
+import PageLayout from '@/src/pages/PageLayout';
 
 export default function BudgetListPage() {
   return (
-    <main>
+    <PageLayout isPadding>
       <BackHeader />
       <section className="py-16">
         <AsyncBoundary>
@@ -20,6 +21,6 @@ export default function BudgetListPage() {
           <BudgetList />
         </AsyncBoundary>
       </section>
-    </main>
+    </PageLayout>
   );
 }

@@ -57,7 +57,7 @@ const config: Config = {
         900: '#022542',
       },
       auxiliary: {
-        rad: '#f64c4c',
+        red: '#f64c4c',
         blue: '#3b82f6',
         orange: '#fe9a74',
         green: '#c7f9cc',
@@ -234,6 +234,7 @@ const config: Config = {
       spacing: px0_200,
       margin: px0_200,
       padding: px0_200,
+      border: px0_200,
       borderRadius: px0_200,
       width: px0_200,
       height: px0_200,

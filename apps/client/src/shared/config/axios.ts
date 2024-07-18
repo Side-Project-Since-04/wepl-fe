@@ -3,6 +3,12 @@ import { stringify } from 'qs';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
+const redirectToLogin = () => {
+  if (typeof window !== 'undefined') {
+    window.location.href = '/'; // 로그인 페이지 URL을 적절히 수정하세요
+  }
+};
+
 export const axiosInstance = axios.create({
   baseURL: isDevelopment ? process.env.NEXT_PUBLIC_API_DEV_URL : process.env.NEXT_PUBLIC_API_PROD_URL,
   paramsSerializer(params: any) {
@@ -37,10 +43,13 @@ axiosInstance.interceptors.response.use(
         if (response.status === 200) {
           // 새 토큰이 쿠키에 저장됨
           return axiosInstance(originalRequest);
+        } else {
         }
       } catch (refreshError) {
         // 로그인 에러 띄우고, 로그인 페이지로 이동
         // 전역 에러바운더리에서 에러 캐치해서, 로그인 페이지로 이동
+        redirectToLogin();
+
         return Promise.reject(refreshError);
       }
     }
