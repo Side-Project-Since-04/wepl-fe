@@ -16,13 +16,13 @@ const buttonVariants = cva(
   },
 );
 
-export interface Button2Props
+export interface WeplButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 
-const WeplButton = React.forwardRef<HTMLButtonElement, Button2Props>(
+const WeplButton = React.forwardRef<HTMLButtonElement, WeplButtonProps>(
   ({ className, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
     return <Comp className={cn(buttonVariants({ size, className }))} ref={ref} {...props} />;
