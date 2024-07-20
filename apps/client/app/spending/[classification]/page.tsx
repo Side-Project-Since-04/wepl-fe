@@ -18,12 +18,9 @@ const ExpenseDetailPage = ({ params }: { params: { classification: string } }) =
 
   const LeftHeader = () => {
     return (
-      <Button variant={'ghost'} className="p-0">
-        {/* href spending main page로 수정 필요 */}
-        <Link href={'/spending'}>
-          <Icon name="arrow-left" size={24} />
-        </Link>
-      </Button>
+      <Link href={'/spending'} className="p-20">
+        <Icon name="arrow-left" size={24} />
+      </Link>
     );
   };
 

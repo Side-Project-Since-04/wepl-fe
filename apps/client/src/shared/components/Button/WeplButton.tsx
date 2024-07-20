@@ -22,12 +22,12 @@ export interface Button2Props
   asChild?: boolean;
 }
 
-const Button2 = React.forwardRef<HTMLButtonElement, Button2Props>(
+const WeplButton = React.forwardRef<HTMLButtonElement, Button2Props>(
   ({ className, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
     return <Comp className={cn(buttonVariants({ size, className }))} ref={ref} {...props} />;
   },
 );
-Button2.displayName = 'Button';
+WeplButton.displayName = 'Button';
 
-export { Button2, buttonVariants as buttonVariants2 };
+export { WeplButton, buttonVariants as buttonVariants2 };

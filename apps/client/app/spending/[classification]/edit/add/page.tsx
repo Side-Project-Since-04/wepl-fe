@@ -12,7 +12,7 @@ import { toast } from '@ui/src/Toast';
 import { ConfirmDialog } from '@ui/src/Dialog';
 import { useRouter } from 'next/navigation';
 
-const page = ({ params }: { params: { classification: string } }) => {
+const CreateSmallCategoryPage = ({ params }: { params: { classification: string } }) => {
   const router = useRouter();
   const classification = decodeURIComponent(params.classification);
 
@@ -20,7 +20,7 @@ const page = ({ params }: { params: { classification: string } }) => {
 
   const LeftHeader = () => {
     return (
-      <Link href={`/spending/${classification}/edit`} className="p-0">
+      <Link href={`/spending/${classification}/edit`}>
         <Icon name="arrow-left" size={24} />
       </Link>
     );
@@ -70,4 +70,4 @@ const page = ({ params }: { params: { classification: string } }) => {
     </div>
   );
 };
-export default page;
+export default CreateSmallCategoryPage;

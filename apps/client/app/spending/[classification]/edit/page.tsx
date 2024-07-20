@@ -5,7 +5,7 @@ import { SubTitle1 } from '@ui/src/components/Text';
 import Link from 'next/link';
 import React from 'react';
 
-const CategoryEditPage = ({ params }: { params: { classification: string } }) => {
+const EditCategoryPage = ({ params }: { params: { classification: string } }) => {
   console.log(params);
   const LeftHeader = () => {
     return (
@@ -47,4 +47,4 @@ const CategoryEditPage = ({ params }: { params: { classification: string } }) =>
   );
 };
 
-export default CategoryEditPage;
+export default EditCategoryPage;

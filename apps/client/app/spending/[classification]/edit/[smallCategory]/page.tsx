@@ -12,7 +12,7 @@ import { toast } from '@ui/src/Toast';
 import { ConfirmDialog } from '@ui/src/Dialog';
 import { useRouter } from 'next/navigation';
 
-const page = ({ params }: { params: { classification: string; smallCategory: string } }) => {
+const SmallCategoryEditPage = ({ params }: { params: { classification: string; smallCategory: string } }) => {
   const router = useRouter();
   const smallCategory = decodeURIComponent(params.smallCategory);
   const classification = decodeURIComponent(params.classification);
@@ -88,4 +88,4 @@ const page = ({ params }: { params: { classification: string; smallCategory: str
     </div>
   );
 };
-export default page;
+export default SmallCategoryEditPage;

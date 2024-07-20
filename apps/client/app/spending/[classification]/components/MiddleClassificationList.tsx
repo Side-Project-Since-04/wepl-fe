@@ -30,11 +30,9 @@ const SpendingListHeader = ({ classification }: ClassficationProps) => {
 
   const RightHeader = () => {
     return (
-      <Button variant={'ghost'} className="p-0" asChild>
-        <Link href={`/spending/${classification}/edit`} className="text-auxiliary-blue">
-          <SubTitle1 className="text-auxiliary-blue">편집하기</SubTitle1>
-        </Link>
-      </Button>
+      <Link href={`/spending/${classification}/edit`} className="text-auxiliary-blue">
+        <SubTitle1 className="text-auxiliary-blue">편집하기</SubTitle1>
+      </Link>
     );
   };
 
@@ -43,15 +41,6 @@ const SpendingListHeader = ({ classification }: ClassficationProps) => {
 
 const CategoryTabs = () => {
   const categories = ['웨딩홀', '스냅/DVD', '스드메', '예복', '혼주', '청첩장'];
-
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-  };
-
   const tmpItems = categories.map((category) => ({ label: category, content: <MiddleClassificationContent /> }));
 
   return <WeplTabs items={tmpItems} />;
