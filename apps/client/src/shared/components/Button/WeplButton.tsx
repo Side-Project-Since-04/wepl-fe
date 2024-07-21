@@ -30,4 +30,4 @@ const WeplButton = React.forwardRef<HTMLButtonElement, WeplButtonProps>(
 );
 WeplButton.displayName = 'Button';
 
-export { WeplButton, buttonVariants as buttonVariants2 };
+export { WeplButton, buttonVariants as weplButtonVariants };
