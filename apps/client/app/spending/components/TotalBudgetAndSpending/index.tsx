@@ -1,5 +1,6 @@
 import { cn } from '@ui/lib/utils';
-import { Button2 } from '@ui/src/Button2';
+
+import { WeplButton } from '@/src/shared/components/Button/WeplButton';
 import Link from 'next/link';
 
 export function TotalBudgetAndSpending() {
@@ -33,9 +34,9 @@ export function TotalBudgetAndSpending() {
       </div>
       <div className="pt-32 flex justify-center">
         <Link href="/spending/collect">
-          <Button2 className="h-40 text-button-md" size="sm">
+          <WeplButton className="h-40 text-button-md" size="sm">
             지출 모아보기
-          </Button2>
+          </WeplButton>
         </Link>
       </div>
     </div>
