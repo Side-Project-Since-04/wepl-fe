@@ -5,11 +5,12 @@ import { Button } from '@ui/src/Button';
 
 interface SpendingHeaderProps {
   disabled: boolean;
+  title: string;
   text: string;
   onClickText: () => void;
 }
 
-export const SpendingHeader = ({ disabled, text, onClickText }: SpendingHeaderProps) => {
+export const SpendingHeader = ({ disabled, title, text, onClickText }: SpendingHeaderProps) => {
   const RightHeader = () => {
     return (
       <Button
@@ -23,5 +24,5 @@ export const SpendingHeader = ({ disabled, text, onClickText }: SpendingHeaderPr
     );
   };
 
-  return <BackHeader title="지출 상세 내역" right={<RightHeader />} />;
+  return <BackHeader title={title} right={<RightHeader />} />;
 };
