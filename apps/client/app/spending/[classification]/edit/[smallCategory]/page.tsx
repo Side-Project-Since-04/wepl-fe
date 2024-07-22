@@ -52,6 +52,7 @@ const SmallCategoryEditPage = ({ params }: { params: { classification: string; s
       </Button>
     );
   };
+
   return (
     <div>
       <Header
