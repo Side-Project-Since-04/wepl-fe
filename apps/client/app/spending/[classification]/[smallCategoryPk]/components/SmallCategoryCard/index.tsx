@@ -68,10 +68,10 @@ const SmallCategoryCard = (props: SmallCategoryCardProps) => {
         onClose={() => setOpenBottomSheet(false)}
         menus={
           <div className="px-24">
-            <SubTitle2 className="py-16 text-gray-700">일정등록</SubTitle2>
-            <SubTitle2 className="py-16 text-gray-700">지출 완료 취소</SubTitle2>
-            <SubTitle2 className="py-16 text-gray-700">정보 수정</SubTitle2>
-            <SubTitle2 className="py-16 text-gray-700">지출 삭제</SubTitle2>
+            <SubTitle2 className="py-16 text-gray-700 cursor-pointer">일정등록</SubTitle2>
+            <SubTitle2 className="py-16 text-gray-700 cursor-pointer">지출 완료 취소</SubTitle2>
+            <SubTitle2 className="py-16 text-gray-700 cursor-pointer">정보 수정</SubTitle2>
+            <SubTitle2 className="py-16 text-gray-700 cursor-pointer">지출 삭제</SubTitle2>
           </div>
         }
       />

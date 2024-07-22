@@ -50,9 +50,9 @@ const CategoryTabs = ({ classification }: ClassficationProps) => {
 };
 const MiddleClassificationContent = ({ classification }: ClassficationProps) => {
   const tmp = [
-    { label: '대관료', spending: '3,000,000' },
-    { label: '폐백', spending: '3,000,000' },
-    { label: '식대', spending: '0' },
+    { pk: 1, label: '대관료', spending: '3,000,000' },
+    { pk: 2, label: '폐백', spending: '3,000,000' },
+    { pk: 3, label: '식대', spending: '0' },
   ];
 
   return (
@@ -63,7 +63,7 @@ const MiddleClassificationContent = ({ classification }: ClassficationProps) => 
       {tmp.map((item, idx) => {
         const isZeroSpending = item.spending === '0';
         return (
-          <Link href={`/spending/${classification}/${item.label}`}>
+          <Link href={`/spending/${classification}/${item.pk}`}>
             <Card className="h-55 w-min-[320px] p-16 flex justify-between mb-12" key={idx}>
               <div className="flex items-center">
                 <div
