@@ -3,6 +3,7 @@
 import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
 import Header, { HeaderProps } from '@ui/src/components/Header';
+import { SubTitle2 } from '@ui/src/components/Text';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
@@ -21,11 +22,13 @@ const LeftHeader = () => {
 };
 
 const Title = ({ title }: { title: string }) => {
-  return <h2 className="text-sub-title2 text-gray-900 text-[16px]">{title}</h2>;
+  return <SubTitle2 className="text-gray-900 text-16">{title}</SubTitle2>;
 };
 
 const BackHeader = ({ title, ...restProps }: BackHeaderProps) => {
-  return <Header left={<LeftHeader />} center={title ? <Title title={title} /> : null} {...restProps} />;
+  return (
+    <Header className="px-12" left={<LeftHeader />} center={title ? <Title title={title} /> : null} {...restProps} />
+  );
 };
 
 export default BackHeader;
