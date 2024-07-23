@@ -70,33 +70,32 @@ function DetailSpendingItem({ item }: { item: DetailSpendingItemProps }) {
   const { name, imgUrl, middleCategories, spending, budget } = item;
 
   return (
-    <div className="py-24 flex gap-16 border-b-[1px] border-b-gray-100">
-      <div className="basis-48">
-        <Image src={imgUrl} alt="썸네일" width={48} height={48} />
-      </div>
-      <div className="flex-auto">
-        <div className="flex items-center gap-5">
-          <h6 className="text-gray-800 text-headline6">{WEDDING_MAIN_CATEGORIES[name]}</h6>
-          {/* TODO: 상세 지출 페이지로 이동 */}
-          <Link href={`/spending/${item.name}`}>
+    <Link href={`/spending/${item.name}`}>
+      <div className="py-24 flex gap-16 border-b-[1px] border-b-gray-100">
+        <div className="basis-48">
+          <Image src={imgUrl} alt="썸네일" width={48} height={48} />
+        </div>
+        <div className="flex-auto">
+          <div className="flex items-center gap-5">
+            <h6 className="text-gray-800 text-headline6">{WEDDING_MAIN_CATEGORIES[name]}</h6>
             <Icon name="arrow-right" size={16} />
-          </Link>
-        </div>
-        <div className="mt-4">
-          <div className="text-auxiliary-blue text-12 font-medium">{middleCategories.join(' · ')}</div>
-        </div>
-        <div className="mt-12 flex w-full">
-          <div className="flex-auto">
-            <p className="text-gray-500 text-body2">지출</p>
-            <p className="text-gray-800 text-body2 text-15 font-bold">{spending.toLocaleString()}원</p>
           </div>
-          <div className="flex-auto">
-            <p className="text-gray-500 text-body2">예산</p>
-            <p className="text-gray-800 text-body2 text-15 font-bold">{budget.toLocaleString()}원</p>
+          <div className="mt-4">
+            <div className="text-auxiliary-blue text-12 font-medium">{middleCategories.join(' · ')}</div>
+          </div>
+          <div className="mt-12 flex w-full">
+            <div className="flex-auto">
+              <p className="text-gray-500 text-body2">지출</p>
+              <p className="text-gray-800 text-body2 text-15 font-bold">{spending.toLocaleString()}원</p>
+            </div>
+            <div className="flex-auto">
+              <p className="text-gray-500 text-body2">예산</p>
+              <p className="text-gray-800 text-body2 text-15 font-bold">{budget.toLocaleString()}원</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

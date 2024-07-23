@@ -8,8 +8,14 @@ export type IconName =
   | 'arrow-left'
   | 'arrow-right'
   | 'arrow-up'
+  | 'close-sm'
+  | 'close'
+  | 'gray-wepl'
   | 'home-off'
   | 'home-on'
+  | 'letter'
+  | 'more'
+  | 'primary-wepl'
   | 'schedule-off'
   | 'schedule-on'
   | 'setting-off'
@@ -17,10 +23,7 @@ export type IconName =
   | 'success'
   | 'trash'
   | 'wallet-off'
-  | 'wallet-on'
-  | 'gray-wepl'
-  | 'primary-wepl'
-  | 'letter';
+  | 'wallet-on';
 
 export interface IconProps {
   className?: string | undefined;
