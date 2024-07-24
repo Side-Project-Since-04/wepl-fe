@@ -16,7 +16,7 @@ const MiddleClassificationList = ({ classification }: ClassficationProps) => {
   return (
     <div>
       <SpendingListHeader classification={classification} />
-      <CategoryTabs />
+      <CategoryTabs classification={classification} />
     </div>
   );
 };
@@ -39,17 +39,20 @@ const SpendingListHeader = ({ classification }: ClassficationProps) => {
   return <Header className="px-20" left={<LeftHeader />} right={<RightHeader />} />;
 };
 
-const CategoryTabs = () => {
+const CategoryTabs = ({ classification }: ClassficationProps) => {
   const categories = ['웨딩홀', '스냅/DVD', '스드메', '예복', '혼주', '청첩장'];
-  const tmpItems = categories.map((category) => ({ label: category, content: <MiddleClassificationContent /> }));
+  const tmpItems = categories.map((category) => ({
+    label: category,
+    content: <MiddleClassificationContent classification={classification} />,
+  }));
 
   return <WeplTabs items={tmpItems} />;
 };
-const MiddleClassificationContent = () => {
+const MiddleClassificationContent = ({ classification }: ClassficationProps) => {
   const tmp = [
-    { label: '대관료', spending: '3,000,000' },
-    { label: '폐백', spending: '3,000,000' },
-    { label: '식대', spending: '0' },
+    { pk: 1, label: '대관료', spending: '3,000,000' },
+    { pk: 2, label: '폐백', spending: '3,000,000' },
+    { pk: 3, label: '식대', spending: '0' },
   ];
 
   return (
@@ -60,22 +63,24 @@ const MiddleClassificationContent = () => {
       {tmp.map((item, idx) => {
         const isZeroSpending = item.spending === '0';
         return (
-          <Card className="h-55 w-min-[320px] p-16 flex justify-between mb-12" key={idx}>
-            <div className="flex items-center">
-              <div
-                className={`w-18 h-18 rounded-full flex items-center justify-center mr-3 ${isZeroSpending ? 'bg-gray-200' : 'bg-neutral-black'} text-neutral-white`}
-              >
-                {idx}
+          <Link href={`/spending/${classification}/${item.pk}`}>
+            <Card className="h-55 w-min-[320px] p-16 flex justify-between mb-12" key={idx}>
+              <div className="flex items-center">
+                <div
+                  className={`w-18 h-18 rounded-full flex items-center justify-center mr-3 ${isZeroSpending ? 'bg-gray-200' : 'bg-neutral-black'} text-neutral-white`}
+                >
+                  {idx}
+                </div>
+                <SubTitle1 className={isZeroSpending ? 'text-gray-100' : ''}>{item.label}</SubTitle1>
               </div>
-              <SubTitle1 className={isZeroSpending ? 'text-gray-100' : ''}>{item.label}</SubTitle1>
-            </div>
-            <div className="flex items-center">
-              <TextBody1 className={isZeroSpending ? 'text-gray-100' : ''}>{item.spending} 원</TextBody1>
-              <Button variant={'ghost'} className="hover:bg-neutral-white">
-                <Icon name="arrow-right" size={16} className={isZeroSpending ? 'text-gray-100' : ''} />
-              </Button>
-            </div>
-          </Card>
+              <div className="flex items-center">
+                <TextBody1 className={isZeroSpending ? 'text-gray-100' : ''}>{item.spending} 원</TextBody1>
+                <Button variant={'ghost'} className="hover:bg-neutral-white">
+                  <Icon name="arrow-right" size={16} className={isZeroSpending ? 'text-gray-100' : ''} />
+                </Button>
+              </div>
+            </Card>
+          </Link>
         );
       })}
       <div className="text-center">

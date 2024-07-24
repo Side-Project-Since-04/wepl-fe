@@ -18,7 +18,7 @@ const ExpenseDetailPage = ({ params }: { params: { classification: string } }) =
 
   const LeftHeader = () => {
     return (
-      <Link href={'/spending'} className="p-20">
+      <Link href={'/spending'} className="pl-12">
         <Icon name="arrow-left" size={24} />
       </Link>
     );
