@@ -18,10 +18,10 @@ const SmallCategoryCard = (props: SmallCategoryCardProps) => {
       <div className="flex justify-between items-center">
         <div className="flex gap-6 items-center">
           <HeadLine6>1차</HeadLine6>
-          <WeplBadge className="rounded-[4px] bg-primary-100 hover:bg-primary-100 py-4 px-6 w-auto text-primary-500">
+          <WeplBadge className="rounded-[4px] bg-primary-100 hover:bg-primary-100  w-52 text-primary-500 ">
             일정 등록
           </WeplBadge>
-          <WeplBadge className="rounded-[4px] bg-semantic-error-100 hover:bg-semantic-error-100 py-4 px-6 w-auto text-semantic-error-600">
+          <WeplBadge className="rounded-[4px] bg-semantic-error-100 hover:bg-semantic-error-100 w-52 text-semantic-error-600">
             지출 완료
           </WeplBadge>
         </div>

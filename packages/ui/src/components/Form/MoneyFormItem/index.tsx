@@ -14,9 +14,7 @@ type CurrencyInputFormItemProps = {
 
 const MoneyInputFormItem = ({ required = false, ...props }: CurrencyInputFormItemProps) => {
   // 추후 보안이 필요함
-  // 1. 원표시 2. 삭제시 포커싱이 원으로 빠져버림
   const formatCurrency = (value: string) => {
-    console.log('value', value);
     // 숫자만 추출
     const number = value.replace(/[^\d]/g, '');
     // 세 자리마다 쉼표 추가 및 원 추가
@@ -26,7 +24,6 @@ const MoneyInputFormItem = ({ required = false, ...props }: CurrencyInputFormIte
   const parseCurrency = (value: string) => {
     // 쉼표와 '원' 제거
     return value.replace(/,/g, '').replace('원', '');
-    // return value;
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, field: any) => {
