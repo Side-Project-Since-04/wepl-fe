@@ -1,3 +1,4 @@
+import AsyncBoundary from '@/src/shared/components/AsyncBoundary';
 import { InvitationButton } from '@/src/widgets/auth/InvitationButton';
 import BudgetOverview from '@/src/widgets/budget/BudgetOverview';
 import { ScheduleCard } from '@/src/widgets/schedule/ScheduleCard';
@@ -20,7 +21,9 @@ const MainPage = () => {
       <Header left={<LeftHeader />} />
       <div className="flex flex-col items-center gap-32">
         <WeddingEventInfo />
-        <BudgetOverview />
+        <AsyncBoundary>
+          <BudgetOverview />
+        </AsyncBoundary>
         <InvitationButton />
         <ScheduleCard />
         {/* <UpcomingSchedulesList /> */}
