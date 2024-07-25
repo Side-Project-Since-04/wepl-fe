@@ -5,13 +5,16 @@ import { HeadLine6 } from '@ui/src/components/HeadLine';
 import { SubTitle2, SubTitle3, TextBody2 } from '@ui/src/components/Text';
 import Icon from '@ui/src/Icon';
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 interface SmallCategoryCardProps {}
 
-const SmallCategoryCard = (props: SmallCategoryCardProps) => {
+const SmallCategoryCard = () => {
+  const pathname = usePathname();
+  console.log(pathname);
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
-
   return (
     <div className="py-40 px-30">
       {/* 헤더 */}
@@ -70,7 +73,9 @@ const SmallCategoryCard = (props: SmallCategoryCardProps) => {
           <div className="px-24">
             <SubTitle2 className="py-16 text-gray-700 cursor-pointer">일정등록</SubTitle2>
             <SubTitle2 className="py-16 text-gray-700 cursor-pointer">지출 완료 취소</SubTitle2>
-            <SubTitle2 className="py-16 text-gray-700 cursor-pointer">정보 수정</SubTitle2>
+            <Link href={`${pathname}/spendingForm`}>
+              <SubTitle2 className="py-16 text-gray-700 cursor-pointer">정보 수정</SubTitle2>
+            </Link>
             <SubTitle2 className="py-16 text-gray-700 cursor-pointer">지출 삭제</SubTitle2>
           </div>
         }

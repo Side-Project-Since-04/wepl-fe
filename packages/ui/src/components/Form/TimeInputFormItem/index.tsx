@@ -35,7 +35,6 @@ const TimeInputFormItem = ({ range, unit, required = false, ...props }: NumberIn
     <FormField
       control={props.control}
       name={props.name}
-      rules={{ required: required, min: 0, max: 60 }}
       render={({ field }) => {
         const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           const value = validateTimeInput(e.target.value, range);

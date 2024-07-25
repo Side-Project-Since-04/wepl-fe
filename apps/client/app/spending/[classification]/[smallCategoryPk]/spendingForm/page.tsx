@@ -9,7 +9,7 @@ import Header from '@ui/src/components/Header';
 import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
 import PageLayout from '@/src/pages/PageLayout';
-import CreateSpendingForm from './SmallCategoryForm';
+import SpendingForm from '@/src/widgets/spending/common/SpendingForm';
 
 /**
  * 지출액
@@ -21,38 +21,56 @@ import CreateSpendingForm from './SmallCategoryForm';
  */
 
 const formSchema = z.object({
-  cost: z.string(),
+  cost: z.string().min(1, '지출액을 입력해주세요'),
   paidAt: z.date(),
-  smallCategoryPk: z.string(),
+  scheduleName: z.string().trim().min(1, '일정명을 입력해주세요'),
   startedHour: z.union([z.string(), z.number()]).refine((value) => {
     const numberValue = typeof value === 'string' ? parseInt(value, 10) : value;
-    return numberValue >= 0 && numberValue <= 23;
+    return value == '' || (numberValue >= 0 && numberValue <= 23);
   }),
   startedMin: z.union([z.string(), z.number()]).refine((value) => {
     const numberValue = typeof value === 'string' ? parseInt(value, 10) : value;
-    return numberValue >= 0 && numberValue <= 59;
+    return value == '' || (numberValue >= 0 && numberValue <= 59);
   }),
   endHour: z.union([z.string(), z.number()]).refine((value) => {
     const numberValue = typeof value === 'string' ? parseInt(value, 10) : value;
-    return numberValue >= 0 && numberValue <= 23;
+    return value == '' || (numberValue >= 0 && numberValue <= 23);
   }),
   endMin: z.union([z.string(), z.number()]).refine((value) => {
     const numberValue = typeof value === 'string' ? parseInt(value, 10) : value;
-    return numberValue >= 0 && numberValue <= 59;
+    return value == '' || (numberValue >= 0 && numberValue <= 59);
   }),
-  memo: z.string().optional(),
+  memo: z.string(),
 });
 
 export type SpendingFormDataType = z.infer<typeof formSchema>;
 
-const CreateSpendingPage = ({ params }: { params: { classification: string; smallCategoryPk: string } }) => {
+const CreateSmallCategorySpendingPage = ({
+  params,
+}: {
+  params: { classification: string; smallCategoryPk: string };
+}) => {
   const form = useForm<SpendingFormDataType>({
     resolver: zodResolver(formSchema),
+    mode: 'onChange',
     defaultValues: {
       cost: '',
-      smallCategoryPk: '',
-    }, // zod validater 통합
+      scheduleName: '',
+      memo: '',
+      startedHour: undefined,
+      startedMin: '',
+      endHour: '',
+      endMin: '',
+    },
   });
+
+  const onSave = () => {
+    console.log(form.getValues());
+  };
+
+  const CenterHeader = () => {
+    return <h1 className="text-2xl font-bold text-center">지출액 추가</h1>;
+  };
 
   const LeftHeader = () => {
     return (
@@ -64,14 +82,15 @@ const CreateSpendingPage = ({ params }: { params: { classification: string; smal
     );
   };
 
-  const onSave = () => {
-    console.log('save');
-  };
-
   const RightHeader = () => {
     return (
-      <Button variant={'ghost'} className="p-0" onClick={onSave} disabled={!form.formState.isValid}>
-        다음
+      <Button
+        variant={'ghost'}
+        className="p-0"
+        onClick={form.handleSubmit(onSave)}
+        disabled={!form.formState.isValid || form.formState.isSubmitting}
+      >
+        저장
       </Button>
     );
   };
@@ -79,9 +98,9 @@ const CreateSpendingPage = ({ params }: { params: { classification: string; smal
   return (
     <PageLayout isPadding>
       <Header left={<LeftHeader />} right={<RightHeader />} />
-      <CreateSpendingForm form={form} />
+      <SpendingForm form={form} onSave={form.handleSubmit(onSave)} />
     </PageLayout>
   );
 };
 
-export default CreateSpendingPage;
+export default CreateSmallCategorySpendingPage;
