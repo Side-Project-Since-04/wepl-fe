@@ -20,7 +20,7 @@ const SpendingForm = ({ form, onSave, ...props }: SpendingFormProps) => {
     if (props.initValues) {
       form.reset(props.initValues);
     }
-  }, [form, props?.initValues]);
+  }, []);
 
   return (
     <Form {...form}>

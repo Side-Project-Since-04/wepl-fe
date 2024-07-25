@@ -1,3 +1,6 @@
+'use client';
+
+import { useSpendingStore } from '@/src/shared/store/useStore';
 import { cn } from '@ui/lib/utils';
 import WeplBadge from '@ui/src/Badge';
 import BottomSheet from '@ui/src/BottomSheet';
@@ -11,10 +14,30 @@ import { useState } from 'react';
 
 interface SmallCategoryCardProps {}
 
+const tmp = {
+  smallCategoryPk: 'string',
+  cost: '0',
+  order: 0,
+  isScheduled: true,
+  isPaid: true,
+  scheduleName: 'string',
+  scheduleStartedAt: '09:34',
+  scheduleEndedAt: '09:34',
+  paidAt: '2024-07-25',
+  memo: 'string',
+};
+
 const SmallCategoryCard = () => {
   const pathname = usePathname();
-  console.log(pathname);
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
+
+  const { set: setSpending } = useSpendingStore();
+
+  const onOpenButton = () => {
+    setOpenBottomSheet(true);
+    setSpending(tmp);
+  };
+
   return (
     <div className="py-40 px-30">
       {/* 헤더 */}
@@ -29,7 +52,7 @@ const SmallCategoryCard = () => {
           </WeplBadge>
         </div>
         <div>
-          <button onClick={() => setOpenBottomSheet(true)}>
+          <button onClick={onOpenButton}>
             <Icon name="more" size={24} />
           </button>
         </div>

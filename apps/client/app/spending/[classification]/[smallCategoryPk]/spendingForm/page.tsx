@@ -10,6 +10,7 @@ import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
 import PageLayout from '@/src/pages/PageLayout';
 import SpendingForm from '@/src/widgets/spending/common/SpendingForm';
+import { useSpendingStore } from '@/src/shared/store/useStore';
 
 /**
  * 지출액
@@ -22,7 +23,12 @@ import SpendingForm from '@/src/widgets/spending/common/SpendingForm';
 
 const formSchema = z.object({
   cost: z.string().min(1, '지출액을 입력해주세요'),
-  paidAt: z.date(),
+  paidAt: z.union([
+    z.string().refine((val) => !isNaN(Date.parse(val)), {
+      message: '유효한 날짜 형식이어야 합니다.',
+    }),
+    z.date(),
+  ]),
   scheduleName: z.string().trim().min(1, '일정명을 입력해주세요'),
   startedHour: z.union([z.string(), z.number()]).refine((value) => {
     const numberValue = typeof value === 'string' ? parseInt(value, 10) : value;
@@ -50,6 +56,8 @@ const CreateSmallCategorySpendingPage = ({
 }: {
   params: { classification: string; smallCategoryPk: string };
 }) => {
+  const { item } = useSpendingStore();
+
   const form = useForm<SpendingFormDataType>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
@@ -57,12 +65,36 @@ const CreateSmallCategorySpendingPage = ({
       cost: '',
       scheduleName: '',
       memo: '',
-      startedHour: undefined,
+      startedHour: '',
       startedMin: '',
       endHour: '',
       endMin: '',
     },
   });
+  let initValue;
+  const extractTimeComponents = (dateTimeString: string | undefined) => {
+    if (!dateTimeString) return { hour: '', min: '' };
+    const [hour, min] = dateTimeString.split(':');
+    return { hour, min };
+  };
+
+  if (item) {
+    const { cost, scheduleName, memo, scheduleStartedAt, scheduleEndedAt, paidAt } = item;
+
+    const { hour: startedHour, min: startedMin } = extractTimeComponents(scheduleStartedAt);
+    const { hour: endHour, min: endMin } = extractTimeComponents(scheduleEndedAt);
+
+    initValue = {
+      cost,
+      scheduleName,
+      memo,
+      startedHour,
+      startedMin,
+      endHour,
+      endMin,
+      paidAt,
+    };
+  }
 
   const onSave = () => {
     console.log(form.getValues());
@@ -97,8 +129,8 @@ const CreateSmallCategorySpendingPage = ({
 
   return (
     <PageLayout isPadding>
-      <Header left={<LeftHeader />} right={<RightHeader />} />
-      <SpendingForm form={form} onSave={form.handleSubmit(onSave)} />
+      <Header left={<LeftHeader />} center={<CenterHeader />} right={<RightHeader />} />
+      <SpendingForm form={form} onSave={form.handleSubmit(onSave)} initValues={initValue} />
     </PageLayout>
   );
 };
