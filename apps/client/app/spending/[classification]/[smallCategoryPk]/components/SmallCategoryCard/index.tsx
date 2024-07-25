@@ -23,7 +23,7 @@ const tmp = {
   scheduleName: 'string',
   scheduleStartedAt: '09:34',
   scheduleEndedAt: '09:34',
-  paidAt: '2024-07-25',
+  paidAt: '2024-07-25' as any, // 임시 처리
   memo: 'string',
 };
 
