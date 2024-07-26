@@ -1,13 +1,13 @@
-import BudgetList from '@/src/widgets/budget/list/BudgetList';
+import { cn } from '@ui/lib/utils';
+import { Skeleton } from '@ui/src/Skeleton';
+import { BudgetList } from '@/src/widgets/budget/list/BudgetList';
 import BackHeader from '@/src/shared/components/BackHeader';
 import { BudgetAmount } from '@/src/widgets/budget/list/BudgetAmount';
 import AsyncBoundary from '@/src/shared/components/AsyncBoundary';
 import PageLayout from '@/src/pages/PageLayout';
-import { cn } from '@ui/lib/utils';
 import { classNames } from '@/src/shared/ui/utils';
-import { Skeleton } from '@ui/src/Skeleton';
 
-export default function BudgetListPage() {
+const BudgetListPage = () => {
   return (
     <PageLayout>
       <BackHeader />
@@ -26,4 +26,6 @@ export default function BudgetListPage() {
       </section>
     </PageLayout>
   );
-}
+};
+
+export default BudgetListPage;
