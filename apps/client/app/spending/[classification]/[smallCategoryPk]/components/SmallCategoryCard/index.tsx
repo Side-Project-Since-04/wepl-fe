@@ -31,7 +31,7 @@ const SmallCategoryCard = () => {
   const pathname = usePathname();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
 
-  const { set: setSpending } = useSpendingStore();
+  const { setSpendingItem: setSpending } = useSpendingStore();
 
   const onOpenButton = () => {
     setOpenBottomSheet(true);
