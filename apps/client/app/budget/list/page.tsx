@@ -5,6 +5,7 @@ import AsyncBoundary from '@/src/shared/components/AsyncBoundary';
 import PageLayout from '@/src/pages/PageLayout';
 import { cn } from '@ui/lib/utils';
 import { classNames } from '@/src/shared/ui/utils';
+import { Skeleton } from '@ui/src/Skeleton';
 
 export default function BudgetListPage() {
   return (
@@ -12,13 +13,13 @@ export default function BudgetListPage() {
       <BackHeader />
       <section className={classNames.pagePadding}>
         <section className="py-16">
-          <AsyncBoundary>
+          <AsyncBoundary SuspenseFallback={<Skeleton className="h-88" />}>
             <BudgetAmount />
           </AsyncBoundary>
         </section>
         <section>
           <div className={cn('py-16 text-gray-800 text-sub-title1')}>결혼 예산 리스트</div>
-          <AsyncBoundary>
+          <AsyncBoundary SuspenseFallback={<Skeleton className="h-400" />}>
             <BudgetList />
           </AsyncBoundary>
         </section>
