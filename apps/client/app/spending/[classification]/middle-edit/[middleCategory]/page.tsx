@@ -27,7 +27,7 @@ const MiddleCategoryEditPage = ({ params }: { params: { classification: string; 
     );
   };
 
-  const onSave = () => {
+  const handleSave = () => {
     toast({ variant: 'success', title: '카테고리 편집이 완료되었습니다!', duration: 1500 });
     router.push(`/spending/${classification}/edit`);
   };
@@ -42,10 +42,7 @@ const MiddleCategoryEditPage = ({ params }: { params: { classification: string; 
       <Button
         variant={'ghost'}
         className="p-0"
-        onClick={() => {
-          console.log(category);
-          onSave();
-        }}
+        onClick={handleSave}
         disabled={category.length == 0 || category == middleCategory}
       >
         저장

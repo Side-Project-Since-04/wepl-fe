@@ -44,7 +44,7 @@ const WeddingInfoPage = () => {
     },
   });
 
-  const onSave = () => {
+  const handleSaveBtn = () => {
     const { weddingHall, weddingDate, hour, min } = form.getValues();
     const formData = {
       weddingHall,
@@ -67,7 +67,7 @@ const WeddingInfoPage = () => {
 
   const RightHeader = () => {
     return (
-      <Button variant={'ghost'} className="p-0" onClick={onSave} disabled={!form.formState.isValid}>
+      <Button variant={'ghost'} className="p-0" onClick={handleSaveBtn} disabled={!form.formState.isValid}>
         <Link href={'/invite'} className="text-lg">
           다음
         </Link>

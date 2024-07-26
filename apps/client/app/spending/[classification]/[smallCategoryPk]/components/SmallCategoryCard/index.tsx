@@ -1,6 +1,6 @@
 'use client';
 
-import { useSpendingStore } from '@/src/shared/store/useStore';
+import { useSpendingStore } from '@/src/features/spending/store';
 import { cn } from '@ui/lib/utils';
 import WeplBadge from '@ui/src/Badge';
 import BottomSheet from '@ui/src/BottomSheet';

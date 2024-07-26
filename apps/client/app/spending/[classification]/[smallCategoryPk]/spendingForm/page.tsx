@@ -10,7 +10,7 @@ import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
 import PageLayout from '@/src/pages/PageLayout';
 import SpendingForm from '@/src/widgets/spending/common/SpendingForm';
-import { useSpendingStore } from '@/src/shared/store/useStore';
+import { useSpendingStore } from '@/src/features/spending/store';
 
 /**
  * 지출액
@@ -96,7 +96,7 @@ const CreateSmallCategorySpendingPage = ({
     };
   }
 
-  const onSave = () => {
+  const handleSaveBtn = () => {
     console.log(form.getValues());
   };
 
@@ -119,7 +119,7 @@ const CreateSmallCategorySpendingPage = ({
       <Button
         variant={'ghost'}
         className="p-0"
-        onClick={form.handleSubmit(onSave)}
+        onClick={form.handleSubmit(handleSaveBtn)}
         disabled={!form.formState.isValid || form.formState.isSubmitting}
       >
         저장
@@ -130,7 +130,7 @@ const CreateSmallCategorySpendingPage = ({
   return (
     <PageLayout isPadding>
       <Header left={<LeftHeader />} center={<CenterHeader />} right={<RightHeader />} />
-      <SpendingForm form={form} onSave={form.handleSubmit(onSave)} initValues={initValue} />
+      <SpendingForm form={form} onSave={form.handleSubmit(handleSaveBtn)} initValues={initValue} />
     </PageLayout>
   );
 };

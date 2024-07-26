@@ -25,22 +25,14 @@ const CreateSmallCategoryPage = ({ params }: { params: { classification: string 
     );
   };
 
-  const onSave = () => {
+  const handleSaveBtn = () => {
     toast({ variant: 'success', title: '카테고리 추가가 완료되었습니다!', duration: 1500 });
     router.push(`/spending/${classification}/edit`);
   };
 
   const RightHeader = () => {
     return (
-      <Button
-        variant={'ghost'}
-        className="p-0"
-        onClick={() => {
-          console.log(category);
-          onSave();
-        }}
-        disabled={category.length == 0}
-      >
+      <Button variant={'ghost'} className="p-0" onClick={handleSaveBtn} disabled={category.length == 0}>
         저장
       </Button>
     );
