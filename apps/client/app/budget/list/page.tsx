@@ -13,13 +13,13 @@ const BudgetListPage = () => {
       <BackHeader />
       <section className={classNames.pagePadding}>
         <section className="py-16">
-          <AsyncBoundary SuspenseFallback={<Skeleton className="h-88" />}>
+          <AsyncBoundary SuspenseFallback={<Skeleton className="h-[88px]" />}>
             <BudgetAmount />
           </AsyncBoundary>
         </section>
         <section>
           <div className={cn('py-16 text-gray-800 text-sub-title1')}>결혼 예산 리스트</div>
-          <AsyncBoundary SuspenseFallback={<Skeleton className="h-400" />}>
+          <AsyncBoundary SuspenseFallback={<Skeleton className="h-[244px]" />}>
             <BudgetList />
           </AsyncBoundary>
         </section>

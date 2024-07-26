@@ -1,6 +1,6 @@
-import { ClassificationNameType } from '../category/types';
+import type { ClassificationNameType } from '../category/types';
 
-export interface Budget {
+export interface BudgetType {
   classificationName: ClassificationNameType;
   amount: number;
 }
