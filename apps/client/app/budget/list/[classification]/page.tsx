@@ -4,7 +4,7 @@ import { queries } from '@/src/features/common/queries';
 import { BudgetClient } from '@/src/shared/apis/budget';
 import BackHeader from '@/src/shared/components/BackHeader';
 import { CLASSIFICATION } from '@/src/features/category/constants';
-import { type ClassificationName } from '@/src/features/category/types';
+import { type ClassificationNameType } from '@/src/features/category/types';
 import BudgetHeader from '@/src/widgets/budget/common/BudgetHeader';
 import BudgetInput from '@/src/widgets/budget/input/BudgetInput';
 import BudgetListDetailDescription from '@/src/widgets/budget/list-detail/BudgetListDetailDescription';
@@ -14,10 +14,11 @@ import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { Budget } from '@/src/features/budget/types';
 import PageLayout from '@/src/pages/PageLayout';
+import { BudgetKeys } from '@/src/features/budget/queries';
 
 interface BudgetListDetailPage {
   params: {
-    classification: Lowercase<ClassificationName>;
+    classification: Lowercase<ClassificationNameType>;
   };
 }
 
@@ -30,7 +31,7 @@ export default function BudgetListDetailPage({ params }: BudgetListDetailPage) {
   const order = searchParams?.get('order') || '?';
 
   const isEnableSave = budget > 0;
-  const classificationName = (params.classification?.toUpperCase() || '') as ClassificationName;
+  const classificationName = (params.classification?.toUpperCase() || '') as ClassificationNameType;
   const isValidClassification = VALID_CLASSIFICATION.includes(classificationName);
 
   const { mutate: mutateForUpdateBudget } = useMutation({
@@ -68,7 +69,7 @@ export default function BudgetListDetailPage({ params }: BudgetListDetailPage) {
       const queryClient = new QueryClient();
 
       try {
-        const budgets = await queryClient.fetchQuery(queries.budget.getBudget());
+        const budgets = await queryClient.fetchQuery(BudgetKeys.getBudget);
 
         const budget = budgets.filter((value) => value.classificationName === classificationName)[0].amount;
         setBudget(budget);
@@ -96,7 +97,7 @@ export default function BudgetListDetailPage({ params }: BudgetListDetailPage) {
       <BudgetHeader isEnableSave={isEnableSave} onSave={() => handleSave(budget)} />
       <section className="py-16">
         <BudgetListDetailDescription
-          classification={params.classification.toUpperCase() as ClassificationName}
+          classification={params.classification.toUpperCase() as ClassificationNameType}
           order={order}
         />
       </section>

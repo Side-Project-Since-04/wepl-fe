@@ -1,8 +1,8 @@
 import { FURNITURE, HONEYMOON, PRESENT, WEDDING } from '@/src/features/category/constants';
-import { ClassificationName } from '@/src/features/category/types';
+import { ClassificationNameType } from '@/src/features/category/types';
 
 interface BudgetListDetailDescriptionProps {
-  classification: ClassificationName;
+  classification: ClassificationNameType;
   order: string;
 }
 
