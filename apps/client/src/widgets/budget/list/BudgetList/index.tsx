@@ -4,11 +4,12 @@ import React from 'react';
 import BudgetListItem from '../BudgetListItem';
 import Link from 'next/link';
 import { useSuspenseQueries } from '@tanstack/react-query';
-import { queries } from '@/src/features/common/queries';
+import { BudgetKeys } from '@/src/features/budget/queries';
+import { CategoryKeys } from '@/src/features/category/queries';
 
 export default function BudgetList() {
   const [{ data: budgets }, { data: classifications }] = useSuspenseQueries({
-    queries: [queries.budget.getBudget(), queries.category.getClassifications()],
+    queries: [BudgetKeys.getBudget, CategoryKeys.getClassifications],
   });
 
   return (

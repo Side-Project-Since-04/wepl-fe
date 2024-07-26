@@ -32,25 +32,27 @@ axiosInstance.interceptors.response.use(
     const { status } = error.response;
 
     if ((status === 400 || status === 401) && originalRequest.url === '/auth/refresh') {
-      throw error;
+      redirectToLogin();
+      return;
     }
 
+    /**
+     * 최초 401 에러 시,
+     */
     if (status === 401) {
       try {
-        // 토큰 갱신 요청
         const response = await axiosInstance.get('/auth/refresh');
 
+        // 액세스 토큰 갱신
         if (response.status === 200) {
-          // 새 토큰이 쿠키에 저장됨
           return axiosInstance(originalRequest);
-        } else {
+        }
+        // 토큰 갱신 실패
+        else {
+          redirectToLogin();
         }
       } catch (refreshError) {
-        // 로그인 에러 띄우고, 로그인 페이지로 이동
-        // 전역 에러바운더리에서 에러 캐치해서, 로그인 페이지로 이동
         redirectToLogin();
-
-        return Promise.reject(refreshError);
       }
     }
   },

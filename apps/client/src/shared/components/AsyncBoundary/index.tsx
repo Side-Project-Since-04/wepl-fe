@@ -7,7 +7,7 @@ import { useMounted } from '@fsd/shared/hooks/useMounted';
 
 interface AsyncBoundaryProps {
   ErrorFallback?: ({ reset }: { reset: () => void }) => React.ReactNode;
-  SuspenseFallback?: () => React.ReactNode;
+  SuspenseFallback?: React.ReactNode;
   children: React.ReactNode;
 }
 
@@ -15,7 +15,7 @@ function DefaultSuspenseFallback() {
   return <div>Loading...</div>;
 }
 
-function DefaultErrorFallback({ reset }: { reset: () => void }) {
+function DefaultErrorFallback({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div>
       <p>에러가 발생했습니다!</p>
@@ -42,15 +42,15 @@ function AsyncBoundary({ ErrorFallback, SuspenseFallback, children }: AsyncBound
       {({ reset }) => (
         <ErrorBoundary
           onReset={reset}
-          fallbackRender={({ resetErrorBoundary }) => {
+          fallbackRender={({ error, resetErrorBoundary }) => {
             if (ErrorFallback) {
               return <ErrorFallback reset={resetErrorBoundary} />;
             }
 
-            return <DefaultErrorFallback reset={resetErrorBoundary} />;
+            return <DefaultErrorFallback error={error} reset={resetErrorBoundary} />;
           }}
         >
-          <CustomSuspense fallback={SuspenseFallback ? <SuspenseFallback /> : <DefaultSuspenseFallback />}>
+          <CustomSuspense fallback={SuspenseFallback ? SuspenseFallback : <DefaultSuspenseFallback />}>
             {children}
           </CustomSuspense>
         </ErrorBoundary>

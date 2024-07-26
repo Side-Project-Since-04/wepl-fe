@@ -11,4 +11,21 @@ export interface Classification {
   id: number;
   name: string;
   guide: string;
+  budget: number;
+  paidSpending: number;
+  notPaidSpending: number;
+  middleCategories: MiddleCategory[];
+}
+
+export interface MiddleCategory {
+  pk: string;
+  name: string;
+  spending: number;
+  smallCategories: SmallCategory[];
+}
+
+export interface SmallCategory {
+  pk: string;
+  name: string;
+  spending: number;
 }

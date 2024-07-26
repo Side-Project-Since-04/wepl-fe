@@ -25,11 +25,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
     <html lang="ko">
       <body>
         <AuthSession>
-          <MswProvider>
-            <QueryProvider>
-              <AppLayout>{children}</AppLayout>
-            </QueryProvider>
-          </MswProvider>
+          {/**
+           * 일단 API 모킹 해제
+           *
+           * <MswProvider>
+           **/}
+          <QueryProvider>
+            <AppLayout>{children}</AppLayout>
+          </QueryProvider>
         </AuthSession>
       </body>
       <KakaoScript />

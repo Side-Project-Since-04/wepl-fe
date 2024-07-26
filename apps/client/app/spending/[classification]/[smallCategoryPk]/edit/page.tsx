@@ -6,7 +6,7 @@ import { SubTitle2 } from '@ui/src/components/Text';
 import { ConfirmDialog } from '@ui/src/Dialog';
 import { Input } from '@ui/src/Input';
 import { useToast } from '@ui/src/Toast';
-import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
 const SmallCategoryEditPage = () => {

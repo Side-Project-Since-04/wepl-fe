@@ -1,8 +1,8 @@
 import { WeddingClient } from '@/src/shared/apis/wedding';
 
-import { WeddingInfoType } from '@/src/shared/types/wedding';
+import { WeddingInfoType } from '@fsd/features/wedding/types';
 import { createQueryKeys } from '@lukemorales/query-key-factory';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { useToast } from '@ui/src/Toast';
 
 export const WeddingKeys = createQueryKeys('wedding', {
@@ -26,6 +26,10 @@ export const WeddingKeys = createQueryKeys('wedding', {
 
 export const useGetWeddingInfo = () => {
   return useQuery(WeddingKeys.getWeddingInfo);
+};
+
+export const useSuspenseGetWeddingInfo = () => {
+  return useSuspenseQuery(WeddingKeys.getWeddingInfo);
 };
 
 export const useCreateWeddingInfo = () => {
