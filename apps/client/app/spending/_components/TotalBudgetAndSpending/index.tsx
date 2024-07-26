@@ -1,6 +1,6 @@
 'use client';
-import { cn } from '@ui/lib/utils';
 
+import { cn } from '@ui/lib/utils';
 import { WeplButton } from '@/src/shared/components/Button/WeplButton';
 import Link from 'next/link';
 import { useSuspenseGetWeddingInfo } from '@/src/features/wedding/queries';
