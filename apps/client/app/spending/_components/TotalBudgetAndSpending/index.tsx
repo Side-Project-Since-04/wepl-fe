@@ -1,8 +1,8 @@
 'use client';
 
 import { cn } from '@ui/lib/utils';
-import { WeplButton } from '@/src/shared/components/Button/WeplButton';
 import Link from 'next/link';
+import { WeplButton } from '@/src/shared/components/Button/WeplButton';
 import { useSuspenseGetWeddingInfo } from '@/src/features/wedding/queries';
 
 export const TotalBudgetAndSpending = () => {
@@ -56,7 +56,7 @@ export const TotalBudgetAndSpending = () => {
 const ProgressBar = ({ percent }: { percent: string }) => {
   return (
     <div className="relative bg-gray-100 h-12 rounded-100">
-      <div className={cn('absolute left-0 top-0 bg-primary-400 h-12 rounded-100', percent)}></div>
+      <div className={cn('absolute left-0 top-0 bg-primary-400 h-12 rounded-100', percent)} />
     </div>
   );
 };

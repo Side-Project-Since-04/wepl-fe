@@ -1,8 +1,8 @@
+import { Skeleton } from '@ui/src/Skeleton';
 import Divider from '@/src/shared/components/Divider';
+import AsyncBoundary from '@/src/shared/components/AsyncBoundary';
 import { TotalBudgetAndSpending } from './_components/TotalBudgetAndSpending';
 import { DetailClassifications } from './_components/DetailClassifications';
-import AsyncBoundary from '@/src/shared/components/AsyncBoundary';
-import { Skeleton } from '@ui/src/Skeleton';
 
 const SpendingPage = () => {
   return (
