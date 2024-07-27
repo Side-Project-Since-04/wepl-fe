@@ -1,4 +1,5 @@
 import { cn } from '@ui/lib/utils';
+import { TextBody2 } from '@ui/src/components/Text';
 
 interface ChipProps {
   isSelected: boolean;
@@ -6,22 +7,24 @@ interface ChipProps {
   onClick?: () => void;
 }
 
-/**
- * <Bug>
- * text-body2 이후에 text-neutral-white를 넣으면 적용 안되는 이유 찾아야 함
- * cn 함수에서 twMerge가 처리하는 방식 확인 필요
- */
-function Chip({ isSelected, name, onClick }: ChipProps) {
+const Chip = ({ isSelected, name, onClick }: ChipProps) => {
   return (
     <button
-      className={cn('px-12 border-[1px] border-gray-100 rounded-100 h-28 text-body2 ', {
-        'bg-gray-700 border-gray-700 text-neutral-white': isSelected,
+      className={cn('border-[1px] border-gray-100 rounded-100 px-12 h-28', {
+        'bg-gray-700 border-gray-700': isSelected,
       })}
       onClick={onClick}
+      type="button"
     >
-      {name}
+      <TextBody2
+        className={cn({
+          'text-neutral-white': isSelected,
+        })}
+      >
+        {name}
+      </TextBody2>
     </button>
   );
-}
+};
 
 export default Chip;
