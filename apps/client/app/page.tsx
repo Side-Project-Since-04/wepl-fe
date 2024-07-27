@@ -36,6 +36,10 @@ export default function LoginPage(): JSX.Element {
 
   const { mutate: signUp } = useSignUp(router);
 
+  // useEffect(() => {
+  //   handleSignOut();
+  // }, []);
+
   // Todo : 로그아웃에 대한 처리 고민..
   useEffect(() => {
     if (session?.accessToken) {

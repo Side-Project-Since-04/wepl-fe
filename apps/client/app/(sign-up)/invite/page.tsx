@@ -5,10 +5,12 @@ import { Button } from '@ui/src/Button';
 import { HeadLine5 } from '@ui/src/components/HeadLine';
 import { TextBody1 } from '@ui/src/components/Text';
 import Link from 'next/link';
+import { toast } from '@ui/src/Toast';
 
 const InvitePage = () => {
   const handleShareToKakao = () => {
     const { Kakao, location } = window;
+    toast({ variant: 'success', title: '완료!', duration: 1500 });
     Kakao.Share.sendScrap({
       requestUrl: location.href + '/3001?',
     });
