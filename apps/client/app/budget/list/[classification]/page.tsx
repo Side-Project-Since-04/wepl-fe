@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { SubTitle1 } from '@ui/src/components/Text';
 import { BudgetClient } from '@/src/shared/apis/budget';
 import BackHeader from '@/src/shared/components/BackHeader';
-import { CLASSIFICATION } from '@/src/features/category/constants';
+import { CLASSIFICATIONS } from '@/src/features/category/constants';
 import { type ClassificationNameType } from '@/src/features/category/types';
 import BudgetHeader from '@/src/widgets/budget/common/BudgetHeader';
 import BudgetInput from '@/src/widgets/budget/input/BudgetInput';
@@ -23,7 +23,7 @@ interface BudgetListDetailPageProps {
   };
 }
 
-const VALID_CLASSIFICATION = CLASSIFICATION.map(({ name }) => name);
+const VALID_CLASSIFICATION = CLASSIFICATIONS.map(({ name }) => name);
 
 const BudgetListDetailPage = ({ params }: BudgetListDetailPageProps) => {
   const [classificationBudget, setClassificationBudget] = useState(0);
