@@ -1,32 +1,12 @@
-'use client';
-
-import { useState } from 'react';
 import BackHeader from '@/src/shared/components/BackHeader';
-import { Tabs } from './_components/Tabs';
-import SpendingStatistic from './_components/SpendingStatistic';
-import SpendingHistory from './_components/SpendingHistory';
-
-export namespace TabTypeNamespace {
-  export type Tabs = { type: TabType; name: string }[];
-  export type Tab = Tabs[number];
-  export type TabType = 'statistic' | 'history';
-}
-
-const TABS: TabTypeNamespace.Tabs = [
-  { type: 'statistic', name: '지출 통계' },
-  { type: 'history', name: '지출 내역' },
-];
+import SpendingCollect from './_components/SpendingCollect';
 
 const SpendingCollectPage = () => {
-  const [selectedTabType, setSelectedTabType] = useState<TabTypeNamespace.TabType>('statistic');
-
   return (
     <main>
       <BackHeader title="지출 관리" />
       <section>
-        <Tabs onChangeTabType={setSelectedTabType} selectedTabType={selectedTabType} tabs={TABS} />
-        {selectedTabType === 'statistic' && <SpendingStatistic />}
-        {selectedTabType === 'history' && <SpendingHistory />}
+        <SpendingCollect />
       </section>
     </main>
   );

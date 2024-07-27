@@ -1,18 +1,25 @@
-import { TabTypeNamespace } from '../../page';
+import type { TabNameType, TabType } from '@/src/features/spending/types';
 import { Tab } from '../Tab';
 
 interface TabsProps {
-  tabs: TabTypeNamespace.Tabs;
-  selectedTabType: TabTypeNamespace.TabType;
-  onChangeTabType: (type: TabTypeNamespace.TabType) => void;
+  tabs: TabType[];
+  selectedTabName: TabNameType;
+  onChangeTabName: (type: TabNameType) => void;
 }
 
-export function Tabs({ tabs, selectedTabType, onChangeTabType }: TabsProps) {
+export const Tabs = ({ tabs, selectedTabName, onChangeTabName }: TabsProps) => {
   return (
     <div className="px-8 border-b-[1px] border-b-gray-100 h-48">
       {tabs.map((tab) => (
-        <Tab isSelected={tab.type === selectedTabType} tab={tab} onClick={onChangeTabType} />
+        <Tab
+          isSelected={tab.name === selectedTabName}
+          key={tab.name}
+          onClick={() => {
+            onChangeTabName(tab.name);
+          }}
+          tab={tab}
+        />
       ))}
     </div>
   );
-}
+};
