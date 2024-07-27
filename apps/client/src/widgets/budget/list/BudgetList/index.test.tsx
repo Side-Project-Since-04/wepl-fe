@@ -1,5 +1,5 @@
 import { HttpResponse, http } from 'msw';
-import { CLASSIFICATION } from '@fsd/features/category/constants';
+import { CLASSIFICATIONS } from '@fsd/features/category/constants';
 import { server } from '@/mocks/server';
 import { render, screen, waitFor } from '@/src/shared/test/testing-library-utils';
 import { createUrl } from '@/mocks/utils';
@@ -12,12 +12,12 @@ describe('BudgetList', () => {
     server.use(
       http.get(createUrl('/category/classifications'), () => {
         return HttpResponse.json({
-          content: CLASSIFICATION,
+          content: CLASSIFICATIONS,
         });
       }),
     );
 
-    CLASSIFICATION.forEach(async ({ guide }) => {
+    CLASSIFICATIONS.forEach(async ({ guide }) => {
       await waitFor(() => {
         expect(screen.getByText(guide)).toBeInTheDocument();
       });

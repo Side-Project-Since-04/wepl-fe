@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { CLASSIFICATION } from '@/src/features/category/constants';
+import { CLASSIFICATIONS } from '@/src/features/category/constants';
 import type { GNB_ITEMS } from '@/src/shared/components/Gnb';
 import { BudgetListItem } from '.';
 
@@ -13,7 +13,7 @@ jest.mock('@ui/src/Icon', () => {
 describe('BudgetListItem', () => {
   const data = {
     order: 1,
-    classification: { ...CLASSIFICATION[0] },
+    classification: { ...CLASSIFICATIONS[0] },
   };
 
   it('대분류 순서, 이름이 화면에 렌더링되어야 한다.', () => {
