@@ -5,25 +5,16 @@ import { HeadLine5 } from '@ui/src/components/HeadLine';
 import Icon from '@ui/src/Icon';
 import { SubTitle1, TextBody1, TextBody2 } from '@ui/src/components/Text';
 import Link from 'next/link';
-import { Button } from '@ui/src/Button';
 import { useSuspenseGetWeddingInfo } from '@/src/features/wedding/queries';
 import { DonutProgress } from './common/DonutPorgress';
+import BudgetRegister from './common/BudgetRegister';
 
 const BudgetOverview = () => {
   const { data } = useSuspenseGetWeddingInfo();
   const { spendingPerBudget, totalBudget, totalSpending } = data;
 
-  const isNoBudget = !spendingPerBudget || !totalBudget;
-
-  if (isNoBudget) {
-    return (
-      <Card className="w-[320px] h-[246px] bg-gray-50 flex flex-col items-center justify-center gap-2">
-        <TextBody1 className="text-gray-400">총 예산 금액을 등록해주세요</TextBody1>
-        <Link href="/budget/input">
-          <Button className="mt-20 h-40 w-110 bg-neutral-white text-primary-400">예산 등록하기</Button>
-        </Link>
-      </Card>
-    );
+  if (totalBudget === null || spendingPerBudget === null) {
+    return <BudgetRegister />;
   }
 
   return (

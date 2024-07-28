@@ -4,11 +4,16 @@ import { cn } from '@ui/lib/utils';
 import Link from 'next/link';
 import { WeplButton } from '@/src/shared/components/Button/WeplButton';
 import { useSuspenseGetWeddingInfo } from '@/src/features/wedding/queries';
+import BudgetRegister from '@/src/widgets/budget/common/BudgetRegister';
 
 export const TotalBudgetAndSpending = () => {
   const { data } = useSuspenseGetWeddingInfo();
   const { totalBudget, totalSpending, spendingPerBudget } = data;
   const percentClassName = `w-[${spendingPerBudget}%]`;
+
+  if (totalBudget === null || spendingPerBudget === null) {
+    return <BudgetRegister />;
+  }
 
   return (
     <div>
