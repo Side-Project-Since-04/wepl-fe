@@ -5,7 +5,7 @@ export type WeddingInfoType = {
 };
 
 export type WeddingBudgetInfoType = {
-  totalBudget: number;
+  totalBudget: number | null;
   totalSpending: number;
-  spendingPerBudget: number;
+  spendingPerBudget: number | null;
 };

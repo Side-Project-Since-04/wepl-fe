@@ -15,25 +15,41 @@ export const HONEYMOON = 'HONEYMOON';
  *
  * 백엔드의 데이터 형식과 통일
  */
-export const CLASSIFICATION = [
+export const CLASSIFICATIONS = [
   {
     id: 1,
-    name: WEDDING,
+    name: 'WEDDING',
     guide: '웨딩',
+    budget: 0,
+    paidSpending: 0,
+    notPaidSpending: 0,
+    middleCategories: [],
   },
   {
     id: 2,
-    name: PRESENT,
+    name: 'PRESENT',
     guide: '예물',
+    budget: 0,
+    paidSpending: 0,
+    notPaidSpending: 0,
+    middleCategories: [],
   },
   {
     id: 3,
-    name: FURNITURE,
+    name: 'FURNITURE',
     guide: '혼수',
+    budget: 0,
+    paidSpending: 0,
+    notPaidSpending: 0,
+    middleCategories: [],
   },
   {
     id: 4,
-    name: HONEYMOON,
+    name: 'HONEYMOON',
     guide: '신혼여행',
+    budget: 0,
+    paidSpending: 0,
+    notPaidSpending: 0,
+    middleCategories: [],
   },
 ] as const;

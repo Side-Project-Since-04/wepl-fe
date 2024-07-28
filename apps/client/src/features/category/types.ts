@@ -1,30 +1,30 @@
-import { FURNITURE, HONEYMOON, PRESENT, WEDDING } from './constants';
+import type { FURNITURE, HONEYMOON, PRESENT, WEDDING } from './constants';
 
-export type Wedding = typeof WEDDING;
-export type Present = typeof PRESENT;
-export type Furniture = typeof FURNITURE;
-export type Honeymoon = typeof HONEYMOON;
+export type WeddingType = typeof WEDDING;
+export type PresentType = typeof PRESENT;
+export type FurnitureType = typeof FURNITURE;
+export type HoneymoonType = typeof HONEYMOON;
 
-export type ClassificationName = Wedding | Present | Furniture | Honeymoon;
+export type ClassificationNameType = WeddingType | PresentType | FurnitureType | HoneymoonType;
 
-export interface Classification {
+export interface ClassificationType {
   id: number;
   name: string;
   guide: string;
   budget: number;
   paidSpending: number;
   notPaidSpending: number;
-  middleCategories: MiddleCategory[];
+  middleCategories: MiddleCategoryType[];
 }
 
-export interface MiddleCategory {
+export interface MiddleCategoryType {
   pk: string;
   name: string;
   spending: number;
-  smallCategories: SmallCategory[];
+  smallCategories: SmallCategoryType[];
 }
 
-export interface SmallCategory {
+export interface SmallCategoryType {
   pk: string;
   name: string;
   spending: number;

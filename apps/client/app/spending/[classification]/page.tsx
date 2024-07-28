@@ -1,14 +1,13 @@
 'use client';
 
-import { WEDDING_MAIN_CATEGORIES } from '@/src/shared/constants';
-import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
 import Header from '@ui/src/components/Header';
 import Link from 'next/link';
-import { redirect, useParams } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import React from 'react';
-import SpendingSummaryCard from './components/SpendingSummaryCard';
-import CategoryTabs from './components/MiddleClassificationList';
+import { WEDDING_MAIN_CATEGORIES } from '@/src/shared/constants';
+import SpendingSummaryCard from './_components/SpendingSummaryCard';
+import CategoryTabs from './_components/MiddleClassificationList';
 
 const ExpenseDetailPage = ({ params }: { params: { classification: string } }) => {
   // 파라미터를 한글 카테고리명으로 변환
@@ -18,7 +17,7 @@ const ExpenseDetailPage = ({ params }: { params: { classification: string } }) =
 
   const LeftHeader = () => {
     return (
-      <Link href={'/spending'} className="pl-12">
+      <Link className="pl-12" href="/spending">
         <Icon name="arrow-left" size={24} />
       </Link>
     );
@@ -26,7 +25,7 @@ const ExpenseDetailPage = ({ params }: { params: { classification: string } }) =
 
   return (
     <div>
-      <Header left={<LeftHeader />} center={categoryName} />
+      <Header center={categoryName} left={<LeftHeader />} />
       <SpendingSummaryCard />
       <CategoryTabs classification={params.classification} />
     </div>

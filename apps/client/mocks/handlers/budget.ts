@@ -1,9 +1,9 @@
 import { HttpResponse, http } from 'msw';
+import { CLASSIFICATIONS } from '@fsd/features/category/constants';
+import type { BudgetType } from '@/src/features/budget/types';
 import { createUrl } from '../utils';
-import { CLASSIFICATION } from '@fsd/features/category/constants';
-import { Budget } from '@/src/features/budget/types';
 
-const BUDGETS: Budget[] = CLASSIFICATION.map(({ name }, idx) => ({
+const BUDGETS: BudgetType[] = CLASSIFICATIONS.map(({ name }, idx) => ({
   classificationName: name,
   amount: 10000 * (idx + 1),
 }));
