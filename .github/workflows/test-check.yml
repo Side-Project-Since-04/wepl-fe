@@ -20,6 +20,11 @@ jobs:
         run: npm run build:ui
       - name: ReInstall dependencies for @wepl/ui
         run: npm ci
+      - name: Generate API-URL env in app/client
+        run: |
+          cd apps/client
+          echo "NEXT_PUBLIC_API_DEV_URL=${{ secrets.NEXT_PUBLIC_API_DEV_URL }}" >> .env
+          echo "NEXT_PUBLIC_API_PROD_URL=${{ secrets.NEXT_PUBLIC_API_PROD_URL }}" >> .env
       - name: Test app/client & packages/ui
         run: npm run test
       - name: Upload app/client coverage reports to Codecov

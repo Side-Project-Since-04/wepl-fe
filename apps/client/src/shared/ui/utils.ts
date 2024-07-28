@@ -1,6 +1,17 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-export function cn(...inputs: ClassValue[]) {
+export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
-}
+};
+
+export const classNames = {
+  pagePadding: 'px-40 sm:px-[20px]',
+};
+
+const screen = {
+  sm: '280px',
+  md: '768px',
+  lg: '1024px',
+  xl: '1280px',
+};

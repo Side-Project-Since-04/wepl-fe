@@ -69,7 +69,7 @@ const config: Config = {
           300: '#f49898',
           400: '#eb6470',
           500: '#f64c4c',
-          600: '#ecc2d30',
+          600: '#ec2d30',
         },
         warning: {
           100: '#fff7e1',
@@ -148,6 +148,14 @@ const config: Config = {
         },
       ],
       'sub-title1': [
+        '18px',
+        {
+          lineHeight: '22px',
+          letterSpacing: '-0.2px',
+          fontWeight: '600',
+        },
+      ],
+      'sub-title2': [
         '16px',
         {
           lineHeight: '22px',
@@ -155,8 +163,7 @@ const config: Config = {
           fontWeight: '600',
         },
       ],
-
-      'sub-title2': [
+      'sub-title3': [
         '14px',
         {
           lineHeight: '20px',

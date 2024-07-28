@@ -8,14 +8,13 @@ import BudgetHeader from '@/src/widgets/budget/common/BudgetHeader';
 import { useMutation } from '@tanstack/react-query';
 import { WeddingClient } from '@/src/shared/apis/wedding';
 import PageLayout from '@/src/pages/PageLayout';
+import { classNames } from '@/src/shared/ui/utils';
 
 export default function BudgetInputPage() {
   const [budget, setBudget] = useState(0);
   const { toast } = useToast();
 
-  const isEnabledSave = budget > 0;
-
-  const { mutate: mutateForUpdateTotalBudget } = useMutation({
+  const { isPending: isPendingUpdateTotalBudget, mutate: mutateForUpdateTotalBudget } = useMutation({
     mutationFn: (budget: number) => WeddingClient.updateTotalBudget(budget),
   });
 
@@ -38,14 +37,18 @@ export default function BudgetInputPage() {
     });
   };
 
+  const isEnabledSave = budget > 0 && !isPendingUpdateTotalBudget;
+
   return (
-    <PageLayout isPadding className="h-full">
+    <PageLayout className="h-full">
       <BudgetHeader isEnableSave={isEnabledSave} onSave={() => saveBudget(budget)} />
-      <section>
-        <BudgetDescription />
-      </section>
-      <section className="mt-40">
-        <BudgetInput budget={budget} onChange={setBudget} />
+      <section className={classNames.pagePadding}>
+        <section>
+          <BudgetDescription />
+        </section>
+        <section className="mt-40">
+          <BudgetInput budget={budget} onChange={setBudget} />
+        </section>
       </section>
     </PageLayout>
   );
