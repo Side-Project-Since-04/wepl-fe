@@ -1,3 +1,5 @@
+'use client';
+import { useGetWeddingInfo } from '@/src/features/wedding/queries';
 import AsyncBoundary from '@/src/shared/components/AsyncBoundary';
 import { InvitationButton } from '@/src/widgets/auth/InvitationButton';
 import BudgetOverview from '@/src/widgets/budget/BudgetOverview';
@@ -20,7 +22,10 @@ const MainPage = () => {
     <>
       <Header left={<LeftHeader />} />
       <div className="flex flex-col items-center gap-32">
-        <WeddingEventInfo />
+        <AsyncBoundary>
+          <WeddingEventInfo />
+        </AsyncBoundary>
+
         <AsyncBoundary>
           <BudgetOverview />
         </AsyncBoundary>
