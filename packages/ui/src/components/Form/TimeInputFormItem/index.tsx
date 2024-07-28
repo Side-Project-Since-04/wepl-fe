@@ -8,7 +8,7 @@ type NumberInputFormItemProps = {
   control: Control<any, any>;
   name: string;
   label?: string | React.ReactNode;
-  placeholder: string;
+  placeholder?: string;
   required?: boolean;
   unit?: string;
   range?: [number, number];
@@ -22,24 +22,22 @@ type NumberInputFormItemProps = {
  * @param {string} props.placeholder - The placeholder for the input field.
  * @return {JSX.Element} The rendered input form item.
  */
-const NumberInputFormItem = ({ range, unit, required = false, ...props }: NumberInputFormItemProps) => {
+const TimeInputFormItem = ({ range, unit, required = false, ...props }: NumberInputFormItemProps) => {
+  const validateTimeInput = (value: string, range?: [number, number]): string => {
+    if (!range) return value;
+    const num = parseInt(value);
+    if (num >= range[0] && num <= range[1]) return value;
+    if (num > range[1]) return String(range[1]);
+    return '';
+  };
+
   return (
     <FormField
       control={props.control}
       name={props.name}
-      rules={{ required: required, min: 0, max: 60 }}
       render={({ field }) => {
         const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-          let value = e.target.value;
-          if (range) {
-            if (parseInt(e.target.value) >= range[0] && parseInt(e.target.value) <= range[1]) {
-              value = e.target.value;
-            } else if (parseInt(e.target.value) > range[1]) {
-              value = String(range[1]);
-            } else {
-              value = '';
-            }
-          }
+          const value = validateTimeInput(e.target.value, range);
           field.onChange(value);
         };
 
@@ -70,4 +68,4 @@ const NumberInputFormItem = ({ range, unit, required = false, ...props }: Number
   );
 };
 
-export default NumberInputFormItem;
+export default TimeInputFormItem;
