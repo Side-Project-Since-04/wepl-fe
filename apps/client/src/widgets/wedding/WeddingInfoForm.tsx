@@ -1,7 +1,7 @@
 'use client';
 
 import { Form } from '@ui/src/Form';
-import NumberInputFormItem from '@ui/src/components/Form/NumberFormItem';
+import TimeInputFormItem from '@ui/src/components/Form/TimeInputFormItem';
 import DatePickerFormItem from '@ui/src/components/Form/DatePickFormItem';
 import InputFormItem from '@ui/src/components/Form/InputFormItem';
 import { UseFormReturn } from 'react-hook-form';
@@ -18,7 +18,7 @@ export function WeddingInfoForm({ form }: WeddingInfoFormProps) {
         <DatePickerFormItem control={form.control} name="weddingDate" label="예식일" required={true} />
         <div className="flex justify-between">
           <div className="flex-1">
-            <NumberInputFormItem
+            <TimeInputFormItem
               control={form.control}
               name="hour"
               label="예식 시간"
@@ -29,7 +29,7 @@ export function WeddingInfoForm({ form }: WeddingInfoFormProps) {
             />
           </div>
           <div className="flex-1 pl-[16px] flex flex-col justify-end">
-            <NumberInputFormItem control={form.control} name="min" placeholder="00분" unit="분" range={[0, 59]} />
+            <TimeInputFormItem control={form.control} name="min" placeholder="00분" unit="분" range={[0, 59]} />
           </div>
         </div>
         <InputFormItem control={form.control} name="weddingHall" label="예식장소" placeholder="예식장을 입력해주세요" />

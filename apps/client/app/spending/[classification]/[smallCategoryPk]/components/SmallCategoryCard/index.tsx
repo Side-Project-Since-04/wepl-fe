@@ -1,3 +1,6 @@
+'use client';
+
+import { useSpendingStore } from '@/src/features/spending/store';
 import { cn } from '@ui/lib/utils';
 import WeplBadge from '@ui/src/Badge';
 import BottomSheet from '@ui/src/BottomSheet';
@@ -5,12 +8,35 @@ import { HeadLine6 } from '@ui/src/components/HeadLine';
 import { SubTitle2, SubTitle3, TextBody2 } from '@ui/src/components/Text';
 import Icon from '@ui/src/Icon';
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 interface SmallCategoryCardProps {}
 
-const SmallCategoryCard = (props: SmallCategoryCardProps) => {
+const tmp = {
+  smallCategoryPk: 'string',
+  cost: '0',
+  order: 0,
+  isScheduled: true,
+  isPaid: true,
+  scheduleName: 'string',
+  scheduleStartedAt: '09:34',
+  scheduleEndedAt: '09:34',
+  paidAt: '2024-07-25' as any, // 임시 처리
+  memo: 'string',
+};
+
+const SmallCategoryCard = () => {
+  const pathname = usePathname();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
+
+  const { setSpendingItem: setSpending } = useSpendingStore();
+
+  const onOpenButton = () => {
+    setOpenBottomSheet(true);
+    setSpending(tmp);
+  };
 
   return (
     <div className="py-40 px-30">
@@ -18,15 +44,15 @@ const SmallCategoryCard = (props: SmallCategoryCardProps) => {
       <div className="flex justify-between items-center">
         <div className="flex gap-6 items-center">
           <HeadLine6>1차</HeadLine6>
-          <WeplBadge className="rounded-[4px] bg-primary-100 hover:bg-primary-100 py-4 px-6 w-auto text-primary-500">
+          <WeplBadge className="rounded-[4px] bg-primary-100 hover:bg-primary-100  w-52 text-primary-500 ">
             일정 등록
           </WeplBadge>
-          <WeplBadge className="rounded-[4px] bg-semantic-error-100 hover:bg-semantic-error-100 py-4 px-6 w-auto text-semantic-error-600">
+          <WeplBadge className="rounded-[4px] bg-semantic-error-100 hover:bg-semantic-error-100 w-52 text-semantic-error-600">
             지출 완료
           </WeplBadge>
         </div>
         <div>
-          <button onClick={() => setOpenBottomSheet(true)}>
+          <button onClick={onOpenButton}>
             <Icon name="more" size={24} />
           </button>
         </div>
@@ -70,7 +96,9 @@ const SmallCategoryCard = (props: SmallCategoryCardProps) => {
           <div className="px-24">
             <SubTitle2 className="py-16 text-gray-700 cursor-pointer">일정등록</SubTitle2>
             <SubTitle2 className="py-16 text-gray-700 cursor-pointer">지출 완료 취소</SubTitle2>
-            <SubTitle2 className="py-16 text-gray-700 cursor-pointer">정보 수정</SubTitle2>
+            <Link href={`${pathname}/spendingForm`}>
+              <SubTitle2 className="py-16 text-gray-700 cursor-pointer">정보 수정</SubTitle2>
+            </Link>
             <SubTitle2 className="py-16 text-gray-700 cursor-pointer">지출 삭제</SubTitle2>
           </div>
         }

@@ -12,12 +12,12 @@ import { toast } from '@ui/src/Toast';
 import { ConfirmDialog } from '@ui/src/Dialog';
 import { useRouter } from 'next/navigation';
 
-const SmallCategoryEditPage = ({ params }: { params: { classification: string; smallCategory: string } }) => {
+const MiddleCategoryEditPage = ({ params }: { params: { classification: string; middleCategory: string } }) => {
   const router = useRouter();
-  const smallCategory = decodeURIComponent(params.smallCategory);
+  const middleCategory = decodeURIComponent(params.middleCategory);
   const classification = decodeURIComponent(params.classification);
 
-  const [category, setCategory] = useState(smallCategory);
+  const [category, setCategory] = useState(middleCategory);
 
   const LeftHeader = () => {
     return (
@@ -27,7 +27,7 @@ const SmallCategoryEditPage = ({ params }: { params: { classification: string; s
     );
   };
 
-  const onSave = () => {
+  const handleSave = () => {
     toast({ variant: 'success', title: '카테고리 편집이 완료되었습니다!', duration: 1500 });
     router.push(`/spending/${classification}/edit`);
   };
@@ -42,11 +42,8 @@ const SmallCategoryEditPage = ({ params }: { params: { classification: string; s
       <Button
         variant={'ghost'}
         className="p-0"
-        onClick={() => {
-          console.log(category);
-          onSave();
-        }}
-        disabled={category.length == 0 || category == smallCategory}
+        onClick={handleSave}
+        disabled={category.length == 0 || category == middleCategory}
       >
         저장
       </Button>
@@ -89,4 +86,4 @@ const SmallCategoryEditPage = ({ params }: { params: { classification: string; s
     </div>
   );
 };
-export default SmallCategoryEditPage;
+export default MiddleCategoryEditPage;
