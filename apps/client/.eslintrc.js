@@ -11,6 +11,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/consistent-type-definitions': 'off',
     'unicorn/filename-case': 'off',
     'react/function-component-definition': [
       2,
