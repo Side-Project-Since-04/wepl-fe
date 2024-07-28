@@ -6,10 +6,9 @@ import Link from 'next/link';
 import React from 'react';
 
 const EditCategoryPage = ({ params }: { params: { classification: string } }) => {
-  console.log(params);
   const LeftHeader = () => {
     return (
-      <Link href="/spending" className="p-0">
+      <Link href={`/spending/${params.classification}`} className="p-0">
         <Icon name="arrow-left" size={24} />
       </Link>
     );

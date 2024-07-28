@@ -9,7 +9,6 @@ import Header from '@ui/src/components/Header';
 import { SubTitle2 } from '@ui/src/components/Text';
 import { Input } from '@ui/src/Input';
 import { toast } from '@ui/src/Toast';
-import { ConfirmDialog } from '@ui/src/Dialog';
 import { useRouter } from 'next/navigation';
 
 const CreateSmallCategoryPage = ({ params }: { params: { classification: string } }) => {
@@ -26,22 +25,14 @@ const CreateSmallCategoryPage = ({ params }: { params: { classification: string 
     );
   };
 
-  const onSave = () => {
+  const handleSaveBtn = () => {
     toast({ variant: 'success', title: '카테고리 추가가 완료되었습니다!', duration: 1500 });
     router.push(`/spending/${classification}/edit`);
   };
 
   const RightHeader = () => {
     return (
-      <Button
-        variant={'ghost'}
-        className="p-0"
-        onClick={() => {
-          console.log(category);
-          onSave();
-        }}
-        disabled={category.length == 0}
-      >
+      <Button variant={'ghost'} className="p-0" onClick={handleSaveBtn} disabled={category.length == 0}>
         저장
       </Button>
     );
