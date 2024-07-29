@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Icon from '@ui/src/Icon';
-import { ClassificationType } from '@/src/features/category/types';
+import type { ClassificationType } from '@/src/features/category/types';
 
 export interface DetailSpendingItemProps {
   classification: ClassificationType;
@@ -9,13 +9,13 @@ export interface DetailSpendingItemProps {
 
 export const DetailClassificationItem = ({ classification }: DetailSpendingItemProps) => {
   const { name, guide, middleCategories, paidSpending, budget } = classification;
-  const middleCategoryNames = middleCategories?.map((v) => v.name) || [];
+  const middleCategoryNames = middleCategories.map((v) => v.name);
 
   return (
-    <Link href={`/spending/${name}`}>
+    <Link href={`/spending/${name.toLowerCase()}`}>
       <div className="py-24 flex gap-16 border-b-[1px] border-b-gray-100">
         <div className="basis-48">
-          <Image src={`/spending/thumb-${name.toLowerCase()}.png`} alt={name} width={48} height={48} />
+          <Image alt={name} height={48} src={`/spending/thumb-${name.toLowerCase()}.png`} width={48} />
         </div>
         <div className="flex-auto">
           <div className="flex items-center gap-5">
