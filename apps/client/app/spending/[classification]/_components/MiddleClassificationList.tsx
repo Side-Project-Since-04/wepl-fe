@@ -5,7 +5,6 @@ import { WeplTabs } from '@ui/src/Tabs';
 import Header from '@ui/src/components/Header';
 import { SubTitle1, TextBody1 } from '@ui/src/components/Text';
 import Link from 'next/link';
-
 import React from 'react';
 
 type ClassficationProps = {
@@ -30,7 +29,7 @@ const SpendingListHeader = ({ classification }: ClassficationProps) => {
 
   const RightHeader = () => {
     return (
-      <Link href={`/spending/${classification}/edit`} className="text-auxiliary-blue">
+      <Link className="text-auxiliary-blue" href={`/spending/${classification}/middleCategories`}>
         <SubTitle1 className="text-auxiliary-blue">편집하기</SubTitle1>
       </Link>
     );
@@ -58,13 +57,16 @@ const MiddleClassificationContent = ({ classification }: ClassficationProps) => 
   return (
     <div className="px-20">
       <div className="my-24">
-        <span className="text-auxiliary-red"> 지출 금액 </span> ${'3,000,000'}$
+        <span className="text-auxiliary-red"> 지출 금액 </span> $3,000,000$
       </div>
       {tmp.map((item, idx) => {
         const isZeroSpending = item.spending === '0';
+        const middleCategoryPk = 123;
+        const link = `/spending/${classification}/middle/${middleCategoryPk}/small/${item.pk}`;
+
         return (
-          <Link href={`/spending/${classification}/${item.pk}`}>
-            <Card className="h-55 w-min-[320px] p-16 flex justify-between mb-12" key={idx}>
+          <Link href={link} key={item.pk}>
+            <Card className="h-55 w-min-[320px] p-16 flex justify-between mb-12">
               <div className="flex items-center">
                 <div
                   className={`w-18 h-18 rounded-full flex items-center justify-center mr-3 ${isZeroSpending ? 'bg-gray-200' : 'bg-neutral-black'} text-neutral-white`}
@@ -75,8 +77,8 @@ const MiddleClassificationContent = ({ classification }: ClassficationProps) => 
               </div>
               <div className="flex items-center">
                 <TextBody1 className={isZeroSpending ? 'text-gray-100' : ''}>{item.spending} 원</TextBody1>
-                <Button variant={'ghost'} className="hover:bg-neutral-white">
-                  <Icon name="arrow-right" size={16} className={isZeroSpending ? 'text-gray-100' : ''} />
+                <Button className="hover:bg-neutral-white" variant="ghost">
+                  <Icon className={isZeroSpending ? 'text-gray-100' : ''} name="arrow-right" size={16} />
                 </Button>
               </div>
             </Card>

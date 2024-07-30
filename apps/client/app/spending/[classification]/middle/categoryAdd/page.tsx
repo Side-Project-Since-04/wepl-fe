@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-
 import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
 import Header from '@ui/src/components/Header';
@@ -32,7 +31,7 @@ const CreateSmallCategoryPage = ({ params }: { params: { classification: string 
 
   const RightHeader = () => {
     return (
-      <Button variant={'ghost'} className="p-0" onClick={handleSaveBtn} disabled={category.length == 0}>
+      <Button className="p-0" disabled={category.length == 0} onClick={handleSaveBtn} variant="ghost">
         저장
       </Button>
     );
@@ -40,10 +39,10 @@ const CreateSmallCategoryPage = ({ params }: { params: { classification: string 
   return (
     <div>
       <Header
-        left={<LeftHeader />}
-        center={'카테고리 추가'}
-        right={<RightHeader />}
+        center="카테고리 추가"
         className="px-20 border-b-2 border-gray-50"
+        left={<LeftHeader />}
+        right={<RightHeader />}
       />
 
       <div className="px-20 my-24">
@@ -54,7 +53,9 @@ const CreateSmallCategoryPage = ({ params }: { params: { classification: string 
           <Input
             className="bg-gray-50 pl-[14px] h-[50px]"
             defaultValue={category}
-            onChange={(e) => setCategory(e.target.value)}
+            onChange={(e) => {
+              setCategory(e.target.value);
+            }}
           />
         </div>
       </div>

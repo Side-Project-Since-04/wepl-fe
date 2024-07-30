@@ -1,9 +1,9 @@
 'use client';
 
-import { SmallCategoryName } from './components/SmallCategoryName';
-import SmallCategoryCard from './components/SmallCategoryCard';
-import { SpendingHeader } from '@/src/widgets/spending/common/SpendingHeader';
 import { usePathname, useRouter } from 'next/navigation';
+import { SpendingHeader } from '@/src/widgets/spending/common/SpendingHeader';
+import { SmallCategoryName } from './_components/SmallCategoryName';
+import SmallCategoryCard from './_components/SmallCategoryCard';
 
 interface SmallCategoryPageProps {}
 
@@ -12,14 +12,14 @@ const SmallCategoryPage = ({}: SmallCategoryPageProps) => {
   const pathname = usePathname();
 
   const handleClickText = () => {
-    const query = `?categoryName=${'대관료'}`;
+    const query = `?categoryName=대관료`;
 
-    router.push(pathname + '/edit' + query);
+    router.push(`${pathname}/edit${query}`);
   };
 
   return (
     <main>
-      <SpendingHeader disabled={false} title="지출 상세 내역" text="수정" onClickText={handleClickText} />
+      <SpendingHeader disabled={false} onClickText={handleClickText} text="수정" title="지출 상세 내역" />
       <section>
         <SmallCategoryName pathname={pathname!} />
       </section>
