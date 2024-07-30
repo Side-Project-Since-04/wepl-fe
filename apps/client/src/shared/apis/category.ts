@@ -26,4 +26,9 @@ export const CategoryClient = {
   deleteMiddleCategory: async (middleCategoryPk: string) => {
     await axiosInstance.delete(`${URL_ROOT}/middle/${middleCategoryPk}`);
   },
+  createSmallCategory: async (middleCategoryPk: string, smallCategoryName: string) => {
+    await axiosInstance.post(`${URL_ROOT}/middle/${middleCategoryPk}/small`, {
+      smallCategoryName,
+    });
+  },
 };

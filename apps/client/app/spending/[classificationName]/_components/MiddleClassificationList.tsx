@@ -118,7 +118,11 @@ const MiddleClassificationNameContent = ({
         );
       })}
       <div className="text-center">
-        <Button className="w-108 h-40 bg-gray-100 text-gray-500 my-32 mx-auto hover:bg-gray-200">항목 추가하기</Button>
+        <Link href={`/spending/${classificationName}/middle/${middleCategoryPk}/small/categoryAdd`}>
+          <Button className="w-108 h-40 bg-gray-100 text-gray-500 my-32 mx-auto hover:bg-gray-200">
+            항목 추가하기
+          </Button>
+        </Link>
       </div>
     </div>
   );
