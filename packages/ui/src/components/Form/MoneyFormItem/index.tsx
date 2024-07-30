@@ -16,13 +16,12 @@ const MoneyInputFormItem = ({ required = false, ...props }: CurrencyInputFormIte
   // 추후 보안이 필요함
   const formatCurrency = (value: string) => {
     // 숫자만 추출
+    console.log(typeof value);
     const number = value.replace(/[^\d]/g, '');
-    // 세 자리마다 쉼표 추가 및 원 추가
     return number ? number.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '원' : '';
   };
 
   const parseCurrency = (value: string) => {
-    // 쉼표와 '원' 제거
     return value.replace(/,/g, '').replace('원', '');
   };
 

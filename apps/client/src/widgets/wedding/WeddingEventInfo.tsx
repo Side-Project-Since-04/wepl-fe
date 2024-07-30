@@ -12,6 +12,8 @@ import MarriedCouple from '@/public/home/Married-Couple.png';
 import { useSuspenseGetWeddingInfo } from '@/src/features/wedding/queries';
 import { type WeddingBudgetInfoType, type WeddingInfoType } from '@/src/features/wedding/types';
 import { calculateDaysUntilWedding, formatWeddingDateInfo } from '@/src/shared/utils/utils';
+import AsyncBoundary from '@/src/shared/components/AsyncBoundary';
+import { CardSkeleton } from '@/app/home/_Skeleton';
 
 interface WeddingInfoCardProps extends WeddingInfoType, WeddingBudgetInfoType {}
 
@@ -45,6 +47,7 @@ const WeddingInfoCard: React.FC<WeddingInfoCardProps> = ({ weddingDate, weddingT
       return `D-${dDay}`;
     }
   };
+
   const [formatWeddingDate, formatWeddingTime] = formatWeddingDateInfo(weddingDate, weddingTime);
   return (
     <div>

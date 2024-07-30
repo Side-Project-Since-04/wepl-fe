@@ -1,14 +1,16 @@
 'use client';
-import { useGetWeddingInfo } from '@/src/features/wedding/queries';
+import Image from 'next/image';
+import React from 'react';
+
 import AsyncBoundary from '@/src/shared/components/AsyncBoundary';
+import Header from '@ui/src/components/Header';
 import { InvitationButton } from '@/src/widgets/auth/InvitationButton';
 import BudgetOverview from '@/src/widgets/budget/BudgetOverview';
 import { ScheduleCard } from '@/src/widgets/schedule/ScheduleCard';
 import WeddingEventInfo from '@/src/widgets/wedding/WeddingEventInfo';
 import { Button } from '@ui/src/Button';
-import Header from '@ui/src/components/Header';
-import Image from 'next/image';
-import React from 'react';
+
+import { CardSkeleton } from './_Skeleton';
 
 const MainPage = () => {
   const LeftHeader = () => {
@@ -22,7 +24,7 @@ const MainPage = () => {
     <>
       <Header left={<LeftHeader />} />
       <div className="flex flex-col items-center gap-32">
-        <AsyncBoundary>
+        <AsyncBoundary SuspenseFallback={<CardSkeleton />}>
           <WeddingEventInfo />
         </AsyncBoundary>
 
