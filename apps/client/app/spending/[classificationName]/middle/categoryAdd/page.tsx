@@ -15,13 +15,13 @@ const MiddleCategoryAddPage = ({ params }: { params: { classificationName: strin
   const router = useRouter();
   const [category, setCategory] = useState('');
 
-  const { mutate: mutateCreateMiddleCategory } = useMutation({
+  const { mutate: createMiddleCategory, isPending: isPendingCreateMiddleCategory } = useMutation({
     mutationFn: (payload: { classificationName: string; middleCategoryName: string }) =>
       CategoryClient.createMiddleCategory(payload),
   });
 
   const handleSaveBtn = () => {
-    mutateCreateMiddleCategory(
+    createMiddleCategory(
       {
         classificationName: params.classificationName,
         middleCategoryName: category,
@@ -53,11 +53,16 @@ const MiddleCategoryAddPage = ({ params }: { params: { classificationName: strin
 
   const RightHeader = useCallback(() => {
     return (
-      <Button className="p-0" disabled={category.length === 0} onClick={handleSaveBtn} variant="ghost">
+      <Button
+        className="p-0"
+        disabled={isPendingCreateMiddleCategory || category.length === 0}
+        onClick={handleSaveBtn}
+        variant="ghost"
+      >
         저장
       </Button>
     );
-  }, [category]);
+  }, [category, isPendingCreateMiddleCategory]);
 
   return (
     <div>
