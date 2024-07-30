@@ -7,29 +7,27 @@ import { SubTitle1, TextBody1 } from '@ui/src/components/Text';
 import Link from 'next/link';
 import React from 'react';
 
-type ClassficationProps = {
-  classification: string;
+type ClassficationNameProps = {
+  classificationName: string;
 };
 
-const MiddleClassificationList = ({ classification }: ClassficationProps) => {
+export const MiddleClassificationList = ({ classificationName }: ClassficationNameProps) => {
   return (
     <div>
-      <SpendingListHeader classification={classification} />
-      <CategoryTabs classification={classification} />
+      <SpendingListHeader classificationName={classificationName} />
+      <CategoryTabs classificationName={classificationName} />
     </div>
   );
 };
 
-export default MiddleClassificationList;
-
-const SpendingListHeader = ({ classification }: ClassficationProps) => {
+const SpendingListHeader = ({ classificationName }: ClassficationNameProps) => {
   const LeftHeader = () => {
     return <SubTitle1 className="font-500">분류 카테고리(6)</SubTitle1>;
   };
 
   const RightHeader = () => {
     return (
-      <Link className="text-auxiliary-blue" href={`/spending/${classification}/middleCategories`}>
+      <Link className="text-auxiliary-blue" href={`/spending/${classificationName}/middleCategories`}>
         <SubTitle1 className="text-auxiliary-blue">편집하기</SubTitle1>
       </Link>
     );
@@ -38,16 +36,16 @@ const SpendingListHeader = ({ classification }: ClassficationProps) => {
   return <Header className="px-20" left={<LeftHeader />} right={<RightHeader />} />;
 };
 
-const CategoryTabs = ({ classification }: ClassficationProps) => {
+const CategoryTabs = ({ classificationName }: ClassficationNameProps) => {
   const categories = ['웨딩홀', '스냅/DVD', '스드메', '예복', '혼주', '청첩장'];
   const tmpItems = categories.map((category) => ({
     label: category,
-    content: <MiddleClassificationContent classification={classification} />,
+    content: <MiddleClassificationNameContent classificationName={classificationName} />,
   }));
 
   return <WeplTabs items={tmpItems} />;
 };
-const MiddleClassificationContent = ({ classification }: ClassficationProps) => {
+const MiddleClassificationNameContent = ({ classificationName }: ClassficationNameProps) => {
   const tmp = [
     { pk: 1, label: '대관료', spending: '3,000,000' },
     { pk: 2, label: '폐백', spending: '3,000,000' },
@@ -62,7 +60,7 @@ const MiddleClassificationContent = ({ classification }: ClassficationProps) => 
       {tmp.map((item, idx) => {
         const isZeroSpending = item.spending === '0';
         const middleCategoryPk = 123;
-        const link = `/spending/${classification}/middle/${middleCategoryPk}/small/${item.pk}`;
+        const link = `/spending/${classificationName}/middle/${middleCategoryPk}/small/${item.pk}`;
 
         return (
           <Link href={link} key={item.pk}>

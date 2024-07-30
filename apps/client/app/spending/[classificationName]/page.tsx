@@ -3,9 +3,11 @@ import Header from '@ui/src/components/Header';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import React from 'react';
+import { Skeleton } from '@ui/src/Skeleton';
 import type { ClassificationNameType } from '@/src/features/category/types';
+import AsyncBoundary from '@/src/shared/components/AsyncBoundary';
 import SpendingSummaryCard from './_components/SpendingSummaryCard';
-import CategoryTabs from './_components/MiddleClassificationList';
+import { MiddleClassificationList } from './_components/MiddleClassificationList';
 
 type ClassificationNameLowercaseType = Lowercase<ClassificationNameType>;
 
@@ -21,7 +23,7 @@ const CLASSIFICATIONS_NAME: Record<ClassificationNameLowercaseType, string> = {
  */
 interface ExpenseDetailPageProps {
   params: {
-    classification: ClassificationNameLowercaseType;
+    classificationName: ClassificationNameLowercaseType;
   };
 }
 
@@ -34,17 +36,19 @@ const LeftHeader = () => {
 };
 
 const ExpenseDetailPage = ({ params }: ExpenseDetailPageProps) => {
-  const name = CLASSIFICATIONS_NAME[params.classification];
+  const name = CLASSIFICATIONS_NAME[params.classificationName];
 
-  if (!name) {
-    redirect('/home');
-  }
+  // if (!name) {
+  //   redirect('/home');
+  // }
 
   return (
     <div>
       <Header center={name} left={<LeftHeader />} />
-      <SpendingSummaryCard />
-      <CategoryTabs classification={params.classification} />
+      <AsyncBoundary SuspenseFallback={<Skeleton className="h-screen" />}>
+        <SpendingSummaryCard classificationName={params.classificationName} />
+        <MiddleClassificationList classificationName={params.classificationName} />
+      </AsyncBoundary>
     </div>
   );
 };

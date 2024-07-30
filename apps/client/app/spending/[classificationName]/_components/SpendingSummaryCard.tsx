@@ -1,9 +1,17 @@
-import React, { useEffect, useState } from 'react';
+'use client';
 
 import { SubTitle1 } from '@ui/src/components/Text';
 import WeplBadge from '@ui/src/Badge';
+import { useSuspenseGetClassification } from '@/src/features/category/queries';
+import type { ClassificationNameType } from '@/src/features/category/types';
 
-const SpendingSummaryCard = () => {
+type SpendingSummaryCardProps = {
+  classificationName: Lowercase<ClassificationNameType>;
+};
+
+const SpendingSummaryCard = ({ classificationName }: SpendingSummaryCardProps) => {
+  useSuspenseGetClassification(classificationName);
+
   return (
     <div className="h-[190px] bg-gray-50 flex justify-center items-center">
       <div className="w-[460px] sm:w-[320px] h-[144px] bg-neutral-white rounded-lg px-20 py-24">
@@ -31,11 +39,11 @@ const CardContent = () => {
       <p className="text-12 text-gray-500 mb-4">지출 완료/대기 금액</p>
       <div className="flex justify-between">
         <div className="flex flex-1">
-          <WeplBadge className={'bg-semantic-success-100 text-semantic-success-600'}>완료</WeplBadge>
+          <WeplBadge className="bg-semantic-success-100 text-semantic-success-600">완료</WeplBadge>
           <span className="ml-4 whitespace-nowrap text-15 ">10,000,000원</span>
         </div>
         <div className="flex ">
-          <WeplBadge className={'bg-semantic-warning-100 text-semantic-warning-600'}>대기</WeplBadge>
+          <WeplBadge className="bg-semantic-warning-100 text-semantic-warning-600">대기</WeplBadge>
           <span className="ml-4 whitespace-nowrap text-15 ">50,000원</span>
         </div>
       </div>
