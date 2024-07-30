@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
-import Link from 'next/link';
+import React, { useCallback, useState } from 'react';
 import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
 import Header from '@ui/src/components/Header';
@@ -9,33 +8,57 @@ import { SubTitle2 } from '@ui/src/components/Text';
 import { Input } from '@ui/src/Input';
 import { toast } from '@ui/src/Toast';
 import { useRouter } from 'next/navigation';
+import { useMutation } from '@tanstack/react-query';
+import { CategoryClient } from '@/src/shared/apis/category';
 
-const CreateSmallCategoryPage = ({ params }: { params: { classification: string } }) => {
+const MiddleCategoryAddPage = ({ params }: { params: { classificationName: string } }) => {
   const router = useRouter();
-  const classification = decodeURIComponent(params.classification);
-
   const [category, setCategory] = useState('');
 
-  const LeftHeader = () => {
-    return (
-      <Link href={`/spending/${classification}/edit`}>
-        <Icon name="arrow-left" size={24} />
-      </Link>
+  const { mutate: mutateCreateMiddleCategory } = useMutation({
+    mutationFn: (payload: { classificationName: string; middleCategoryName: string }) =>
+      CategoryClient.createMiddleCategory(payload),
+  });
+
+  const handleSaveBtn = () => {
+    mutateCreateMiddleCategory(
+      {
+        classificationName: params.classificationName,
+        middleCategoryName: category,
+      },
+      {
+        onSuccess() {
+          toast({ variant: 'success', title: '카테고리 추가가 완료되었습니다!', duration: 1500 });
+          router.back();
+        },
+        onError() {
+          toast({ variant: 'alert', title: '카테고리 추가를 실패했습니다!', duration: 1500 });
+        },
+      },
     );
   };
 
-  const handleSaveBtn = () => {
-    toast({ variant: 'success', title: '카테고리 추가가 완료되었습니다!', duration: 1500 });
-    router.push(`/spending/${classification}/edit`);
-  };
-
-  const RightHeader = () => {
+  const LeftHeader = useCallback(() => {
     return (
-      <Button className="p-0" disabled={category.length == 0} onClick={handleSaveBtn} variant="ghost">
+      <button
+        onClick={() => {
+          router.back();
+        }}
+        type="button"
+      >
+        <Icon name="arrow-left" size={24} />
+      </button>
+    );
+  }, [router]);
+
+  const RightHeader = useCallback(() => {
+    return (
+      <Button className="p-0" disabled={category.length === 0} onClick={handleSaveBtn} variant="ghost">
         저장
       </Button>
     );
-  };
+  }, [category]);
+
   return (
     <div>
       <Header
@@ -62,4 +85,4 @@ const CreateSmallCategoryPage = ({ params }: { params: { classification: string 
     </div>
   );
 };
-export default CreateSmallCategoryPage;
+export default MiddleCategoryAddPage;

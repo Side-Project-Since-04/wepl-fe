@@ -14,4 +14,16 @@ export const CategoryClient = {
 
     return data;
   },
+  createMiddleCategory: async (payload: { classificationName: string; middleCategoryName: string }) => {
+    await axiosInstance.post(`${URL_ROOT}/middle`, payload);
+  },
+  updateMiddleCategory: async (
+    middleCategoryPk: string,
+    payload: { classificationName: string; middleCategoryName: string },
+  ) => {
+    await axiosInstance.put(`${URL_ROOT}/middle/${middleCategoryPk}`, payload);
+  },
+  deleteMiddleCategory: async (middleCategoryPk: string) => {
+    await axiosInstance.delete(`${URL_ROOT}/middle/${middleCategoryPk}`);
+  },
 };
