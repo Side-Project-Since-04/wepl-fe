@@ -1,5 +1,5 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { CategoryClient } from '@/src/shared/apis/category';
 import type { ClassificationNameType } from './types';
 
@@ -22,4 +22,10 @@ export const useSuspenseGetClassification = (
   classificationName: ClassificationNameType | Lowercase<ClassificationNameType>,
 ) => {
   return useSuspenseQuery(CategoryKeys.getClassification(classificationName));
+};
+
+export const useGetClassification = (
+  classificationName: ClassificationNameType | Lowercase<ClassificationNameType>,
+) => {
+  return useQuery(CategoryKeys.getClassification(classificationName));
 };

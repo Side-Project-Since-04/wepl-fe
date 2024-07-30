@@ -12,7 +12,7 @@ export const TotalBudgetAndSpending = () => {
   const percentClassName = `w-[${spendingPerBudget}%]`;
 
   if (totalBudget === null || spendingPerBudget === null) {
-    return <BudgetRegister />;
+    return <BudgetRegister className="w-full" />;
   }
 
   return (
