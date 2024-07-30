@@ -1,25 +1,34 @@
+'use client';
+
 import { Card } from '@ui/shadcn-ui/card';
 import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
 import { WeplTabs } from '@ui/src/Tabs';
 import Header from '@ui/src/components/Header';
-import { SubTitle1, TextBody1 } from '@ui/src/components/Text';
+import { SubTitle1, TextBody1, TextBody2 } from '@ui/src/components/Text';
 import Link from 'next/link';
 import React from 'react';
+import type { ClassificationNameType, ClassificationType } from '@/src/features/category/types';
+import { useSuspenseGetClassification } from '@/src/features/category/queries';
 
 type ClassficationNameProps = {
-  classificationName: string;
+  classificationName: Lowercase<ClassificationNameType>;
 };
 
 export const MiddleClassificationList = ({ classificationName }: ClassficationNameProps) => {
+  const { data: classification } = useSuspenseGetClassification(classificationName);
+
   return (
     <div>
       <SpendingListHeader classificationName={classificationName} />
-      <CategoryTabs classificationName={classificationName} />
+      <CategoryTabs classification={classification} classificationName={classificationName} />
     </div>
   );
 };
 
+/**
+ * SpendingListHeader
+ */
 const SpendingListHeader = ({ classificationName }: ClassficationNameProps) => {
   const LeftHeader = () => {
     return <SubTitle1 className="font-500">분류 카테고리(6)</SubTitle1>;
@@ -36,34 +45,59 @@ const SpendingListHeader = ({ classificationName }: ClassficationNameProps) => {
   return <Header className="px-20" left={<LeftHeader />} right={<RightHeader />} />;
 };
 
-const CategoryTabs = ({ classificationName }: ClassficationNameProps) => {
-  const categories = ['웨딩홀', '스냅/DVD', '스드메', '예복', '혼주', '청첩장'];
-  const tmpItems = categories.map((category) => ({
-    label: category,
-    content: <MiddleClassificationNameContent classificationName={classificationName} />,
+/**
+ * CategoryTabs
+ */
+type CategoryTabsProps = {
+  classification: ClassificationType;
+} & ClassficationNameProps;
+
+const CategoryTabs = ({ classification, classificationName }: CategoryTabsProps) => {
+  const middleCategoryLabels = classification.middleCategories.map((value) => value.name);
+  const items = middleCategoryLabels.map((label) => ({
+    label,
+    content: (
+      /**
+       * !!고민!!
+       * 중분류 메뉴 중에서 특정 메뉴가 확실히 존재한다고 판단하는 로직
+       * filter를 사용하지 않고 다르게 처리할 수는 없을까?
+       * find를 사용하면 반환값이 undefined가 될 수 있다고 판단
+       */
+      <MiddleClassificationNameContent
+        classificationName={classificationName}
+        middleCategory={classification.middleCategories.filter((value) => value.name === label)[0]}
+      />
+    ),
   }));
 
-  return <WeplTabs items={tmpItems} />;
+  return <WeplTabs items={items} />;
 };
-const MiddleClassificationNameContent = ({ classificationName }: ClassficationNameProps) => {
-  const tmp = [
-    { pk: 1, label: '대관료', spending: '3,000,000' },
-    { pk: 2, label: '폐백', spending: '3,000,000' },
-    { pk: 3, label: '식대', spending: '0' },
-  ];
+
+/**
+ * MiddleClassificationNameContent
+ */
+type MiddleClassificationNameContentProps = {
+  middleCategory: ClassificationType['middleCategories'][number];
+} & ClassficationNameProps;
+
+const MiddleClassificationNameContent = ({
+  middleCategory,
+  classificationName,
+}: MiddleClassificationNameContentProps) => {
+  const { pk: middleCategoryPk, spending, smallCategories } = middleCategory;
 
   return (
     <div className="px-20">
-      <div className="my-24">
-        <span className="text-auxiliary-red"> 지출 금액 </span> $3,000,000$
+      <div className="my-24 flex items-center gap-4">
+        <TextBody2 className="text-auxiliary-red"> 지출 금액 </TextBody2>
+        <TextBody2 className="text-gray-500">{spending}원</TextBody2>
       </div>
-      {tmp.map((item, idx) => {
-        const isZeroSpending = item.spending === '0';
-        const middleCategoryPk = 123;
-        const link = `/spending/${classificationName}/middle/${middleCategoryPk}/small/${item.pk}`;
+      {smallCategories.map((smallCategory, idx) => {
+        const isZeroSpending = smallCategory.spending === 0;
+        const link = `/spending/${classificationName}/middle/${middleCategoryPk}/small/${smallCategory.pk}`;
 
         return (
-          <Link href={link} key={item.pk}>
+          <Link href={link} key={smallCategory.pk}>
             <Card className="h-55 w-min-[320px] p-16 flex justify-between mb-12">
               <div className="flex items-center">
                 <div
@@ -71,10 +105,10 @@ const MiddleClassificationNameContent = ({ classificationName }: ClassficationNa
                 >
                   {idx}
                 </div>
-                <SubTitle1 className={isZeroSpending ? 'text-gray-100' : ''}>{item.label}</SubTitle1>
+                <SubTitle1 className={isZeroSpending ? 'text-gray-100' : ''}>{smallCategory.name}</SubTitle1>
               </div>
               <div className="flex items-center">
-                <TextBody1 className={isZeroSpending ? 'text-gray-100' : ''}>{item.spending} 원</TextBody1>
+                <TextBody1 className={isZeroSpending ? 'text-gray-100' : ''}>{smallCategory.spending} 원</TextBody1>
                 <Button className="hover:bg-neutral-white" variant="ghost">
                   <Icon className={isZeroSpending ? 'text-gray-100' : ''} name="arrow-right" size={16} />
                 </Button>

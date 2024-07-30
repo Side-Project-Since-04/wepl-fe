@@ -12,7 +12,7 @@ import { MiddleClassificationList } from './_components/MiddleClassificationList
 type ClassificationNameLowercaseType = Lowercase<ClassificationNameType>;
 
 const CLASSIFICATIONS_NAME: Record<ClassificationNameLowercaseType, string> = {
-  wedding: '본식',
+  wedding: '웨딩',
   present: '예물',
   furniture: '혼수',
   honeymoon: '신혼여행',
@@ -38,9 +38,9 @@ const LeftHeader = () => {
 const ExpenseDetailPage = ({ params }: ExpenseDetailPageProps) => {
   const name = CLASSIFICATIONS_NAME[params.classificationName];
 
-  // if (!name) {
-  //   redirect('/home');
-  // }
+  if (!name) {
+    redirect('/home');
+  }
 
   return (
     <div>
