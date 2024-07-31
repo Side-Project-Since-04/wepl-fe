@@ -2,7 +2,7 @@
 
 import { SmallCategoryName } from './components/SmallCategoryName';
 import SmallCategoryCard from './components/SmallCategoryCard';
-import { SpendingHeader } from '@/src/widgets/spending/common/SpendingHeader';
+import { SpendingHeader } from '@/src/widgets/spending/SpendingHeader';
 import { usePathname, useRouter } from 'next/navigation';
 
 interface SmallCategoryPageProps {}

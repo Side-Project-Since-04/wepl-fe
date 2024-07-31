@@ -1,6 +1,6 @@
 'use client';
 
-import { SpendingHeader } from '@/src/widgets/spending/common/SpendingHeader';
+import { SpendingHeader } from '@/src/widgets/spending/SpendingHeader';
 import { Button } from '@ui/src/Button';
 import { SubTitle2 } from '@ui/src/components/Text';
 import { ConfirmDialog } from '@ui/src/Dialog';
