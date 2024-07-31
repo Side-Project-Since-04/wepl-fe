@@ -10,11 +10,14 @@ import BudgetHeader from '@/src/widgets/budget/common/BudgetHeader';
 import { WeddingClient } from '@/src/shared/apis/wedding';
 import PageLayout from '@/src/pages/PageLayout';
 import { classNames } from '@/src/shared/ui/utils';
+import { useGetWeddingInfo } from '@/src/features/wedding/queries';
 
 const BudgetInputPage = () => {
   const router = useRouter();
-  const [budgetAmount, setBudgetAmount] = useState(0);
   const { toast } = useToast();
+
+  const { data: weddingInfo } = useGetWeddingInfo();
+  const [budgetAmount, setBudgetAmount] = useState(weddingInfo?.totalBudget || 0);
 
   const { isPending: isPendingUpdateTotalBudget, mutate: mutateForUpdateTotalBudget } = useMutation({
     mutationFn: (budget: number) => WeddingClient.updateTotalBudget(budget),
