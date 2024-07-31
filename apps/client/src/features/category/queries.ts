@@ -12,6 +12,10 @@ export const CategoryKeys = createQueryKeys('category', {
     queryKey: [classificationName],
     queryFn: () => CategoryClient.getClassification(classificationName),
   }),
+  getSmallCategoryDetail: (middleCategoryPk: string, smallCategoryPk: string) => ({
+    queryKey: [middleCategoryPk, smallCategoryPk],
+    queryFn: () => CategoryClient.getSmallCategoryDetail(middleCategoryPk, smallCategoryPk),
+  }),
 });
 
 export const useSuspenseGetClassifications = () => {
@@ -28,4 +32,12 @@ export const useGetClassification = (
   classificationName: ClassificationNameType | Lowercase<ClassificationNameType>,
 ) => {
   return useQuery(CategoryKeys.getClassification(classificationName));
+};
+
+export const useSuspenseGetSmallCategoryDetail = (middleCategoryPk: string, smallCategoryPk: string) => {
+  return useSuspenseQuery(CategoryKeys.getSmallCategoryDetail(middleCategoryPk, smallCategoryPk));
+};
+
+export const useGetSmallCategoryDetail = (middleCategoryPk: string, smallCategoryPk: string) => {
+  return useQuery(CategoryKeys.getSmallCategoryDetail(middleCategoryPk, smallCategoryPk));
 };

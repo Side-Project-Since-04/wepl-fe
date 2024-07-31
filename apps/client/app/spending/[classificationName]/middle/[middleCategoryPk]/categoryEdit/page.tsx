@@ -70,7 +70,7 @@ const MiddleCategoryEditPage = ({ params }: MiddleCategoryEditPageProps) => {
     );
   };
 
-  const onDelete = () => {
+  const handleDelete = () => {
     deleteMiddleCategory(middleCategoryPk, {
       onSuccess() {
         toast({ variant: 'success', title: '카테고리 삭제되었습니다', duration: 1500 });
@@ -133,7 +133,7 @@ const MiddleCategoryEditPage = ({ params }: MiddleCategoryEditPageProps) => {
       </div>
       <div className="text-center">
         <ConfirmDialog
-          onSubmit={onDelete}
+          onSubmit={handleDelete}
           submitText="삭제"
           subtitle="삭제후에는 복구가 불가능합니다."
           title="정말 삭제하시겠습니까?"

@@ -1,33 +1,41 @@
 'use client';
 
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { Skeleton } from '@ui/src/Skeleton';
 import { SpendingHeader } from '@/src/widgets/spending/common/SpendingHeader';
+import type { ClassificationNameType } from '@/src/features/category/types';
+import AsyncBoundary from '@/src/shared/components/AsyncBoundary';
 import { SmallCategoryName } from './_components/SmallCategoryName';
-import SmallCategoryCard from './_components/SmallCategoryCard';
+import { SmallCategoryDetailSpendings } from './_components/SmallCategoryDetailSpendings';
 
-interface SmallCategoryPageProps {}
+interface SmallCategoryPageProps {
+  params: {
+    classificationName: Lowercase<ClassificationNameType>;
+    middleCategoryPk: string;
+    smallCategoryPk: string;
+  };
+}
 
-const SmallCategoryPage = ({}: SmallCategoryPageProps) => {
+const SmallCategoryPage = ({ params }: SmallCategoryPageProps) => {
   const router = useRouter();
-  const pathname = usePathname();
-
   const handleClickText = () => {
-    const query = `?categoryName=대관료`;
-
-    router.push(`${pathname}/edit${query}`);
+    router.push(
+      `/spending/${params.classificationName}/middle/${params.middleCategoryPk}/small/${params.smallCategoryPk}/categoryEdit`,
+    );
   };
 
   return (
     <main>
       <SpendingHeader disabled={false} onClickText={handleClickText} text="수정" title="지출 상세 내역" />
       <section>
-        <SmallCategoryName pathname={pathname!} />
+        <AsyncBoundary SuspenseFallback={<Skeleton className="h-200" />}>
+          <SmallCategoryName params={params} />
+        </AsyncBoundary>
       </section>
       <section>
-        <ul>
-          <SmallCategoryCard />
-          <SmallCategoryCard />
-        </ul>
+        <AsyncBoundary SuspenseFallback={<Skeleton className="h-[600px]" />}>
+          <SmallCategoryDetailSpendings params={params} />
+        </AsyncBoundary>
       </section>
     </main>
   );

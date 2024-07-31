@@ -1,16 +1,17 @@
 'use client';
-import React from 'react';
-import Link from 'next/link';
+
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-
 import Header from '@ui/src/components/Header';
 import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
+import { useRouter } from 'next/navigation';
+import { useCallback } from 'react';
 import PageLayout from '@/src/pages/PageLayout';
 import SpendingForm from '@/src/widgets/spending/common/SpendingForm';
 import { useSpendingStore } from '@/src/features/spending/store';
+import type { ClassificationNameType } from '@/src/features/category/types';
 
 /**
  * 지출액
@@ -32,30 +33,34 @@ const formSchema = z.object({
   scheduleName: z.string().trim().min(1, '일정명을 입력해주세요'),
   startedHour: z.union([z.string(), z.number()]).refine((value) => {
     const numberValue = typeof value === 'string' ? parseInt(value, 10) : value;
-    return value == '' || (numberValue >= 0 && numberValue <= 23);
+    return value === '' || (numberValue >= 0 && numberValue <= 23);
   }),
   startedMin: z.union([z.string(), z.number()]).refine((value) => {
     const numberValue = typeof value === 'string' ? parseInt(value, 10) : value;
-    return value == '' || (numberValue >= 0 && numberValue <= 59);
+    return value === '' || (numberValue >= 0 && numberValue <= 59);
   }),
   endHour: z.union([z.string(), z.number()]).refine((value) => {
     const numberValue = typeof value === 'string' ? parseInt(value, 10) : value;
-    return value == '' || (numberValue >= 0 && numberValue <= 23);
+    return value === '' || (numberValue >= 0 && numberValue <= 23);
   }),
   endMin: z.union([z.string(), z.number()]).refine((value) => {
     const numberValue = typeof value === 'string' ? parseInt(value, 10) : value;
-    return value == '' || (numberValue >= 0 && numberValue <= 59);
+    return value === '' || (numberValue >= 0 && numberValue <= 59);
   }),
   memo: z.string(),
 });
 
 export type SpendingFormDataType = z.infer<typeof formSchema>;
 
-const CreateSmallCategorySpendingPage = ({
-  params,
-}: {
-  params: { classification: string; smallCategoryPk: string };
-}) => {
+interface SpendingFormPageProps {
+  params: {
+    classification: Lowercase<ClassificationNameType>;
+    smallCategoryPk: string;
+  };
+}
+
+const SpendingFormPage = ({ params }: SpendingFormPageProps) => {
+  const router = useRouter();
   const { item } = useSpendingStore();
 
   const form = useForm<SpendingFormDataType>({
@@ -100,39 +105,46 @@ const CreateSmallCategorySpendingPage = ({
     console.log(form.getValues());
   };
 
-  const CenterHeader = () => {
+  /**
+   * 헤더에 사용되는 컴포넌트
+   */
+  const CenterHeader = useCallback(() => {
     return <h1 className="text-2xl font-bold text-center">지출액 추가</h1>;
-  };
+  }, []);
 
-  const LeftHeader = () => {
-    return (
-      <Button variant={'ghost'} className="p-0">
-        <Link href={`/spending/${params.classification}/${params.smallCategoryPk}`}>
-          <Icon name="arrow-left" size={25} />
-        </Link>
-      </Button>
-    );
-  };
-
-  const RightHeader = () => {
+  const LeftHeader = useCallback(() => {
     return (
       <Button
-        variant={'ghost'}
         className="p-0"
-        onClick={form.handleSubmit(handleSaveBtn)}
+        onClick={() => {
+          router.back();
+        }}
+        variant="ghost"
+      >
+        <Icon name="arrow-left" size={25} />
+      </Button>
+    );
+  }, []);
+
+  const RightHeader = useCallback(() => {
+    return (
+      <Button
+        className="p-0"
         disabled={!form.formState.isValid || form.formState.isSubmitting}
+        onClick={form.handleSubmit(handleSaveBtn)}
+        variant="ghost"
       >
         저장
       </Button>
     );
-  };
+  }, [form]);
 
   return (
     <PageLayout isPadding>
-      <Header left={<LeftHeader />} center={<CenterHeader />} right={<RightHeader />} />
-      <SpendingForm form={form} onSave={form.handleSubmit(handleSaveBtn)} initValues={initValue} />
+      <Header center={<CenterHeader />} left={<LeftHeader />} right={<RightHeader />} />
+      <SpendingForm form={form} initValues={initValue} onSave={form.handleSubmit(handleSaveBtn)} />
     </PageLayout>
   );
 };
 
-export default CreateSmallCategorySpendingPage;
+export default SpendingFormPage;
