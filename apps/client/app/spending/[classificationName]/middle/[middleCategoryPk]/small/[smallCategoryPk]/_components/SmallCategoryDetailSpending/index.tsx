@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { useSpendingStore } from '@/src/features/spending/store';
-import type { Spending } from '@/src/features/category/types';
+import type { SpendingType } from '@/src/features/spending/types';
 
 const tmp = {
   smallCategoryPk: 'string',
@@ -27,7 +27,7 @@ const tmp = {
 };
 
 interface SmallCategoryDetailSpendingProps {
-  spending: Spending;
+  spending: SpendingType;
 }
 
 export const SmallCategoryDetailSpending = ({ spending }: SmallCategoryDetailSpendingProps) => {

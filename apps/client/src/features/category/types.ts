@@ -1,4 +1,4 @@
-import type { Spending } from '../spending/types';
+import type { SpendingType } from '../spending/types';
 import type { FURNITURE, HONEYMOON, PRESENT, WEDDING } from './constants';
 
 export type WeddingType = typeof WEDDING;
@@ -36,5 +36,5 @@ export interface SmallCategoryDetailType {
   middleCategoryName: string;
   smallCategoryPk: string;
   smallCategoryName: string;
-  spendingList: Spending[];
+  spendingList: SpendingType[];
 }
