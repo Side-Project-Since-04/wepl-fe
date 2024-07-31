@@ -10,7 +10,7 @@ import { toast } from '@ui/src/Toast';
 import { ConfirmDialog } from '@ui/src/Dialog';
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
-import { useGetClassification } from '@/src/features/category/queries';
+import { useGetDetailClassification } from '@/src/features/category/queries';
 import type { ClassificationNameType } from '@/src/features/category/types';
 import { CategoryClient } from '@/src/shared/apis/category';
 
@@ -19,7 +19,7 @@ interface MiddleCategoryEditPageProps {
 }
 
 const MiddleCategoryEditPage = ({ params }: MiddleCategoryEditPageProps) => {
-  const { data: classification } = useGetClassification(params.classificationName);
+  const { data: classification } = useGetDetailClassification(params.classificationName);
 
   const router = useRouter();
   const middleCategoryPk = params.middleCategoryPk;

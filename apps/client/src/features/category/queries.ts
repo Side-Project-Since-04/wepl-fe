@@ -25,16 +25,11 @@ export const useSuspenseGetClassifications = () => {
 export const useSuspenseGetDetailClassifications = (classification: string) => {
   return useSuspenseQuery({ ...CategoryKeys.getDetailClassification(classification) });
 };
-export const useSuspenseGetClassification = (
-  classificationName: ClassificationNameType | Lowercase<ClassificationNameType>,
-) => {
-  return useSuspenseQuery(CategoryKeys.getClassification(classificationName));
-};
 
-export const useGetClassification = (
+export const useGetDetailClassification = (
   classificationName: ClassificationNameType | Lowercase<ClassificationNameType>,
 ) => {
-  return useQuery(CategoryKeys.getClassification(classificationName));
+  return useQuery(CategoryKeys.getDetailClassification(classificationName));
 };
 
 export const useSuspenseGetSmallCategoryDetail = (middleCategoryPk: string, smallCategoryPk: string) => {

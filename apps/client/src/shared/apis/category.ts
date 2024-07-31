@@ -17,6 +17,7 @@ export const CategoryClient = {
     const { data } = await axiosInstance.get(URL_ROOT + `/classifications/${classification}`);
     return data;
   },
+
   createMiddleCategory: async (payload: { classificationName: string; middleCategoryName: string }) => {
     await axiosInstance.post(`${URL_ROOT}/middle`, payload);
   },

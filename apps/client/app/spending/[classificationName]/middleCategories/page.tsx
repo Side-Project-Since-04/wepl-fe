@@ -8,7 +8,7 @@ import React from 'react';
 import { Skeleton } from '@ui/src/Skeleton';
 import BackHeader from '@/src/shared/components/BackHeader';
 import type { ClassificationNameType } from '@/src/features/category/types';
-import { useGetClassification } from '@/src/features/category/queries';
+import { useGetDetailClassification } from '@/src/features/category/queries';
 
 interface MiddleCategoriesPageProps {
   params: {
@@ -17,7 +17,7 @@ interface MiddleCategoriesPageProps {
 }
 
 const MiddleCategoriesPage = ({ params }: MiddleCategoriesPageProps) => {
-  const { data: classification, isFetching } = useGetClassification(params.classificationName);
+  const { data: classification, isFetching } = useGetDetailClassification(params.classificationName);
 
   // const LeftHeader = () => {
   //   return (
