@@ -1,3 +1,4 @@
+import { MiddleCategoryType, SmallCategoryType } from '@/src/features/category/types';
 import { Card } from '@ui/shadcn-ui/card';
 import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
@@ -8,24 +9,30 @@ import Link from 'next/link';
 
 import React from 'react';
 
-type ClassficationProps = {
+interface ClassficationProps {
   classification: string;
-};
+  middleCategory: MiddleCategoryType[];
+}
 
-const MiddleClassificationList = ({ classification }: ClassficationProps) => {
+interface CategoryTabsProps {
+  middleCategory: MiddleCategoryType[];
+  classification: string;
+}
+
+const MiddleClassificationList = ({ classification, middleCategory }: ClassficationProps) => {
   return (
     <div>
-      <SpendingListHeader classification={classification} />
-      <CategoryTabs classification={classification} />
+      <SpendingListHeader classification={classification} count={middleCategory.length} />
+      <CategoryTabs classification={classification} middleCategory={middleCategory} />
     </div>
   );
 };
 
 export default MiddleClassificationList;
 
-const SpendingListHeader = ({ classification }: ClassficationProps) => {
+const SpendingListHeader = ({ classification, count }: { classification: string; count: number }) => {
   const LeftHeader = () => {
-    return <SubTitle1 className="font-500">분류 카테고리(6)</SubTitle1>;
+    return <SubTitle1 className="font-500">분류 카테고리({count})</SubTitle1>;
   };
 
   const RightHeader = () => {
@@ -39,30 +46,39 @@ const SpendingListHeader = ({ classification }: ClassficationProps) => {
   return <Header className="px-20" left={<LeftHeader />} right={<RightHeader />} />;
 };
 
-const CategoryTabs = ({ classification }: ClassficationProps) => {
-  const categories = ['웨딩홀', '스냅/DVD', '스드메', '예복', '혼주', '청첩장'];
-  const tmpItems = categories.map((category) => ({
-    label: category,
-    content: <MiddleClassificationContent classification={classification} />,
+const CategoryTabs = ({ middleCategory, classification }: CategoryTabsProps) => {
+  const tmpItems = middleCategory.map((category: MiddleCategoryType) => ({
+    label: category.name,
+    content: (
+      <MiddleClassificationContent
+        key={category.pk}
+        spending={category.spending}
+        smallCategory={category.smallCategories}
+        classification={classification}
+      />
+    ),
   }));
 
   return <WeplTabs items={tmpItems} />;
 };
-const MiddleClassificationContent = ({ classification }: ClassficationProps) => {
-  const tmp = [
-    { pk: 1, label: '대관료', spending: '3,000,000' },
-    { pk: 2, label: '폐백', spending: '3,000,000' },
-    { pk: 3, label: '식대', spending: '0' },
-  ];
-
+const MiddleClassificationContent = ({
+  smallCategory,
+  spending,
+  classification,
+}: {
+  smallCategory: SmallCategoryType[];
+  spending: number;
+  classification: string;
+}) => {
   return (
     <div className="px-20">
       <div className="my-24">
-        <span className="text-auxiliary-red"> 지출 금액 </span> ${'3,000,000'}$
+        <span className="text-auxiliary-red"> 지출 금액 </span> {spending.toLocaleString()} 원
       </div>
-      {tmp.map((item, idx) => {
-        const isZeroSpending = item.spending === '0';
+      {smallCategory.map((item, idx) => {
+        const isZeroSpending = item.spending === 0;
         return (
+          // wedding -> 중분류로 바꾸기
           <Link href={`/spending/${classification}/${item.pk}`}>
             <Card className="h-55 w-min-[320px] p-16 flex justify-between mb-12" key={idx}>
               <div className="flex items-center">
@@ -71,7 +87,7 @@ const MiddleClassificationContent = ({ classification }: ClassficationProps) => 
                 >
                   {idx}
                 </div>
-                <SubTitle1 className={isZeroSpending ? 'text-gray-100' : ''}>{item.label}</SubTitle1>
+                <SubTitle1 className={isZeroSpending ? 'text-gray-100' : ''}>{item.name}</SubTitle1>
               </div>
               <div className="flex items-center">
                 <TextBody1 className={isZeroSpending ? 'text-gray-100' : ''}>{item.spending} 원</TextBody1>

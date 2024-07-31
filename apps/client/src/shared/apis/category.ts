@@ -9,4 +9,8 @@ export const CategoryClient = {
     const { data } = await axiosInstance.get<Pageable<ClassificationType>>(URL_ROOT + '/classifications');
     return data;
   },
+  getDetailClassification: async (classification: string): Promise<ClassificationType> => {
+    const { data } = await axiosInstance.get(URL_ROOT + `/classifications/${classification}`);
+    return data;
+  },
 };
