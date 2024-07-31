@@ -8,10 +8,15 @@ import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import moment from 'moment';
+import { toast } from '@ui/src/Toast';
 import PageLayout from '@/src/pages/PageLayout';
 import SpendingForm from '@/src/widgets/spending/common/SpendingForm';
 import { useSpendingStore } from '@/src/features/spending/store';
 import type { ClassificationNameType } from '@/src/features/category/types';
+import { SpendingClient } from '@/src/shared/apis/spending';
+import type { SpendingInputType } from '@/src/features/spending/types';
 
 /**
  * 지출액
@@ -21,7 +26,6 @@ import type { ClassificationNameType } from '@/src/features/category/types';
  * 종료 시간
  * 메모
  */
-
 const formSchema = z.object({
   cost: z.string().min(1, '지출액을 입력해주세요'),
   paidAt: z.union([
@@ -63,6 +67,10 @@ const SpendingFormPage = ({ params }: SpendingFormPageProps) => {
   const router = useRouter();
   const { item } = useSpendingStore();
 
+  const { mutate: createSpending, isPending: isPendingCreateSpending } = useMutation({
+    mutationFn: (spendingInput: Partial<SpendingInputType>) => SpendingClient.createSpending(spendingInput),
+  });
+
   const form = useForm<SpendingFormDataType>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
@@ -102,7 +110,36 @@ const SpendingFormPage = ({ params }: SpendingFormPageProps) => {
   }
 
   const handleSaveBtn = () => {
-    console.log(form.getValues());
+    const { cost, paidAt, startedMin, startedHour, scheduleName, endMin, endHour, memo } = form.getValues();
+    const paidAtMoment = moment(paidAt);
+
+    const spendingInput: Partial<SpendingInputType> = {
+      smallCategoryPk: params.smallCategoryPk,
+      cost: Number(cost),
+      paidAt: paidAtMoment.toDate(),
+      scheduleName,
+      scheduleStartedAt: moment(paidAtMoment).hour(Number(startedHour)).minute(Number(startedMin)).toDate(),
+      scheduleEndedAt: moment(paidAtMoment).hour(Number(endHour)).minute(Number(endMin)).toDate(),
+      memo,
+    };
+
+    createSpending(spendingInput, {
+      onSuccess() {
+        toast({
+          variant: 'success',
+          title: '지출 항목 생성을 성공했습니다',
+          duration: 1500,
+        });
+        router.back();
+      },
+      onError() {
+        toast({
+          variant: 'alert',
+          title: '지출 항목 생성을 실패했습니다',
+          duration: 1500,
+        });
+      },
+    });
   };
 
   /**
