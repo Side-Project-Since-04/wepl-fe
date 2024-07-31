@@ -1,8 +1,8 @@
 'use client';
 
 import { useSuspenseGetClassifications } from '@/src/features/category/queries';
+import type { ClassificationType } from '@/src/features/category/types';
 import { DetailClassificationItem } from '../DetailClassificationItem';
-import { ClassificationType } from '@/src/features/category/types';
 
 export const DetailClassifications = () => {
   const { data } = useSuspenseGetClassifications();
@@ -10,7 +10,7 @@ export const DetailClassifications = () => {
   return (
     <div className="mt-32">
       {data.content.map((classification: ClassificationType) => (
-        <DetailClassificationItem key={classification.name} classification={classification} />
+        <DetailClassificationItem classification={classification} key={classification.name} />
       ))}
     </div>
   );

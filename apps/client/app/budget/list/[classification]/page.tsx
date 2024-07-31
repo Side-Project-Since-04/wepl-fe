@@ -1,21 +1,22 @@
 'use client';
 
-import { QueryClient, useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useToast } from '@ui/src/Toast';
-import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import React, { useState } from 'react';
 import { SubTitle1 } from '@ui/src/components/Text';
+import { produce } from 'immer';
 import { BudgetClient } from '@/src/shared/apis/budget';
 import BackHeader from '@/src/shared/components/BackHeader';
 import { CLASSIFICATIONS } from '@/src/features/category/constants';
-import { type ClassificationNameType } from '@/src/features/category/types';
+import type { ClassificationType, ClassificationNameType } from '@/src/features/category/types';
 import BudgetHeader from '@/src/widgets/budget/common/BudgetHeader';
 import BudgetInput from '@/src/widgets/budget/input/BudgetInput';
 import { BudgetListDetailDescription } from '@/src/widgets/budget/list-detail/BudgetListDetailDescription';
 import type { BudgetType } from '@/src/features/budget/types';
-import { BudgetKeys } from '@/src/features/budget/queries';
 import { classNames } from '@/src/shared/ui/utils';
-import type { ApiErrorType } from '@/src/features/common/types';
+import type { ApiErrorType, Pageable } from '@/src/features/common/types';
+import { CategoryKeys, useSuspenseGetClassifications } from '@/src/features/category/queries';
 
 interface BudgetListDetailPageProps {
   params: {
@@ -26,18 +27,24 @@ interface BudgetListDetailPageProps {
 const VALID_CLASSIFICATION = CLASSIFICATIONS.map(({ name }) => name);
 
 const BudgetListDetailPage = ({ params }: BudgetListDetailPageProps) => {
-  const [classificationBudget, setClassificationBudget] = useState(0);
-  const { toast } = useToast();
+  const queryClient = useQueryClient();
+  const router = useRouter();
   const searchParams = useSearchParams();
+  const { toast } = useToast();
 
+  const { data: classifications } = useSuspenseGetClassifications();
   const { isPending: isPendingUpdateBudget, mutate: mutateUpdateBudget } = useMutation({
     mutationFn: (budget: BudgetType) => BudgetClient.updateBudget(budget),
   });
 
-  const order = searchParams?.get('order') || '?';
-  const isEnableSave = classificationBudget > 0 && !isPendingUpdateBudget;
   const classificationName = (params.classification.toUpperCase() || '') as ClassificationNameType;
   const isValidClassification = VALID_CLASSIFICATION.includes(classificationName);
+
+  const defaultBudget = classifications.content.filter((value) => value.name === classificationName)[0].budget;
+  const [classificationBudget, setClassificationBudget] = useState(defaultBudget || 0);
+
+  const isEnableSave = classificationBudget > 0 && !isPendingUpdateBudget;
+  const order = searchParams?.get('order') || '?';
 
   const handleSave = (budgetAmount: number) => {
     mutateUpdateBudget(
@@ -52,6 +59,20 @@ const BudgetListDetailPage = ({ params }: BudgetListDetailPageProps) => {
             title: '저장되었습니다',
             duration: 1500,
           });
+
+          /**
+           * 변경된 금액을 서버 State에 반영
+           */
+          queryClient.setQueryData<Pageable<ClassificationType>>(CategoryKeys.getClassifications.queryKey, (prev) => {
+            if (prev) {
+              return produce(prev, (draft) => {
+                const found = draft.content.filter((classification) => classification.name === classificationName);
+                found[0].budget = budgetAmount;
+              });
+            }
+          });
+
+          router.back();
         },
         onError: (error) => {
           const apiError = error as ApiErrorType;
@@ -65,25 +86,6 @@ const BudgetListDetailPage = ({ params }: BudgetListDetailPageProps) => {
       },
     );
   };
-
-  useEffect(() => {
-    const fetchBudget = async () => {
-      const queryClient = new QueryClient();
-
-      try {
-        const budgets = await queryClient.fetchQuery(BudgetKeys.getBudget);
-
-        const budget = budgets.filter((value) => value.classificationName === classificationName)[0].amount;
-        setClassificationBudget(budget);
-      } catch (e) {
-        console.warn(e);
-      }
-    };
-
-    if (isValidClassification) {
-      fetchBudget();
-    }
-  }, [classificationName, isValidClassification]);
 
   if (!isValidClassification) {
     return (
