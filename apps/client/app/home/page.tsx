@@ -12,11 +12,12 @@ import { Button } from '@ui/src/Button';
 
 import { CardSkeleton } from './_Skeleton';
 
+
 const MainPage = () => {
   const LeftHeader = () => {
     return (
-      <Button className="hover:bg-inherit" variant={'ghost'}>
-        <Image src="/main/logo.png" alt="wepl" width={80} height={36} />
+      <Button className="hover:bg-inherit" variant="ghost">
+        <Image alt="wepl" height={36} src="/main/logo.png" width={80} />
       </Button>
     );
   };
@@ -27,7 +28,6 @@ const MainPage = () => {
         <AsyncBoundary SuspenseFallback={<CardSkeleton />}>
           <WeddingEventInfo />
         </AsyncBoundary>
-
         <AsyncBoundary>
           <BudgetOverview />
         </AsyncBoundary>

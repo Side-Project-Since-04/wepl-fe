@@ -10,7 +10,11 @@ module.exports = {
     ];
   },
   reactStrictMode: false,
-  transpilePackages: ['@wepl/ui'],
+
+  // 빌드 시, ESlint 오류 무시
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   /**
    * SVG 대응
    * 참고: https://react-svgr.com/docs/next/

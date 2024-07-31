@@ -1,5 +1,7 @@
-import axios, { AxiosError } from 'axios';
+import type { AxiosError } from 'axios';
+import axios from 'axios';
 import { stringify } from 'qs';
+import type { ApiErrorType } from '@/src/features/common/types';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
@@ -48,12 +50,15 @@ axiosInstance.interceptors.response.use(
           return axiosInstance(originalRequest);
         }
         // 토큰 갱신 실패
-        else {
-          redirectToLogin();
-        }
+
+        redirectToLogin();
       } catch (refreshError) {
         redirectToLogin();
       }
     }
+
+    const ApiError = error.response.data as ApiErrorType;
+
+    throw ApiError;
   },
 );

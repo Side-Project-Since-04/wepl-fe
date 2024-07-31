@@ -4,13 +4,18 @@ import { Card } from '@ui/shadcn-ui/card';
 import { HeadLine5 } from '@ui/src/components/HeadLine';
 import Icon from '@ui/src/Icon';
 import { SubTitle1, TextBody1, TextBody2 } from '@ui/src/components/Text';
-import { DonutProgress } from './common/DonutPorgress';
-import { useSuspenseGetWeddingInfo } from '@/src/features/wedding/queries';
 import Link from 'next/link';
+import { useSuspenseGetWeddingInfo } from '@/src/features/wedding/queries';
+import { DonutProgress } from './common/DonutPorgress';
+import BudgetRegister from './common/BudgetRegister';
 
 const BudgetOverview = () => {
   const { data } = useSuspenseGetWeddingInfo();
   const { spendingPerBudget, totalBudget, totalSpending } = data;
+
+  if (totalBudget === null || spendingPerBudget === null) {
+    return <BudgetRegister />;
+  }
 
   return (
     <div className="mb-32">

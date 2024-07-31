@@ -1,45 +1,53 @@
 'use client';
 
-import { queries } from '@/src/features/common/queries';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useToast } from '@ui/src/Toast';
+import { useRouter, useSearchParams } from 'next/navigation';
+import React, { useState } from 'react';
+import { SubTitle1 } from '@ui/src/components/Text';
+import { produce } from 'immer';
 import { BudgetClient } from '@/src/shared/apis/budget';
 import BackHeader from '@/src/shared/components/BackHeader';
-import { CLASSIFICATION } from '@/src/features/category/constants';
-import { type ClassificationName } from '@/src/features/category/types';
+import { CLASSIFICATIONS } from '@/src/features/category/constants';
+import type { ClassificationType, ClassificationNameType } from '@/src/features/category/types';
 import BudgetHeader from '@/src/widgets/budget/common/BudgetHeader';
 import BudgetInput from '@/src/widgets/budget/input/BudgetInput';
-import BudgetListDetailDescription from '@/src/widgets/budget/list-detail/BudgetListDetailDescription';
-import { QueryClient, useMutation } from '@tanstack/react-query';
-import { useToast } from '@ui/src/Toast';
-import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
-import { Budget } from '@/src/features/budget/types';
-import PageLayout from '@/src/pages/PageLayout';
+import { BudgetListDetailDescription } from '@/src/widgets/budget/list-detail/BudgetListDetailDescription';
+import type { BudgetType } from '@/src/features/budget/types';
+import { classNames } from '@/src/shared/ui/utils';
+import type { ApiErrorType, Pageable } from '@/src/features/common/types';
+import { CategoryKeys, useSuspenseGetClassifications } from '@/src/features/category/queries';
 
-interface BudgetListDetailPage {
+interface BudgetListDetailPageProps {
   params: {
-    classification: Lowercase<ClassificationName>;
+    classification: Lowercase<ClassificationNameType>;
   };
 }
 
-const VALID_CLASSIFICATION = CLASSIFICATION.map(({ name }) => name);
+const VALID_CLASSIFICATION = CLASSIFICATIONS.map(({ name }) => name);
 
-export default function BudgetListDetailPage({ params }: BudgetListDetailPage) {
-  const [budget, setBudget] = useState(0);
-  const { toast } = useToast();
+const BudgetListDetailPage = ({ params }: BudgetListDetailPageProps) => {
+  const queryClient = useQueryClient();
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const order = searchParams?.get('order') || '?';
+  const { toast } = useToast();
 
-  const isEnableSave = budget > 0;
-  const classificationName = (params.classification?.toUpperCase() || '') as ClassificationName;
-  const isValidClassification = VALID_CLASSIFICATION.includes(classificationName);
-
-  const { mutate: mutateForUpdateBudget } = useMutation({
-    mutationKey: [queries.wedding.updateTotalBudget],
-    mutationFn: (budget: Budget) => BudgetClient.updateBudget(budget),
+  const { data: classifications } = useSuspenseGetClassifications();
+  const { isPending: isPendingUpdateBudget, mutate: mutateUpdateBudget } = useMutation({
+    mutationFn: (budget: BudgetType) => BudgetClient.updateBudget(budget),
   });
 
-  const handleSave = async (budgetAmount: number) => {
-    await mutateForUpdateBudget(
+  const classificationName = (params.classification.toUpperCase() || '') as ClassificationNameType;
+  const isValidClassification = VALID_CLASSIFICATION.includes(classificationName);
+
+  const defaultBudget = classifications.content.filter((value) => value.name === classificationName)[0].budget;
+  const [classificationBudget, setClassificationBudget] = useState(defaultBudget || 0);
+
+  const isEnableSave = classificationBudget > 0 && !isPendingUpdateBudget;
+  const order = searchParams?.get('order') || '?';
+
+  const handleSave = (budgetAmount: number) => {
+    mutateUpdateBudget(
       {
         classificationName,
         amount: budgetAmount,
@@ -51,11 +59,27 @@ export default function BudgetListDetailPage({ params }: BudgetListDetailPage) {
             title: '저장되었습니다',
             duration: 1500,
           });
+
+          /**
+           * 변경된 금액을 서버 State에 반영
+           */
+          queryClient.setQueryData<Pageable<ClassificationType>>(CategoryKeys.getClassifications.queryKey, (prev) => {
+            if (prev) {
+              return produce(prev, (draft) => {
+                const found = draft.content.filter((classification) => classification.name === classificationName);
+                found[0].budget = budgetAmount;
+              });
+            }
+          });
+
+          router.back();
         },
-        onError: () => {
+        onError: (error) => {
+          const apiError = error as ApiErrorType;
+
           toast({
             variant: 'alert',
-            title: '오류가 발생했습니다',
+            title: apiError.message,
             duration: 1500,
           });
         },
@@ -63,46 +87,38 @@ export default function BudgetListDetailPage({ params }: BudgetListDetailPage) {
     );
   };
 
-  useEffect(() => {
-    const fetchBudget = async () => {
-      const queryClient = new QueryClient();
-
-      try {
-        const budgets = await queryClient.fetchQuery(queries.budget.getBudget());
-
-        const budget = budgets.filter((value) => value.classificationName === classificationName)[0].amount;
-        setBudget(budget);
-      } catch (e) {
-        console.warn(e);
-      }
-    };
-
-    if (isValidClassification) {
-      fetchBudget();
-    }
-  }, [classificationName, isValidClassification]);
-
   if (!isValidClassification) {
     return (
-      <PageLayout isPadding>
+      <main>
         <BackHeader />
-        <div>올바르지 않은 대분류 항목입니다.</div>
-      </PageLayout>
+        <section className={classNames.pagePadding}>
+          <SubTitle1>잘못된 접근입니다.</SubTitle1>
+        </section>
+      </main>
     );
   }
 
   return (
-    <PageLayout isPadding>
-      <BudgetHeader isEnableSave={isEnableSave} onSave={() => handleSave(budget)} />
-      <section className="py-16">
-        <BudgetListDetailDescription
-          classification={params.classification.toUpperCase() as ClassificationName}
-          order={order}
-        />
+    <main>
+      <BudgetHeader
+        isEnableSave={isEnableSave}
+        onSave={() => {
+          handleSave(classificationBudget);
+        }}
+      />
+      <section className={classNames.pagePadding}>
+        <section className="py-16">
+          <BudgetListDetailDescription
+            classification={params.classification.toUpperCase() as ClassificationNameType}
+            order={order}
+          />
+        </section>
+        <section>
+          <BudgetInput budget={classificationBudget} onChange={setClassificationBudget} />
+        </section>
       </section>
-      <section>
-        <BudgetInput budget={budget} onChange={setBudget} />
-      </section>
-    </PageLayout>
+    </main>
   );
-}
+};
+
+export default BudgetListDetailPage;

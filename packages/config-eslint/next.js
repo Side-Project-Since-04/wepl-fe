@@ -19,7 +19,6 @@ module.exports = {
     '@vercel/style-guide/eslint/react',
     '@vercel/style-guide/eslint/next',
     'eslint-config-turbo',
-    'next',
   ].map(require.resolve),
   parserOptions: {
     project,
@@ -39,12 +38,5 @@ module.exports = {
     },
   },
   ignorePatterns: ['node_modules/', 'dist/'],
-  // add rules configurations here
-  rules: {
-    'import/no-default-export': 'off',
-    'import/no-extraneous-dependencies': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-    'unicorn/filename-case': 'off',
-  },
+  rules: {},
 };

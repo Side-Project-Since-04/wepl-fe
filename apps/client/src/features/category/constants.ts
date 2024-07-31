@@ -10,30 +10,53 @@ export const PRESENT = 'PRESENT';
 export const FURNITURE = 'FURNITURE';
 export const HONEYMOON = 'HONEYMOON';
 
+export const CLASSIFICATION_NAME_GUIDES = {
+  WEDDING: '웨딩',
+  PRESENT: '예물',
+  FURNITURE: '혼수',
+  HONEYMOON: '신혼여행',
+} as const;
+
 /**
  * 대분류의 타입과 이름을 배열로 정의
  *
  * 백엔드의 데이터 형식과 통일
  */
-export const CLASSIFICATION = [
+export const CLASSIFICATIONS = [
   {
     id: 1,
-    name: WEDDING,
+    name: 'WEDDING',
     guide: '웨딩',
+    budget: 0,
+    paidSpending: 0,
+    notPaidSpending: 0,
+    middleCategories: [],
   },
   {
     id: 2,
-    name: PRESENT,
+    name: 'PRESENT',
     guide: '예물',
+    budget: 0,
+    paidSpending: 0,
+    notPaidSpending: 0,
+    middleCategories: [],
   },
   {
     id: 3,
-    name: FURNITURE,
+    name: 'FURNITURE',
     guide: '혼수',
+    budget: 0,
+    paidSpending: 0,
+    notPaidSpending: 0,
+    middleCategories: [],
   },
   {
     id: 4,
-    name: HONEYMOON,
+    name: 'HONEYMOON',
     guide: '신혼여행',
+    budget: 0,
+    paidSpending: 0,
+    notPaidSpending: 0,
+    middleCategories: [],
   },
 ] as const;

@@ -1,9 +1,8 @@
-import { WeddingClient } from '@/src/shared/apis/wedding';
-
-import { WeddingInfoType } from '@fsd/features/wedding/types';
 import { createQueryKeys } from '@lukemorales/query-key-factory';
 import { useMutation, useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { useToast } from '@ui/src/Toast';
+import type { WeddingInfoType } from '@fsd/features/wedding/types';
+import { WeddingClient } from '@/src/shared/apis/wedding';
 
 export const WeddingKeys = createQueryKeys('wedding', {
   getWeddingInfo: {
@@ -17,10 +16,6 @@ export const WeddingKeys = createQueryKeys('wedding', {
   update: (formData: WeddingInfoType) => ({
     queryKey: [{ formData }],
     queryFn: () => WeddingClient.update,
-  }),
-  updateTotalBudget: () => ({
-    queryKey: ['updateTotalBudget'],
-    queryFn: (budget: number) => WeddingClient.updateTotalBudget(budget),
   }),
 });
 
