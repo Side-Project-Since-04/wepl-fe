@@ -1,6 +1,5 @@
 'use client';
 
-import { useSpendingStore } from '@/src/features/spending/store';
 import { cn } from '@ui/lib/utils';
 import WeplBadge from '@ui/src/Badge';
 import BottomSheet from '@ui/src/BottomSheet';
@@ -11,8 +10,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-
-interface SmallCategoryCardProps {}
+import { useSpendingStore } from '@/src/features/spending/store';
+import type { SpendingType } from '@/src/features/spending/types';
 
 const tmp = {
   smallCategoryPk: 'string',
@@ -27,7 +26,11 @@ const tmp = {
   memo: 'string',
 };
 
-const SmallCategoryCard = () => {
+interface SmallCategoryDetailSpendingProps {
+  spending: SpendingType;
+}
+
+export const SmallCategoryDetailSpending = ({ spending }: SmallCategoryDetailSpendingProps) => {
   const pathname = usePathname();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
 
@@ -59,29 +62,29 @@ const SmallCategoryCard = () => {
       </div>
       {/* 리스트 */}
       <div className="mt-16 border-t-[1px] border-b-[1px] border-gray-100">
-        <SmallCategoryCardItem
+        <SmallCategoryDetailSpendingItem
           isBorder
           itemName="일정명"
           itemValue="웨딩홀 계약금 이체"
           itemValueColor="text-auxiliary-blue"
         />
-        <SmallCategoryCardItem itemName="지출액" itemValue={Number(3000000).toLocaleString() + '원'} />
+        <SmallCategoryDetailSpendingItem itemName="지출액" itemValue={`${Number(3000000).toLocaleString()}원`} />
       </div>
       {/* Checks */}
       <div className="mt-16">
         <div className="flex items-center gap-4 cursor-pointer">
           {false ? (
-            <Image src="/spending/checkbox-on-24.png" alt="check-on" width={24} height={24} />
+            <Image alt="check-on" height={24} src="/spending/checkbox-on-24.png" width={24} />
           ) : (
-            <Image src="/spending/checkbox-off-24.png" alt="check-off" width={24} height={24} />
+            <Image alt="check-off" height={24} src="/spending/checkbox-off-24.png" width={24} />
           )}
           <TextBody2 className="text-gray-600">일정 등록하기</TextBody2>
         </div>
         <div className="mt-4 flex items-center gap-4 cursor-pointer">
           {true ? (
-            <Image src="/spending/checkbox-on-24.png" alt="check-on" width={24} height={24} />
+            <Image alt="check-on" height={24} src="/spending/checkbox-on-24.png" width={24} />
           ) : (
-            <Image src="/spending/checkbox-off-24.png" alt="check-off" width={24} height={24} />
+            <Image alt="check-off" height={24} src="/spending/checkbox-off-24.png" width={24} />
           )}
           <TextBody2 className="text-gray-600">지출 완료하기</TextBody2>
         </div>
@@ -90,8 +93,6 @@ const SmallCategoryCard = () => {
       {/* 바텀 시트 */}
       <BottomSheet
         isOpen={openBottomSheet}
-        title="1차 지출 정보"
-        onClose={() => setOpenBottomSheet(false)}
         menus={
           <div className="px-24">
             <SubTitle2 className="py-16 text-gray-700 cursor-pointer">일정등록</SubTitle2>
@@ -102,14 +103,16 @@ const SmallCategoryCard = () => {
             <SubTitle2 className="py-16 text-gray-700 cursor-pointer">지출 삭제</SubTitle2>
           </div>
         }
+        onClose={() => {
+          setOpenBottomSheet(false);
+        }}
+        title="1차 지출 정보"
       />
     </div>
   );
 };
 
-export default SmallCategoryCard;
-
-const SmallCategoryCardItem = ({
+const SmallCategoryDetailSpendingItem = ({
   isBorder,
   className,
   itemName,
@@ -126,7 +129,7 @@ const SmallCategoryCardItem = ({
     <div
       className={cn('flex items-center py-12', { 'border-b-[1px] border-dashed border-gray-100': isBorder }, className)}
     >
-      <TextBody2 className={'basis-56 text-gray-500'}>{itemName}</TextBody2>
+      <TextBody2 className="basis-56 text-gray-500">{itemName}</TextBody2>
       <SubTitle3 className={cn('text-gray-700', itemValueColor)}>{itemValue}</SubTitle3>
     </div>
   );
