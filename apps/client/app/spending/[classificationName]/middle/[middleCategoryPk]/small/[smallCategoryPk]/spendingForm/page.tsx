@@ -1,14 +1,11 @@
 'use client';
 import React from 'react';
-import Link from 'next/link';
 
 import Header from '@ui/src/components/Header';
 import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
-import { useMutation } from '@tanstack/react-query';
-import { toast } from '@ui/src/Toast';
 import PageLayout from '@/src/pages/PageLayout';
 import SpendingForm from '@/src/widgets/spending/SpendingForm';
 
@@ -23,7 +20,6 @@ const CreateSmallCategorySpendingPage = ({
   const { form, handleSubmit } = useCreateSpendingForm(params.smallCategoryPk);
   const initValue = useInitValue();
   const router = useRouter();
-
   const CenterHeader = useCallback(() => {
     return <h1 className="text-2xl font-bold text-center">지출액 추가</h1>;
   }, []);

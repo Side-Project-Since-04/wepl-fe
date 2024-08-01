@@ -17,6 +17,7 @@ const MainPage = () => {
       </Button>
     );
   };
+
   return (
     <>
       <Header left={<LeftHeader />} />

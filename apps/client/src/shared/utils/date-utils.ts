@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 export function extractTimeFromISOString(isoString: string) {
   try {
     const date = new Date(isoString);
@@ -16,6 +18,6 @@ export function extractTimeFromISOString(isoString: string) {
   }
 }
 
-export const formatTime = (date: string, hour: string, min: string) => {
-  return `${date}T${hour}:${min}:00.000Z`;
+export const formatTime = (date: string, hour: number, min: number) => {
+  return dayjs(date).set('hour', Number(hour)).set('minute', Number(min)).format('YYYY-MM-DD HH:mm');
 };

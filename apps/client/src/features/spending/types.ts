@@ -9,7 +9,8 @@ export type SpendingDataType = {
   cost: number;
   paidAt: string;
   scheduleName: string;
-  scheduleStartedAt?: number;
-  scheduleEndedAt?: number;
+  scheduleStartedAt?: string;
+  scheduleEndedAt?: string;
   memo?: string;
+  order?: number; // 나중에 삭제 시킬 예정
 };

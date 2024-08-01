@@ -1,14 +1,14 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory';
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
-import { CategoryClient } from '@/src/shared/apis/category';
 import type { ClassificationNameType } from './types';
+import { CategoryClient } from '@/src/shared/apis/category';
 
 export const CategoryKeys = createQueryKeys('category', {
   getClassifications: {
     queryKey: null,
     queryFn: () => CategoryClient.getClassifications(),
   },
-  getDetailClassification: (classification) => ({
+  getDetailClassification: (classification: string) => ({
     queryKey: [{ classification }, 'detail'] as const,
     queryFn: () => CategoryClient.getDetailClassification(classification),
   }),

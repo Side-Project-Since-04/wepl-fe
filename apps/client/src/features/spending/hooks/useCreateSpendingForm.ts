@@ -4,6 +4,10 @@ import { useForm } from 'react-hook-form';
 import { formatTime } from '@/src/shared/utils/date-utils';
 import { useToast } from '@ui/src/Toast';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useCreateSpending } from '../queries';
+import { SpendingDataType } from '../types';
+import { useRouter } from 'next/navigation';
+import dayjs from 'dayjs';
 
 const timeSchema = z.union([z.number().int().min(0).max(23), z.null(), z.undefined()]);
 
@@ -33,48 +37,55 @@ export const useCreateSpendingForm = (smallCategoryPk: string) => {
       memo: '',
     },
   });
+  const router = useRouter();
 
+  const { mutate } = useCreateSpending(router);
   const { toast } = useToast();
 
   const handleSubmit = (data: SpendingFormDataType) => {
-    const paidAt = format(data.paidAt, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
-    const formattedDate = format(data.paidAt, 'yyyy-MM-dd');
+    const paidAt = dayjs(data.paidAt).format('YYYY-MM-DD HH:mm');
+    const formattedDate = dayjs(data.paidAt).format('YYYY-MM-DD');
 
     let scheduleStartedAt: string | undefined;
     let scheduleEndedAt: string | undefined;
 
     if (data.startedHour && data.startedMin) {
-      const startHour = data.startedHour.toString().padStart(2, '0');
-      const startMin = data.startedMin.toString().padStart(2, '0');
-      scheduleStartedAt = formatTime(formattedDate, startHour, startMin);
+      scheduleStartedAt = formatTime(formattedDate, data.startedHour, data.startedMin);
     }
 
     if (data.endHour && data.endMin) {
-      const endHour = data.endHour.toString().padStart(2, '0');
-      const endMin = data.endMin.toString().padStart(2, '0');
-      scheduleEndedAt = formatTime(formattedDate, endHour, endMin);
+      scheduleEndedAt = formatTime(formattedDate, data.endHour, data.endMin);
     }
 
     if (scheduleEndedAt && !scheduleStartedAt) {
       toast({
         variant: 'alert',
-        title: '저장을 실패했습니다',
-        duration: 1500,
+        title: '종료 시간만 넣을 순 없어요 😀',
+        duration: 2000,
       });
       return;
     }
 
-    const submitData = {
+    const submitData: SpendingDataType = {
       smallCategoryPk: smallCategoryPk,
-      cost: data.cost ? data.cost : 0,
+      cost: data.cost ? parseInt(data.cost.replace(/,/g, '').replace('원', '')) : 0,
       scheduleName: data.scheduleName,
       paidAt,
-      ...(scheduleStartedAt && { scheduleStartedAt }),
-      ...(scheduleEndedAt && { scheduleEndedAt }),
-      ...(data.memo && { memo: data.memo }),
+      memo: data.memo,
+      order: 1,
     };
 
-    console.log(submitData);
+    if (scheduleStartedAt) {
+      submitData['scheduleStartedAt'] = scheduleStartedAt;
+    }
+    if (scheduleEndedAt) {
+      submitData['scheduleEndedAt'] = scheduleEndedAt;
+    }
+    if (data.memo) {
+      submitData['memo'] = data.memo;
+    }
+
+    mutate(submitData);
   };
 
   return {

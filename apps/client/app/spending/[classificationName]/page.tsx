@@ -8,11 +8,11 @@ import { useSuspenseGetDetailClassifications } from '@/src/features/category/que
 import Header from '@ui/src/components/Header';
 import Icon from '@ui/src/Icon';
 import Link from 'next/link';
-const ExpenseDetailPage = ({ params }: { params: { classification: string } }) => {
+const ExpenseDetailPage = ({ params }: { params: { classificationName: string } }) => {
   // 파라미터를 한글 카테고리명으로 변환
-  const categoryName = WEDDING_MAIN_CATEGORIES[params.classification as keyof typeof WEDDING_MAIN_CATEGORIES] || null;
-
-  const { data } = useSuspenseGetDetailClassifications(params.classification);
+  const categoryName =
+    WEDDING_MAIN_CATEGORIES[params.classificationName as keyof typeof WEDDING_MAIN_CATEGORIES] || null;
+  const { data } = useSuspenseGetDetailClassifications(params.classificationName);
   const LeftHeader = () => {
     return (
       <Link className="pl-12" href="/spending">
@@ -30,7 +30,7 @@ const ExpenseDetailPage = ({ params }: { params: { classification: string } }) =
         paidSpending={data.paidSpending}
         notPaidSpending={data.notPaidSpending}
       />
-      <CategoryTabs classification={params.classification} middleCategory={data.middleCategories} />
+      <CategoryTabs classification={params.classificationName} middleCategory={data.middleCategories} />
     </div>
   );
 };
