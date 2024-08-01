@@ -37,7 +37,7 @@ const SpendingListHeader = ({ classification, count }: { classification: string;
 
   const RightHeader = () => {
     return (
-      <Link href={`/spending/${classification}/edit`} className="text-auxiliary-blue">
+      <Link href={`/spending/${classification}/middleCategories`} className="text-auxiliary-blue">
         <SubTitle1 className="text-auxiliary-blue">편집하기</SubTitle1>
       </Link>
     );

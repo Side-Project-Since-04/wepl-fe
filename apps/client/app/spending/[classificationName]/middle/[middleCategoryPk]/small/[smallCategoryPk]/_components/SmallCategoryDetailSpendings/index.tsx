@@ -16,8 +16,6 @@ export const SmallCategoryDetailSpendings = ({ params }: SmallCategoryDetailCard
     params.smallCategoryPk,
   );
 
-  if (!smallCategoryDetail.spendingList) return null;
-
   return (
     <ul>
       {smallCategoryDetail.spendingList.map((spending) => (

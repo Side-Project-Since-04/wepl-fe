@@ -19,36 +19,22 @@ interface MiddleCategoriesPageProps {
 const MiddleCategoriesPage = ({ params }: MiddleCategoriesPageProps) => {
   const { data: classification, isFetching } = useGetDetailClassification(params.classificationName);
 
-  // const LeftHeader = () => {
-  //   return (
-  //     <Link className="p-0" href={`/spending/middle/${params.classification}`}>
-  //       <Icon name="arrow-left" size={24} />
-  //     </Link>
-  //   );
-  // };
-
-  if (isFetching) {
-    return (
-      <main>
-        <BackHeader title="카테고리 편집" />
-        <Skeleton className="h-[400px]" />
-      </main>
-    );
-  }
-
   return (
     <main>
-      {/* <Header center="카테고리 편집11" className="px-20 border-b-2 border-gray-50" left={<LeftHeader />} /> */}
       <BackHeader title="카테고리 편집" />
       <div className="px-20 mt-5">
-        {classification?.middleCategories.map(({ pk, name }) => (
-          <Link href={`/spending/${params.classificationName}/middle/${pk}/categoryEdit`} key={pk}>
-            <div className="flex justify-between py-12">
-              <SubTitle1>{name}</SubTitle1>
-              <Icon name="arrow-right" size={16} />
-            </div>
-          </Link>
-        ))}
+        {isFetching ? (
+          <Skeleton className="h-[400px]" />
+        ) : (
+          classification?.middleCategories.map(({ pk, name }) => (
+            <Link href={`/spending/${params.classificationName}/middle/${pk}/categoryEdit`} key={pk}>
+              <div className="flex justify-between py-12">
+                <SubTitle1>{name}</SubTitle1>
+                <Icon name="arrow-right" size={16} />
+              </div>
+            </Link>
+          ))
+        )}
       </div>
 
       <div className="p-20">
