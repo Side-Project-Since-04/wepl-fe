@@ -1,19 +1,20 @@
-import { SpendingClient } from '@/src/shared/apis/spending';
 import { useMutation } from '@tanstack/react-query';
 import { useToast } from '@ui/src/Toast';
-import { SpendingDataType } from './types';
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import { useRouter } from 'next/navigation';
+import { SpendingClient } from '@/src/shared/apis/spending';
+import type { SpendingDataType } from './types';
 
-export const useCreateSpending = (router: AppRouterInstance) => {
+export const useCreateSpending = () => {
   const { toast } = useToast();
+  const router = useRouter();
 
   return useMutation({
     mutationFn: (spendingData: Partial<SpendingDataType>) => SpendingClient.createSpending(spendingData),
-    onSuccess: (res) => {
+    onSuccess: () => {
       toast({ variant: 'success', title: '완료!', duration: 1500 });
       router.back();
     },
-    onError: (error) => {
+    onError: () => {
       toast({
         variant: 'alert',
         title: '실패!',

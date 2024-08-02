@@ -14,6 +14,7 @@ module.exports = {
     '@typescript-eslint/consistent-type-definitions': 'off',
     'unicorn/filename-case': 'off',
     'react/function-component-definition': [
+      2,
       {
         namedComponents: 'arrow-function',
       },

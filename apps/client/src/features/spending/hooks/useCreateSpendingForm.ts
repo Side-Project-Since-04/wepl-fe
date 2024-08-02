@@ -1,13 +1,11 @@
 import { z } from 'zod';
-import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
-import { formatTime } from '@/src/shared/utils/date-utils';
 import { useToast } from '@ui/src/Toast';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useCreateSpending } from '../queries';
-import { SpendingDataType } from '../types';
-import { useRouter } from 'next/navigation';
 import dayjs from 'dayjs';
+import { formatTime } from '@/src/shared/utils/date-utils';
+import type { SpendingDataType } from '../types';
+import { useCreateSpending } from '../queries';
 
 const timeSchema = z.union([z.number().int().min(0).max(23), z.null(), z.undefined()]);
 
@@ -37,9 +35,8 @@ export const useCreateSpendingForm = (smallCategoryPk: string) => {
       memo: '',
     },
   });
-  const router = useRouter();
 
-  const { mutate } = useCreateSpending(router);
+  const { mutate } = useCreateSpending();
   const { toast } = useToast();
 
   const handleSubmit = (data: SpendingFormDataType) => {
@@ -67,7 +64,7 @@ export const useCreateSpendingForm = (smallCategoryPk: string) => {
     }
 
     const submitData: SpendingDataType = {
-      smallCategoryPk: smallCategoryPk,
+      smallCategoryPk,
       cost: data.cost ? parseInt(data.cost.replace(/,/g, '').replace('원', '')) : 0,
       scheduleName: data.scheduleName,
       paidAt,
@@ -76,16 +73,17 @@ export const useCreateSpendingForm = (smallCategoryPk: string) => {
     };
 
     if (scheduleStartedAt) {
-      submitData['scheduleStartedAt'] = scheduleStartedAt;
+      submitData.scheduleStartedAt = scheduleStartedAt;
     }
     if (scheduleEndedAt) {
-      submitData['scheduleEndedAt'] = scheduleEndedAt;
+      submitData.scheduleEndedAt = scheduleEndedAt;
     }
     if (data.memo) {
-      submitData['memo'] = data.memo;
+      submitData.memo = data.memo;
     }
 
     mutate(submitData);
+    
   };
 
   return {

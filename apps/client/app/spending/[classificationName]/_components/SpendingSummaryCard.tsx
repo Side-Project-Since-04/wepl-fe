@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { SubTitle1 } from '@ui/src/components/Text';
 import WeplBadge from '@ui/src/Badge';
-import { useSuspenseGetDetailClassifications } from '@/src/features/category/queries';
+import { useSuspenseGetDetailClassification } from '@/src/features/category/queries';
 
 interface SpendingSummaryCardProps {
   name: string;

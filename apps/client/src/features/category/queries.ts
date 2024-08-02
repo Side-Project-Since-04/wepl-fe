@@ -1,7 +1,7 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory';
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
-import type { ClassificationNameType } from './types';
 import { CategoryClient } from '@/src/shared/apis/category';
+import type { ClassificationNameType } from './types';
 
 export const CategoryKeys = createQueryKeys('category', {
   getClassifications: {
@@ -22,7 +22,7 @@ export const useSuspenseGetClassifications = () => {
   return useSuspenseQuery({ ...CategoryKeys.getClassifications });
 };
 
-export const useSuspenseGetDetailClassifications = (classification: string) => {
+export const useSuspenseGetDetailClassification = (classification: string) => {
   return useSuspenseQuery({ ...CategoryKeys.getDetailClassification(classification) });
 };
 
