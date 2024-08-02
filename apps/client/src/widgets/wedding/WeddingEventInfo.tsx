@@ -13,15 +13,18 @@ import MarriedCouple from '@/public/home/Married-Couple.png';
 import { useSuspenseGetWeddingInfo } from '@/src/features/wedding/queries';
 import { type WeddingBudgetInfoType, type WeddingInfoType } from '@/src/features/wedding/types';
 import { calculateDaysUntilWedding, formatWeddingDateInfo } from '@/src/shared/utils/utils';
+import { useSuspenseGetMember } from '@/src/features/member/queries';
 
 interface WeddingInfoCardProps extends WeddingInfoType, WeddingBudgetInfoType {}
 
 const WeddingEventInfo = () => {
-  const { data } = useSuspenseGetWeddingInfo();
+  const { data: weddingInfo } = useSuspenseGetWeddingInfo();
+  const { data: member } = useSuspenseGetMember();
+
   return (
     <div className="w-screen max-w-[768px] flex flex-col items-center h-[404px] bg-primary-400 gap-24 text-primary-25 p-32 mb-60">
-      <WeddingEventInfo.Header name="$홍길동$" />
-      <WeddingEventInfo.Card {...data} />
+      <WeddingEventInfo.Header name={member.nickname} />
+      <WeddingEventInfo.Card {...weddingInfo} />
     </div>
   );
 };

@@ -11,20 +11,12 @@ import { CardSkeleton } from './_components/CardSkeleton';
 const LeftHeader = () => {
   return (
     <Button className="hover:bg-inherit" variant="ghost">
-      <Image alt="wepl" height={36} src="/main/logo.png" width={80} />
+      <Image alt="wepl" height={36} src="/main/Logo.png" width={80} />
     </Button>
   );
 };
 
 const MainPage = () => {
-  const LeftHeader = () => {
-    return (
-      <Button className="hover:bg-inherit" variant="ghost">
-        <Image alt="wepl" height={36} src="/main/logo.png" width={80} />
-      </Button>
-    );
-  };
-
   return (
     <>
       <Header left={<LeftHeader />} />
