@@ -8,7 +8,7 @@ import React from 'react';
 import { Skeleton } from '@ui/src/Skeleton';
 import BackHeader from '@/src/shared/components/BackHeader';
 import type { ClassificationNameType } from '@/src/features/category/types';
-import { useGetClassification } from '@/src/features/category/queries';
+import { useGetDetailClassification } from '@/src/features/category/queries';
 
 interface MiddleCategoriesPageProps {
   params: {
@@ -17,38 +17,24 @@ interface MiddleCategoriesPageProps {
 }
 
 const MiddleCategoriesPage = ({ params }: MiddleCategoriesPageProps) => {
-  const { data: classification, isFetching } = useGetClassification(params.classificationName);
-
-  // const LeftHeader = () => {
-  //   return (
-  //     <Link className="p-0" href={`/spending/middle/${params.classification}`}>
-  //       <Icon name="arrow-left" size={24} />
-  //     </Link>
-  //   );
-  // };
-
-  if (isFetching) {
-    return (
-      <main>
-        <BackHeader title="카테고리 편집" />
-        <Skeleton className="h-[400px]" />
-      </main>
-    );
-  }
+  const { data: classification, isFetching } = useGetDetailClassification(params.classificationName);
 
   return (
     <main>
-      {/* <Header center="카테고리 편집11" className="px-20 border-b-2 border-gray-50" left={<LeftHeader />} /> */}
       <BackHeader title="카테고리 편집" />
       <div className="px-20 mt-5">
-        {classification?.middleCategories.map(({ pk, name }) => (
-          <Link href={`/spending/${params.classificationName}/middle/${pk}/categoryEdit`} key={pk}>
-            <div className="flex justify-between py-12">
-              <SubTitle1>{name}</SubTitle1>
-              <Icon name="arrow-right" size={16} />
-            </div>
-          </Link>
-        ))}
+        {isFetching ? (
+          <Skeleton className="h-[400px]" />
+        ) : (
+          classification?.middleCategories.map(({ pk, name }) => (
+            <Link href={`/spending/${params.classificationName}/middle/${pk}/categoryEdit`} key={pk}>
+              <div className="flex justify-between py-12">
+                <SubTitle1>{name}</SubTitle1>
+                <Icon name="arrow-right" size={16} />
+              </div>
+            </Link>
+          ))
+        )}
       </div>
 
       <div className="p-20">

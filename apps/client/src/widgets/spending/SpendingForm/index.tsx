@@ -6,7 +6,8 @@ import InputFormItem from '@ui/src/components/Form/InputFormItem';
 import DatePickerFormItem from '@ui/src/components/Form/DatePickFormItem';
 import MoneyInputFormItem from '@ui/src/components/Form/MoneyFormItem';
 import TimeInputFormItem from '@ui/src/components/Form/TimeInputFormItem';
-import { type SpendingFormDataType } from '@/app/spending/[classificationName]/middle/[middleCategoryPk]/small/[smallCategoryPk]/spendingForm/page';
+import { SpendingFormDataType } from '@/src/features/spending/hooks/useCreateSpendingForm';
+import { SpendingDataType } from '@/src/features/spending/types';
 
 type SpendingFormProps = {
   form: UseFormReturn<SpendingFormDataType>;

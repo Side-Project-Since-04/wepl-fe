@@ -8,9 +8,9 @@ export const CategoryKeys = createQueryKeys('category', {
     queryKey: null,
     queryFn: () => CategoryClient.getClassifications(),
   },
-  getClassification: (classificationName: ClassificationNameType | Lowercase<ClassificationNameType>) => ({
-    queryKey: [classificationName],
-    queryFn: () => CategoryClient.getClassification(classificationName),
+  getDetailClassification: (classification: string) => ({
+    queryKey: [{ classification }, 'detail'] as const,
+    queryFn: () => CategoryClient.getDetailClassification(classification),
   }),
   getSmallCategoryDetail: (middleCategoryPk: string, smallCategoryPk: string) => ({
     queryKey: [middleCategoryPk, smallCategoryPk],
@@ -22,16 +22,14 @@ export const useSuspenseGetClassifications = () => {
   return useSuspenseQuery({ ...CategoryKeys.getClassifications });
 };
 
-export const useSuspenseGetClassification = (
-  classificationName: ClassificationNameType | Lowercase<ClassificationNameType>,
-) => {
-  return useSuspenseQuery(CategoryKeys.getClassification(classificationName));
+export const useSuspenseGetDetailClassification = (classification: string) => {
+  return useSuspenseQuery({ ...CategoryKeys.getDetailClassification(classification) });
 };
 
-export const useGetClassification = (
+export const useGetDetailClassification = (
   classificationName: ClassificationNameType | Lowercase<ClassificationNameType>,
 ) => {
-  return useQuery(CategoryKeys.getClassification(classificationName));
+  return useQuery(CategoryKeys.getDetailClassification(classificationName));
 };
 
 export const useSuspenseGetSmallCategoryDetail = (middleCategoryPk: string, smallCategoryPk: string) => {

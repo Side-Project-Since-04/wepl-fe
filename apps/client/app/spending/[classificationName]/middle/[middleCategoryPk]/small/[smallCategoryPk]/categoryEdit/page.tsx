@@ -8,10 +8,10 @@ import { useToast } from '@ui/src/Toast';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { SpendingHeader } from '@/src/widgets/spending/common/SpendingHeader';
 import type { ClassificationNameType } from '@/src/features/category/types';
 import { useGetSmallCategoryDetail } from '@/src/features/category/queries';
 import { CategoryClient } from '@/src/shared/apis/category';
+import { SpendingHeader } from '@/src/widgets/spending/SpendingHeader';
 
 interface SmallCategoryEditPageProps {
   params: {

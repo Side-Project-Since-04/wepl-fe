@@ -17,6 +17,14 @@ const LeftHeader = () => {
 };
 
 const MainPage = () => {
+  const LeftHeader = () => {
+    return (
+      <Button className="hover:bg-inherit" variant="ghost">
+        <Image alt="wepl" height={36} src="/main/logo.png" width={80} />
+      </Button>
+    );
+  };
+
   return (
     <>
       <Header left={<LeftHeader />} />

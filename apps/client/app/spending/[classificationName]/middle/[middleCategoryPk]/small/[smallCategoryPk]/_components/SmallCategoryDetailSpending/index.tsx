@@ -11,23 +11,24 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { useSpendingStore } from '@/src/features/spending/store';
-import type { SpendingType } from '@/src/features/spending/types';
+import { SpendingDataType } from '@/src/features/spending/types';
 
 const tmp = {
   smallCategoryPk: 'string',
-  cost: '0',
+  cost: 3000000,
   order: 0,
   isScheduled: true,
   isPaid: true,
   scheduleName: 'string',
-  scheduleStartedAt: '09:34',
-  scheduleEndedAt: '09:34',
-  paidAt: '2024-07-25' as any, // 임시 처리
+  scheduleStartedAt: '2024-07-31T14:40:32.373Z',
+  scheduleEndedAt: '2024-07-31T18:40:32.373Z',
+  paidAt: '2024-07-31T06:40:32.373Z',
+  expectedPaidAt: '2024-07-31T06:40:32.373Z',
   memo: 'string',
 };
 
 interface SmallCategoryDetailSpendingProps {
-  spending: SpendingType;
+  spending: SpendingDataType;
 }
 
 export const SmallCategoryDetailSpending = ({ spending }: SmallCategoryDetailSpendingProps) => {
@@ -43,7 +44,6 @@ export const SmallCategoryDetailSpending = ({ spending }: SmallCategoryDetailSpe
 
   return (
     <div className="py-40 px-30">
-      {/* 헤더 */}
       <div className="flex justify-between items-center">
         <div className="flex gap-6 items-center">
           <HeadLine6>1차</HeadLine6>
@@ -60,7 +60,6 @@ export const SmallCategoryDetailSpending = ({ spending }: SmallCategoryDetailSpe
           </button>
         </div>
       </div>
-      {/* 리스트 */}
       <div className="mt-16 border-t-[1px] border-b-[1px] border-gray-100">
         <SmallCategoryDetailSpendingItem
           isBorder

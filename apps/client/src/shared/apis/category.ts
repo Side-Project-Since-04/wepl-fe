@@ -1,8 +1,4 @@
-import type {
-  ClassificationNameType,
-  ClassificationType,
-  SmallCategoryDetailType,
-} from '@/src/features/category/types';
+import type { ClassificationType, SmallCategoryDetailType } from '@/src/features/category/types';
 import type { Pageable } from '@fsd/features/common/types';
 import { axiosInstance } from '../config/axios';
 
@@ -13,11 +9,13 @@ export const CategoryClient = {
     const { data } = await axiosInstance.get<Pageable<ClassificationType>>(`${URL_ROOT}/classifications`);
     return data;
   },
-  getClassification: async (classificationName: ClassificationNameType | Lowercase<ClassificationNameType>) => {
-    const { data } = await axiosInstance.get<ClassificationType>(`${URL_ROOT}/classifications/${classificationName}`);
-
+  getDetailClassification: async (classification: string): Promise<ClassificationType> => {
+    const { data }: { data: ClassificationType } = await axiosInstance.get(
+      URL_ROOT + `/classifications/${classification}`,
+    );
     return data;
   },
+
   createMiddleCategory: async (payload: { classificationName: string; middleCategoryName: string }) => {
     await axiosInstance.post(`${URL_ROOT}/middle`, payload);
   },
@@ -35,11 +33,13 @@ export const CategoryClient = {
       smallCategoryName,
     });
   },
-  getSmallCategoryDetail: async (middleCategoryPk: string, smallCategoryPk: string) => {
+  getSmallCategoryDetail: async (
+    middleCategoryPk: string,
+    smallCategoryPk: string,
+  ): Promise<SmallCategoryDetailType> => {
     const { data } = await axiosInstance.get<SmallCategoryDetailType>(
       `${URL_ROOT}/middle/${middleCategoryPk}/small/${smallCategoryPk}`,
     );
-
     return data;
   },
   updateSmallCategory: async (middleCategoryPk: string, smallCategoryPk: string, smallCategoryName: string) => {
