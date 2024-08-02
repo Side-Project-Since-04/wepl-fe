@@ -33,15 +33,19 @@ const LoadingSpinner = ({ className }: { className?: string }) => {
 export default function LoginPage(): JSX.Element {
   const { data: session, status } = useSession() as any;
   const router = useRouter();
-
   const { mutate: signUp } = useSignUp(router);
+
+  // useEffect(() => {
+  //   handleSignOut();
+  // }, []);
 
   // Todo : 로그아웃에 대한 처리 고민..
   useEffect(() => {
-    if (session?.accessToken) {
+    if (session?.accessToken || status == 'authenticated') {
       signUp(session.accessToken);
       localStorage.setItem('sub_id', session.social_id);
     }
+    // if (status == 'authenticated') signUp(session.accessToken);
   }, [session?.accessToken]);
 
   const handleKakaoBtn = async () => {
@@ -65,8 +69,13 @@ export default function LoginPage(): JSX.Element {
         <span className="text-headline1 text-neutral-white">wepl</span>
       </div>
       <div className="text-neutral-white">결혼 준비에도 관리가 필요하니까</div>
-      <Button className="mt-[22px] w-[280px] h-[50px]" onClick={handleKakaoBtn} variant="outline">
-        {status === 'loading' ? <LoadingSpinner /> : '카카오톡으로 시작하기'}
+      <Button
+        className="mt-[22px] w-[280px] h-[50px]"
+        onClick={handleKakaoBtn}
+        variant="outline"
+        disabled={status == 'authenticated' || status == 'loading'}
+      >
+        {status === 'loading' || status == 'authenticated' ? <LoadingSpinner /> : '카카오톡으로 시작하기'}
       </Button>
     </main>
   );

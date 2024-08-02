@@ -1,8 +1,8 @@
-type WeddingMainCategory = 'main_ceremony' | 'wedding_gifts' | 'marriage_articles' | 'honeymoon';
+// type WeddingMainCategory = 'WEDDING' | 'PRESENT' | 'FURNITURE' | 'HONEYMOON';
 
-export const WEDDING_MAIN_CATEGORIES: Record<WeddingMainCategory, string> = {
-  main_ceremony: '본식',
-  wedding_gifts: '예물',
-  marriage_articles: '혼수',
-  honeymoon: '신혼여행',
-};
+// export const WEDDING_MAIN_CATEGORIES: Record<WeddingMainCategory, string> = {
+//   WEDDING: '본식',
+//   PRESENT: '예물',
+//   FURNITURE: '혼수',
+//   HONEYMOON: '신혼여행',
+// };

@@ -10,6 +10,19 @@ export const PRESENT = 'PRESENT';
 export const FURNITURE = 'FURNITURE';
 export const HONEYMOON = 'HONEYMOON';
 
+
+type ClassificationGuidesType = {
+  [key in string]: string;
+}
+
+
+export const CLASSIFICATION_NAME_GUIDES:ClassificationGuidesType = {
+  WEDDING: '웨딩',
+  PRESENT: '예물',
+  FURNITURE: '혼수',
+  HONEYMOON: '신혼여행',
+}  as const
+
 /**
  * 대분류의 타입과 이름을 배열로 정의
  *

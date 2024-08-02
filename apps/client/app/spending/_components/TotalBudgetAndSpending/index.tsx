@@ -5,21 +5,24 @@ import Link from 'next/link';
 import { WeplButton } from '@/src/shared/components/Button/WeplButton';
 import { useSuspenseGetWeddingInfo } from '@/src/features/wedding/queries';
 import BudgetRegister from '@/src/widgets/budget/common/BudgetRegister';
+import { useSuspenseGetMember } from '@/src/features/member/queries';
 
 export const TotalBudgetAndSpending = () => {
-  const { data } = useSuspenseGetWeddingInfo();
-  const { totalBudget, totalSpending, spendingPerBudget } = data;
+  const { data: weddingInfo } = useSuspenseGetWeddingInfo();
+  const { data: member } = useSuspenseGetMember();
+
+  const { totalBudget, totalSpending, spendingPerBudget } = weddingInfo;
   const percentClassName = `w-[${spendingPerBudget}%]`;
 
   if (totalBudget === null || spendingPerBudget === null) {
-    return <BudgetRegister />;
+    return <BudgetRegister className="w-full" />;
   }
 
   return (
     <div>
       <div className="text-center">
         <div>
-          <p className="text-body1 text-gray-500">$홍길동$님의 지출 현황</p>
+          <p className="text-body1 text-gray-500">{member.nickname}님의 지출 현황</p>
           <h4 className="text-headline4 text-gray-900">
             총 예산 대비 지출 <span className="text-primary-400">{spendingPerBudget}%</span>
           </h4>

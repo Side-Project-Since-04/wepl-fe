@@ -3,14 +3,14 @@ import { create } from 'zustand';
 
 export type SpendingItemType = {
   smallCategoryPk: string;
-  cost: string;
+  cost: number;
   order: number;
   isScheduled: boolean;
   isPaid: boolean;
   scheduleName: string;
   scheduleStartedAt: string; // ISO date strings are represented as strings
   scheduleEndedAt: string;
-  paidAt: Date;
+  paidAt: string;
   memo: string;
 };
 

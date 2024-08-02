@@ -1,7 +1,8 @@
 'use client';
 
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
-import { Suspense, SuspenseProps } from 'react';
+import type { SuspenseProps } from 'react';
+import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { useMounted } from '@fsd/shared/hooks/useMounted';
 
@@ -11,22 +12,23 @@ interface AsyncBoundaryProps {
   children: React.ReactNode;
 }
 
-function DefaultSuspenseFallback() {
+const DefaultSuspenseFallback = () => {
   return <div>Loading...</div>;
 }
 
-function DefaultErrorFallback({ error, reset }: { error: Error; reset: () => void }) {
+const DefaultErrorFallback = ({ error, reset }: { error: Error; reset: () => void }) => {
   return (
     <div>
       <p>에러가 발생했습니다!</p>
       <p>
         <button onClick={reset}>재시도</button>
+        <div>{error.message}</div>
       </p>
     </div>
   );
 }
 
-function CustomSuspense({ fallback, children }: SuspenseProps) {
+const CustomSuspense = ({ fallback, children }: SuspenseProps) => {
   const isMounted = useMounted();
 
   if (!isMounted) {
@@ -36,19 +38,26 @@ function CustomSuspense({ fallback, children }: SuspenseProps) {
   return <Suspense fallback={fallback}>{children}</Suspense>;
 }
 
-function AsyncBoundary({ ErrorFallback, SuspenseFallback, children }: AsyncBoundaryProps) {
+
+
+const renderFallback = ({ErrorFallback , error, resetErrorBoundary }: {ErrorFallback?: ({ reset }: { reset: () => void }) => React.ReactNode, error: Error, resetErrorBoundary: () => void})=> {
+  if (ErrorFallback) {
+    return <ErrorFallback reset={resetErrorBoundary} />;
+  }
+  return <DefaultErrorFallback error={error} reset={resetErrorBoundary} />;
+};
+
+
+
+const AsyncBoundary = ({ ErrorFallback, SuspenseFallback, children }: AsyncBoundaryProps) => {
   return (
     <QueryErrorResetBoundary>
       {({ reset }) => (
         <ErrorBoundary
-          onReset={reset}
-          fallbackRender={({ error, resetErrorBoundary }) => {
-            if (ErrorFallback) {
-              return <ErrorFallback reset={resetErrorBoundary} />;
-            }
-
-            return <DefaultErrorFallback error={error} reset={resetErrorBoundary} />;
+          fallbackRender={({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void }) => {
+            return renderFallback({ErrorFallback, error, resetErrorBoundary })
           }}
+          onReset={reset}
         >
           <CustomSuspense fallback={SuspenseFallback ? SuspenseFallback : <DefaultSuspenseFallback />}>
             {children}

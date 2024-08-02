@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { cn } from '@ui/lib/utils';
-import { SubTitle2 } from '@ui/src/components/Text';
+import { SubTitle2, TextBody2 } from '@ui/src/components/Text';
 import { HeadLine4 } from '@ui/src/components/HeadLine';
 import { classNames } from '@/src/shared/ui/utils';
 import { useSuspenseGetClassifications } from '@/src/features/category/queries';
@@ -102,17 +102,19 @@ const SpendingHistoryItem = ({ filteredClassification, classification }: Spendin
         <HeadLine4>{paidSpending.toLocaleString()}원</HeadLine4>
       </div>
       {/* 중분류 메뉴별 지출금액 */}
-      {middleCategories.map((value) => (
-        <div className="mt-16 border-t-[1px] border-gray-100" key={value.pk}>
-          <div
-            className="flex justify-between py-12 border-b-[1px] border-dashed border-gray-100 text-body2 text-gray-500 font-normal"
+      <div className="mt-16 border-t-[1px] border-gray-100">
+        {middleCategories.map((value, idx) => (
+          <TextBody2
+            className={cn('flex justify-between py-12 text-gray-500 font-normal', {
+              'border-b-[1px] border-dashed border-gray-100': idx !== middleCategories.length - 1,
+            })}
             key={value.pk}
           >
             <span>{value.name}</span>
-            <span>{value.spending.toLocaleString()}</span>
-          </div>
-        </div>
-      ))}
+            <span>{value.spending.toLocaleString()}원</span>
+          </TextBody2>
+        ))}
+      </div>
     </div>
   );
 };

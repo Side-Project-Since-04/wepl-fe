@@ -11,24 +11,16 @@ type NumberInputFormItemProps = {
   placeholder?: string;
   required?: boolean;
   unit?: string;
-  range?: [number, number];
+  range: [number, number];
 };
-/**
- * Renders a form item for an input field with optional required label.
- * @param {boolean} required - Indicates if the input field is required.
- * @param {Control} props.control - The control object from react-hook-form.
- * @param {string} props.name - The name of the input field.
- * @param {string | React.ReactNode} props.label - The label for the input field.
- * @param {string} props.placeholder - The placeholder for the input field.
- * @return {JSX.Element} The rendered input form item.
- */
+
 const TimeInputFormItem = ({ range, unit, required = false, ...props }: NumberInputFormItemProps) => {
-  const validateTimeInput = (value: string, range?: [number, number]): string => {
-    if (!range) return value;
+  const validateTimeInput = (value: string, range: [number, number]) => {
     const num = parseInt(value);
-    if (num >= range[0] && num <= range[1]) return value;
-    if (num > range[1]) return String(range[1]);
-    return '';
+    if (isNaN(num)) return null;
+    if (num > range[1]) return range[1];
+    if (num < range[0]) return range[0];
+    return num;
   };
 
   return (
@@ -37,6 +29,7 @@ const TimeInputFormItem = ({ range, unit, required = false, ...props }: NumberIn
       name={props.name}
       render={({ field }) => {
         const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+          if (parseInt(e.target.value) < 0) field.onChange(null);
           const value = validateTimeInput(e.target.value, range);
           field.onChange(value);
         };
@@ -58,9 +51,7 @@ const TimeInputFormItem = ({ range, unit, required = false, ...props }: NumberIn
                 type="number"
               />
             </FormControl>
-            {unit && field.value && <span className="absolute bottom-[16px] left-[35px]">{unit}</span>}
-
-            <FormMessage />
+            {unit && field.value > 0 && <span className="absolute bottom-[16px] left-[35px]">{unit}</span>}
           </FormItem>
         );
       }}

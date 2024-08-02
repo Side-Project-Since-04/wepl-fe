@@ -7,6 +7,7 @@ export const cn = (...inputs: ClassValue[]) => {
 
 export const classNames = {
   pagePadding: 'px-40 sm:px-[20px]',
+  screenHeightMinusHeader: 'h-[calc(100vh-56px)]',
 };
 
 const screen = {

@@ -14,15 +14,14 @@ type CurrencyInputFormItemProps = {
 
 const MoneyInputFormItem = ({ required = false, ...props }: CurrencyInputFormItemProps) => {
   // 추후 보안이 필요함
-  const formatCurrency = (value: string) => {
+  const formatCurrency = (value: string | undefined) => {
     // 숫자만 추출
+    if (!value) return '';
     const number = value.replace(/[^\d]/g, '');
-    // 세 자리마다 쉼표 추가 및 원 추가
     return number ? number.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '원' : '';
   };
 
   const parseCurrency = (value: string) => {
-    // 쉼표와 '원' 제거
     return value.replace(/,/g, '').replace('원', '');
   };
 
@@ -55,8 +54,10 @@ const MoneyInputFormItem = ({ required = false, ...props }: CurrencyInputFormIte
               {...field}
               value={formatCurrency(field.value)}
               onChange={(e) => {
-                const parsed = parseCurrency(formatCurrency(e.target.value));
-                field.onChange(parsed);
+                if (e.target.value) {
+                  const parsed = parseCurrency(formatCurrency(e.target.value));
+                  field.onChange(parsed);
+                }
               }}
               onKeyDown={(e) => handleKeyDown(e, field)}
             />
