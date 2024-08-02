@@ -1,11 +1,25 @@
 import { cn } from '@ui/lib/utils';
 import { useSuspenseGetClassifications } from '@/src/features/category/queries';
+import type { PieDataType } from '../SpendingStatisticPieGraph';
+import { SpendingStatisticPieGraph } from '../SpendingStatisticPieGraph';
 
-const colors: Record<number, string> = {
-  1: 'bg-primary-800',
-  2: 'bg-primary-600',
-  3: 'bg-primary-400',
-  4: 'bg-primary-300',
+const colors: Record<number, Record<'tailwind' | 'rgb', string>> = {
+  1: {
+    tailwind: 'bg-primary-800',
+    rgb: '#03304d',
+  },
+  2: {
+    tailwind: 'bg-primary-600',
+    rgb: '#085972',
+  },
+  3: {
+    tailwind: 'bg-primary-400',
+    rgb: '#38abb5',
+  },
+  4: {
+    tailwind: 'bg-primary-300',
+    rgb: '#7ddde1',
+  },
 };
 
 export const SpendingStatistic = () => {
@@ -13,13 +27,20 @@ export const SpendingStatistic = () => {
   const classifications = data.content.map((classification, idx) => {
     return {
       ...classification,
-      color: colors[idx + 1],
+      color: colors[idx + 1].tailwind,
     };
   });
+
   const allPaidSpending = classifications.reduce((acc, val) => acc + val.paidSpending, 0);
+  const pieData: PieDataType<string>[] = classifications.map((c, idx) => ({
+    id: c.name,
+    label: c.name,
+    value: c.paidSpending,
+    color: colors[idx + 1].rgb,
+  }));
 
   return (
-    <section className="bg-gray-100 pt-24 px-20 min-h-screen">
+    <section className="bg-gray-50 pt-24 px-20 min-h-screen">
       <div className="text-center">
         <p className="text-gray-500 text-body1 font-normal">카테고리별 현황</p>
         <h4 className="mt-4 text-gray-900 text-headline4">지출 비율을 확인할 수 있어요!</h4>
@@ -27,7 +48,7 @@ export const SpendingStatistic = () => {
 
       {/* 도넛 그래프 */}
       <div className="mt-32 text-center">
-        <div className="inline-block bg-neutral-black w-156 h-156 rounded-[50%]" />
+        <SpendingStatisticPieGraph allPaidSpending={allPaidSpending} data={pieData} />
       </div>
 
       {/* 범주 */}
@@ -53,3 +74,5 @@ export const SpendingStatistic = () => {
     </section>
   );
 };
+
+const PieGraph = () => {};

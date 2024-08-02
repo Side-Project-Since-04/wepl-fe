@@ -1,4 +1,5 @@
 'use client';
+
 import React from 'react';
 import Image from 'next/image';
 
@@ -12,8 +13,6 @@ import MarriedCouple from '@/public/home/Married-Couple.png';
 import { useSuspenseGetWeddingInfo } from '@/src/features/wedding/queries';
 import { type WeddingBudgetInfoType, type WeddingInfoType } from '@/src/features/wedding/types';
 import { calculateDaysUntilWedding, formatWeddingDateInfo } from '@/src/shared/utils/utils';
-import AsyncBoundary from '@/src/shared/components/AsyncBoundary';
-import { CardSkeleton } from '@/app/home/_Skeleton';
 
 interface WeddingInfoCardProps extends WeddingInfoType, WeddingBudgetInfoType {}
 
@@ -21,7 +20,7 @@ const WeddingEventInfo = () => {
   const { data } = useSuspenseGetWeddingInfo();
   return (
     <div className="w-screen max-w-[768px] flex flex-col items-center h-[404px] bg-primary-400 gap-24 text-primary-25 p-32 mb-60">
-      <WeddingEventInfo.Header name={'$홍길동$'} />
+      <WeddingEventInfo.Header name="$홍길동$" />
       <WeddingEventInfo.Card {...data} />
     </div>
   );
@@ -39,13 +38,12 @@ const InfoHeader = ({ name }: { name: string }) => {
 const WeddingInfoCard: React.FC<WeddingInfoCardProps> = ({ weddingDate, weddingTime, weddingHall }) => {
   const DdaySentence = () => {
     const dDay = calculateDaysUntilWedding(weddingDate);
-    if (dDay == 0) {
+    if (dDay === 0) {
       return 'D-day';
     } else if (dDay < 0) {
       return `D+${-dDay}`;
-    } else {
-      return `D-${dDay}`;
     }
+    return `D-${dDay}`;
   };
 
   const [formatWeddingDate, formatWeddingTime] = formatWeddingDateInfo(weddingDate, weddingTime);
@@ -58,7 +56,7 @@ const WeddingInfoCard: React.FC<WeddingInfoCardProps> = ({ weddingDate, weddingT
           </div>
           <CardTitle className="text-primary-800 text-[24px]">Wedding day</CardTitle>
           <CardDescription className="text-[32px] font-bold text-auxiliary-red">{DdaySentence()}</CardDescription>
-          <Image src={MarriedCouple} alt="Married-Couple" width={160} height={90} placeholder="empty" />
+          <Image alt="Married-Couple" height={90} placeholder="empty" src={MarriedCouple} width={160} />
         </CardHeader>
         <CardFooter className="flex flex-col justify-center items-center w-full h-full gap-4 bg-primary-600 rounded-br-lg rounded-bl-lg text-neutral-white font-normal">
           <CardTitle className="text-14">
