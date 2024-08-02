@@ -3,7 +3,7 @@
 import React, { useCallback, useState } from 'react';
 import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
-import Header from '@ui/src/components/Header';
+import { Header } from '@ui/src/components/Header';
 import { SubTitle2 } from '@ui/src/components/Text';
 import { Input } from '@ui/src/Input';
 import { toast } from '@ui/src/Toast';

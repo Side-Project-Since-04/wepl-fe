@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Header from '@ui/src/components/Header';
+import { Header } from '@ui/src/components/Header';
 import Icon from '@ui/src/Icon';
 import Link from 'next/link';
 import { CLASSIFICATION_NAME_GUIDES } from '@/src/features/category/constants';
@@ -9,12 +9,10 @@ import { useSuspenseGetDetailClassification } from '@/src/features/category/quer
 import SpendingSummaryCard from './_components/SpendingSummaryCard';
 import CategoryTabs from './_components/MiddleClassificationList';
 
-
 const ExpenseDetailPage = ({ params }: { params: { classificationName: string } }) => {
   const { data } = useSuspenseGetDetailClassification(params.classificationName);
-  const categoryName = CLASSIFICATION_NAME_GUIDES[params.classificationName.toUpperCase()] ;
+  const categoryName = CLASSIFICATION_NAME_GUIDES[params.classificationName.toUpperCase()];
   // 파라미터를 한글 카테고리명으로 변환
-
 
   return (
     <div>
@@ -32,7 +30,6 @@ const ExpenseDetailPage = ({ params }: { params: { classificationName: string } 
 };
 
 export default ExpenseDetailPage;
-
 
 const LeftHeader = () => {
   return (

@@ -2,13 +2,13 @@
 import React from 'react';
 
 export interface HeaderProps {
-  left?: React.ReactNode;
-  center?: React.ReactNode;
-  right?: React.ReactNode;
+  left?: React.ReactNode | React.JSX.Element;
+  center?: React.ReactNode | React.JSX.Element;
+  right?: React.ReactNode | React.JSX.Element;
   className?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ left, center, right, ...props }) => {
+export const Header: React.FC<HeaderProps> = ({ left, center, right, ...props }) => {
   return (
     <header className={`flex justify-between items-center py-[15px] h-[56px] ${props.className}`}>
       <div className="w-1/3 flex justify-start items-center">{left || <div className="" />}</div>
@@ -17,5 +17,3 @@ const Header: React.FC<HeaderProps> = ({ left, center, right, ...props }) => {
     </header>
   );
 };
-
-export default Header;

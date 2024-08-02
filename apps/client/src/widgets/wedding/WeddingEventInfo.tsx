@@ -9,19 +9,23 @@ import { HeadLine5 } from '@ui/src/components/HeadLine';
 import { SubTitle1 } from '@ui/src/components/Text';
 
 // third
+import Link from 'next/link';
 import MarriedCouple from '@/public/home/Married-Couple.png';
 import { useSuspenseGetWeddingInfo } from '@/src/features/wedding/queries';
 import { type WeddingBudgetInfoType, type WeddingInfoType } from '@/src/features/wedding/types';
 import { calculateDaysUntilWedding, formatWeddingDateInfo } from '@/src/shared/utils/utils';
+import { useSuspenseGetMember } from '@/src/features/member/queries';
+import { WeplButton } from '@/src/shared/components/Button/WeplButton';
 
 interface WeddingInfoCardProps extends WeddingInfoType, WeddingBudgetInfoType {}
 
 const WeddingEventInfo = () => {
-  const { data } = useSuspenseGetWeddingInfo();
+  const { data: weddingInfo } = useSuspenseGetWeddingInfo();
+  const { data: userInfo } = useSuspenseGetMember();
   return (
     <div className="w-screen max-w-[768px] flex flex-col items-center h-[404px] bg-primary-400 gap-24 text-primary-25 p-32 mb-60">
-      <WeddingEventInfo.Header name="$홍길동$" />
-      <WeddingEventInfo.Card {...data} />
+      <WeddingEventInfo.Header name={userInfo.nickname} />
+      <WeddingEventInfo.Card {...weddingInfo} />
     </div>
   );
 };
@@ -37,6 +41,9 @@ const InfoHeader = ({ name }: { name: string }) => {
 
 const WeddingInfoCard: React.FC<WeddingInfoCardProps> = ({ weddingDate, weddingTime, weddingHall }) => {
   const DdaySentence = () => {
+    if (!weddingDate) {
+      return '-';
+    }
     const dDay = calculateDaysUntilWedding(weddingDate);
     if (dDay === 0) {
       return 'D-day';
@@ -47,6 +54,7 @@ const WeddingInfoCard: React.FC<WeddingInfoCardProps> = ({ weddingDate, weddingT
   };
 
   const [formatWeddingDate, formatWeddingTime] = formatWeddingDateInfo(weddingDate, weddingTime);
+
   return (
     <div>
       <Card className="mt-12 bg-neutral-white flex flex-col justify-between items-center w-[260px] h-[336px] border-0">
@@ -59,10 +67,17 @@ const WeddingInfoCard: React.FC<WeddingInfoCardProps> = ({ weddingDate, weddingT
           <Image alt="Married-Couple" height={90} placeholder="empty" src={MarriedCouple} width={160} />
         </CardHeader>
         <CardFooter className="flex flex-col justify-center items-center w-full h-full gap-4 bg-primary-600 rounded-br-lg rounded-bl-lg text-neutral-white font-normal">
-          <CardTitle className="text-14">
-            {formatWeddingDate} {formatWeddingTime}
-          </CardTitle>
-
+          {formatWeddingDate ? (
+            <CardTitle className="text-14">
+              {formatWeddingDate} {formatWeddingTime}
+            </CardTitle>
+          ) : (
+            <Link href="/user-info/wedding">
+              <WeplButton className="text-primary-600" size="sm">
+                결혼 정보 입력하기
+              </WeplButton>
+            </Link>
+          )}
           <CardDescription className="text-14">{weddingHall}</CardDescription>
         </CardFooter>
       </Card>

@@ -1,13 +1,12 @@
-import { MiddleCategoryType, SmallCategoryType } from '@/src/features/category/types';
 import { Card } from '@ui/shadcn-ui/card';
 import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
 import { WeplTabs } from '@ui/src/Tabs';
-import Header from '@ui/src/components/Header';
+import { Header } from '@ui/src/components/Header';
 import { SubTitle1, TextBody1 } from '@ui/src/components/Text';
 import Link from 'next/link';
-
 import React from 'react';
+import type { MiddleCategoryType, SmallCategoryType } from '@/src/features/category/types';
 
 interface ClassficationProps {
   classification: string;
@@ -37,7 +36,7 @@ const SpendingListHeader = ({ classification, count }: { classification: string;
 
   const RightHeader = () => {
     return (
-      <Link href={`/spending/${classification}/middleCategories`} className="text-auxiliary-blue">
+      <Link className="text-auxiliary-blue" href={`/spending/${classification}/middleCategories`}>
         <SubTitle1 className="text-auxiliary-blue">편집하기</SubTitle1>
       </Link>
     );
@@ -51,10 +50,10 @@ const CategoryTabs = ({ middleCategories, classification }: CategoryTabsProps) =
     label: middleCategory.name,
     content: (
       <MiddleClassificationContent
-        middleCategoryPk={middleCategory.pk}
-        spending={middleCategory.spending}
-        smallCategory={middleCategory.smallCategories}
         classification={classification}
+        middleCategoryPk={middleCategory.pk}
+        smallCategory={middleCategory.smallCategories}
+        spending={middleCategory.spending}
       />
     ),
   }));
@@ -80,7 +79,7 @@ const MiddleClassificationContent = ({
       {smallCategory.map((item, idx) => {
         const isZeroSpending = item.spending === 0;
         return (
-          <Link key={idx} href={`/spending/${classification}/middle/${middleCategoryPk}/small/${item.pk}`}>
+          <Link href={`/spending/${classification}/middle/${middleCategoryPk}/small/${item.pk}`} key={idx}>
             <Card className="h-55 w-min-[320px] p-16 flex justify-between mb-12" key={idx}>
               <div className="flex items-center">
                 <div
@@ -92,8 +91,8 @@ const MiddleClassificationContent = ({
               </div>
               <div className="flex items-center">
                 <TextBody1 className={isZeroSpending ? 'text-gray-100' : ''}>{item.spending} 원</TextBody1>
-                <Button variant={'ghost'} className="hover:bg-neutral-white">
-                  <Icon name="arrow-right" size={16} className={isZeroSpending ? 'text-gray-100' : ''} />
+                <Button className="hover:bg-neutral-white" variant="ghost">
+                  <Icon className={isZeroSpending ? 'text-gray-100' : ''} name="arrow-right" size={16} />
                 </Button>
               </div>
             </Card>

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Header from '@ui/src/components/Header';
+import { Header } from '@ui/src/components/Header';
 import { Button } from '@ui/src/Button';
 import AsyncBoundary from '@/src/shared/components/AsyncBoundary';
 import { InvitationButton } from '@/src/widgets/auth/InvitationButton';
@@ -17,14 +17,6 @@ const LeftHeader = () => {
 };
 
 const MainPage = () => {
-  const LeftHeader = () => {
-    return (
-      <Button className="hover:bg-inherit" variant="ghost">
-        <Image alt="wepl" height={36} src="/main/logo.png" width={80} />
-      </Button>
-    );
-  };
-
   return (
     <>
       <Header left={<LeftHeader />} />

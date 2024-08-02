@@ -1,21 +1,22 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 
 // @wepl/ui
-import Header from '@ui/src/components/Header';
+import { Header } from '@ui/src/components/Header';
 import { Button } from '@ui/src/Button';
 import { HeadLine5 } from '@ui/src/components/HeadLine';
 
-//third-party
+// third-party
 import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { WeddingInfoForm } from '@/src/widgets/wedding/WeddingInfoForm';
+import Icon from '@ui/src/Icon';
+import { useRouter } from 'next/navigation';
 import { useCreateWeddingInfo } from '@/src/features/wedding/queries';
 import PageLayout from '@/src/pages/PageLayout';
-import Icon from '@ui/src/Icon';
+import { WeddingInfoForm } from '@/src/widgets/wedding/WeddingInfoForm';
 
 const formSchema = z.object({
   weddingDate: z.date(),
@@ -36,7 +37,7 @@ const WeddingInfoPage = () => {
   const { mutate } = useCreateWeddingInfo();
 
   const form = useForm<WeddingFormData>({
-    resolver: zodResolver(formSchema), // zod validater 통합
+    resolver: zodResolver(formSchema),
     defaultValues: {
       weddingHall: '',
       hour: '',
@@ -55,29 +56,12 @@ const WeddingInfoPage = () => {
     mutate(formData);
   };
 
-  const LeftHeader = () => {
-    return (
-      <Button variant={'ghost'} className="p-0">
-        <Link href={'/user-info'}>
-          <Icon name="arrow-left" size={25} />
-        </Link>
-      </Button>
-    );
-  };
-
-  const RightHeader = () => {
-    return (
-      <Button variant={'ghost'} className="p-0" onClick={handleSaveBtn} disabled={!form.formState.isValid}>
-        <Link href={'/invite'} className="text-lg">
-          다음
-        </Link>
-      </Button>
-    );
-  };
-
   return (
     <PageLayout isPadding>
-      <Header left={<LeftHeader />} right={<RightHeader />} />
+      <Header
+        left={<LeftHeader />}
+        right={<RightHeader isFormValid={form.formState.isValid} onSave={handleSaveBtn} />}
+      />
       <div className="pt-5 flex flex-col gap-[16px]">
         <HeadLine5>웨딩홀 정보를 입력해주세요.</HeadLine5>
         <WeddingInfoForm form={form} />
@@ -87,3 +71,31 @@ const WeddingInfoPage = () => {
 };
 
 export default WeddingInfoPage;
+
+const RightHeader = ({ onSave, isFormValid }: { onSave: () => void; isFormValid: boolean }) => {
+  return (
+    <Button className="p-0" disabled={!isFormValid} onClick={onSave} variant="ghost">
+      <Link className="text-lg" href="/invite">
+        다음
+      </Link>
+    </Button>
+  );
+};
+
+const LeftHeader = () => {
+  const router = useRouter();
+
+  return (
+    <Button
+      className="p-0"
+      onClick={() => {
+        router.back();
+      }}
+      variant="ghost"
+    >
+      <Link href="/user-info">
+        <Icon name="arrow-left" size={25} />
+      </Link>
+    </Button>
+  );
+};
