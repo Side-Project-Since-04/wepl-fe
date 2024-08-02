@@ -30,19 +30,25 @@ const MiddleClassificationList = ({ classification, middleCategory }: Classficat
 export default MiddleClassificationList;
 
 const SpendingListHeader = ({ classification, count }: { classification: string; count: number }) => {
-  const LeftHeader = () => {
-    return <SubTitle1 className="sm:text-[16px]">분류 카테고리({count})</SubTitle1>;
-  };
+  return (
+    <Header
+      className="px-20"
+      left={<LeftHeader count={count} />}
+      right={<RightHeader classification={classification} />}
+    />
+  );
+};
 
-  const RightHeader = () => {
-    return (
-      <Link className="text-auxiliary-blue" href={`/spending/${classification}/middleCategories`}>
-        <SubTitle1 className="text-auxiliary-blue">편집하기</SubTitle1>
-      </Link>
-    );
-  };
+const LeftHeader = ({ count }: { count: number }) => {
+  return <SubTitle1 className="sm:text-[16px]">분류 카테고리({count})</SubTitle1>;
+};
 
-  return <Header className="px-20" left={<LeftHeader />} right={<RightHeader />} />;
+const RightHeader = ({ classification }: { classification: string }) => {
+  return (
+    <Link className="text-auxiliary-blue" href={`/spending/${classification}/middleCategories`}>
+      <SubTitle1 className="text-auxiliary-blue">편집하기</SubTitle1>
+    </Link>
+  );
 };
 
 const CategoryTabs = ({ middleCategories, classification }: CategoryTabsProps) => {
