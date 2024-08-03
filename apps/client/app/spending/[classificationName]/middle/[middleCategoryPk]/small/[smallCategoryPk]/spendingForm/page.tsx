@@ -1,14 +1,12 @@
 'use client';
-import React from 'react';
 
+import React, { useCallback } from 'react';
 import Header from '@ui/src/components/Header';
 import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
 import { useRouter } from 'next/navigation';
-import { useCallback } from 'react';
 import PageLayout from '@/src/pages/PageLayout';
 import SpendingForm from '@/src/widgets/spending/SpendingForm';
-
 import { useCreateSpendingForm } from '@/src/features/spending/hooks/useCreateSpendingForm';
 import useInitValue from '@/src/features/spending/hooks/useSpendingFormInit';
 
@@ -20,6 +18,7 @@ const CreateSmallCategorySpendingPage = ({
   const { form, handleSubmit } = useCreateSpendingForm(params.smallCategoryPk);
   const initValue = useInitValue();
   const router = useRouter();
+
   const CenterHeader = useCallback(() => {
     return <h1 className="text-2xl font-bold text-center">지출액 추가</h1>;
   }, []);
@@ -42,8 +41,10 @@ const CreateSmallCategorySpendingPage = ({
     return (
       <Button
         className="p-0"
-        onClick={() => handleSubmit(form.getValues())}
         disabled={!form.formState.isValid || form.formState.isSubmitting}
+        onClick={() => {
+          handleSubmit(form.getValues());
+        }}
         variant="ghost"
       >
         저장
@@ -53,8 +54,10 @@ const CreateSmallCategorySpendingPage = ({
 
   return (
     <PageLayout isPadding>
-      <Header left={<LeftHeader />} center={<CenterHeader />} right={<RightHeader />} />
-      <SpendingForm form={form} onSave={form.handleSubmit(handleSubmit)} initValues={initValue} />
+      <Header center={<CenterHeader />} left={<LeftHeader />} right={<RightHeader />} />
+      <section className="py-24">
+        <SpendingForm form={form} initValues={initValue} onSave={() => form.handleSubmit(handleSubmit)} />
+      </section>
     </PageLayout>
   );
 };

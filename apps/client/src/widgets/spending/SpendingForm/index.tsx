@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useEffect } from 'react';
 import { Form } from '@ui/src/Form';
 import type { UseFormReturn } from 'react-hook-form';
@@ -6,8 +7,7 @@ import InputFormItem from '@ui/src/components/Form/InputFormItem';
 import DatePickerFormItem from '@ui/src/components/Form/DatePickFormItem';
 import MoneyInputFormItem from '@ui/src/components/Form/MoneyFormItem';
 import TimeInputFormItem from '@ui/src/components/Form/TimeInputFormItem';
-import { SpendingFormDataType } from '@/src/features/spending/hooks/useCreateSpendingForm';
-import { SpendingDataType } from '@/src/features/spending/types';
+import type { SpendingFormDataType } from '@/src/features/spending/hooks/useCreateSpendingForm';
 
 type SpendingFormProps = {
   form: UseFormReturn<SpendingFormDataType>;
