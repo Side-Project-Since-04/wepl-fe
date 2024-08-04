@@ -1,4 +1,3 @@
-import * as React from 'react';
 // import Image from 'next/image';
 
 import { Carousel, CarouselContent, CarouselItem } from '@ui/src/Carousel';
@@ -6,7 +5,7 @@ import { Button } from '@ui/src/Button';
 import Link from 'next/link';
 import { Header } from '@ui/src/components/Header';
 
-export const OnboardingPage = () => {
+const OnboardingPage = () => {
   return (
     <div className="relative h-screen w-full flex flex-col bg-gray-700">
       <Header right={<RightHeader />} />
