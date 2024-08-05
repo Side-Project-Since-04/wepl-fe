@@ -11,7 +11,7 @@ export const CategoryClient = {
   },
   getDetailClassification: async (classification: string): Promise<ClassificationType> => {
     const { data }: { data: ClassificationType } = await axiosInstance.get(
-      URL_ROOT + `/classifications/${classification}`,
+      `${URL_ROOT}/classifications/${classification}`,
     );
     return data;
   },
@@ -33,10 +33,7 @@ export const CategoryClient = {
       smallCategoryName,
     });
   },
-  getSmallCategoryDetail: async (
-    middleCategoryPk: string,
-    smallCategoryPk: string,
-  ): Promise<SmallCategoryDetailType> => {
+  getSmallCategoryDetail: async (middleCategoryPk: string, smallCategoryPk: string) => {
     const { data } = await axiosInstance.get<SmallCategoryDetailType>(
       `${URL_ROOT}/middle/${middleCategoryPk}/small/${smallCategoryPk}`,
     );

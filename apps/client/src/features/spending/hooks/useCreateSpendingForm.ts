@@ -4,7 +4,7 @@ import { useToast } from '@ui/src/Toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import dayjs from 'dayjs';
 import { formatTime } from '@/src/shared/utils/date-utils';
-import type { SpendingDataType } from '../types';
+import type { SpendingInputType } from '../types';
 import { useCreateSpending } from '../queries';
 
 const timeSchema = z.union([z.number().int().min(0).max(23), z.null(), z.undefined()]);
@@ -63,13 +63,12 @@ export const useCreateSpendingForm = (smallCategoryPk: string) => {
       return;
     }
 
-    const submitData: SpendingDataType = {
+    const submitData: Partial<SpendingInputType> = {
       smallCategoryPk,
       cost: data.cost ? parseInt(data.cost.replace(/,/g, '').replace('원', '')) : 0,
       scheduleName: data.scheduleName,
       paidAt,
       memo: data.memo,
-      order: 1,
     };
 
     if (scheduleStartedAt) {
@@ -82,8 +81,7 @@ export const useCreateSpendingForm = (smallCategoryPk: string) => {
       submitData.memo = data.memo;
     }
 
-    mutate(submitData);
-    
+    mutate({ spendingData: submitData });
   };
 
   return {
