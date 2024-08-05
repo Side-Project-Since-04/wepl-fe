@@ -18,8 +18,12 @@ export const SmallCategoryDetailSpendings = ({ params }: SmallCategoryDetailCard
 
   return (
     <ul>
-      {smallCategoryDetail.spendingList.map((spending) => (
-        <SmallCategoryDetailSpending key={spending.smallCategoryPk} spending={spending} />
+      {smallCategoryDetail.spendingList.map((spending, idx) => (
+        <SmallCategoryDetailSpending
+          key={`${spending.spendingPk}-${spending.scheduleName} `}
+          order={idx + 1}
+          spending={spending}
+        />
       ))}
     </ul>
   );

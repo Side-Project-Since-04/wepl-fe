@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Header from '@ui/src/components/Header';
 import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
@@ -9,6 +9,7 @@ import PageLayout from '@/src/pages/PageLayout';
 import SpendingForm from '@/src/widgets/spending/SpendingForm';
 import { useCreateSpendingForm } from '@/src/features/spending/hooks/useCreateSpendingForm';
 import useInitValue from '@/src/features/spending/hooks/useSpendingFormInit';
+import { useSpendingStore } from '@/src/features/spending/store';
 
 const CreateSmallCategorySpendingPage = ({
   params,
@@ -16,6 +17,7 @@ const CreateSmallCategorySpendingPage = ({
   params: { classification: string; smallCategoryPk: string };
 }) => {
   const { form, handleSubmit } = useCreateSpendingForm(params.smallCategoryPk);
+  const { setSpendingItem } = useSpendingStore();
   const initValue = useInitValue();
   const router = useRouter();
 
@@ -51,6 +53,16 @@ const CreateSmallCategorySpendingPage = ({
       </Button>
     );
   }, [form]);
+
+  /**
+   * 페이지를 떠날 때,
+   * SpendingItem을 undefined로 설정
+   */
+  useEffect(() => {
+    return () => {
+      setSpendingItem(undefined);
+    };
+  }, []);
 
   return (
     <PageLayout isPadding>
