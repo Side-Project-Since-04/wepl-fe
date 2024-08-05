@@ -6,6 +6,7 @@ import { InvitationButton } from '@/src/widgets/auth/InvitationButton';
 import BudgetOverview from '@/src/widgets/budget/BudgetOverview';
 import { ScheduleCard } from '@/src/widgets/schedule/ScheduleCard';
 import WeddingEventInfo from '@/src/widgets/wedding/WeddingEventInfo';
+import UpcomingSchedulesList from '@/src/widgets/schedule/UpcomingSchedulesList';
 import { CardSkeleton } from './_components/CardSkeleton';
 
 const LeftHeader = () => {
@@ -29,7 +30,7 @@ const MainPage = () => {
         </AsyncBoundary>
         <InvitationButton />
         <ScheduleCard />
-        {/* <UpcomingSchedulesList /> */}
+        <UpcomingSchedulesList />
         {/* <WeddingInfoCard /> */}
       </div>
     </>
