@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '@ui/src/Button';
 import { SubTitle2 } from '@ui/src/components/Text';
 import { Dialog } from '@ui/src/Dialog';
 import Icon from '@ui/src/Icon';

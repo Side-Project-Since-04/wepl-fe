@@ -2,23 +2,22 @@ import React, { useState } from 'react';
 import { cn } from '@ui/lib/utils';
 import {
   Dialog as DialogWrapper,
-  DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogDescription,
 } from '../../shadcn-ui/dialog';
 import { Button } from '../Button';
-import { SubTitle2, TextBody2 } from '../components/Text';
+import { TextBody2 } from '../components/Text';
 import { HeadLine6 } from '../components/HeadLine';
 
 /**
  * submitType에 따라
  * Alert, Confirm 역할을 수행
  */
-interface DialogProps {
+export interface DialogProps {
   title: string;
   subtitle: string;
   children: React.ReactNode;
@@ -40,8 +39,12 @@ export function Dialog({ title, subtitle, submitType, submitText, ...props }: Di
       <DialogTrigger asChild>{props.children}</DialogTrigger>
       <DialogContent className="sm:max-w-[296px] md:max-w-[425px] p-24">
         <DialogHeader className="flex flex-col items-center justify-center">
-          <HeadLine6 className="whitespace-pre-line text-center">{title}</HeadLine6>
-          <TextBody2 className="text-gray-600 font-normal whitespace-pre-line text-center">{subtitle}</TextBody2>
+          <HeadLine6 className="whitespace-pre-line text-center">
+            <DialogTitle>{title}</DialogTitle>
+          </HeadLine6>
+          <TextBody2 className="mt-8 text-gray-600 font-normal whitespace-pre-line text-center">
+            <DialogDescription>{subtitle}</DialogDescription>
+          </TextBody2>
         </DialogHeader>
         <DialogFooter className="mt-20 flex flex-row !justify-center gap-12">
           <Button
