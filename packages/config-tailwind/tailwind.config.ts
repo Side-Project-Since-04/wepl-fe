@@ -179,18 +179,18 @@ const config: Config = {
           fontWeight: '500',
         },
       ],
-      'body-long': [
-        '16px',
-        {
-          lineHeight: '28px',
-          letterSpacing: '-0.2px',
-          fontWeight: '500',
-        },
-      ],
       body2: [
         '14px',
         {
           lineHeight: '20px',
+          letterSpacing: '-0.2px',
+          fontWeight: '500',
+        },
+      ],
+      'body-long': [
+        '16px',
+        {
+          lineHeight: '28px',
           letterSpacing: '-0.2px',
           fontWeight: '500',
         },
