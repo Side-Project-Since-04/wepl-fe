@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+
 import Link from 'next/link';
 
 // @wepl/ui
@@ -10,33 +10,19 @@ import { HeadLine5 } from '@ui/src/components/HeadLine';
 //third-party
 import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { WeddingInfoForm } from '@/src/widgets/wedding/WeddingInfoForm';
-import { useCreateWeddingInfo } from '@/src/features/wedding/queries';
-import PageLayout from '@/src/pages/PageLayout';
 import Icon from '@ui/src/Icon';
-
-const formSchema = z.object({
-  weddingDate: z.date(),
-  weddingHall: z.string().max(15),
-  hour: z.union([z.string(), z.number()]).refine((value) => {
-    const numberValue = typeof value === 'string' ? parseInt(value, 10) : value;
-    return numberValue >= 0 && numberValue <= 23;
-  }),
-  min: z.union([z.string(), z.number()]).refine((value) => {
-    const numberValue = typeof value === 'string' ? parseInt(value, 10) : value;
-    return numberValue >= 0 && numberValue <= 59;
-  }),
-});
-
-export type WeddingFormData = z.infer<typeof formSchema>;
+import { useCallback } from 'react';
+import type { WeddingFormData } from '@/src/widgets/wedding/WeddingInfoForm';
+import { weddingFormSchema, WeddingInfoForm } from '@/src/widgets/wedding/WeddingInfoForm';
+import { useCreateWeddingInfo } from '@/src/features/wedding/queries';
+import { classNames } from '@/src/shared/ui/utils';
 
 const WeddingInfoPage = () => {
   const { mutate } = useCreateWeddingInfo();
 
   const form = useForm<WeddingFormData>({
-    resolver: zodResolver(formSchema), // zod validater 통합
+    resolver: zodResolver(weddingFormSchema), // zod validater 통합
     defaultValues: {
       weddingHall: '',
       hour: '',
@@ -55,34 +41,34 @@ const WeddingInfoPage = () => {
     mutate(formData);
   };
 
-  const LeftHeader = () => {
+  const LeftHeader = useCallback(() => {
     return (
-      <Button variant={'ghost'} className="p-0">
-        <Link href={'/user-info'}>
+      <Button className="p-0" variant="ghost">
+        <Link href="/user-info">
           <Icon name="arrow-left" size={25} />
         </Link>
       </Button>
     );
-  };
+  }, []);
 
-  const RightHeader = () => {
+  const RightHeader = useCallback(() => {
     return (
-      <Button variant={'ghost'} className="p-0" onClick={handleSaveBtn} disabled={!form.formState.isValid}>
-        <Link href={'/invite'} className="text-lg">
+      <Button className="p-0" disabled={!form.formState.isValid} onClick={handleSaveBtn} variant="ghost">
+        <Link className="text-lg" href="/invite">
           다음
         </Link>
       </Button>
     );
-  };
+  }, [form]);
 
   return (
-    <PageLayout isPadding>
+    <main>
       <Header left={<LeftHeader />} right={<RightHeader />} />
-      <div className="pt-5 flex flex-col gap-[16px]">
+      <div className={`pt-5 flex flex-col gap-16 ${classNames.pagePadding}`}>
         <HeadLine5>웨딩홀 정보를 입력해주세요.</HeadLine5>
         <WeddingInfoForm form={form} />
       </div>
-    </PageLayout>
+    </main>
   );
 };
 
