@@ -19,7 +19,7 @@ import { useCreateWeddingInfo } from '@/src/features/wedding/queries';
 import { classNames } from '@/src/shared/ui/utils';
 
 const WeddingInfoPage = () => {
-  const { mutate } = useCreateWeddingInfo();
+  const { mutate, isPending } = useCreateWeddingInfo();
 
   const form = useForm<WeddingFormData>({
     resolver: zodResolver(weddingFormSchema), // zod validater 통합
@@ -53,7 +53,7 @@ const WeddingInfoPage = () => {
 
   const RightHeader = useCallback(() => {
     return (
-      <Button className="p-0" disabled={!form.formState.isValid} onClick={handleSaveBtn} variant="ghost">
+      <Button className="p-0" disabled={!form.formState.isValid || isPending} onClick={handleSaveBtn} variant="ghost">
         <Link className="text-lg" href="/invite">
           다음
         </Link>
