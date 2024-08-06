@@ -4,9 +4,8 @@ import { Button } from '@ui/src/Button';
 import AsyncBoundary from '@/src/shared/components/AsyncBoundary';
 import { InvitationButton } from '@/src/widgets/auth/InvitationButton';
 import BudgetOverview from '@/src/widgets/budget/BudgetOverview';
-import { ScheduleCard } from '@/src/widgets/schedule/ScheduleCard';
 import WeddingEventInfo from '@/src/widgets/wedding/WeddingEventInfo';
-import UpcomingSchedulesList from '@/src/widgets/schedule/UpcomingSchedulesList';
+import ScheduleView from '@/src/widgets/schedule/ScheduleView';
 import { CardSkeleton } from './_components/CardSkeleton';
 
 const LeftHeader = () => {
@@ -29,8 +28,9 @@ const MainPage = () => {
           <BudgetOverview />
         </AsyncBoundary>
         <InvitationButton />
-        <ScheduleCard />
-        <UpcomingSchedulesList />
+        <AsyncBoundary>
+          <ScheduleView />
+        </AsyncBoundary>
         {/* <WeddingInfoCard /> */}
       </div>
     </>
