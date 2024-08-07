@@ -57,3 +57,23 @@ export const useUpdateWeddingInfo = () => {
     },
   });
 };
+
+export const useDeleteWeddingConnection = () => {
+  const { toast } = useToast();
+
+  return useMutation({
+    mutationFn: () => WeddingClient.deleteWeddingConnection(),
+    onSuccess: () => {
+      toast({ variant: 'success', title: '완료!', duration: 1500 });
+
+      // 짝궁 연결끊기 후, invalidate
+    },
+    onError: () => {
+      toast({
+        variant: 'alert',
+        title: '실패!',
+        duration: 1500,
+      });
+    },
+  });
+};

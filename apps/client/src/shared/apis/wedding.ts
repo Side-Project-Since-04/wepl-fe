@@ -20,4 +20,7 @@ export const WeddingClient = {
       totalBudget,
     });
   },
+  deleteWeddingConnection: async () => {
+    await axiosInstance.delete(`${URL_ROOT}/connection`);
+  },
 };

@@ -2,14 +2,19 @@
 
 import { SubTitle2, TextBody2 } from '@ui/src/components/Text';
 import Image from 'next/image';
-import type { DialogProps } from '@ui/src/Dialog';
 import { Dialog } from '@ui/src/Dialog';
-import { useState } from 'react';
 import BackHeader from '@/src/shared/components/BackHeader';
 import { WeplButton } from '@/src/shared/components/Button/WeplButton';
-import { classNames, cn } from '@/src/shared/ui/utils';
+import { classNames } from '@/src/shared/ui/utils';
+import { useDeleteWeddingConnection } from '@/src/features/wedding/queries';
+import { useGetMember } from '@/src/features/member/queries';
+import { useInvitation } from '@/src/features/auth/hooks';
 
 const SettingMemberPage = () => {
+  const { mutate: deleteWeddingConnection } = useDeleteWeddingConnection();
+  const { data: member } = useGetMember();
+  const { sendInvitation } = useInvitation();
+
   return (
     <main>
       <BackHeader center="멤버 관리" className="border-b-[1px] border-gray-100" />
@@ -25,7 +30,7 @@ const SettingMemberPage = () => {
 
       <section className={`my-32 ${classNames.pagePadding}`}>
         <div className="bg-gray-50 h-62 p-16 flex justify-between items-center">
-          <SubTitle2>홍길동</SubTitle2>
+          <SubTitle2>{member?.nickname || ''}</SubTitle2>
           <WeplButton className="bg-primary-400 hover:bg-primary-600 py-4 px-10 h-30 text-neutral-white" size="sm">
             이름변경
           </WeplButton>
@@ -33,13 +38,21 @@ const SettingMemberPage = () => {
         <div className="mt-12 h-62 p-16 bg-gray-50 flex justify-between items-center">
           <SubTitle2>{false ? <span>홍길동 짝꿍</span> : <span className="text-gray-400">짝꿍</span>}</SubTitle2>
 
-          {false ? (
-            <WeplButton className="py-4 px-10 h-30 bg-primary-400 hover:bg-primary-600 text-neutral-white" size="sm">
+          {true ? (
+            <WeplButton
+              className="py-4 px-10 h-30 bg-primary-400 hover:bg-primary-600 text-neutral-white"
+              onClick={() => {
+                sendInvitation();
+              }}
+              size="sm"
+            >
               초대하기
             </WeplButton>
           ) : (
             <Dialog
-              onSubmit={() => {}}
+              onSubmit={() => {
+                deleteWeddingConnection();
+              }}
               submitText="확인"
               submitType="confirm"
               subtitle={`기존에 입력된 정보는 모든 멤버가\n확인할 수 있으나 더 이상 동기화되지 않습니다`}
