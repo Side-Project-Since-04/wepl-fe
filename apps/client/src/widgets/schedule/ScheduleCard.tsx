@@ -6,12 +6,12 @@ import React from 'react';
 import { calculateDaysUntilWedding, formatDate, formatScheduleTime } from '@/src/shared/utils/utils';
 import type { ScheduleItemType } from '@/src/features/schedule/types';
 
-export const ScheduleCard: React.FC<{ data: ScheduleItemType | null }> = ({ data }) => {
+export const ScheduleCard: React.FC<{ data: ScheduleItemType | null; title: string }> = ({ data, title }) => {
   return (
     <div className="mx-auto my-24">
       {data ? (
         <>
-          <HeadLine4 className="mb-24">곧 일정이 시작됩니다!</HeadLine4>
+          <HeadLine4 className="mb-24">{title}</HeadLine4>
           <Card className="w-[320px] ">
             <ScheduleCardHeader category={data.smallCategoryName} daysLeft={data.scheduleStartedDate} />
             <ScheduleCardContent data={data} />

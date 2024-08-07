@@ -20,7 +20,7 @@ const UpcomingSchedulesList: React.FC<ScheduleCardProps> = ({ schedules }) => {
           전체보기
         </Link>
       </div>
-      <ScheduleCard schedules={schedules} />{' '}
+      <ScheduleCard schedules={schedules} />
     </PageLayout>
   );
 };

@@ -8,7 +8,7 @@ const ScheduleView = () => {
   const { data } = useSuspenseGetWaitList(6);
   return (
     <>
-      <ScheduleCard data={data.length > 0 ? data[0] : null} />
+      <ScheduleCard data={data.length > 0 ? data[0] : null} title="곧 일정이 시작됩니다!" />
       {data.length > 1 && <UpcomingSchedulesList schedules={data.slice(1)} />}
     </>
   );

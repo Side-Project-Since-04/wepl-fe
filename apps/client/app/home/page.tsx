@@ -6,7 +6,7 @@ import { InvitationButton } from '@/src/widgets/auth/InvitationButton';
 import BudgetOverview from '@/src/widgets/budget/BudgetOverview';
 import WeddingEventInfo from '@/src/widgets/wedding/WeddingEventInfo';
 import ScheduleView from '@/src/widgets/schedule/ScheduleView';
-import { CardSkeleton } from './_components/CardSkeleton';
+import { BudgetOverViewSkeleton, ScheduleCardSkeleton, UserCardSkeleton } from './_components/Skeleton';
 
 const LeftHeader = () => {
   return (
@@ -21,14 +21,14 @@ const MainPage = () => {
     <>
       <Header left={<LeftHeader />} />
       <div className="flex flex-col items-center gap-32">
-        <AsyncBoundary SuspenseFallback={<CardSkeleton />}>
+        <AsyncBoundary SuspenseFallback={<UserCardSkeleton />}>
           <WeddingEventInfo />
         </AsyncBoundary>
-        <AsyncBoundary>
+        <AsyncBoundary SuspenseFallback={<BudgetOverViewSkeleton />}>
           <BudgetOverview />
         </AsyncBoundary>
         <InvitationButton />
-        <AsyncBoundary>
+        <AsyncBoundary SuspenseFallback={<ScheduleCardSkeleton />}>
           <ScheduleView />
         </AsyncBoundary>
         {/* <WeddingInfoCard /> */}
