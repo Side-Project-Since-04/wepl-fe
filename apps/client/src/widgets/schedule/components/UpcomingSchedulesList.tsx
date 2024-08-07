@@ -5,6 +5,7 @@ import { TextBody2 } from '@ui/src/components/Text';
 import Link from 'next/link';
 import PageLayout from '@/src/pages/PageLayout';
 import type { ScheduleItemType } from '@/src/features/schedule/types';
+import { formatDate, formatScheduleTime } from '@/src/shared/utils/utils';
 
 // ScheduleCard 컴포넌트의 props 타입 정의
 interface ScheduleCardProps {
@@ -40,11 +41,13 @@ const ScheduleCard = ({ schedules }: ScheduleCardProps) => {
             <div className="px-32 pb-20">
               <div className="flex gap-12">
                 <TextBody2 className="text-gray-400">일정</TextBody2>
-                <TextBody2 className="text-gray-600"> 202-05-03(금)</TextBody2>
+                <TextBody2 className="text-gray-600">{formatDate(new Date(schedule.scheduleStartedDate))}</TextBody2>
               </div>
               <div className="flex gap-12">
-                <TextBody2 className="text-gray-400">시간</TextBody2>{' '}
-                <TextBody2 className="text-gray-600">오후 12:00 - 오흐 2:00</TextBody2>
+                <TextBody2 className="text-gray-400">시간</TextBody2>
+                <TextBody2 className="text-gray-600">
+                  {formatScheduleTime(schedule.scheduleStartedDate, schedule.scheduleEndedDate) || '-'}
+                </TextBody2>
               </div>
               <div className="flex gap-12">
                 <TextBody2 className="text-gray-400">지출</TextBody2>{' '}

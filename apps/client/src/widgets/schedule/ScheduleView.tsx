@@ -1,8 +1,8 @@
 'use client';
 import React from 'react';
 import { useSuspenseGetWaitList } from '@/src/features/schedule/queries';
-import { ScheduleCard } from './ScheduleCard';
-import UpcomingSchedulesList from './UpcomingSchedulesList';
+import UpcomingSchedulesList from './components/UpcomingSchedulesList';
+import { ScheduleCard } from './components/ScheduleCard';
 
 const ScheduleView = () => {
   const { data } = useSuspenseGetWaitList(6);

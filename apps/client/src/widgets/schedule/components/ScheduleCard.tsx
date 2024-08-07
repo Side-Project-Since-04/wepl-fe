@@ -3,7 +3,7 @@ import { HeadLine4, HeadLine6 } from '@ui/src/components/HeadLine';
 import { SubTitle1, TextBody1, TextBody2 } from '@ui/src/components/Text';
 import Image from 'next/image';
 import React from 'react';
-import { calculateDaysUntilWedding, formatDate, formatScheduleTime } from '@/src/shared/utils/utils';
+import { calculateDday, formatDate, formatScheduleTime } from '@/src/shared/utils/utils';
 import type { ScheduleItemType } from '@/src/features/schedule/types';
 
 export const ScheduleCard: React.FC<{ data: ScheduleItemType | null; title: string }> = ({ data, title }) => {
@@ -35,7 +35,7 @@ interface ScheduleCardHeaderProps {
 const ScheduleCardHeader: React.FC<ScheduleCardHeaderProps> = ({ category, daysLeft }) => (
   <CardHeader className="rounded-t-lg bg-primary-400 text-neutral-white flex-row justify-between items-center px-20 py-12">
     <SubTitle1>{category}</SubTitle1>
-    <SubTitle1>D-{calculateDaysUntilWedding(daysLeft)}</SubTitle1>
+    <SubTitle1>{calculateDday(daysLeft)}</SubTitle1>
   </CardHeader>
 );
 
@@ -51,7 +51,7 @@ const ScheduleCardContent: React.FC<ScheduleCardContentProps> = ({ data }) => (
     <div className="flex flex-col gap-8">
       <div className="flex justify-between items-center">
         <TextBody2 className="text-gray-600">시간</TextBody2>
-        <TextBody2>{formatScheduleTime(data.scheduleStartedDate, data.scheduleEndedDate) || '- '}</TextBody2>
+        <TextBody2>{formatScheduleTime(data.scheduleStartedDate, data.scheduleEndedDate) || '-'}</TextBody2>
       </div>
       <div className="flex justify-between items-center">
         <TextBody2 className="text-gray-600">지출</TextBody2>

@@ -1,8 +1,16 @@
-export function calculateDaysUntilWedding(weddingDate: string) {
+export function calculateDday(date: string) {
   const today = new Date();
-  const wedding = new Date(weddingDate);
+  const wedding = new Date(date);
   const timeDiff = wedding.getTime() - today.getTime();
-  return Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+  const dDay = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+  if (dDay === 0) {
+    return 'D-day';
+  } else if (dDay < 0) {
+    return `D+${-dDay}`;
+  }
+  return `D-${dDay}`;
 }
 
 export function formatWeddingDateInfo(weddingDate: string, weddingTime: string) {
