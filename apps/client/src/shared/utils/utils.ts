@@ -15,8 +15,8 @@ export function formatWeddingDateInfo(weddingDate: string, weddingTime: string) 
   return [formattedDate, formattedTime];
 }
 
-export function formatDate(date: Date) {
-  return date
+export function formatDate(date: Date | string) {
+  return new Date(date)
     .toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'short' })
     .replace(/\./, '년 ')
     .replace(/\./, '월 ')
@@ -25,8 +25,8 @@ export function formatDate(date: Date) {
     .replace(')', ')');
 }
 
-export function formatTime(date: Date) {
-  return date
+export function formatTime(date: Date | string) {
+  return new Date(date)
     .toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: true })
     .replace('오전', '오전 ')
     .replace('오후', '오후 ');
