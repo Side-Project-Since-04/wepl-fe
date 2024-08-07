@@ -1,11 +1,26 @@
 'use client';
 
+import { z } from 'zod';
 import { Form } from '@ui/src/Form';
 import TimeInputFormItem from '@ui/src/components/Form/TimeInputFormItem';
 import DatePickerFormItem from '@ui/src/components/Form/DatePickFormItem';
 import InputFormItem from '@ui/src/components/Form/InputFormItem';
 import type { UseFormReturn } from 'react-hook-form';
-import type { WeddingFormData } from '@/app/(sign-up)/user-info/wedding/page';
+
+export const weddingFormSchema = z.object({
+  weddingDate: z.date(),
+  weddingHall: z.string().max(15),
+  hour: z.union([z.string(), z.number()]).refine((value) => {
+    const numberValue = typeof value === 'string' ? parseInt(value, 10) : value;
+    return numberValue >= 0 && numberValue <= 23;
+  }),
+  min: z.union([z.string(), z.number()]).refine((value) => {
+    const numberValue = typeof value === 'string' ? parseInt(value, 10) : value;
+    return numberValue >= 0 && numberValue <= 59;
+  }),
+});
+
+export type WeddingFormData = z.infer<typeof weddingFormSchema>;
 
 type WeddingInfoFormProps = {
   form: UseFormReturn<WeddingFormData>;
