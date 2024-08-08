@@ -1,14 +1,9 @@
-import * as React from 'react';
-// import Image from 'next/image';
-
 import { Carousel, CarouselContent, CarouselItem } from '@ui/src/Carousel';
-import Header from '@ui/src/components/Header';
 import { Button } from '@ui/src/Button';
 import Link from 'next/link';
+import { Header } from '@ui/src/components/Header';
 
-export default function OnboardingPage() {
-  const imageArray = [null, null];
-
+const OnboardingPage: React.FC = () => {
   return (
     <div className="relative h-screen w-full flex flex-col bg-gray-700">
       <Header right={<RightHeader />} />
@@ -27,9 +22,11 @@ export default function OnboardingPage() {
       </section>
     </div>
   );
-}
+};
 
-const RightHeader = () => {
+export default OnboardingPage;
+
+const RightHeader: React.FC = () => {
   return (
     <Button asChild className="hover:bg-inherit mr-12" variant="ghost">
       <Link className="text-gray-400 text-base hover:text-white" href="/user-info">
