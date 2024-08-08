@@ -6,16 +6,14 @@ import InputFormItem from '@ui/src/components/Form/InputFormItem';
 import DatePickerFormItem from '@ui/src/components/Form/DatePickFormItem';
 import MoneyInputFormItem from '@ui/src/components/Form/MoneyFormItem';
 import TimeInputFormItem from '@ui/src/components/Form/TimeInputFormItem';
-import { SpendingFormDataType } from '@/src/features/spending/hooks/useCreateSpendingForm';
-import { SpendingDataType } from '@/src/features/spending/types';
+import type { SpendingFormDataType } from '@/src/features/spending/hooks/useCreateSpendingForm';
 
 type SpendingFormProps = {
   form: UseFormReturn<SpendingFormDataType>;
-  onSave: React.FormEventHandler<HTMLFormElement>;
   initValues?: SpendingFormDataType;
 };
 
-const SpendingForm = ({ form, onSave, ...props }: SpendingFormProps) => {
+const SpendingForm = ({ form, ...props }: SpendingFormProps) => {
   useEffect(() => {
     if (props.initValues) {
       form.reset(props.initValues);
@@ -24,7 +22,7 @@ const SpendingForm = ({ form, onSave, ...props }: SpendingFormProps) => {
 
   return (
     <Form {...form}>
-      <form className="flex flex-col gap-[24px]" onSubmit={onSave}>
+      <form className="flex flex-col gap-[24px]">
         <MoneyInputFormItem control={form.control} label="지출액" name="cost" placeholder="0원" required />
         <DatePickerFormItem control={form.control} label="지출일" name="paidAt" required />
         <InputFormItem

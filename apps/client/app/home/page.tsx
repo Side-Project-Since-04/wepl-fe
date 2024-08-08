@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Header from '@ui/src/components/Header';
+import { Header } from '@ui/src/components/Header';
 import { Button } from '@ui/src/Button';
 import AsyncBoundary from '@/src/shared/components/AsyncBoundary';
 import { InvitationButton } from '@/src/widgets/auth/InvitationButton';

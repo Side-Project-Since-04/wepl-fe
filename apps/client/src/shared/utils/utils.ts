@@ -5,7 +5,11 @@ export function calculateDaysUntilWedding(weddingDate: string) {
   return Math.ceil(timeDiff / (1000 * 3600 * 24));
 }
 
-export function formatWeddingDateInfo(weddingDate: string, weddingTime: string) {
+export function formatWeddingDateInfo(weddingDate: string | null, weddingTime: string | null) {
+  if (!weddingDate || !weddingTime) {
+    return [null, null];
+  }
+
   const weddingDateTime = new Date(`${weddingDate}T${weddingTime}`);
 
   const formattedDate = weddingDateTime

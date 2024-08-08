@@ -4,7 +4,7 @@ import { cn } from '@ui/lib/utils';
 import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
 import type { HeaderProps } from '@ui/src/components/Header';
-import Header from '@ui/src/components/Header';
+import { Header } from '@ui/src/components/Header';
 import { SubTitle2 } from '@ui/src/components/Text';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -35,12 +35,7 @@ const Title = ({ title }: { title: string }) => {
 
 const BackHeader = ({ title, className, ...restProps }: BackHeaderProps) => {
   return (
-    <Header
-      center={title ? <Title title={title} /> : null}
-      className={cn('px-12', className)}
-      left={<LeftHeader />}
-      {...restProps}
-    />
+    <Header center={title ? <Title title={title} /> : null} className="px-12" left={<LeftHeader />} {...restProps} />
   );
 };
 

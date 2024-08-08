@@ -3,15 +3,16 @@
 import Link from 'next/link';
 
 // @wepl/ui
-import Header from '@ui/src/components/Header';
+import { Header } from '@ui/src/components/Header';
 import { Button } from '@ui/src/Button';
 import { HeadLine5 } from '@ui/src/components/HeadLine';
 
-//third-party
+// third-party
 import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Icon from '@ui/src/Icon';
+
 import { useCallback } from 'react';
 import type { WeddingFormData } from '@/src/widgets/wedding/WeddingInfoForm';
 import { weddingFormSchema, WeddingInfoForm } from '@/src/widgets/wedding/WeddingInfoForm';
@@ -41,26 +42,6 @@ const WeddingInfoPage = () => {
     mutate(formData);
   };
 
-  const LeftHeader = useCallback(() => {
-    return (
-      <Button className="p-0" variant="ghost">
-        <Link href="/user-info">
-          <Icon name="arrow-left" size={25} />
-        </Link>
-      </Button>
-    );
-  }, []);
-
-  const RightHeader = useCallback(() => {
-    return (
-      <Button className="p-0" disabled={!form.formState.isValid || isPending} onClick={handleSaveBtn} variant="ghost">
-        <Link className="text-lg" href="/invite">
-          다음
-        </Link>
-      </Button>
-    );
-  }, [form]);
-
   return (
     <main>
       <Header left={<LeftHeader />} right={<RightHeader />} />
@@ -73,3 +54,31 @@ const WeddingInfoPage = () => {
 };
 
 export default WeddingInfoPage;
+
+const RightHeader = ({ onSave, isFormValid }: { onSave: () => void; isFormValid: boolean }) => {
+  return (
+    <Button className="p-0" disabled={!isFormValid} onClick={onSave} variant="ghost">
+      <Link className="text-lg" href="/invite">
+        다음
+      </Link>
+    </Button>
+  );
+};
+
+const LeftHeader = () => {
+  const router = useRouter();
+
+  return (
+    <Button
+      className="p-0"
+      onClick={() => {
+        router.back();
+      }}
+      variant="ghost"
+    >
+      <Link href="/user-info">
+        <Icon name="arrow-left" size={25} />
+      </Link>
+    </Button>
+  );
+};
