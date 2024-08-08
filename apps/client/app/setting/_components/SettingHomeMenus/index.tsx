@@ -4,6 +4,7 @@ import { SubTitle2 } from '@ui/src/components/Text';
 import { Dialog } from '@ui/src/Dialog';
 import Icon from '@ui/src/Icon';
 import Link from 'next/link';
+import { useDeleteMember } from '@/src/features/member/queries';
 
 const MENUS_LINK = [
   {
@@ -21,6 +22,8 @@ const MENUS_LINK = [
 ] as const;
 
 export const SettingHomeMenus = () => {
+  const { mutate: deleteMember } = useDeleteMember();
+
   return (
     <>
       <div>
@@ -34,7 +37,9 @@ export const SettingHomeMenus = () => {
         ))}
       </div>
       <Dialog
-        onSubmit={() => {}}
+        onSubmit={() => {
+          deleteMember();
+        }}
         submitText="확인"
         submitType="confirm"
         subtitle={`탈퇴 후에는 입력된 정보가 모두 삭제되며\n복구가 불가능합니다.`}

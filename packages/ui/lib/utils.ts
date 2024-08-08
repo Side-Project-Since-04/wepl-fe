@@ -1,6 +1,6 @@
 import sharedConfig from '@wepl/tailwind-config';
 import { type ClassValue, clsx } from 'clsx';
-import { extendTailwindMerge } from 'tailwind-merge';
+import { extendTailwindMerge, twMerge } from 'tailwind-merge';
 
 /**
  * 커스텀 클래스를 사용하는 경우, twMerge에 정보를 제공하지 않는 경우,
@@ -19,11 +19,15 @@ const customTwMerge = extendTailwindMerge({
       })),
     },
     classGroups: {
-      'font-size': Object.keys(sharedConfig.theme?.fontSize || {}).map((key) => `text-${key}`),
+      'font-size': [
+        ...Object.keys(sharedConfig.theme?.fontSize || {}).map((key) => `text-${key}`),
+        { text: [(value: string) => Number(value) <= 200] },
+      ],
     },
   },
 });
 
 export const cn = (...inputs: ClassValue[]) => {
   return customTwMerge(clsx(inputs));
+  // return twMerge(clsx(inputs));
 };

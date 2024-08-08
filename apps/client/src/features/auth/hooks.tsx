@@ -8,7 +8,7 @@ export const useInvitation = () => {
   const handleShareToKakao = () => {
     const { Kakao, location } = window;
     Kakao.Share.sendScrap({
-      requestUrl: location.href + '/3001?',
+      requestUrl: `${location.href}/3001?`,
     });
   };
 
@@ -16,7 +16,10 @@ export const useInvitation = () => {
     setIsLoading(true);
     try {
       // 여기에 실제 초대장 보내는 API 호출 로직을 구현합니다.
-      await new Promise((resolve) => handleShareToKakao()); // 임시로 2초 딜레이
+      await new Promise((resolve) => {
+        handleShareToKakao();
+      }); // 임시로 2초 딜레이
+      // handleShareToKakao();
       console.log('초대장이 성공적으로 전송되었습니다.');
       // 성공 처리 로직 (예: 알림 표시)
     } catch (error) {
