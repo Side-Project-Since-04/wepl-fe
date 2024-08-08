@@ -1,10 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useToast } from '@ui/src/Toast';
 import { useParams, useRouter } from 'next/navigation';
-import { produce } from 'immer';
 import { SpendingClient } from '@/src/shared/apis/spending';
 import { CategoryKeys } from '../category/queries';
-import type { SmallCategoryDetailType } from '../category/types';
 import type { SpendingInputType } from './types';
 
 export const useCreateSpending = () => {
@@ -12,8 +10,8 @@ export const useCreateSpending = () => {
   const router = useRouter();
 
   return useMutation({
-    mutationFn: ({ spendingData }: { spendingData: Partial<SpendingInputType> }) =>
-      SpendingClient.createSpending(spendingData),
+    mutationFn: ({ spendingInput }: { spendingInput: Partial<SpendingInputType> }) =>
+      SpendingClient.createSpending(spendingInput),
     onSuccess: () => {
       toast({ variant: 'success', title: '완료!', duration: 1500 });
       router.back();
@@ -47,22 +45,10 @@ export const useUpdateSpending = () => {
         spendingPk,
         spendingInput,
       }),
-    onSuccess: (_, { spendingPk, spendingInput }) => {
-      queryClient.setQueryData<SmallCategoryDetailType>(
-        CategoryKeys.getSmallCategoryDetail(params.middleCategoryPk, params.smallCategoryPk).queryKey,
-        (prev) => {
-          return produce(prev, (draft) => {
-            let target = prev?.spendingList.find((spending) => spending.spendingPk === spendingPk);
-
-            if (target) {
-              target = { ...target, ...spendingInput };
-            }
-
-            return draft;
-          });
-        },
-      );
-
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: CategoryKeys.getSmallCategoryDetail(params.middleCategoryPk, params.smallCategoryPk).queryKey,
+      });
       toast({ variant: 'success', title: '완료!', duration: 1500 });
     },
     onError: () => {

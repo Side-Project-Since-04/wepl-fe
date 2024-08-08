@@ -7,7 +7,7 @@ import Icon from '@ui/src/Icon';
 import { useRouter } from 'next/navigation';
 import SpendingForm from '@/src/widgets/spending/SpendingForm';
 import { useCreateSpendingForm } from '@/src/features/spending/hooks/useCreateSpendingForm';
-import useInitValue from '@/src/features/spending/hooks/useSpendingFormInit';
+import { useInitValue } from '@/src/features/spending/hooks/useSpendingFormInit';
 import { useSpendingStore } from '@/src/features/spending/store';
 import { classNames } from '@/src/shared/ui/utils';
 
