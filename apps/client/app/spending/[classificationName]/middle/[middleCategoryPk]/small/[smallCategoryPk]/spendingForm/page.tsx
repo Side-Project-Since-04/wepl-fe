@@ -5,11 +5,11 @@ import Header from '@ui/src/components/Header';
 import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
 import { useRouter } from 'next/navigation';
-import PageLayout from '@/src/pages/PageLayout';
 import SpendingForm from '@/src/widgets/spending/SpendingForm';
 import { useCreateSpendingForm } from '@/src/features/spending/hooks/useCreateSpendingForm';
 import useInitValue from '@/src/features/spending/hooks/useSpendingFormInit';
 import { useSpendingStore } from '@/src/features/spending/store';
+import { classNames } from '@/src/shared/ui/utils';
 
 const CreateSmallCategorySpendingPage = ({
   params,
@@ -17,6 +17,7 @@ const CreateSmallCategorySpendingPage = ({
   params: { classification: string; smallCategoryPk: string };
 }) => {
   const { form, handleSubmit } = useCreateSpendingForm(params.smallCategoryPk);
+
   const { setSpendingItem } = useSpendingStore();
   const initValue = useInitValue();
   const router = useRouter();
@@ -65,12 +66,12 @@ const CreateSmallCategorySpendingPage = ({
   }, []);
 
   return (
-    <PageLayout isPadding>
+    <main>
       <Header center={<CenterHeader />} left={<LeftHeader />} right={<RightHeader />} />
-      <section className="py-24">
+      <section className={`py-24 ${classNames.pagePadding}`}>
         <SpendingForm form={form} initValues={initValue} onSave={() => form.handleSubmit(handleSubmit)} />
       </section>
-    </PageLayout>
+    </main>
   );
 };
 

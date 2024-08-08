@@ -13,7 +13,7 @@ import { useMemo, useState } from 'react';
 import { cn } from '@ui/lib/utils';
 import { useSpendingStore } from '@/src/features/spending/store';
 import type { SpendingType } from '@/src/features/spending/types';
-import { useDeleteSpending, useDeleteSpendingSchedule, useUpdateSpending } from '@/src/features/spending/queries';
+import { useDeleteSpending, useUpdateSpending } from '@/src/features/spending/queries';
 import { formatSpendingPaidAtDate, formatSpendingPaidAtTime } from '@/src/shared/utils/utils';
 import { SmallCategoryDetailSpendingItem } from '../SmallCategoryDetailSpendingItem';
 
@@ -28,15 +28,12 @@ export const SmallCategoryDetailSpending = ({ spending, order }: SmallCategoryDe
 
   const { mutate: updateSpending, isPending: isPendingUpdateSpending } = useUpdateSpending();
   const { mutate: deleteSpending, isPending: isPendingDeleteSpending } = useDeleteSpending();
-  const { mutate: deleteSpendingSchedule, isPending: isPendingDeleteSpendingSchedule } = useDeleteSpendingSchedule();
   const { setSpendingItem: setSpending } = useSpendingStore();
 
   const handleOpenBottomSheet = () => {
     setOpenBottomSheet(true);
     setSpending(spending);
   };
-
-  console.log(spending);
 
   const items = useMemo(() => {
     const { scheduleName, cost, paidAt, scheduleStartedAt, scheduleEndedAt, memo } = spending;
@@ -56,7 +53,7 @@ export const SmallCategoryDetailSpending = ({ spending, order }: SmallCategoryDe
     );
   }, [spending]);
 
-  const isPendingApi = isPendingDeleteSpending || isPendingDeleteSpendingSchedule || isPendingUpdateSpending;
+  const isPendingApi = isPendingDeleteSpending || isPendingUpdateSpending;
 
   return (
     <div className="py-40 px-30">
@@ -96,6 +93,7 @@ export const SmallCategoryDetailSpending = ({ spending, order }: SmallCategoryDe
       <div className="mt-16">
         <button
           className="flex items-center gap-4"
+          disabled={isPendingApi}
           onClick={() => {
             updateSpending({
               spendingPk: spending.spendingPk,
@@ -109,10 +107,17 @@ export const SmallCategoryDetailSpending = ({ spending, order }: SmallCategoryDe
           ) : (
             <Image alt="check-off" height={24} src="/spending/checkbox-off-24.png" width={24} />
           )}
-          <TextBody2 className="text-gray-600">일정 등록하기</TextBody2>
+          <TextBody2
+            className={cn('text-gray-600', {
+              'text-gray-400': isPendingApi,
+            })}
+          >
+            일정 등록하기
+          </TextBody2>
         </button>
         <button
           className="mt-4 flex items-center gap-4"
+          disabled={isPendingApi}
           onClick={() => {
             updateSpending({
               spendingPk: spending.spendingPk,
@@ -126,7 +131,13 @@ export const SmallCategoryDetailSpending = ({ spending, order }: SmallCategoryDe
           ) : (
             <Image alt="check-off" height={24} src="/spending/checkbox-off-24.png" width={24} />
           )}
-          <TextBody2 className="text-gray-600">지출 완료하기</TextBody2>
+          <TextBody2
+            className={cn('text-gray-600', {
+              'text-gray-400': isPendingApi,
+            })}
+          >
+            지출 완료하기
+          </TextBody2>
         </button>
       </div>
 
