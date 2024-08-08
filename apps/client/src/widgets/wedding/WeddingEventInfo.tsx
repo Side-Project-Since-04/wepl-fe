@@ -21,10 +21,11 @@ interface WeddingInfoCardProps extends WeddingInfoType, WeddingBudgetInfoType {}
 
 const WeddingEventInfo = () => {
   const { data: weddingInfo } = useSuspenseGetWeddingInfo();
-  const { data: userInfo } = useSuspenseGetMember();
+  const { data: member } = useSuspenseGetMember();
+
   return (
     <div className="w-screen max-w-[768px] flex flex-col items-center h-[404px] bg-primary-400 gap-24 text-primary-25 p-32 mb-60">
-      <WeddingEventInfo.Header name={userInfo.nickname} />
+      <WeddingEventInfo.Header name={member.nickname} />
       <WeddingEventInfo.Card {...weddingInfo} />
     </div>
   );

@@ -1,6 +1,7 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory';
 import { useMutation, useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { useToast } from '@ui/src/Toast';
+import { useRouter } from 'next/navigation';
 import type { WeddingInfoType } from '@fsd/features/wedding/types';
 import { WeddingClient } from '@/src/shared/apis/wedding';
 
@@ -9,14 +10,6 @@ export const WeddingKeys = createQueryKeys('wedding', {
     queryKey: null,
     queryFn: () => WeddingClient.getWeddingInfo(),
   },
-  create: (formData: WeddingInfoType) => ({
-    queryKey: [{ formData }],
-    queryFn: () => WeddingClient.createWeddingInfo(formData),
-  }),
-  update: (formData: WeddingInfoType) => ({
-    queryKey: [{ formData }],
-    queryFn: () => WeddingClient.update,
-  }),
 });
 
 export const useGetWeddingInfo = () => {
@@ -32,10 +25,30 @@ export const useCreateWeddingInfo = () => {
 
   return useMutation({
     mutationFn: (formData: WeddingInfoType) => WeddingClient.createWeddingInfo(formData),
-    onSuccess: (res) => {
+    onSuccess: () => {
       toast({ variant: 'success', title: '완료!', duration: 1500 });
     },
-    onError: (error) => {
+    onError: () => {
+      toast({
+        variant: 'alert',
+        title: '실패!',
+        duration: 1500,
+      });
+    },
+  });
+};
+
+export const useUpdateWeddingInfo = () => {
+  const { toast } = useToast();
+  const router = useRouter();
+
+  return useMutation({
+    mutationFn: (formData: WeddingInfoType) => WeddingClient.updateWeddingInfo(formData),
+    onSuccess: () => {
+      toast({ variant: 'success', title: '완료!', duration: 1500 });
+      router.back();
+    },
+    onError: () => {
       toast({
         variant: 'alert',
         title: '실패!',

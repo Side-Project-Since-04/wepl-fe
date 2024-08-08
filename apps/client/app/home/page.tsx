@@ -6,12 +6,13 @@ import { InvitationButton } from '@/src/widgets/auth/InvitationButton';
 import BudgetOverview from '@/src/widgets/budget/BudgetOverview';
 import { ScheduleCard } from '@/src/widgets/schedule/ScheduleCard';
 import WeddingEventInfo from '@/src/widgets/wedding/WeddingEventInfo';
+import UpcomingSchedulesList from '@/src/widgets/schedule/UpcomingSchedulesList';
 import { CardSkeleton } from './_components/CardSkeleton';
 
 const LeftHeader = () => {
   return (
     <Button className="hover:bg-inherit" variant="ghost">
-      <Image alt="wepl" height={36} src="/main/logo.png" width={80} />
+      <Image alt="wepl" height={36} src="/main/Logo.png" width={80} />
     </Button>
   );
 };
@@ -29,7 +30,7 @@ const MainPage = () => {
         </AsyncBoundary>
         <InvitationButton />
         <ScheduleCard />
-        {/* <UpcomingSchedulesList /> */}
+        <UpcomingSchedulesList />
         {/* <WeddingInfoCard /> */}
       </div>
     </>

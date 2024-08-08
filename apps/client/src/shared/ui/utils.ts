@@ -1,9 +1,4 @@
-import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
-
-export const cn = (...inputs: ClassValue[]) => {
-  return twMerge(clsx(inputs));
-};
+export { cn } from '@ui/lib/utils';
 
 export const classNames = {
   pagePadding: 'px-40 sm:px-[20px]',
