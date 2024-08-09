@@ -1,4 +1,14 @@
-export function calculateDday(date: string) {
+export function getDday(date: string) {
+  const today = new Date();
+  const wedding = new Date(date);
+  const timeDiff = wedding.getTime() - today.getTime();
+
+  const dDay = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+  return dDay;
+}
+
+export function formatDday(date: string) {
   const today = new Date();
   const wedding = new Date(date);
   const timeDiff = wedding.getTime() - today.getTime();

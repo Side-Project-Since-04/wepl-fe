@@ -12,7 +12,7 @@ import { SubTitle1 } from '@ui/src/components/Text';
 import MarriedCouple from '@/public/home/Married-Couple.png';
 import { useSuspenseGetWeddingInfo } from '@/src/features/wedding/queries';
 import { type WeddingBudgetInfoType, type WeddingInfoType } from '@/src/features/wedding/types';
-import { calculateDday, formatWeddingDateInfo } from '@/src/shared/utils/utils';
+import { formatDday, formatWeddingDateInfo } from '@/src/shared/utils/utils';
 import { useSuspenseGetMember } from '@/src/features/member/queries';
 
 interface WeddingInfoCardProps extends WeddingInfoType, WeddingBudgetInfoType {}
@@ -49,7 +49,7 @@ const WeddingInfoCard: React.FC<WeddingInfoCardProps> = ({ weddingDate, weddingT
           </div>
           <CardTitle className="text-primary-800 text-[24px]">Wedding day</CardTitle>
           <CardDescription className="text-[32px] font-bold text-auxiliary-red">
-            {calculateDday(weddingDate)}
+            {formatDday(weddingDate)}
           </CardDescription>
           <Image alt="Married-Couple" height={90} placeholder="empty" src={MarriedCouple} width={160} />
         </CardHeader>

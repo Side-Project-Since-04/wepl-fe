@@ -5,7 +5,7 @@ import WeplBadge from '@ui/src/Badge';
 import { Card } from '@ui/shadcn-ui/card';
 import Image from 'next/image';
 import type { ScheduleItemType } from '@/src/features/schedule/types';
-import { calculateDday, formatDate, formatScheduleTime } from '@/src/shared/utils/utils';
+import { formatDday, formatDate, formatScheduleTime } from '@/src/shared/utils/utils';
 
 // ScheduleCard 컴포넌트의 props 타입 정의
 interface ScheduleCardProps {
@@ -36,7 +36,7 @@ const ScheduleCard = ({ schedules }: ScheduleCardProps) => {
             <div>
               <div className="flex gap-12 mb-6">
                 <WeplBadge className="bg-semantic-error-100 text-semantic-error-600 rounded-lg w-40 h-22">
-                  {calculateDday(schedule.scheduleStartedDate)}
+                  {formatDday(schedule.scheduleStartedDate)}
                 </WeplBadge>
                 <TextBody2 className="text-gray-600">{formatDate(new Date(schedule.scheduleStartedDate))}</TextBody2>
               </div>
