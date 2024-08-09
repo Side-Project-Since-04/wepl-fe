@@ -12,12 +12,15 @@ export const WeddingClient = {
   createWeddingInfo: async (formData: WeddingInfoType) => {
     await axiosInstance.post(URL_ROOT, { ...formData });
   },
-  update: async (formData: WeddingInfoType) => {
+  updateWeddingInfo: async (formData: WeddingInfoType) => {
     await axiosInstance.put(URL_ROOT, { ...formData });
   },
   updateTotalBudget: async (totalBudget: number) => {
     await axiosInstance.put(`${URL_ROOT}/total-budget`, {
       totalBudget,
     });
+  },
+  deleteWeddingConnection: async () => {
+    await axiosInstance.delete(`${URL_ROOT}/connection`);
   },
 };

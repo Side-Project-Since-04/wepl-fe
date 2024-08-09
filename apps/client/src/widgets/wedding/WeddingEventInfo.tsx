@@ -12,7 +12,7 @@ import { SubTitle1 } from '@ui/src/components/Text';
 import MarriedCouple from '@/public/home/Married-Couple.png';
 import { useSuspenseGetWeddingInfo } from '@/src/features/wedding/queries';
 import { type WeddingBudgetInfoType, type WeddingInfoType } from '@/src/features/wedding/types';
-import { calculateDaysUntilWedding, formatWeddingDateInfo } from '@/src/shared/utils/utils';
+import { calculateDday, formatWeddingDateInfo } from '@/src/shared/utils/utils';
 import { useSuspenseGetMember } from '@/src/features/member/queries';
 
 interface WeddingInfoCardProps extends WeddingInfoType, WeddingBudgetInfoType {}
@@ -39,16 +39,6 @@ const InfoHeader = ({ name }: { name: string }) => {
 };
 
 const WeddingInfoCard: React.FC<WeddingInfoCardProps> = ({ weddingDate, weddingTime, weddingHall }) => {
-  const DdaySentence = () => {
-    const dDay = calculateDaysUntilWedding(weddingDate);
-    if (dDay === 0) {
-      return 'D-day';
-    } else if (dDay < 0) {
-      return `D+${-dDay}`;
-    }
-    return `D-${dDay}`;
-  };
-
   const [formatWeddingDate, formatWeddingTime] = formatWeddingDateInfo(weddingDate, weddingTime);
   return (
     <div>
@@ -58,14 +48,15 @@ const WeddingInfoCard: React.FC<WeddingInfoCardProps> = ({ weddingDate, weddingT
             우리 결혼합니다
           </div>
           <CardTitle className="text-primary-800 text-[24px]">Wedding day</CardTitle>
-          <CardDescription className="text-[32px] font-bold text-auxiliary-red">{DdaySentence()}</CardDescription>
+          <CardDescription className="text-[32px] font-bold text-auxiliary-red">
+            {calculateDday(weddingDate)}
+          </CardDescription>
           <Image alt="Married-Couple" height={90} placeholder="empty" src={MarriedCouple} width={160} />
         </CardHeader>
         <CardFooter className="flex flex-col justify-center items-center w-full h-full gap-4 bg-primary-600 rounded-br-lg rounded-bl-lg text-neutral-white font-normal">
           <CardTitle className="text-14">
             {formatWeddingDate} {formatWeddingTime}
           </CardTitle>
-
           <CardDescription className="text-14">{weddingHall}</CardDescription>
         </CardFooter>
       </Card>

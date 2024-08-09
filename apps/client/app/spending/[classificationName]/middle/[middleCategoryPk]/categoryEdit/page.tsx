@@ -7,7 +7,7 @@ import Header from '@ui/src/components/Header';
 import { SubTitle2 } from '@ui/src/components/Text';
 import { Input } from '@ui/src/Input';
 import { toast } from '@ui/src/Toast';
-import { ConfirmDialog } from '@ui/src/Dialog';
+import { Dialog } from '@ui/src/Dialog';
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
 import { useGetDetailClassification } from '@/src/features/category/queries';
@@ -132,9 +132,10 @@ const MiddleCategoryEditPage = ({ params }: MiddleCategoryEditPageProps) => {
         </div>
       </div>
       <div className="text-center">
-        <ConfirmDialog
+        <Dialog
           onSubmit={handleDelete}
           submitText="삭제"
+          submitType="alert"
           subtitle="삭제후에는 복구가 불가능합니다."
           title="정말 삭제하시겠습니까?"
         >
@@ -145,7 +146,7 @@ const MiddleCategoryEditPage = ({ params }: MiddleCategoryEditPageProps) => {
           >
             카테고리 삭제
           </Button>
-        </ConfirmDialog>
+        </Dialog>
       </div>
     </main>
   );

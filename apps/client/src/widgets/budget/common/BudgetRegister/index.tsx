@@ -14,7 +14,7 @@ const BudgetRegister = ({ className }: BudgetRegisterProps) => {
       <TextBody1 className="text-gray-400 text-center">
         예산을 등록하고 <br /> 지출을 관리할 수 있어요
       </TextBody1>
-      <Link href="/budget/input">
+      <Link href="/budget/list">
         <Button className="mt-20 h-40 w-110 bg-neutral-white text-primary-400">예산 등록하기</Button>
       </Link>
     </Card>

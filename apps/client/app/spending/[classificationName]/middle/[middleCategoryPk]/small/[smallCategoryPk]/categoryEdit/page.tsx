@@ -2,7 +2,7 @@
 
 import { Button } from '@ui/src/Button';
 import { SubTitle2 } from '@ui/src/components/Text';
-import { ConfirmDialog } from '@ui/src/Dialog';
+import { Dialog } from '@ui/src/Dialog';
 import { Input } from '@ui/src/Input';
 import { useToast } from '@ui/src/Toast';
 import { usePathname, useRouter } from 'next/navigation';
@@ -104,9 +104,10 @@ const SmallCategoryEditPage = ({ params }: SmallCategoryEditPageProps) => {
         </div>
       </div>
       <div className="text-center">
-        <ConfirmDialog
+        <Dialog
           onSubmit={handleDelete}
           submitText="삭제"
+          submitType="alert"
           subtitle="삭제후에는 복구가 불가능합니다."
           title={`해당 카테고리 전체 내역을\n삭제하시겠습니까?`}
         >
@@ -117,7 +118,7 @@ const SmallCategoryEditPage = ({ params }: SmallCategoryEditPageProps) => {
           >
             카테고리 전체 삭제
           </Button>
-        </ConfirmDialog>
+        </Dialog>
       </div>
     </main>
   );

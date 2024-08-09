@@ -179,18 +179,18 @@ const config: Config = {
           fontWeight: '500',
         },
       ],
-      'body-long': [
-        '16px',
-        {
-          lineHeight: '28px',
-          letterSpacing: '-0.2px',
-          fontWeight: '500',
-        },
-      ],
       body2: [
         '14px',
         {
           lineHeight: '20px',
+          letterSpacing: '-0.2px',
+          fontWeight: '500',
+        },
+      ],
+      'body-long': [
+        '16px',
+        {
+          lineHeight: '28px',
           letterSpacing: '-0.2px',
           fontWeight: '500',
         },
@@ -303,7 +303,7 @@ const config: Config = {
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.1s ease-out',
       },
     },
   },

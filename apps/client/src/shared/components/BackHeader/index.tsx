@@ -1,8 +1,10 @@
 'use client';
 
+import { cn } from '@ui/lib/utils';
 import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
-import Header, { HeaderProps } from '@ui/src/components/Header';
+import type { HeaderProps } from '@ui/src/components/Header';
+import Header from '@ui/src/components/Header';
 import { SubTitle2 } from '@ui/src/components/Text';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -15,8 +17,14 @@ const LeftHeader = () => {
   const router = useRouter();
 
   return (
-    <Button variant={'ghost'} className="p-0" onClick={() => router.back()}>
-      <Icon size={24} name="arrow-left" />
+    <Button
+      className="p-0"
+      onClick={() => {
+        router.back();
+      }}
+      variant="ghost"
+    >
+      <Icon name="arrow-left" size={24} />
     </Button>
   );
 };
@@ -25,9 +33,14 @@ const Title = ({ title }: { title: string }) => {
   return <SubTitle2 className="text-gray-900 text-16">{title}</SubTitle2>;
 };
 
-const BackHeader = ({ title, ...restProps }: BackHeaderProps) => {
+const BackHeader = ({ title, className, ...restProps }: BackHeaderProps) => {
   return (
-    <Header className="px-12" left={<LeftHeader />} center={title ? <Title title={title} /> : null} {...restProps} />
+    <Header
+      center={title ? <Title title={title} /> : null}
+      className={cn('px-12', className)}
+      left={<LeftHeader />}
+      {...restProps}
+    />
   );
 };
 

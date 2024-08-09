@@ -2,12 +2,10 @@ import type { Metadata } from 'next';
 import { AppLayout } from '@fsd/app/AppLayout';
 import { QueryProvider } from '@fsd/app/QueryProvider';
 import AuthSession from '@fsd/features/auth/AuthSession';
-import { MswProvider } from '@/src/app/MswProvider';
+// import { MswProvider } from '@/src/app/MswProvider';
 import KakaoScript from '@/src/shared/Kakao/Kakaoscript';
-
-/** Next Font는 일단 보류 */
-// import { Inter } from "next/font/google";
-// const inter = Inter({ subsets: ["latin"] });
+import AsyncBoundary from '@/src/shared/components/AsyncBoundary';
+import LoadingAnimation from '@/src/shared/components/Loading';
 
 declare global {
   interface Window {
@@ -20,7 +18,7 @@ export const metadata: Metadata = {
   description: '결혼까지 편리하게 일정/예산 관리하자',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }): JSX.Element {
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="ko">
       <body>
@@ -31,11 +29,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
            * <MswProvider>
            **/}
           <QueryProvider>
-            <AppLayout>{children}</AppLayout>
+            <AppLayout>
+              <AsyncBoundary SuspenseFallback={<LoadingAnimation />}>{children}</AsyncBoundary>
+            </AppLayout>
           </QueryProvider>
         </AuthSession>
       </body>
       <KakaoScript />
     </html>
   );
-}
+};
+
+export default RootLayout;

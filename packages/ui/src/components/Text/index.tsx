@@ -1,24 +1,24 @@
-type TextProps = {
+interface TextProps {
   children: React.ReactNode;
   className?: string;
-};
+}
 
-export const TextBody1 = ({ children, className }: TextProps): JSX.Element => {
+export function TextBody1({ children, className }: TextProps): JSX.Element {
   return <div className={`text-body1 ${className}`}>{children}</div>;
-};
+}
 
-export const TextBody2 = ({ children, className }: TextProps): JSX.Element => {
+export function TextBody2({ children, className }: TextProps): JSX.Element {
   return <div className={`text-body2 ${className}`}>{children}</div>;
-};
+}
 
-export const SubTitle1 = ({ children, className }: TextProps): JSX.Element => {
+export function SubTitle1({ children, className }: TextProps): JSX.Element {
   return <div className={`text-sub-title1 ${className}`}>{children}</div>;
-};
+}
 
-export const SubTitle2 = ({ children, className }: TextProps): JSX.Element => {
+export function SubTitle2({ children, className }: TextProps): JSX.Element {
   return <div className={`text-sub-title2 ${className}`}>{children}</div>;
-};
+}
 
-export const SubTitle3 = ({ children, className }: TextProps): JSX.Element => {
+export function SubTitle3({ children, className }: TextProps): JSX.Element {
   return <div className={`text-sub-title3 ${className}`}>{children}</div>;
-};
+}
