@@ -1,7 +1,13 @@
 import React from 'react';
+import ScheduleMainView from '@/src/widgets/schedule/ScheduleMainView';
+import { ScheduleCardSkeleton } from '@/app/schedule/_components/Skeleton';
 
 const ScheduleMainPage = () => {
-  return <div>page</div>;
+  return (
+    <main>
+      <ScheduleMainView cardSkeleton={<ScheduleCardSkeleton />} />
+    </main>
+  );
 };
 
 export default ScheduleMainPage;

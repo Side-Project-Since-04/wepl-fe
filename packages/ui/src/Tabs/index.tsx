@@ -1,9 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../shadcn-ui/tabs';
 import { cn } from '@ui/lib/utils';
-import { Carousel, CarouselContent, CarouselItem } from '../Carousel';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../shadcn-ui/tabs';
 
 interface TabItem {
   label: string;
@@ -24,23 +23,23 @@ export const WeplTabs: React.FC<WeplTabsProps> = ({
   items,
   defaultValue,
   className,
+  tabsListClassName,
   tabsTriggerClassName,
   tabsContentClassName,
-  sliderSettings = {},
 }) => {
   const [activeTab, setActiveTab] = useState(defaultValue || items[0]?.label);
 
   return (
-    <Tabs value={activeTab} onValueChange={setActiveTab} className={cn('w-full', className)}>
-      <TabsList>
+    <Tabs className={cn('w-full', className)} onValueChange={setActiveTab} value={activeTab}>
+      <TabsList className={cn(tabsListClassName)}>
         {items.map((item) => (
-          <TabsTrigger key={item.label} value={item.label} className={cn(tabsTriggerClassName)}>
+          <TabsTrigger className={cn(tabsTriggerClassName)} key={item.label} value={item.label}>
             {item.label}
           </TabsTrigger>
         ))}
       </TabsList>
       {items.map((item) => (
-        <TabsContent key={item.label} value={item.label} className={tabsContentClassName}>
+        <TabsContent className={tabsContentClassName} key={item.label} value={item.label}>
           {item.content}
         </TabsContent>
       ))}

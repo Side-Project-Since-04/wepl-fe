@@ -4,10 +4,9 @@ import { Button } from '@ui/src/Button';
 import AsyncBoundary from '@/src/shared/components/AsyncBoundary';
 import { InvitationButton } from '@/src/widgets/auth/InvitationButton';
 import BudgetOverview from '@/src/widgets/budget/BudgetOverview';
-import { ScheduleCard } from '@/src/widgets/schedule/ScheduleCard';
 import WeddingEventInfo from '@/src/widgets/wedding/WeddingEventInfo';
-import UpcomingSchedulesList from '@/src/widgets/schedule/UpcomingSchedulesList';
-import { CardSkeleton } from './_components/CardSkeleton';
+import ScheduleView from '@/src/widgets/schedule/ScheduleView';
+import { BudgetOverViewSkeleton, ScheduleCardSkeleton, UserCardSkeleton } from './_components/Skeleton';
 
 const LeftHeader = () => {
   return (
@@ -22,15 +21,16 @@ const MainPage = () => {
     <>
       <Header left={<LeftHeader />} />
       <div className="flex flex-col items-center gap-32">
-        <AsyncBoundary SuspenseFallback={<CardSkeleton />}>
+        <AsyncBoundary SuspenseFallback={<UserCardSkeleton />}>
           <WeddingEventInfo />
         </AsyncBoundary>
-        <AsyncBoundary>
+        <AsyncBoundary SuspenseFallback={<BudgetOverViewSkeleton />}>
           <BudgetOverview />
         </AsyncBoundary>
         <InvitationButton />
-        <ScheduleCard />
-        <UpcomingSchedulesList />
+        <AsyncBoundary SuspenseFallback={<ScheduleCardSkeleton />}>
+          <ScheduleView />
+        </AsyncBoundary>
         {/* <WeddingInfoCard /> */}
       </div>
     </>
