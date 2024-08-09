@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { cn } from '@/src/shared/ui/utils';
 import { WeplButton } from '@/src/shared/components/Button/WeplButton';
 import { useSuspenseGetWeddingInfo } from '@/src/features/wedding/queries';
-import { calculateDaysUntilWedding } from '@/src/shared/utils/utils';
+import { getDday, formatDday } from '@/src/shared/utils/utils';
 import { useSuspenseGetMember } from '@/src/features/member/queries';
 import { useInvitation } from '@/src/features/auth/hooks';
 
@@ -14,22 +14,22 @@ export const SettingHomeDisplay = () => {
   const { data: member } = useSuspenseGetMember();
   const { sendInvitation } = useInvitation();
 
-  const dDay = weddingInfo.weddingDate ? calculateDaysUntilWedding(weddingInfo.weddingDate) : null;
+  const dDay = getDday(weddingInfo.weddingDate);
 
   return (
     <>
       <div className="bg-gray-50 p-16">
         <TextBody2 className="text-gray-500 text-13">웨플에서 결혼 준비와 관리까지</TextBody2>
-        {!dDay && <SubTitle2 className="mt-4">결혼식 미정</SubTitle2>}
-        {dDay && dDay > 0 ? (
+        {!weddingInfo.weddingDate && <SubTitle2 className="mt-4">결혼식 미정</SubTitle2>}
+        {dDay > 0 ? (
           <SubTitle2 className="mt-4">
-            결혼까지 <span className="text-auxiliary-red">D-{dDay}</span> 남았습니다.
+            결혼까지 <span className="text-auxiliary-red">{formatDday(weddingInfo.weddingDate)}</span> 남았습니다.
           </SubTitle2>
         ) : null}
         {dDay === 0 && <SubTitle2 className="mt-4">행복한 결혼식 되세요!</SubTitle2>}
-        {dDay && dDay < 0 ? (
+        {dDay < 0 ? (
           <SubTitle2 className="mt-4">
-            결혼한지 <span className="text-auxiliary-red">D+{Math.abs(dDay)}</span> 남았습니다.
+            결혼한지 <span className="text-auxiliary-red">{formatDday(weddingInfo.weddingDate)}</span> 남았습니다.
           </SubTitle2>
         ) : null}
       </div>

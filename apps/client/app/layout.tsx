@@ -4,8 +4,6 @@ import { QueryProvider } from '@fsd/app/QueryProvider';
 import AuthSession from '@fsd/features/auth/AuthSession';
 // import { MswProvider } from '@/src/app/MswProvider';
 import KakaoScript from '@/src/shared/Kakao/Kakaoscript';
-import AsyncBoundary from '@/src/shared/components/AsyncBoundary';
-import LoadingAnimation from '@/src/shared/components/Loading';
 
 declare global {
   interface Window {
@@ -29,9 +27,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
            * <MswProvider>
            **/}
           <QueryProvider>
-            <AppLayout>
-              <AsyncBoundary SuspenseFallback={<LoadingAnimation />}>{children}</AsyncBoundary>
-            </AppLayout>
+            <AppLayout>{children}</AppLayout>
           </QueryProvider>
         </AuthSession>
       </body>

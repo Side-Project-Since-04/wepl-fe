@@ -43,7 +43,7 @@ export const SmallCategoryName = ({ params }: SmallCategoryNameProps) => {
         <HeadLine4 className="mt-4">{smallCategoryName}</HeadLine4>
       </div>
       <div className="mt-16">
-        <Link href={`${pathname}/spendingForm`}>
+        <Link href={`${pathname}/spendingAdd`}>
           <WeplButton className="bg-primary-400 hover:bg-primary-500 w-full text-neutral-white text-[15px]" size="sm">
             지출 추가하기
           </WeplButton>

@@ -4,9 +4,9 @@ import { useRouter } from 'next/navigation';
 import { Skeleton } from '@ui/src/Skeleton';
 import type { ClassificationNameType } from '@/src/features/category/types';
 import AsyncBoundary from '@/src/shared/components/AsyncBoundary';
+import { SpendingHeader } from '@/src/widgets/spending/SpendingHeader';
 import { SmallCategoryName } from './_components/SmallCategoryName';
 import { SmallCategoryDetailSpendings } from './_components/SmallCategoryDetailSpendings';
-import { SpendingHeader } from '@/src/widgets/spending/SpendingHeader';
 
 interface SmallCategoryPageProps {
   params: {
