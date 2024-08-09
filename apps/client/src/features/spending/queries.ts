@@ -28,7 +28,6 @@ export const useCreateSpending = () => {
 
 export const useUpdateSpending = () => {
   const queryClient = useQueryClient();
-  const { toast } = useToast();
   const params = useParams<{
     classificationName: string;
     middleCategoryPk: string;
@@ -38,6 +37,7 @@ export const useUpdateSpending = () => {
     middleCategoryPk: '',
     smallCategoryPk: '',
   };
+  const { toast } = useToast();
 
   return useMutation({
     mutationFn: ({ spendingPk, spendingInput }: Parameters<typeof SpendingClient.updateSpending>[number]) =>
@@ -62,11 +62,24 @@ export const useUpdateSpending = () => {
 };
 
 export const useDeleteSpending = () => {
+  const queryClient = useQueryClient();
+  const params = useParams<{
+    classificationName: string;
+    middleCategoryPk: string;
+    smallCategoryPk: string;
+  }>() || {
+    classificationName: '',
+    middleCategoryPk: '',
+    smallCategoryPk: '',
+  };
   const { toast } = useToast();
 
   return useMutation({
     mutationFn: ({ spendingPk }: { spendingPk: string }) => SpendingClient.deleteSpending(spendingPk),
-    onSuccess: () => {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: CategoryKeys.getSmallCategoryDetail(params.middleCategoryPk, params.smallCategoryPk).queryKey,
+      });
       toast({ variant: 'success', title: '완료!', duration: 1500 });
     },
     onError: () => {

@@ -3,9 +3,10 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '@ui/src/Toast';
 import dayjs from 'dayjs';
-import type { UseMutateFunction } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import { formatTime } from '@/src/shared/utils/date-utils';
 import type { SpendingInputType } from '../types';
+import { useCreateSpending, useUpdateSpending } from '../queries';
 
 /**
  * spendingFormSchema
@@ -26,25 +27,9 @@ export const spendingFormSchema = z.object({
 });
 
 /**
- * useSpendingForm
+ * useCreateSpendingForm
  */
-type MutateFnParams<T> =
-  | {
-      spendingInput: Partial<SpendingInputType>;
-    }
-  | {
-      spendingPk: string;
-      spendingInput: Partial<SpendingInputType>;
-    };
-
-type CreateHandleSubmitParams<T> = {
-  // type: T;
-  smallCategoryPk: string;
-  mutateFn: UseMutateFunction<void, Error, T>;
-  mutateFnParams: Omit<T, 'spendingInput'>;
-};
-
-export const useSpendingForm = () => {
+export const useCreateSpendingForm = (smallCategoryPk: string) => {
   const form = useForm<SpendingFormDataType>({
     resolver: zodResolver(spendingFormSchema),
     mode: 'onChange',
@@ -54,95 +39,142 @@ export const useSpendingForm = () => {
     },
   });
   const { toast } = useToast();
+  const { mutate, isPending } = useCreateSpending();
 
-  const createHandleSubmit =
-    <
-      T extends
-        | {
-            spendingInput: Partial<SpendingInputType>;
-          }
-        | {
-            spendingPk: string;
-            spendingInput: Partial<SpendingInputType>;
-          },
-    >({
-      smallCategoryPk,
-      mutateFn,
-      mutateFnParams,
-    }: CreateHandleSubmitParams<T>) =>
-    (data: SpendingFormDataType) => {
-      const paidAt = dayjs(data.paidAt).format('YYYY-MM-DD HH:mm');
-      const formattedDate = dayjs(data.paidAt).format('YYYY-MM-DD');
+  const handleSubmit = (data: SpendingFormDataType) => {
+    const paidAt = dayjs(data.paidAt).format('YYYY-MM-DD HH:mm');
+    const formattedDate = dayjs(data.paidAt).format('YYYY-MM-DD');
 
-      let scheduleStartedAt: string | undefined;
-      let scheduleEndedAt: string | undefined;
+    let scheduleStartedAt: string | undefined;
+    let scheduleEndedAt: string | undefined;
 
-      if (data.startedHour && data.startedMin) {
-        scheduleStartedAt = formatTime(formattedDate, data.startedHour, data.startedMin);
-      }
+    if (data.startedHour && data.startedMin) {
+      scheduleStartedAt = formatTime(formattedDate, data.startedHour, data.startedMin);
+    }
 
-      if (data.endHour && data.endMin) {
-        scheduleEndedAt = formatTime(formattedDate, data.endHour, data.endMin);
-      }
+    if (data.endHour && data.endMin) {
+      scheduleEndedAt = formatTime(formattedDate, data.endHour, data.endMin);
+    }
 
-      if (scheduleEndedAt && !scheduleStartedAt) {
-        toast({
-          variant: 'alert',
-          title: '종료 시간만 넣을 순 없어요 😀',
-          duration: 2000,
-        });
-        return;
-      }
-
-      const submitData: Partial<SpendingInputType> = {
-        smallCategoryPk,
-        cost: data.cost ? parseInt(data.cost.replace(/,/g, '').replace('원', '')) : 0,
-        scheduleName: data.scheduleName,
-        paidAt,
-        memo: data.memo,
-      };
-
-      if (scheduleStartedAt) {
-        submitData.scheduleStartedAt = scheduleStartedAt;
-      }
-      if (scheduleEndedAt) {
-        submitData.scheduleEndedAt = scheduleEndedAt;
-      }
-      if (data.memo) {
-        submitData.memo = data.memo;
-      }
-
-      // const fnParams = (() => {
-      //   if (type === 'create') {
-      //     mutateFnParams;
-
-      //     return {
-      //       spendingInput: submitData,
-      //     };
-      //   }
-
-      //   if (type === 'update') {
-      //     mutateFnParams,
-
-      //     return {
-      //       spendingPk: mutateFnParams.spendingPk as string,
-      //       spendingInput: submitData,
-      //     };
-      //   }
-
-      //   return {};
-      // })();
-
-      mutateFnParams;
-
-      mutateFn({
-        spendingPk: mutateFnParams.spendingPk,
-        spendingInput: submitData,
+    if (scheduleEndedAt && !scheduleStartedAt) {
+      toast({
+        variant: 'alert',
+        title: '종료 시간만 넣을 순 없어요 😀',
+        duration: 2000,
       });
+      return;
+    }
+
+    const submitData: Partial<SpendingInputType> = {
+      smallCategoryPk,
+      cost: data.cost ? parseInt(data.cost.replace(/,/g, '').replace('원', '')) : 0,
+      scheduleName: data.scheduleName,
+      paidAt,
+      memo: data.memo,
     };
+
+    if (scheduleStartedAt) {
+      submitData.scheduleStartedAt = scheduleStartedAt;
+    }
+    if (scheduleEndedAt) {
+      submitData.scheduleEndedAt = scheduleEndedAt;
+    }
+    if (data.memo) {
+      submitData.memo = data.memo;
+    }
+
+    mutate({
+      spendingInput: submitData,
+    });
+  };
 
   return {
     form,
-    createHandleSubmit,
+    handleSubmit,
+    isSubmitting: isPending,
+  };
+};
+
+/**
+ * useUpdateSpendingForm
+ */
+export const useUpdateSpendingForm = ({
+  smallCategoryPk,
+  spendingPk,
+}: {
+  smallCategoryPk: string;
+  spendingPk: string;
+}) => {
+  const form = useForm<SpendingFormDataType>({
+    resolver: zodResolver(spendingFormSchema),
+    mode: 'onChange',
+    defaultValues: {
+      scheduleName: '',
+      memo: '',
+    },
+  });
+  const router = useRouter();
+  const { toast } = useToast();
+  const { mutate, isPending } = useUpdateSpending();
+
+  const handleSubmit = (data: SpendingFormDataType) => {
+    const paidAt = dayjs(data.paidAt).format('YYYY-MM-DD HH:mm');
+    const formattedDate = dayjs(data.paidAt).format('YYYY-MM-DD');
+
+    let scheduleStartedAt: string | undefined;
+    let scheduleEndedAt: string | undefined;
+
+    if (data.startedHour && data.startedMin) {
+      scheduleStartedAt = formatTime(formattedDate, data.startedHour, data.startedMin);
+    }
+
+    if (data.endHour && data.endMin) {
+      scheduleEndedAt = formatTime(formattedDate, data.endHour, data.endMin);
+    }
+
+    if (scheduleEndedAt && !scheduleStartedAt) {
+      toast({
+        variant: 'alert',
+        title: '종료 시간만 넣을 순 없어요 😀',
+        duration: 2000,
+      });
+      return;
+    }
+
+    const submitData: Partial<SpendingInputType> = {
+      smallCategoryPk,
+      cost: data.cost ? parseInt(data.cost.replace(/,/g, '').replace('원', '')) : 0,
+      scheduleName: data.scheduleName,
+      paidAt,
+      memo: data.memo,
+    };
+
+    if (scheduleStartedAt) {
+      submitData.scheduleStartedAt = scheduleStartedAt;
+    }
+    if (scheduleEndedAt) {
+      submitData.scheduleEndedAt = scheduleEndedAt;
+    }
+    if (data.memo) {
+      submitData.memo = data.memo;
+    }
+
+    mutate(
+      {
+        spendingPk,
+        spendingInput: submitData,
+      },
+      {
+        onSuccess() {
+          router.back();
+        },
+      },
+    );
+  };
+
+  return {
+    form,
+    handleSubmit,
+    isSubmitting: isPending,
   };
 };

@@ -168,7 +168,7 @@ export const SmallCategoryDetailSpending = ({ spending, order }: SmallCategoryDe
               {spending.isPaid ? '지출 완료 취소' : '지출 완료'}
             </BottomSheetMenuButton>
             <BottomSheetMenuButton disabled={isPendingApi}>
-              <Link href={`${pathname}/spendingForm`}>
+              <Link href={`${pathname}/${spending.spendingPk}/spendingEdit`}>
                 <SubTitle2
                   className={cn('py-16 text-gray-700 text-left hover:text-auxiliary-blue', {
                     'text-gray-400 hover:text-gray-400': isPendingApi,

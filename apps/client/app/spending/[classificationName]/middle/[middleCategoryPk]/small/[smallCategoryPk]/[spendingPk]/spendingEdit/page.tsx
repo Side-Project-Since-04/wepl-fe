@@ -6,17 +6,20 @@ import { Button } from '@ui/src/Button';
 import Icon from '@ui/src/Icon';
 import { useRouter } from 'next/navigation';
 import SpendingForm from '@/src/widgets/spending/SpendingForm';
-import { useCreateSpendingForm } from '@/src/features/spending/hooks/useCreateSpendingForm';
 import { useInitValue } from '@/src/features/spending/hooks/useSpendingFormInit';
 import { useSpendingStore } from '@/src/features/spending/store';
 import { classNames } from '@/src/shared/ui/utils';
+import { useUpdateSpendingForm } from '@/src/features/spending/hooks/useSpendingForm';
 
-const CreateSmallCategorySpendingPage = ({
-  params,
-}: {
-  params: { classification: string; smallCategoryPk: string };
-}) => {
-  const { form, handleSubmit } = useCreateSpendingForm(params.smallCategoryPk);
+interface SpendingEditPageProps {
+  params: { classification: string; smallCategoryPk: string; spendingPk: string };
+}
+
+const SpendingEditPage = ({ params }: SpendingEditPageProps) => {
+  const { form, handleSubmit, isSubmitting } = useUpdateSpendingForm({
+    smallCategoryPk: params.smallCategoryPk,
+    spendingPk: params.spendingPk,
+  });
 
   const { setSpendingItem } = useSpendingStore();
   const initValue = useInitValue();
@@ -44,7 +47,7 @@ const CreateSmallCategorySpendingPage = ({
     return (
       <Button
         className="p-0"
-        disabled={!form.formState.isValid || form.formState.isSubmitting}
+        disabled={isSubmitting || !form.formState.isValid}
         onClick={() => {
           handleSubmit(form.getValues());
         }}
@@ -53,7 +56,7 @@ const CreateSmallCategorySpendingPage = ({
         저장
       </Button>
     );
-  }, [form]);
+  }, [form, isSubmitting]);
 
   /**
    * 페이지를 떠날 때,
@@ -75,4 +78,4 @@ const CreateSmallCategorySpendingPage = ({
   );
 };
 
-export default CreateSmallCategorySpendingPage;
+export default SpendingEditPage;
